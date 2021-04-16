@@ -1,0 +1,47 @@
+.atlas-container {
+	width: 90%;
+	border: 1px solid blue;
+	padding: 5px;
+	margin: 5px;
+}
+
+.panels-container {
+	height: 500px;
+	margin: 0 auto;
+
+	display: grid;
+	grid-template-columns: 1fr 2.5fr 10px;
+	grid-template-rows: 1fr 1fr 1fr;
+	gap: 5px 5px;
+	grid-template-areas:
+		"side-panel-1 main-panel scrollbar"
+		"side-panel-2 main-panel scrollbar"
+		"side-panel-3 main-panel scrollbar";
+	padding: 5px;
+	margin: 5px;
+}
+
+.panels-container .side-panel-1 {
+	grid-area: side-panel-1;
+	border: 1px solid green;
+}
+
+.panels-container .side-panel-2 {
+	grid-area: side-panel-2;
+	border: 1px solid green;
+}
+
+.panels-container .side-panel-3 {
+	grid-area: side-panel-3;
+	border: 1px solid green;
+}
+
+.panels-container .main-panel {
+	grid-area: main-panel;
+	border: 1px solid green;
+}
+
+.panels-container .scrollbar {
+	grid-area: scrollbar;
+	border: 1px solid green;
+}

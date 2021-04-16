@@ -1,6 +1,7 @@
 .main {
 	margin: 3rem auto;
-	width: 90%;
-	max-width: 40rem;
+	width: 90vw;
+	height: 90vh;
+	max-width: 50rem;
 	text-align: center;
 }

@@ -10,7 +10,7 @@ function App() {
 		<Layout>
 			<Switch>
 				<Route path="/" exact>
-					<Redirect to="/home" />
+					<Redirect to="/atlas" />
 				</Route>
 				<Route path="/home" exact>
 					<Home />
