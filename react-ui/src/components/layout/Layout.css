@@ -1,7 +1,6 @@
 .main {
+	padding: 10px;
 	margin: 3rem auto;
 	width: 90vw;
-	height: 90vh;
-	max-width: 50rem;
-	text-align: center;
+	border: 1px solid black;
 }
