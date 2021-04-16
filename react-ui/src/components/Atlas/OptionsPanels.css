@@ -1,0 +1,35 @@
+.options-container {
+	width: 250px;
+	margin-left: 20px;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 6fr 1fr 1fr 1fr 1fr;
+	row-gap: 5px;
+	column-gap: 5px;
+}
+
+.options-container div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.options-container .atlas-navigation {
+	border: 1px solid red;
+}
+
+.options-container .show-labels {
+	border: 1px solid red;
+}
+
+.options-container .label-transparency {
+	border: 1px solid red;
+}
+
+.options-container .channel {
+	border: 1px solid red;
+}
+
+.options-container .current-label {
+	border: 1px solid red;
+}
