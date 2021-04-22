@@ -28,10 +28,12 @@ const ImagePanels = (props) => {
 		const numericPickedSliceNumber = props.coronalSlice;
 
 		const baseString = "slice_";
-
 		const paddedSlice = numericPickedSliceNumber.toString().padStart(3, 0);
-
 		const sliceNumberAsString = baseString + paddedSlice;
+
+		let coordsXAsNumeric;
+		let coordsYAsNumeric;
+		let coordsZAsNumeric;
 
 		let coordsXAsString;
 		let coordsYAsString;
@@ -40,16 +42,19 @@ const ImagePanels = (props) => {
 		if (tempCoordsX !== undefined) {
 			const paddedSlice = tempCoordsX.toString().padStart(3, 0);
 			coordsXAsString = baseString + paddedSlice;
+			coordsXAsNumeric = tempCoordsX;
 		}
 
 		if (tempCoordsY !== undefined) {
 			const paddedSlice = tempCoordsY.toString().padStart(3, 0);
 			coordsYAsString = baseString + paddedSlice;
+			coordsYAsNumeric = tempCoordsY;
 		}
 
 		if (tempCoordsZ !== undefined) {
 			const paddedSlice = tempCoordsZ.toString().padStart(3, 0);
 			coordsZAsString = baseString + paddedSlice;
+			coordsZAsNumeric = tempCoordsZ;
 		}
 
 		let newCoords;
@@ -59,18 +64,18 @@ const ImagePanels = (props) => {
 				newCoords = {
 					sagittal: {
 						slice: sliceNumberAsString,
-						x: coordsXAsString,
-						z: coordsZAsString,
+						x: coordsXAsNumeric,
+						z: coordsZAsNumeric,
 					},
 					coronal: {
 						slice: coordsXAsString,
-						y: sliceNumberAsString,
-						z: coordsZAsString,
+						y: numericPickedSliceNumber,
+						z: coordsZAsNumeric,
 					},
 					axial: {
 						slice: coordsZAsString,
-						x: coordsXAsString,
-						y: sliceNumberAsString,
+						x: coordsXAsNumeric,
+						y: numericPickedSliceNumber,
 					},
 				};
 				break;
@@ -78,18 +83,18 @@ const ImagePanels = (props) => {
 				newCoords = {
 					sagittal: {
 						slice: coordsYAsString,
-						x: sliceNumberAsString,
-						z: coordsZAsString,
+						x: numericPickedSliceNumber,
+						z: coordsZAsNumeric,
 					},
 					coronal: {
 						slice: sliceNumberAsString,
-						y: coordsYAsString,
-						z: coordsZAsString,
+						y: coordsYAsNumeric,
+						z: coordsZAsNumeric,
 					},
 					axial: {
 						slice: coordsZAsString,
-						x: sliceNumberAsString,
-						y: coordsYAsString,
+						x: numericPickedSliceNumber,
+						y: coordsYAsNumeric,
 					},
 				};
 				break;
@@ -97,18 +102,18 @@ const ImagePanels = (props) => {
 				newCoords = {
 					sagittal: {
 						slice: coordsYAsString,
-						x: coordsXAsString,
-						z: sliceNumberAsString,
+						x: coordsXAsNumeric,
+						z: numericPickedSliceNumber,
 					},
 					coronal: {
 						slice: coordsXAsString,
-						y: coordsYAsString,
-						z: sliceNumberAsString,
+						y: coordsYAsNumeric,
+						z: numericPickedSliceNumber,
 					},
 					axial: {
 						slice: sliceNumberAsString,
-						x: coordsXAsString,
-						y: coordsYAsString,
+						x: coordsXAsNumeric,
+						y: coordsYAsNumeric,
 					},
 				};
 				break;
