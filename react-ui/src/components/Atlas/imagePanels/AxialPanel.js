@@ -16,7 +16,7 @@ const AxialPanel = () => {
 
 	const axialImages = importAll(
 		require.context(
-			"../../assets/mri/slices_sagittal",
+			"../../../assets/mri/slices_sagittal",
 			false,
 			/\.(png|jpe?g|svg)$/
 		)
@@ -26,7 +26,7 @@ const AxialPanel = () => {
 		<div className="side-panel axial">
 			<img
 				className="axial-image"
-				src={coronalImages["slice_025.png"]["default"]}
+				//src={axialImages["slice_025.png"]["default"]}
 				alt="axial-image"
 			></img>
 		</div>

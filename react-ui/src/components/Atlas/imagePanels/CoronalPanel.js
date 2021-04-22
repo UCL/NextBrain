@@ -1,11 +1,11 @@
-import "./SagittalPanel.css";
+import "./CoronalPanel.css";
 
 // const sagittalImages = require.context(
 // 	"../../assets/mri/slices_sagittal",
 // 	true
 // );
 
-const SagittalPanel = () => {
+const CoronalPanel = () => {
 	function importAll(r) {
 		let images = {};
 		r.keys().map((item, index) => {
@@ -14,25 +14,23 @@ const SagittalPanel = () => {
 		return images;
 	}
 
-	const sagittalImages = importAll(
+	const coronalImages = importAll(
 		require.context(
-			"../../assets/mri/slices_sagittal",
+			"../../../assets/mri/slices_sagittal",
 			false,
 			/\.(png|jpe?g|svg)$/
 		)
 	);
 
-	console.log(sagittalImages);
-
 	return (
-		<div className="side-panel sagittal">
+		<div className="side-panel coronal">
 			<img
-				className="sagittal-image"
-				src={sagittalImages["slice_025.png"]["default"]}
-				alt="sagittal-image"
+				className="coronal-image"
+				//src={coronalImages["slice_025.png"]["default"]}
+				alt="coronal-image"
 			></img>
 		</div>
 	);
 };
 
-export default SagittalPanel;
+export default CoronalPanel;

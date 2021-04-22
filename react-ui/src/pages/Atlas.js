@@ -1,5 +1,5 @@
-import ImagePanels from "../components/atlas/ImagePanels";
-import OptionsPanels from "../components/atlas/OptionsPanels";
+import ImagePanels from "../components/atlas/imagePanels/ImagePanels";
+import OptionsPanels from "../components/atlas/optionsPanels/OptionsPanels";
 
 import "./Atlas.css";
 

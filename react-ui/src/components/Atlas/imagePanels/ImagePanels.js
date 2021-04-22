@@ -9,7 +9,7 @@ import "./ImagePanels.css";
 const ImagePanels = () => {
 	return (
 		<section className="panels-container">
-			<SagittalPanel />
+			<SagittalPanel slice={"slice_025"} />
 			<CoronalPanel />
 			<AxialPanel />
 			<div className="main-panel histology">Histology panel</div>
