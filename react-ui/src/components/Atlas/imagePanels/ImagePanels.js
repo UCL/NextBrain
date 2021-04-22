@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import LoadingSpinner from "../../shared/LoadingSpinner";
+import ErrorModal from "../../shared/ErrorModal";
 import SagittalPanel from "./SagittalPanel";
 import CoronalPanel from "./CoronalPanel";
 import AxialPanel from "./AxialPanel";
@@ -7,11 +9,18 @@ import AxialPanel from "./AxialPanel";
 import "./ImagePanels.css";
 
 const ImagePanels = (props) => {
+	const [error, setError] = useState();
+	const [isLoading, setIsLoading] = useState(false);
+
 	const [mriSlices, setMriSlices] = useState({
 		sagittal: { slice: "slice_010", x: 15, z: 5 },
 		coronal: { slice: "slice_015", y: 10, z: 5 },
 		axial: { slice: "slice_005", x: 15, y: 10 },
 	});
+
+	const clearError = () => {
+		setError(null);
+	};
 
 	const calculateMriImages = (
 		currentPanel,
@@ -20,6 +29,21 @@ const ImagePanels = (props) => {
 		coordsZ,
 		pickedSlice
 	) => {
+		const minPanelCoord = 0;
+		const maxCoordSagittalX = 448;
+		const maxCoordSagittalZ = 282;
+		const maxCoordCoronalZ = 282;
+		const maxCoordCoronalY = 224;
+		const maxCoordAxialX = 448;
+		const maxCoordAxialY = 224;
+
+		if (
+			currentPanel === "sagittal" &&
+			(coordsX > maxCoordSagittalX || coordsZ > maxCoordSagittalZ)
+		) {
+			setError("Selected coordinate is out of bounds");
+		}
+
 		const tempPanel = "coronal";
 		const tempCoordsX = undefined;
 		const tempCoordsY = props.coronalY;
@@ -124,6 +148,9 @@ const ImagePanels = (props) => {
 
 	return (
 		<section className="panels-container">
+			<ErrorModal error={error} onClear={clearError} />
+			{isLoading && <LoadingSpinner asOverlay />}
+
 			<SagittalPanel mriSlices={mriSlices} />
 			<CoronalPanel mriSlices={mriSlices} />
 			<AxialPanel mriSlices={mriSlices} />
