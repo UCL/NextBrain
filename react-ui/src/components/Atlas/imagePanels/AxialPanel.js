@@ -1,34 +1,12 @@
 import "./AxialPanel.css";
 
-// const sagittalImages = require.context(
-// 	"../../assets/mri/slices_sagittal",
-// 	true
-// );
-
-const AxialPanel = () => {
-	function importAll(r) {
-		let images = {};
-		r.keys().map((item, index) => {
-			images[item.replace("./", "")] = r(item);
-		});
-		return images;
-	}
-
-	const axialImages = importAll(
-		require.context(
-			"../../../assets/mri/slices_sagittal",
-			false,
-			/\.(png|jpe?g|svg)$/
-		)
-	);
+const AxialPanel = (props) => {
+	const axialSlice = require(`../../../assets/mri/slices_axial/${props.mriSlices["axial"]["slice"]}.png`)
+		.default;
 
 	return (
 		<div className="side-panel axial">
-			<img
-				className="axial-image"
-				//src={axialImages["slice_025.png"]["default"]}
-				alt="axial-image"
-			></img>
+			<img className="axial-image" src={axialSlice} alt="axial-image"></img>
 		</div>
 	);
 };

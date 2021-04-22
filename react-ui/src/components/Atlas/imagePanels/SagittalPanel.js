@@ -1,7 +1,7 @@
 import "./SagittalPanel.css";
 
 const SagittalPanel = (props) => {
-	var sagittalImages = require(`../../../assets/mri/slices_sagittal/${props.slice}.png`)
+	const sagittalImage = require(`../../../assets/mri/slices_sagittal/${props.mriSlices["sagittal"]["slice"]}.png`)
 		.default;
 
 	// function importAll(r) {
@@ -20,14 +20,13 @@ const SagittalPanel = (props) => {
 	// 	)
 	// );
 
-	console.log(sagittalImages);
+	console.log(sagittalImage);
 
 	return (
 		<div className="side-panel sagittal">
 			<img
 				className="sagittal-image"
-				//src={sagittalImages["slice_025.png"]["default"]}
-				src={sagittalImages}
+				src={sagittalImage}
 				alt="sagittal-image"
 			></img>
 		</div>
