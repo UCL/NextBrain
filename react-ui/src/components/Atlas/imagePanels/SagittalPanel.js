@@ -20,15 +20,26 @@ const SagittalPanel = (props) => {
 	// 	)
 	// );
 
-	console.log(sagittalImage);
+	console.log(props.mriSlices);
 
 	return (
 		<div className="side-panel sagittal">
+			<div>sagittal</div>
 			<img
 				className="sagittal-image"
 				src={sagittalImage}
 				alt="sagittal-image"
 			></img>
+			<div>
+				{Object.keys(props.mriSlices.sagittal).map((prop) => (
+					<>
+						<div>
+							<strong>{prop}: </strong>
+							<strong>{props.mriSlices["sagittal"][prop]} </strong>
+						</div>
+					</>
+				))}
+			</div>
 		</div>
 	);
 };

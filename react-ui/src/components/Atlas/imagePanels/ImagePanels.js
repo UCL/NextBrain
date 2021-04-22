@@ -6,72 +6,115 @@ import AxialPanel from "./AxialPanel";
 
 import "./ImagePanels.css";
 
-const ImagePanels = () => {
+const ImagePanels = (props) => {
 	const [mriSlices, setMriSlices] = useState({
 		sagittal: { slice: "slice_010", x: 15, z: 5 },
 		coronal: { slice: "slice_015", y: 10, z: 5 },
 		axial: { slice: "slice_005", x: 15, y: 10 },
 	});
 
-	const calculateMriImages = (coords, currentPanel, pickedSlice) => {
-		const tempCoords = [10, 20];
-		const tempPanel = "sagittal";
-		const tempPickedSlice = "slice_010";
+	const calculateMriImages = (
+		currentPanel,
+		coordsX,
+		coordsY,
+		coordsZ,
+		pickedSlice
+	) => {
+		const tempPanel = "coronal";
+		const tempCoordsX = undefined;
+		const tempCoordsY = props.coronalY;
+		const tempCoordsZ = props.coronalZ;
+		const tempPickedSlice = "slice_004";
+		const numericPickedSliceNumber = props.coronalSlice;
 
-		let currentPanelPlanes;
-		let orthogonalAxis;
+		const baseString = "slice_";
+
+		const paddedSlice = numericPickedSliceNumber.toString().padStart(3, 0);
+
+		const sliceNumberAsString = baseString + paddedSlice;
+
+		let coordsXAsString;
+		let coordsYAsString;
+		let coordsZAsString;
+
+		if (tempCoordsX !== undefined) {
+			const paddedSlice = tempCoordsX.toString().padStart(3, 0);
+			coordsXAsString = baseString + paddedSlice;
+		}
+
+		if (tempCoordsY !== undefined) {
+			const paddedSlice = tempCoordsY.toString().padStart(3, 0);
+			coordsYAsString = baseString + paddedSlice;
+		}
+
+		if (tempCoordsZ !== undefined) {
+			const paddedSlice = tempCoordsZ.toString().padStart(3, 0);
+			coordsZAsString = baseString + paddedSlice;
+		}
+
+		let newCoords;
 
 		switch (tempPanel) {
 			case "sagittal":
-				currentPanelPlanes = ["z", "x"];
+				newCoords = {
+					sagittal: {
+						slice: sliceNumberAsString,
+						x: coordsXAsString,
+						z: coordsZAsString,
+					},
+					coronal: {
+						slice: coordsXAsString,
+						y: sliceNumberAsString,
+						z: coordsZAsString,
+					},
+					axial: {
+						slice: coordsZAsString,
+						x: coordsXAsString,
+						y: sliceNumberAsString,
+					},
+				};
 				break;
 			case "coronal":
-				currentPanelPlanes = ["z", "y"];
+				newCoords = {
+					sagittal: {
+						slice: coordsYAsString,
+						x: sliceNumberAsString,
+						z: coordsZAsString,
+					},
+					coronal: {
+						slice: sliceNumberAsString,
+						y: coordsYAsString,
+						z: coordsZAsString,
+					},
+					axial: {
+						slice: coordsZAsString,
+						x: sliceNumberAsString,
+						y: coordsYAsString,
+					},
+				};
 				break;
 			case "axial":
-				currentPanelPlanes = ["x", "y"];
+				newCoords = {
+					sagittal: {
+						slice: coordsYAsString,
+						x: coordsXAsString,
+						z: sliceNumberAsString,
+					},
+					coronal: {
+						slice: coordsXAsString,
+						y: coordsYAsString,
+						z: sliceNumberAsString,
+					},
+					axial: {
+						slice: sliceNumberAsString,
+						x: coordsXAsString,
+						y: coordsYAsString,
+					},
+				};
 				break;
-			default:
-				currentPanelPlanes = ["x", "y"];
 		}
 
-		switch (tempPanel) {
-			case "sagittal":
-				orthogonalAxis = "y";
-				break;
-			case "coronal":
-				orthogonalAxis = "x";
-				break;
-			case "axial":
-				orthogonalAxis = "z";
-				break;
-			default:
-				orthogonalAxis = "z";
-		}
-
-		const sagittalSlice = {
-			slice: tempPickedSlice,
-			x: tempCoords[0],
-			z: tempCoords[1],
-		};
-
-		const coronalSlice = {
-			slice: tempPickedSlice,
-			x: tempCoords[0],
-			z: tempCoords[1],
-		};
-
-		const axialSlice = {
-			slice: tempPickedSlice,
-			x: tempCoords[0],
-			z: tempCoords[1],
-		};
-
-		setMriSlices({
-			sagittal: { slice: "slice_010", x: 15, z: 5 },
-			coronal: { slice: "slice_015", y: 10, z: 5 },
-			axial: { slice: "slice_005", x: 15, y: 10 },
-		});
+		setMriSlices(newCoords);
 	};
 
 	return (
@@ -81,6 +124,7 @@ const ImagePanels = () => {
 			<AxialPanel mriSlices={mriSlices} />
 			<div className="main-panel histology">Histology panel</div>
 			<div className="scrollbar"></div>
+			<button onClick={() => calculateMriImages()}>populate</button>
 		</section>
 	);
 };
