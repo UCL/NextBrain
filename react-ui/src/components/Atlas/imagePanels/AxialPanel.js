@@ -6,9 +6,9 @@ const AxialPanel = (props) => {
 
 	return (
 		<div className="side-panel axial">
-			<div>axial</div>
+			{/* <div>axial</div> */}
 			<img className="axial-image" src={axialSlice} alt="axial-image"></img>
-			<div>
+			{/* <div>
 				{Object.keys(props.mriSlices.axial).map((prop) => (
 					<>
 						<div>
@@ -17,7 +17,7 @@ const AxialPanel = (props) => {
 						</div>
 					</>
 				))}
-			</div>
+			</div> */}
 		</div>
 	);
 };

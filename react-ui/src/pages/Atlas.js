@@ -20,7 +20,7 @@ const Atlas = () => {
 
 	return (
 		<>
-			<span>slice number sagittal: </span>{" "}
+			{/* <span>slice number sagittal: </span>{" "}
 			<input
 				onChange={(e) => {
 					setSagittalSlice(e.target.value);
@@ -75,7 +75,7 @@ const Atlas = () => {
 				onChange={(e) => {
 					setAxialY(e.target.value);
 				}}
-			></input>
+			></input> */}
 			<main className="atlas-container">
 				<ImagePanels
 					sagittalSlice={sagittalSlice}

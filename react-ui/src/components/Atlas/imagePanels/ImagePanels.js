@@ -156,7 +156,7 @@ const ImagePanels = (props) => {
 			<AxialPanel mriSlices={mriSlices} />
 			<div className="main-panel histology">Histology panel</div>
 			<div className="scrollbar"></div>
-			<button onClick={() => calculateMriImages()}>populate</button>
+			{/* <button onClick={() => calculateMriImages()}>populate</button> */}
 		</section>
 	);
 };

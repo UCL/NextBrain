@@ -6,13 +6,13 @@ const CoronalPanel = (props) => {
 
 	return (
 		<div className="side-panel coronal">
-			<div>coronal</div>
+			{/* <div>coronal</div> */}
 			<img
 				className="coronal-image"
 				src={coronalSlice}
 				alt="coronal-image"
 			></img>
-			<div>
+			{/* <div>
 				{Object.keys(props.mriSlices.coronal).map((prop) => (
 					<>
 						<div>
@@ -21,7 +21,7 @@ const CoronalPanel = (props) => {
 						</div>
 					</>
 				))}
-			</div>
+			</div> */}
 		</div>
 	);
 };
