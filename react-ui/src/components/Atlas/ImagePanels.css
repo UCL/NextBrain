@@ -1,39 +1,44 @@
 .panels-container {
-	width: 800px;
 	display: grid;
-	grid-template-columns: 1fr 2fr 20px;
+	grid-template-columns: 1fr 3fr 25px;
 	grid-template-rows: 1fr 1fr 1fr;
 	row-gap: 5px;
 	column-gap: 5px;
 	grid-template-areas:
-		"side-panel-1 main-panel scrollbar"
-		"side-panel-2 main-panel scrollbar"
-		"side-panel-3 main-panel scrollbar";
+		"side-panel-sagittal main-panel scroll-bar"
+		"side-panel-coronal main-panel scroll-bar"
+		"side-panel-axial main-panel scroll-bar";
 }
 
-.panels-container div {
+.panels-container > * {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border: 1px solid green;
 }
 
-.panels-container .side-panel-1 {
-	grid-area: side-panel-1;
+.panels-container .side-panel {
+	width: 200px;
+	height: 200px;
+	/* background-color: black; */
 }
 
-.panels-container .side-panel-2 {
-	grid-area: side-panel-2;
+.panels-container .side-panel.sagittal {
+	grid-area: side-panel-sagittal;
 }
 
-.panels-container .side-panel-3 {
-	grid-area: side-panel-3;
+.panels-container .side-panel.coronal {
+	grid-area: side-panel-coronal;
 }
 
-.panels-container .main-panel {
+.panels-container .side-panel.axial {
+	grid-area: side-panel-axial;
+}
+
+.panels-container .main-panel.histology {
 	grid-area: main-panel;
 }
 
 .panels-container .scrollbar {
-	grid-area: scrollbar;
+	grid-area: scroll-bar;
 }

@@ -1,12 +1,18 @@
+import SagittalPanel from "./SagittalPanel";
+import CoronalPanel from "./CoronalPanel";
+import AxialPanel from "./AxialPanel";
+
 import "./ImagePanels.css";
+
+//const images = require.context("../../../assets/mri", true);
 
 const ImagePanels = () => {
 	return (
 		<section className="panels-container">
-			<div className="side-panel-1">Sagittal panel</div>
-			<div className="side-panel-2">Coronal panel</div>
-			<div className="side-panel-3">Axial panel</div>
-			<div className="main-panel">Histology panel</div>
+			<SagittalPanel />
+			<CoronalPanel />
+			<AxialPanel />
+			<div className="main-panel histology">Histology panel</div>
 			<div className="scrollbar"></div>
 		</section>
 	);
