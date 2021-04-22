@@ -1,3 +1,8 @@
+/* 
+The commented out max-height represents the exact dimensions based on my calculations.
+I have commented it out because css can calculate the dimension automatically based on the image size
+*/
+
 .sagittal-image {
 	width: auto;
 	height: auto;
