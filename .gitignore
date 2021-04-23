@@ -8,7 +8,6 @@ lerna-debug.log*
 
 # NIFTI files
 images/*/histology/*/*nii.gz 
-images/*/histology/*/slices_labels
 images/*/mri/*nii.gz
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
