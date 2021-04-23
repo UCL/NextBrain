@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import ImagePanels from "../components/atlas/imagePanels/ImagePanels";
-import OptionsPanels from "../components/atlas/optionsPanels/OptionsPanels";
+import ImagePanels from "../components/Atlas/imagePanels/ImagePanels";
+import OptionsPanels from "../components/Atlas/optionsPanels/OptionsPanels";
 
 import "./Atlas.css";
 
@@ -20,7 +20,7 @@ const Atlas = () => {
 
 	return (
 		<>
-			{/* <span>slice number sagittal: </span>{" "}
+			{/* <span>slice number sagittal: </span>
 			<input
 				onChange={(e) => {
 					setSagittalSlice(e.target.value);

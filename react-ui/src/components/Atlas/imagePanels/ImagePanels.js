@@ -13,9 +13,9 @@ const ImagePanels = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const [mriSlices, setMriSlices] = useState({
-		sagittal: { slice: "slice_010", x: 15, z: 5 },
-		coronal: { slice: "slice_015", y: 10, z: 5 },
-		axial: { slice: "slice_005", x: 15, y: 10 },
+		sagittal: { slice: "slice_035", x: 60, z: 50 },
+		coronal: { slice: "slice_060", y: 35, z: 50 },
+		axial: { slice: "slice_050", x: 60, y: 35 },
 	});
 
 	const clearError = () => {

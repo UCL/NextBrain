@@ -20,7 +20,8 @@
 .panels-container .side-panel {
 	width: 200px;
 	height: 200px;
-	/* background-color: black; */
+
+	background-color: black;
 }
 
 .panels-container .side-panel.sagittal {

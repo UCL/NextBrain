@@ -3,9 +3,31 @@ The commented out max-height represents the exact dimensions based on my calcula
 I have commented it out because css can calculate the dimension automatically based on the image size
 */
 
+.side-panel.sagittal {
+	position: relative;
+}
+
+.img-container {
+	display: flex;
+	position: relative;
+
+	/* border: 1px solid blue; */
+}
+
 .sagittal-image {
 	width: auto;
 	height: auto;
 	/* max-width: 125.8928857px; */
 	max-height: 200px;
+
+	/* border: 1px solid red; */
+}
+
+.target-pointer {
+	position: absolute;
+	width: 3px;
+	height: 3px;
+	background-color: red;
+	/* top: 50px;
+	left: 50px; */
 }

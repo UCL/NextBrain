@@ -7,60 +7,48 @@ const SagittalPanel = (props) => {
 	const sagittalImage = require(`../../../assets/mri/slices_sagittal/${props.mriSlices["sagittal"]["slice"]}.png`)
 		.default;
 
-	// function importAll(r) {
-	// 	let images = {};
-	// 	r.keys().map((item, index) => {
-	// 		images[item.replace("./", "")] = r(item);
-	// 	});
-	// 	return images;
-	// }
-
-	// const sagittalImages = importAll(
-	// 	require.context(
-	// 		"../../assets/mri/slices_sagittal",
-	// 		false,
-	// 		/\.(png|jpe?g|svg)$/
-	// 	)
-	// );
-
-	const enterTarget = () => {
-		console.log("target entered");
-	};
-
-	const leaveTarget = () => {
-		console.log("target left");
-	};
-
 	const getCoords = (e) => {
-		console.log(e);
-		const xCoordinate = e.nativeEvent.offsetX * 2.24;
-		const yCoordinate = e.nativeEvent.offsetY * 2.24;
+		// no need for the *2.24 now
+		const xCoordinate = e.nativeEvent.offsetX;
+		const yCoordinate = e.nativeEvent.offsetY;
 
 		console.log(xCoordinate.toFixed(0), yCoordinate.toFixed(0));
+
+		if (
+			+xCoordinate.toFixed(0) < 0 ||
+			+xCoordinate.toFixed(0) > 125 ||
+			+yCoordinate.toFixed(0) < 0 ||
+			+yCoordinate.toFixed(0) > 200
+		) {
+			console.log("out of bounds");
+			return;
+		}
+
+		setCoords({ x: xCoordinate.toFixed(0), y: yCoordinate.toFixed(0) });
 	};
 
-	const mouseMove = (e) => {
-		console.log(e);
-		const xCoordinate = e.nativeEvent.offsetX * 2.24;
-		const yCoordinate = e.nativeEvent.offsetY * 2.24;
-
-		console.log(xCoordinate.toFixed(0), yCoordinate.toFixed(0));
-	};
-
-	console.log(props.mriSlices);
+	console.log(coords);
 
 	return (
 		<div className="side-panel sagittal">
 			{/* <div>sagittal</div> */}
-			<img
-				onClick={(e) => getCoords(e)}
-				// onMouseEnter={() => enterTarget()}
-				// onMouseLeave={() => leaveTarget()}
-				// onMouseMove={(e) => mouseMove(e)}
-				className="sagittal-image"
-				src={sagittalImage}
-				alt="sagittal-image"
-			></img>
+			<div className="img-container">
+				<div
+					className="target-pointer"
+					style={{ top: +coords.y - 1, left: +coords.x - 1 }}
+				></div>
+
+				<img
+					onClick={(e) => getCoords(e)}
+					// onMouseEnter={() => enterTarget()}
+					// onMouseLeave={() => leaveTarget()}
+					// onMouseMove={(e) => mouseMove(e)}
+					className="sagittal-image"
+					src={sagittalImage}
+					alt="sagittal-image"
+				></img>
+			</div>
+
 			{/* <div>
 				{Object.keys(props.mriSlices.sagittal).map((prop) => (
 					<>
