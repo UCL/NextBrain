@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+
 import "./MriPanel.css";
 
 const MriPanel = (props) => {
-	const [coords, setCoords] = useState({ x: 0, y: 0, z: 0 });
-
 	const { plane, mriSlices, calculateMriImages } = props;
 
 	const paddedSlice = props.mriSlices[plane]["slice"].toString().padStart(3, 0);
@@ -14,15 +13,7 @@ const MriPanel = (props) => {
 		const xCoordinate = e.nativeEvent.offsetX;
 		const yCoordinate = e.nativeEvent.offsetY;
 
-		console.log(xCoordinate.toFixed(0), yCoordinate.toFixed(0));
-
 		if (plane === "sagittal") {
-			// setCoords({
-			// 	z: xCoordinate.toFixed(0),
-			// 	x: yCoordinate.toFixed(0),
-			// 	y: undefined,
-			// });
-
 			calculateMriImages(
 				plane,
 				yCoordinate.toFixed(0),
@@ -33,12 +24,6 @@ const MriPanel = (props) => {
 		}
 
 		if (plane === "coronal") {
-			// setCoords({
-			// 	z: xCoordinate.toFixed(0),
-			// 	x: undefined,
-			// 	y: yCoordinate.toFixed(0),
-			// });
-
 			calculateMriImages(
 				plane,
 				undefined,
@@ -49,12 +34,6 @@ const MriPanel = (props) => {
 		}
 
 		if (plane === "axial") {
-			// setCoords({
-			// 	z: undefined,
-			// 	x: xCoordinate.toFixed(0),
-			// 	y: yCoordinate.toFixed(0),
-			// });
-
 			calculateMriImages(
 				plane,
 				xCoordinate.toFixed(0),
@@ -64,29 +43,10 @@ const MriPanel = (props) => {
 			);
 		}
 	};
-
-	const getTopLeft = () => {
-		if (plane === "sagittal") {
-			return { top: +coords.x - 1, left: +coords.z - 1 };
-		}
-		if (plane === "coronal") {
-			return { top: +coords.y - 1, left: +coords.z - 1 };
-		}
-		if (plane === "axial") {
-			return { top: +coords.y - 1, left: +coords.x - 1 };
-		}
-	};
-
-	console.log(coords);
-	console.log(mriSlices[plane].targetTop);
-
-	// useEffect(() => {
-	// 	getTopLeft();
-	// }, [coords]);
 
 	return (
 		<div className={`side-panel ${plane}`}>
-			{/* <div>sagittal</div> */}
+			<div>{plane}</div>
 			<div className="img-container">
 				<div
 					className="target-pointer"
@@ -107,16 +67,16 @@ const MriPanel = (props) => {
 				></img>
 			</div>
 
-			{/* <div>
-				{Object.keys(props.mriSlices.sagittal).map((prop) => (
-					<>
+			<div>
+				{Object.keys(mriSlices[plane]).map((prop, index) => (
+					<React.Fragment key={index}>
 						<div>
 							<strong>{prop}: </strong>
-							<strong>{props.mriSlices["sagittal"][prop]} </strong>
+							<strong>{mriSlices[plane][prop]} </strong>
 						</div>
-					</>
+					</React.Fragment>
 				))}
-			</div> */}
+			</div>
 		</div>
 	);
 };

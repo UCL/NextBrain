@@ -2,9 +2,6 @@ import React, { useState } from "react";
 
 import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
-import SagittalPanel from "./SagittalPanel";
-import CoronalPanel from "./CoronalPanel";
-import AxialPanel from "./AxialPanel";
 import MriPanel from "./MriPanel";
 
 import "./ImagePanels.css";
@@ -118,13 +115,6 @@ const ImagePanels = (props) => {
 			<ErrorModal error={error} onClear={clearError} />
 			{isLoading && <LoadingSpinner asOverlay />}
 
-			{/* <SagittalPanel
-				mriSlices={mriSlices}
-				calculateMriImages={calculateMriImages}
-			/>
-			<CoronalPanel mriSlices={mriSlices} />
-			<AxialPanel mriSlices={mriSlices} /> */}
-
 			<MriPanel
 				plane="sagittal"
 				mriSlices={mriSlices}
@@ -149,7 +139,6 @@ const ImagePanels = (props) => {
 
 			<div className="main-panel histology">Histology panel</div>
 			<div className="scrollbar"></div>
-			{/* <button onClick={() => calculateMriImages()}>populate</button> */}
 		</section>
 	);
 };
