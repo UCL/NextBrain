@@ -5,6 +5,7 @@ import ErrorModal from "../../shared/ErrorModal";
 import SagittalPanel from "./SagittalPanel";
 import CoronalPanel from "./CoronalPanel";
 import AxialPanel from "./AxialPanel";
+import MriPanel from "./MriPanel";
 
 import "./ImagePanels.css";
 
@@ -13,9 +14,9 @@ const ImagePanels = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const [mriSlices, setMriSlices] = useState({
-		sagittal: { slice: "slice_035", x: 60, z: 50 },
-		coronal: { slice: "slice_060", y: 35, z: 50 },
-		axial: { slice: "slice_050", x: 60, y: 35 },
+		sagittal: { slice: 10, x: 15, z: 5, targetTop: 15, targetLeft: 5 },
+		coronal: { slice: 15, y: 10, z: 5, targetTop: 10, targetLeft: 5 },
+		axial: { slice: 5, x: 15, y: 10, targetTop: 10, targetLeft: 15 },
 	});
 
 	const clearError = () => {
@@ -23,121 +24,87 @@ const ImagePanels = (props) => {
 	};
 
 	const calculateMriImages = (
-		currentPanel,
+		pickedPanel,
 		coordsX,
 		coordsY,
 		coordsZ,
 		pickedSlice
 	) => {
-		const minPanelCoord = 0;
-		const maxCoordSagittalX = 448;
-		const maxCoordSagittalZ = 282;
-		const maxCoordCoronalZ = 282;
-		const maxCoordCoronalY = 224;
-		const maxCoordAxialX = 448;
-		const maxCoordAxialY = 224;
-
-		if (
-			currentPanel === "sagittal" &&
-			(coordsX > maxCoordSagittalX || coordsZ > maxCoordSagittalZ)
-		) {
-			setError("Selected coordinate is out of bounds");
-		}
-
-		const tempPanel = "coronal";
-		const tempCoordsX = undefined;
-		const tempCoordsY = props.coronalY;
-		const tempCoordsZ = props.coronalZ;
-		const tempPickedSlice = "slice_004";
-		const numericPickedSliceNumber = props.coronalSlice;
-
-		const baseString = "slice_";
-		const paddedSlice = numericPickedSliceNumber.toString().padStart(3, 0);
-		const sliceNumberAsString = baseString + paddedSlice;
-
-		let coordsXAsNumeric;
-		let coordsYAsNumeric;
-		let coordsZAsNumeric;
-
-		let coordsXAsString;
-		let coordsYAsString;
-		let coordsZAsString;
-
-		if (tempCoordsX !== undefined) {
-			const paddedSlice = tempCoordsX.toString().padStart(3, 0);
-			coordsXAsString = baseString + paddedSlice;
-			coordsXAsNumeric = tempCoordsX;
-		}
-
-		if (tempCoordsY !== undefined) {
-			const paddedSlice = tempCoordsY.toString().padStart(3, 0);
-			coordsYAsString = baseString + paddedSlice;
-			coordsYAsNumeric = tempCoordsY;
-		}
-
-		if (tempCoordsZ !== undefined) {
-			const paddedSlice = tempCoordsZ.toString().padStart(3, 0);
-			coordsZAsString = baseString + paddedSlice;
-			coordsZAsNumeric = tempCoordsZ;
-		}
-
 		let newCoords;
 
-		switch (tempPanel) {
+		switch (pickedPanel) {
 			case "sagittal":
 				newCoords = {
 					sagittal: {
-						slice: sliceNumberAsString,
-						x: coordsXAsNumeric,
-						z: coordsZAsNumeric,
+						slice: pickedSlice,
+						x: coordsX,
+						z: coordsZ,
+						targetTop: coordsX,
+						targetLeft: coordsZ,
 					},
 					coronal: {
-						slice: coordsXAsString,
-						y: numericPickedSliceNumber,
-						z: coordsZAsNumeric,
+						slice: coordsX,
+						y: pickedSlice,
+						z: coordsZ,
+						targetTop: pickedSlice,
+						targetLeft: coordsZ,
 					},
 					axial: {
-						slice: coordsZAsString,
-						x: coordsXAsNumeric,
-						y: numericPickedSliceNumber,
+						slice: coordsZ,
+						x: coordsX,
+						y: pickedSlice,
+						targetTop: pickedSlice,
+						targetLeft: coordsX,
 					},
 				};
 				break;
 			case "coronal":
 				newCoords = {
 					sagittal: {
-						slice: coordsYAsString,
-						x: numericPickedSliceNumber,
-						z: coordsZAsNumeric,
+						slice: coordsY,
+						x: pickedSlice,
+						z: coordsZ,
+						targetTop: coordsZ,
+						targetLeft: pickedSlice,
 					},
 					coronal: {
-						slice: sliceNumberAsString,
-						y: coordsYAsNumeric,
-						z: coordsZAsNumeric,
+						slice: pickedSlice,
+						y: coordsY,
+						z: coordsZ,
+						targetTop: coordsY,
+						targetLeft: coordsZ,
 					},
 					axial: {
-						slice: coordsZAsString,
-						x: numericPickedSliceNumber,
-						y: coordsYAsNumeric,
+						slice: coordsZ,
+						x: pickedSlice,
+						y: coordsY,
+						targetTop: coordsY,
+						targetLeft: pickedSlice,
 					},
 				};
 				break;
 			case "axial":
 				newCoords = {
 					sagittal: {
-						slice: coordsYAsString,
-						x: coordsXAsNumeric,
-						z: numericPickedSliceNumber,
+						slice: coordsY,
+						x: coordsX,
+						z: pickedSlice,
+						targetTop: coordsX,
+						targetLeft: pickedSlice,
 					},
 					coronal: {
-						slice: coordsXAsString,
-						y: coordsYAsNumeric,
-						z: numericPickedSliceNumber,
+						slice: coordsX,
+						y: coordsY,
+						z: pickedSlice,
+						targetTop: coordsY,
+						targetLeft: pickedSlice,
 					},
 					axial: {
-						slice: sliceNumberAsString,
-						x: coordsXAsNumeric,
-						y: coordsYAsNumeric,
+						slice: pickedSlice,
+						x: coordsX,
+						y: coordsY,
+						targetTop: coordsY,
+						targetLeft: coordsX,
 					},
 				};
 				break;
@@ -151,9 +118,35 @@ const ImagePanels = (props) => {
 			<ErrorModal error={error} onClear={clearError} />
 			{isLoading && <LoadingSpinner asOverlay />}
 
-			<SagittalPanel mriSlices={mriSlices} />
+			{/* <SagittalPanel
+				mriSlices={mriSlices}
+				calculateMriImages={calculateMriImages}
+			/>
 			<CoronalPanel mriSlices={mriSlices} />
-			<AxialPanel mriSlices={mriSlices} />
+			<AxialPanel mriSlices={mriSlices} /> */}
+
+			<MriPanel
+				plane="sagittal"
+				mriSlices={mriSlices}
+				calculateMriImages={calculateMriImages}
+				targetTop={10}
+				targetLeft={10}
+			/>
+			<MriPanel
+				plane="coronal"
+				mriSlices={mriSlices}
+				calculateMriImages={calculateMriImages}
+				targetTop={10}
+				targetLeft={10}
+			/>
+			<MriPanel
+				plane="axial"
+				mriSlices={mriSlices}
+				calculateMriImages={calculateMriImages}
+				targetTop={10}
+				targetLeft={10}
+			/>
+
 			<div className="main-panel histology">Histology panel</div>
 			<div className="scrollbar"></div>
 			{/* <button onClick={() => calculateMriImages()}>populate</button> */}

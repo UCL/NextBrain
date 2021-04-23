@@ -1,7 +1,10 @@
 import "./CoronalPanel.css";
 
 const CoronalPanel = (props) => {
-	const coronalSlice = require(`../../../assets/mri/slices_coronal/${props.mriSlices["coronal"]["slice"]}.png`)
+	const paddedSlice = props.mriSlices["coronal"]["slice"]
+		.toString()
+		.padStart(3, 0);
+	const coronalSlice = require(`../../../assets/mri/slices_coronal/slice_${paddedSlice}.png`)
 		.default;
 
 	return (

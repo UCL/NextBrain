@@ -1,7 +1,10 @@
 import "./AxialPanel.css";
 
 const AxialPanel = (props) => {
-	const axialSlice = require(`../../../assets/mri/slices_axial/${props.mriSlices["axial"]["slice"]}.png`)
+	const paddedSlice = props.mriSlices["axial"]["slice"]
+		.toString()
+		.padStart(3, 0);
+	const axialSlice = require(`../../../assets/mri/slices_axial/slice_${paddedSlice}.png`)
 		.default;
 
 	return (
