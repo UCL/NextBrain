@@ -4,6 +4,8 @@ import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
 import MriPanel from "./MriPanel";
 
+import CORONAL_RESCALING_FACTOR from "../../utils/CoronalRescalingFactor";
+
 import "./ImagePanels.css";
 
 const ImagePanels = (props) => {
@@ -17,8 +19,8 @@ const ImagePanels = (props) => {
 			slice: 224,
 			y: 113,
 			z: 141,
-			targetTop: 113 * 1.5,
-			targetLeft: 141 * 1.5,
+			targetTop: 113 * CORONAL_RESCALING_FACTOR,
+			targetLeft: 141 * CORONAL_RESCALING_FACTOR,
 		},
 		axial: { slice: 141, x: 224, y: 113, targetTop: 113, targetLeft: 224 },
 	});
@@ -42,11 +44,6 @@ const ImagePanels = (props) => {
 	) => {
 		let newCoords;
 
-		// we have increased the size of coronal image (using css) to make it easier to see
-		// as a result, we need to adjust the location of the target for coronal to keep the coordinates consistent
-		// see below for further coordinate adjustments to account for coronal rescaling
-		const targetRescalingFactor = 1.5;
-
 		switch (pickedPanel) {
 			case "sagittal":
 				newCoords = {
@@ -61,8 +58,8 @@ const ImagePanels = (props) => {
 						slice: coordsX,
 						y: pickedSlice,
 						z: coordsZ,
-						targetTop: pickedSlice * targetRescalingFactor,
-						targetLeft: coordsZ * targetRescalingFactor,
+						targetTop: pickedSlice * CORONAL_RESCALING_FACTOR,
+						targetLeft: coordsZ * CORONAL_RESCALING_FACTOR,
 					},
 					axial: {
 						slice: coordsZ,
@@ -75,8 +72,8 @@ const ImagePanels = (props) => {
 				break;
 			case "coronal":
 				// a further adjustment of the coordinates is necessary to account for the rescaling of coronal image
-				coordsY = (coordsY / targetRescalingFactor).toFixed(0);
-				coordsZ = (coordsZ / targetRescalingFactor).toFixed(0);
+				coordsY = (coordsY / CORONAL_RESCALING_FACTOR).toFixed(0);
+				coordsZ = (coordsZ / CORONAL_RESCALING_FACTOR).toFixed(0);
 
 				newCoords = {
 					sagittal: {
@@ -90,8 +87,8 @@ const ImagePanels = (props) => {
 						slice: pickedSlice,
 						y: coordsY,
 						z: coordsZ,
-						targetTop: coordsY * targetRescalingFactor,
-						targetLeft: coordsZ * targetRescalingFactor,
+						targetTop: coordsY * CORONAL_RESCALING_FACTOR,
+						targetLeft: coordsZ * CORONAL_RESCALING_FACTOR,
 					},
 					axial: {
 						slice: coordsZ,
@@ -115,8 +112,8 @@ const ImagePanels = (props) => {
 						slice: coordsX,
 						y: coordsY,
 						z: pickedSlice,
-						targetTop: coordsY * targetRescalingFactor,
-						targetLeft: pickedSlice * targetRescalingFactor,
+						targetTop: coordsY * CORONAL_RESCALING_FACTOR,
+						targetLeft: pickedSlice * CORONAL_RESCALING_FACTOR,
 					},
 					axial: {
 						slice: pickedSlice,
@@ -148,6 +145,7 @@ const ImagePanels = (props) => {
 				mriSlices={mriSlices}
 				calculateMriImages={calculateMriImages}
 				mriDimensions={mriDimensions}
+				coronalRescalingFactor={CORONAL_RESCALING_FACTOR}
 			/>
 			<MriPanel
 				plane="axial"
