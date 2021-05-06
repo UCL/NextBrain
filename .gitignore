@@ -10,6 +10,11 @@ lerna-debug.log*
 images/*/histology/*/*nii.gz 
 images/*/mri/*nii.gz
 
+# Jupyter Notebook
+src/.ipynb_checkpoints/*
+
+
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
