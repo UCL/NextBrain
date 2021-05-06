@@ -1,47 +1,27 @@
-/* 
-The commented out max-height represents the exact dimensions based on my calculations.
-I have commented it out because css can calculate the dimension automatically based on the image size
-*/
-
-.side-panel.sagittal {
+.debug-info {
 	position: relative;
+	left: -90px;
 }
 
 .img-container {
 	display: flex;
 	position: relative;
-
-	/* border: 1px solid blue; */
+	transform: scale(0.6);
+	border: 1px solid white;
 }
 
-.sagittal-image {
-	width: auto;
-	height: auto;
-	/* max-width: 125.8928857px; */
-	max-height: 200px;
-
-	/* border: 1px solid red; */
-}
-
-.coronal-image {
-	width: auto;
-	height: auto;
-	max-width: 200px;
-	/* max-height: 158.865248px; */
-}
-
-.axial-image {
-	width: auto;
-	height: auto;
-	max-width: 200px;
-	/* max-height: 100px; */
+.coronal-img {
+	zoom: 1.5;
 }
 
 .target-pointer {
 	position: absolute;
-	width: 3px;
-	height: 3px;
-	background-color: red;
-	/* top: 50px;
-	left: 50px; */
+	width: 5px;
+	height: 5px;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 50%;
+	z-index: 5;
+
+	pointer-events: none;
 }

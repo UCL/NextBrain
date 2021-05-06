@@ -14,14 +14,13 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid green;
+	border: 1px solid black;
 }
 
 .panels-container .side-panel {
-	width: 200px;
-	height: 200px;
-
-	/* background-color: black; */
+	width: 270px;
+	height: 270px;
+	background-color: black;
 }
 
 .panels-container .side-panel.sagittal {

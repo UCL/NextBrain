@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./MriPanel.css";
 
 const MriPanel = (props) => {
-	const { plane, mriSlices, calculateMriImages } = props;
+	const { plane, mriSlices, calculateMriImages, mriDimensions } = props;
 
 	const paddedSlice = props.mriSlices[plane]["slice"].toString().padStart(3, 0);
 	const mriImage = require(`../../../assets/mri/slices_${plane}/slice_${paddedSlice}.png`)
@@ -12,6 +12,8 @@ const MriPanel = (props) => {
 	const getCoords = (e) => {
 		const xCoordinate = e.nativeEvent.offsetX;
 		const yCoordinate = e.nativeEvent.offsetY;
+
+		// console.log(xCoordinate, yCoordinate);
 
 		if (plane === "sagittal") {
 			calculateMriImages(
@@ -46,8 +48,29 @@ const MriPanel = (props) => {
 
 	return (
 		<div className={`side-panel ${plane}`}>
-			<div>{plane}</div>
-			<div className="img-container">
+			{/* <div className="debug-info">
+				<div>{plane}</div>
+				<div>
+					{Object.keys(mriSlices[plane]).map((prop, index) => (
+						<React.Fragment key={index}>
+							<div>
+								<strong>{prop}: </strong>
+								<strong>{mriSlices[plane][prop]} </strong>
+							</div>
+						</React.Fragment>
+					))}
+					{Object.keys(mriDimensions[plane]).map((prop, index) => (
+						<React.Fragment key={index}>
+							<div>
+								<strong>{prop}: </strong>
+								<strong>{mriDimensions[plane][prop]} </strong>
+							</div>
+						</React.Fragment>
+					))}
+				</div>
+			</div> */}
+
+			<div className={`img-container ${plane}`}>
 				<div
 					className="target-pointer"
 					style={{
@@ -58,24 +81,10 @@ const MriPanel = (props) => {
 
 				<img
 					onClick={(e) => getCoords(e)}
-					// onMouseEnter={() => enterTarget()}
-					// onMouseLeave={() => leaveTarget()}
-					// onMouseMove={(e) => mouseMove(e)}
-					className={`${plane}-image`}
+					className={`${plane}-img`}
 					src={mriImage}
-					alt={`${plane}-image`}
+					alt={`${plane}-img`}
 				></img>
-			</div>
-
-			<div>
-				{Object.keys(mriSlices[plane]).map((prop, index) => (
-					<React.Fragment key={index}>
-						<div>
-							<strong>{prop}: </strong>
-							<strong>{mriSlices[plane][prop]} </strong>
-						</div>
-					</React.Fragment>
-				))}
 			</div>
 		</div>
 	);
