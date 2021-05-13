@@ -19,15 +19,13 @@ const ImagePanels = (props) => {
 	});
 
 	const [mriImages, setMriImages] = useState({
-		sagittal: { slice: 113, x: 224, z: 141, targetTop: 224, targetLeft: 141 },
+		sagittal: { slice: 113, mouseY: 224, mouseX: 141 },
 		coronal: {
 			slice: 224,
-			y: 113,
-			z: 141,
-			targetTop: 113 * CORONAL_RESCALING_FACTOR,
-			targetLeft: 141 * CORONAL_RESCALING_FACTOR,
+			mouseY: 113 * CORONAL_RESCALING_FACTOR,
+			mouseX: 141 * CORONAL_RESCALING_FACTOR,
 		},
-		axial: { slice: 141, x: 224, y: 113, targetTop: 113, targetLeft: 224 },
+		axial: { slice: 141, mouseY: 113, mouseX: 224 },
 	});
 
 	const clearError = () => {
@@ -41,31 +39,25 @@ const ImagePanels = (props) => {
 		coordsZ,
 		currentSlice
 	) => {
-		let newCoords;
+		let newMriParams;
 
 		switch (currentPlane) {
 			case "sagittal":
-				newCoords = {
+				newMriParams = {
 					sagittal: {
 						slice: currentSlice,
-						x: coordsX,
-						z: coordsZ,
-						targetTop: coordsX,
-						targetLeft: coordsZ,
+						mouseY: coordsX,
+						mouseX: coordsZ,
 					},
 					coronal: {
 						slice: coordsX,
-						y: currentSlice,
-						z: coordsZ,
-						targetTop: currentSlice * CORONAL_RESCALING_FACTOR,
-						targetLeft: coordsZ * CORONAL_RESCALING_FACTOR,
+						mouseY: currentSlice * CORONAL_RESCALING_FACTOR,
+						mouseX: coordsZ * CORONAL_RESCALING_FACTOR,
 					},
 					axial: {
 						slice: coordsZ,
-						x: coordsX,
-						y: currentSlice,
-						targetTop: currentSlice,
-						targetLeft: coordsX,
+						mouseY: currentSlice,
+						mouseX: coordsX,
 					},
 				};
 				break;
@@ -74,58 +66,46 @@ const ImagePanels = (props) => {
 				coordsY = (coordsY / CORONAL_RESCALING_FACTOR).toFixed(0);
 				coordsZ = (coordsZ / CORONAL_RESCALING_FACTOR).toFixed(0);
 
-				newCoords = {
+				newMriParams = {
 					sagittal: {
 						slice: coordsY,
-						x: currentSlice,
-						z: coordsZ,
-						targetTop: currentSlice,
-						targetLeft: coordsZ,
+						mouseY: currentSlice,
+						mouseX: coordsZ,
 					},
 					coronal: {
 						slice: currentSlice,
-						y: coordsY,
-						z: coordsZ,
-						targetTop: coordsY * CORONAL_RESCALING_FACTOR,
-						targetLeft: coordsZ * CORONAL_RESCALING_FACTOR,
+						mouseY: coordsY * CORONAL_RESCALING_FACTOR,
+						mouseX: coordsZ * CORONAL_RESCALING_FACTOR,
 					},
 					axial: {
 						slice: coordsZ,
-						x: currentSlice,
-						y: coordsY,
-						targetTop: coordsY,
-						targetLeft: currentSlice,
+						mouseY: coordsY,
+						mouseX: currentSlice,
 					},
 				};
 				break;
 			case "axial":
-				newCoords = {
+				newMriParams = {
 					sagittal: {
 						slice: coordsY,
-						x: coordsX,
-						z: currentSlice,
-						targetTop: coordsX,
-						targetLeft: currentSlice,
+						mouseY: coordsX,
+						mouseX: currentSlice,
 					},
 					coronal: {
 						slice: coordsX,
-						y: coordsY,
-						z: currentSlice,
-						targetTop: coordsY * CORONAL_RESCALING_FACTOR,
-						targetLeft: currentSlice * CORONAL_RESCALING_FACTOR,
+						mouseY: coordsY * CORONAL_RESCALING_FACTOR,
+						mouseX: currentSlice * CORONAL_RESCALING_FACTOR,
 					},
 					axial: {
 						slice: currentSlice,
-						x: coordsX,
-						y: coordsY,
-						targetTop: coordsY,
-						targetLeft: coordsX,
+						mouseY: coordsY,
+						mouseX: coordsX,
 					},
 				};
 				break;
 		}
 
-		setMriImages(newCoords);
+		setMriImages(newMriParams);
 	};
 
 	return (

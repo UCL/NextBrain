@@ -20,6 +20,7 @@ const MriPanel = (props) => {
 		calculateMriImagesHandler(mouseX, mouseY);
 	};
 
+	// see readme for more details on how the mri coordinates are calculated
 	const calculateMriImagesHandler = (mouseX, mouseY) => {
 		if (mouseX < 0 || mouseY < 0) return;
 
@@ -98,8 +99,8 @@ const MriPanel = (props) => {
 					className="target-pointer"
 					// - 5 to account for element width and border offsets
 					style={{
-						top: +mriImages[plane].targetTop - 5,
-						left: +mriImages[plane].targetLeft - 5,
+						top: +mriImages[plane].mouseY - 5,
+						left: +mriImages[plane].mouseX - 5,
 					}}
 				></div>
 
