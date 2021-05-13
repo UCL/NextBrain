@@ -12,8 +12,13 @@ const ImagePanels = (props) => {
 	const [error, setError] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 
-	// multiplied by 1.5 for coronal due to rescaling
-	const [mriSlices, setMriSlices] = useState({
+	const [mriDimensions, setMriDimensions] = useState({
+		sagittal: { x: 282, y: 448 },
+		coronal: { x: 282, y: 224 },
+		axial: { x: 448, y: 224 },
+	});
+
+	const [mriImages, setMriImages] = useState({
 		sagittal: { slice: 113, x: 224, z: 141, targetTop: 224, targetLeft: 141 },
 		coronal: {
 			slice: 224,
@@ -25,30 +30,24 @@ const ImagePanels = (props) => {
 		axial: { slice: 141, x: 224, y: 113, targetTop: 113, targetLeft: 224 },
 	});
 
-	const [mriDimensions, setMriDimensions] = useState({
-		sagittal: { x: 282, y: 448 },
-		coronal: { x: 282, y: 224 },
-		axial: { x: 448, y: 224 },
-	});
-
 	const clearError = () => {
 		setError(null);
 	};
 
 	const calculateMriImages = (
-		pickedPanel,
+		currentPlane,
 		coordsX,
 		coordsY,
 		coordsZ,
-		pickedSlice
+		currentSlice
 	) => {
 		let newCoords;
 
-		switch (pickedPanel) {
+		switch (currentPlane) {
 			case "sagittal":
 				newCoords = {
 					sagittal: {
-						slice: pickedSlice,
+						slice: currentSlice,
 						x: coordsX,
 						z: coordsZ,
 						targetTop: coordsX,
@@ -56,16 +55,16 @@ const ImagePanels = (props) => {
 					},
 					coronal: {
 						slice: coordsX,
-						y: pickedSlice,
+						y: currentSlice,
 						z: coordsZ,
-						targetTop: pickedSlice * CORONAL_RESCALING_FACTOR,
+						targetTop: currentSlice * CORONAL_RESCALING_FACTOR,
 						targetLeft: coordsZ * CORONAL_RESCALING_FACTOR,
 					},
 					axial: {
 						slice: coordsZ,
 						x: coordsX,
-						y: pickedSlice,
-						targetTop: pickedSlice,
+						y: currentSlice,
+						targetTop: currentSlice,
 						targetLeft: coordsX,
 					},
 				};
@@ -78,13 +77,13 @@ const ImagePanels = (props) => {
 				newCoords = {
 					sagittal: {
 						slice: coordsY,
-						x: pickedSlice,
+						x: currentSlice,
 						z: coordsZ,
-						targetTop: pickedSlice,
+						targetTop: currentSlice,
 						targetLeft: coordsZ,
 					},
 					coronal: {
-						slice: pickedSlice,
+						slice: currentSlice,
 						y: coordsY,
 						z: coordsZ,
 						targetTop: coordsY * CORONAL_RESCALING_FACTOR,
@@ -92,10 +91,10 @@ const ImagePanels = (props) => {
 					},
 					axial: {
 						slice: coordsZ,
-						x: pickedSlice,
+						x: currentSlice,
 						y: coordsY,
 						targetTop: coordsY,
-						targetLeft: pickedSlice,
+						targetLeft: currentSlice,
 					},
 				};
 				break;
@@ -104,19 +103,19 @@ const ImagePanels = (props) => {
 					sagittal: {
 						slice: coordsY,
 						x: coordsX,
-						z: pickedSlice,
+						z: currentSlice,
 						targetTop: coordsX,
-						targetLeft: pickedSlice,
+						targetLeft: currentSlice,
 					},
 					coronal: {
 						slice: coordsX,
 						y: coordsY,
-						z: pickedSlice,
+						z: currentSlice,
 						targetTop: coordsY * CORONAL_RESCALING_FACTOR,
-						targetLeft: pickedSlice * CORONAL_RESCALING_FACTOR,
+						targetLeft: currentSlice * CORONAL_RESCALING_FACTOR,
 					},
 					axial: {
-						slice: pickedSlice,
+						slice: currentSlice,
 						x: coordsX,
 						y: coordsY,
 						targetTop: coordsY,
@@ -126,7 +125,7 @@ const ImagePanels = (props) => {
 				break;
 		}
 
-		setMriSlices(newCoords);
+		setMriImages(newCoords);
 	};
 
 	return (
@@ -136,20 +135,20 @@ const ImagePanels = (props) => {
 
 			<MriPanel
 				plane="sagittal"
-				mriSlices={mriSlices}
+				mriImages={mriImages}
 				calculateMriImages={calculateMriImages}
 				mriDimensions={mriDimensions}
 			/>
 			<MriPanel
 				plane="coronal"
-				mriSlices={mriSlices}
+				mriImages={mriImages}
 				calculateMriImages={calculateMriImages}
 				mriDimensions={mriDimensions}
 				coronalRescalingFactor={CORONAL_RESCALING_FACTOR}
 			/>
 			<MriPanel
 				plane="axial"
-				mriSlices={mriSlices}
+				mriImages={mriImages}
 				calculateMriImages={calculateMriImages}
 				mriDimensions={mriDimensions}
 			/>

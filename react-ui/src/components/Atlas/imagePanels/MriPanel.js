@@ -3,32 +3,36 @@ import "./MriPanel.css";
 const MriPanel = (props) => {
 	const {
 		plane,
-		mriSlices,
+		mriImages,
 		calculateMriImages,
 		mriDimensions,
 		coronalRescalingFactor,
 	} = props;
 
-	const paddedSlice = props.mriSlices[plane]["slice"].toString().padStart(3, 0);
-	const mriImage = require(`../../../assets/mri/slices_${plane}/slice_${paddedSlice}.png`)
-		.default;
+	const paddedSlice = props.mriImages[plane]["slice"].toString().padStart(3, 0);
+	const mriImage =
+		require(`../../../assets/mri/slices_${plane}/slice_${paddedSlice}.png`).default;
 
-	const getCoords = (e) => {
-		const xCoordinate = e.nativeEvent.offsetX;
-		const yCoordinate = e.nativeEvent.offsetY;
+	const getMouseCoords = (e) => {
+		const mouseX = e.nativeEvent.offsetX;
+		const mouseY = e.nativeEvent.offsetY;
 
-		if (xCoordinate < 0 || yCoordinate < 0) return;
+		calculateMriImagesHandler(mouseX, mouseY);
+	};
+
+	const calculateMriImagesHandler = (mouseX, mouseY) => {
+		if (mouseX < 0 || mouseY < 0) return;
 
 		if (plane === "sagittal") {
 			// constrain coordinates to the current image dimensions
-			if (xCoordinate > 281 || yCoordinate > 447) return;
+			if (mouseX > 281 || mouseY > 447) return;
 
 			calculateMriImages(
 				plane,
-				yCoordinate.toFixed(0),
+				mouseY.toFixed(0),
 				undefined,
-				xCoordinate.toFixed(0),
-				mriSlices[plane]["slice"]
+				mouseX.toFixed(0),
+				mriImages[plane]["slice"]
 			);
 		}
 
@@ -36,30 +40,30 @@ const MriPanel = (props) => {
 			// constrain coordinates to the current image dimensions
 			// also accounting for coronal rescaling
 			if (
-				xCoordinate > 281 * coronalRescalingFactor ||
-				yCoordinate > 223 * coronalRescalingFactor
+				mouseX > 281 * coronalRescalingFactor ||
+				mouseY > 223 * coronalRescalingFactor
 			)
 				return;
 
 			calculateMriImages(
 				plane,
 				undefined,
-				yCoordinate.toFixed(0),
-				xCoordinate.toFixed(0),
-				mriSlices[plane]["slice"]
+				mouseY.toFixed(0),
+				mouseX.toFixed(0),
+				mriImages[plane]["slice"]
 			);
 		}
 
 		if (plane === "axial") {
 			// constrain coordinates to the current image dimensions
-			if (xCoordinate > 447 || yCoordinate > 223) return;
+			if (mouseX > 447 || mouseY > 223) return;
 
 			calculateMriImages(
 				plane,
-				xCoordinate.toFixed(0),
-				yCoordinate.toFixed(0),
+				mouseX.toFixed(0),
+				mouseY.toFixed(0),
 				undefined,
-				mriSlices[plane]["slice"]
+				mriImages[plane]["slice"]
 			);
 		}
 	};
@@ -69,11 +73,11 @@ const MriPanel = (props) => {
 			{/* <div className="debug-info">
 				<div>{plane}</div>
 				<div>
-					{Object.keys(mriSlices[plane]).map((prop, index) => (
+					{Object.keys(mriImages[plane]).map((prop, index) => (
 						<React.Fragment key={index}>
 							<div>
 								<strong>{prop}: </strong>
-								<strong>{mriSlices[plane][prop]} </strong>
+								<strong>{mriImages[plane][prop]} </strong>
 							</div>
 						</React.Fragment>
 					))}
@@ -94,13 +98,13 @@ const MriPanel = (props) => {
 					className="target-pointer"
 					// - 5 to account for element width and border offsets
 					style={{
-						top: +mriSlices[plane].targetTop - 5,
-						left: +mriSlices[plane].targetLeft - 5,
+						top: +mriImages[plane].targetTop - 5,
+						left: +mriImages[plane].targetLeft - 5,
 					}}
 				></div>
 
 				<img
-					onClick={(e) => getCoords(e)}
+					onClick={(e) => getMouseCoords(e)}
 					className={`${plane}-img`}
 					src={mriImage}
 					alt={`${plane}-img`}
