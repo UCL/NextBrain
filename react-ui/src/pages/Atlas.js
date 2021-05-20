@@ -1,7 +1,5 @@
-import React from "react";
-
-import ImagePanels from "../components/Atlas/imagePanels/ImagePanels";
-import OptionsPanels from "../components/Atlas/optionsPanels/OptionsPanels";
+import AtlasImages from "../components/atlas/atlasImages/AtlasImages";
+import AtlasOptions from "../components/atlas/atlasOptions/AtlasOptions";
 
 import "./Atlas.css";
 
@@ -9,8 +7,8 @@ const Atlas = () => {
 	return (
 		<>
 			<main className="atlas-container">
-				<ImagePanels />
-				<OptionsPanels />
+				<AtlasImages />
+				<AtlasOptions />
 			</main>
 		</>
 	);

@@ -1,0 +1,10 @@
+.mouse-pointer {
+	position: absolute;
+	width: 7px;
+	height: 7px;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 50%;
+	z-index: 5;
+	pointer-events: none;
+}
