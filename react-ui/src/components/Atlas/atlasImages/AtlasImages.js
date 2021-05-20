@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ndarray from "ndarray";
 
-import npyjs from "../../../components/utils/npy";
+import npyjs from "../../utils/npy";
 
 import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
@@ -9,8 +9,6 @@ import MriImages from "./MriImages";
 import HistologyImage from "./HistologyImage";
 
 import CORONAL_RESCALING_FACTOR from "../../utils/CoronalRescalingFactor";
-
-//import file from "../../../assets/slice_102_C.npy";
 
 import "./AtlasImages.css";
 
