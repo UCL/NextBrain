@@ -65,7 +65,7 @@ class npyjs {
 		const headerLength = new DataView(
 			arrayBufferContents.slice(8, 10)
 		).getUint8(0);
-		console.log(headerLength);
+		//console.log(headerLength);
 		const offsetBytes = 10 + headerLength;
 
 		let hcontents = new TextDecoder("utf-8").decode(
@@ -76,6 +76,7 @@ class npyjs {
 		var header = JSON.parse(
 			hcontents
 				.replace(/'/g, '"')
+				.replace("True", "true")
 				.replace("False", "false")
 				.replace("(", "[")
 				.replace(/,*\),*/g, "]")

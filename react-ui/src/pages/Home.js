@@ -1,24 +1,58 @@
 import npyjs from "../components/utils/npy";
 import ndarray from "ndarray";
 
-import file from "../assets/slice_102_C.npy";
+import arrayF from "../assets/slice_102.npy";
+import arrayC from "../assets/slice_102_C.npy";
 
 import "./Home.css";
 
 const Atlas = () => {
 	let n = new npyjs();
 
-	const getNpy = async () => {
-		n.ajax(file, (npyArray) => {
+	const getNpyFortran = async () => {
+		n.ajax(arrayF, (npyArray) => {
+			console.log("FORTRAN ORDER REVERSED");
+			console.log(npyArray);
+
+			// const sliceIndices = ndarray(npyArray.data, npyArray.shape);
+			// console.log(reversed);
+			// console.log(reversed.get(29, 271));
+
+			// initialise the ndarray with a stride that conforms to C contiguity
+			// this is done by editing the stride
+			// original Fortran contiguity stride = [448, 1] (which is the same as stride = [data.shape[1], 1])
+			// transforming this stride to C contiguous = [1, 224] (which is the same as stride = [1, data.shape[0]])
+			// this allows us to access array indexes correctly
+			// for more info see https://ajcr.net/stride-guide-part-2/
+			var reversedStride = ndarray(
+				npyArray.data,
+				npyArray.shape,
+				[1, npyArray.shape[0]],
+				npyArray.offset
+			);
+			console.log(reversedStride);
+			console.log(reversedStride.get(29, 264));
+		});
+	};
+
+	getNpyFortran();
+
+	const getNpyC = async () => {
+		n.ajax(arrayC, (npyArray) => {
+			console.log("C ORDER");
 			console.log(npyArray);
 
 			const sliceIndices = ndarray(npyArray.data, npyArray.shape);
 			console.log(sliceIndices);
-			console.log(sliceIndices.get(47, 80));
+			console.log(sliceIndices.get(29, 264));
+
+			// var reversedStride = ndarray(npyArray.data, [448, 224], [448, 1], 0);
+			// console.log(reversedStride);
+			// console.log(reversedStride.get(29, 271));
 		});
 	};
 
-	getNpy();
+	getNpyC();
 
 	const multiplyMatrixAndPoint = (matrix, point) => {
 		// Give a variable name to each part of the matrix, a column and row number
@@ -65,7 +99,7 @@ const Atlas = () => {
 	];
 
 	let result = multiplyMatrixAndPoint(brainMatrix, [47, 80, 103, 1]);
-	console.log(result);
+	//console.log(result);
 
 	return <main>Welcome to Brain Atlas, currently under construction</main>;
 };
