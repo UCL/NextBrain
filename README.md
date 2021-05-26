@@ -9,15 +9,15 @@ For each patient a set of images and associated data are provided
 - MRI scans in 3 projections: axial, sagittal, coronal
 - images of histology slices stemming from a number of different blocks (regions in the brain). Each block contains a number of image slices. Images are provided as standard and high resolution images.
 - transformation matrices for moving between MRI and histology diagrams
-- NUMPY arrays to map MRI region to histology blocks (and reverse)
+- NUMPY arrays to map MRI region to histology blocks
 
 ### Notations
 Throughout this section, the following notations will be used:
 - pixel location *(x,y)*, where x describes the horizontal axis and y the vertical axis of the image
 - slice/image index *z*. Images in the MRI/histology folders are labelled starting with 0. *z* describes the z-th image in this folder (i.e. image/slice with label z)
-- *v* the vector representation a location in the 3-dim brain representation of either MRI or histology images.
-- *v'* a transformed vector
-- *A* a transformation matrix
+- *v* the vector representation a location in the 3-dim brain representation of either MRI or histology images. *v* is in homogeneous co-ordinates and will be used in the form: *(x,y,z,1)*
+- *v'* a transformed vector. *v'* is in homogeneous co-ordinates and will be used in the form: *(x',y',z',1)*
+- *A* a transformation matrix. Transformation matrices are of shape *4 x 4*, where the 4th row is 0 except for the diagonal element (1). 
 - *[(x,y),z]* a co-ordinate representation, whereby the pair *(x,y)* can be represented by the pixel locations, and *z* by the slice/image index. It can be read as "pixel at location (x,y) along the z-axis"
 - *axial, sagittal, coronal* : these denote image projections from MRI scans. Note: the assignment of these projections to image sequences mentioned below is for illustrative purposes only. The actual name of the projection may be different (e.g. sagittal instead of axial). However, this is only a labelling issue and does not impact the way co-ordinates are computed and/or transformed.
 
@@ -46,9 +46,9 @@ As can be seen, the number of slices/images in each folder matches between all p
 
 With this it is possible to build a "unified" 3-dim representation of the brain. In this model, each projection forms an *image/slice* plane along a co-ordinate axis. Using the *axial, sagittal, coronal* notation for projections, we can write:
 
-- axial      x_max = 448, y_max = 224 (slices along z-axis: z_max = 282 => number of images): [(x,y), z]
-- sagittal   z_max = 282, x_max = 448 (slices along y-axis: y_max = 224 => number of images): [(z,x), y]
-- coronal    z_max = 282, y_max = 224 (slices along x-axis: x_max = 448 => number of images): [(z,y), x]
+- axial      x_max = 447, y_max = 223 (slices along z-axis: z_max = 281 => number of images): [(x,y), z]
+- sagittal   z_max = 281, x_max = 447 (slices along y-axis: y_max = 223 => number of images): [(z,x), y]
+- coronal    z_max = 281, y_max = 223 (slices along x-axis: x_max = 447 => number of images): [(z,y), x]
 
 
 ##### Example:
@@ -72,7 +72,7 @@ Histology images or slices are generated in a different way than MRI images. The
 
 Histology slices (and images) are created from blocks of brain tissue. 
 Each block is identified with a label/number and corresponds to one area in the brain. 
-*NOTE*: block labelling starts at index = 1
+*NOTE*: block labelling starts at index = 1. A block value of 0 is reserved for areas with no matching tissue in histology images.
 
 In principle the matching of co-ordinates follows the three steps below:
 - for a given pixel find the corresponding histology block. This is facilitated by a number of stored pixel arrays (stored as NUMPY arrays) in the MRI folder (see below)
@@ -171,7 +171,7 @@ in that folder
 
 The following steps need to be performed:
 - from the selected pixel in a selected histology image build the vector *v_h = [(x_h, y_h), z_h, 1]*
-- read the values from *matrix.txt* into a 4x4 matrix *A_h*
+- read the values from *matrix.txt* into a 4x4 matrix *A_h*. *NOTE*: this matrix will be the inverse to the matrix used to transform from MRI to a histology image.
 - perform the matrix multiplication to obtained the transformed vector *v'_mri = [(x'_mri, y'_mri), z'_mri, 1]*. Note that this vector will again be 4-dim
 - use the coordinates *[(x'_mri, y'_mri), z'_mri]* to select the image in the "reference" projection of index *z'_mri* with pixel values *(x'_mri, y'_mri)* 
 
