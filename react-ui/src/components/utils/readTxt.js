@@ -156,4 +156,4 @@ class readTxt {
 	}
 }
 
-module.exports = readTxt;
+export default readTxt;
