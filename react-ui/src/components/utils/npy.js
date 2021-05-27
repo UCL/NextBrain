@@ -176,4 +176,4 @@ class npyjs {
 	}
 }
 
-module.exports = npyjs;
+export default npyjs;
