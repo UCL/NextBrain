@@ -71,7 +71,6 @@ class npyjs {
 		let hcontents = new TextDecoder("utf-8").decode(
 			new Uint8Array(arrayBufferContents.slice(10, 10 + headerLength))
 		);
-		console.log(hcontents);
 
 		var header = JSON.parse(
 			hcontents
@@ -83,6 +82,8 @@ class npyjs {
 		);
 		var shape = header.shape;
 
+		//console.log(header);
+
 		let dtype = this.dtypes[header.descr];
 
 		let nums = new dtype["arrayConstructor"](arrayBufferContents, offsetBytes);
@@ -93,7 +94,22 @@ class npyjs {
 			dtype: dtype.name,
 			data: nums,
 			shape,
+			fortranOrder: header.fortran_order,
 		};
+	}
+
+	async readFileAsync(file) {
+		return new Promise((resolve, reject) => {
+			let reader = new FileReader();
+
+			reader.onload = () => {
+				resolve(reader.result);
+			};
+
+			reader.onerror = reject;
+
+			reader.readAsArrayBuffer(file);
+		});
 	}
 
 	async load(filename, callback) {
@@ -103,24 +119,32 @@ class npyjs {
 		let self = this;
 		return fetch(filename)
 			.then((fh) => {
-				console.log(fh);
 				if (fh.ok) {
 					return fh
 						.blob()
 						.then((i) => {
 							var content = i;
-							console.log(content);
-							var reader = new FileReader();
-							reader.addEventListener("loadend", function () {
-								var text = reader.result;
-								var res = self.parse(text);
+							// var reader = new FileReader();
+							// reader.addEventListener("loadend", function () {
+							// 	var text = reader.result;
+							// 	var res = self.parse(text);
+							// 	if (callback) {
+							// 		return callback(res);
+							// 	}
+							// 	console.log(res);
+							// 	return res;
+							// });
+							// reader.readAsArrayBuffer(content);
+
+							return self.readFileAsync(content).then((res) => {
+								// var text = res.result;
+								var result = self.parse(res);
 								if (callback) {
-									return callback(res);
+									return callback(result);
 								}
-								//console.log(res);
-								return res;
+								//console.log(result);
+								return result;
 							});
-							reader.readAsArrayBuffer(content);
 						})
 						.catch((err) => console.error(err));
 				}

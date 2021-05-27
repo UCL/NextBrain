@@ -1,5 +1,9 @@
-import npyjs from "../components/utils/npy";
+//import npyjs from "npyjs";
 import ndarray from "ndarray";
+
+import npyjs from "../components/utils/npy";
+//import npyjs from "../components/utils/npy2";
+//import npyjs from "../components/utils/npy3";
 
 import arrayF from "../assets/slice_102.npy";
 import arrayC from "../assets/slice_102_C.npy";
@@ -35,7 +39,7 @@ const Atlas = () => {
 		});
 	};
 
-	getNpyFortran();
+	// getNpyFortran();
 
 	const getNpyC = async () => {
 		n.ajax(arrayC, (npyArray) => {
@@ -52,7 +56,37 @@ const Atlas = () => {
 		});
 	};
 
-	getNpyC();
+	// getNpyC();
+
+	const getNpyTest = async () => {
+		const npyArray = await n.load(arrayF);
+		console.log(npyArray);
+		console.log("jj");
+
+		const sliceIndices = ndarray(npyArray.data, npyArray.shape);
+		console.log(sliceIndices);
+		console.log(sliceIndices.get(47, 80));
+
+		var reversedStride = ndarray(
+			npyArray.data,
+			npyArray.shape,
+			[1, npyArray.shape[0]],
+			npyArray.offset
+		);
+		console.log(reversedStride);
+		console.log(reversedStride.get(47, 80));
+
+		// n.load(arrayC, (array, shape) => {
+		// 	console.log(array);
+		// });
+		// console.log("jj");
+		// n.load(arrayC).then((res) => {
+		// 	console.log(res);
+		// });
+		// console.log("jj");
+	};
+
+	getNpyTest();
 
 	const multiplyMatrixAndPoint = (matrix, point) => {
 		// Give a variable name to each part of the matrix, a column and row number
@@ -99,7 +133,7 @@ const Atlas = () => {
 	];
 
 	let result = multiplyMatrixAndPoint(brainMatrix, [47, 80, 103, 1]);
-	//console.log(result);
+	console.log(result);
 
 	return <main>Welcome to Brain Atlas, currently under construction</main>;
 };

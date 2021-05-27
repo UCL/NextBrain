@@ -1,6 +1,6 @@
-const fetch = window.fetch;
+const fetch = this.fetch ? this.fetch : require("node-fetch");
 
-class npy2js {
+class npyjs {
 	constructor(opts) {
 		if (opts) {
 			console.error(
@@ -22,10 +22,20 @@ class npy2js {
 				size: 8,
 				arrayConstructor: Uint8Array,
 			},
+			"<u2": {
+				name: "uint16",
+				size: 16,
+				arrayConstructor: Uint16Array,
+			},
 			"|i1": {
 				name: "int8",
 				size: 8,
 				arrayConstructor: Int8Array,
+			},
+			"<i2": {
+				name: "int16",
+				size: 16,
+				arrayConstructor: Int16Array,
 			},
 			"<u4": {
 				name: "uint32",
@@ -37,6 +47,16 @@ class npy2js {
 				size: 32,
 				arrayConstructor: Int32Array,
 			},
+			// "<u8": {
+			// 	name: "uint64",
+			// 	size: 64,
+			// 	arrayConstructor: BigUint64Array,
+			// },
+			// "<i8": {
+			// 	name: "int64",
+			// 	size: 64,
+			// 	arrayConstructor: BigInt64Array,
+			// },
 			"<f4": {
 				name: "float32",
 				size: 32,
@@ -51,53 +71,35 @@ class npy2js {
 	}
 
 	parse(arrayBufferContents) {
-		console.log(arrayBufferContents);
-
-		//const version = arrayBufferContents.slice(6, 8); // Uint8-encoded
+		// const version = arrayBufferContents.slice(6, 8); // Uint8-encoded
 		const headerLength = new DataView(
 			arrayBufferContents.slice(8, 10)
 		).getUint8(0);
-		//console.log(headerLength)
-
-		// console.log(new DataView(arrayBufferContents));
-		// console.log(new DataView(arrayBufferContents.slice(8, 10)));
-		//console.log(new DataView(arrayBufferContents.slice(8, 10)).getUint8(0));
 		const offsetBytes = 10 + headerLength;
 
 		let hcontents = new TextDecoder("utf-8").decode(
 			new Uint8Array(arrayBufferContents.slice(10, 10 + headerLength))
 		);
 
-		let test = new TextDecoder("utf-8").decode(
-			new Uint8Array(arrayBufferContents.slice(10, 1000))
-		);
-
-		console.log(test);
-
 		var header = JSON.parse(
 			hcontents
+				.toLowerCase() // True -> true
 				.replace(/'/g, '"')
-				.replace("True", "true")
-				.replace("False", "false")
 				.replace("(", "[")
 				.replace(/,*\),*/g, "]")
 		);
-		console.log(header);
+
+		if (header.fortran_order) {
+			throw new Error(
+				"NUMPY array is in Fortran contiguous order, please only load in NUMPY arrays in C contiguous order."
+			);
+		}
+
 		var shape = header.shape;
 
 		let dtype = this.dtypes[header.descr];
 
-		// let nums = new dtype["arrayConstructor"](
-		//     arrayBufferContents,
-		//     offsetBytes
-		// );
-		// console.log(nums)
-
-		let nums = new Uint8Array(arrayBufferContents, offsetBytes);
-
-		console.dir(nums, { maxArrayLength: 15000 });
-
-		//console.log(nums[5000])
+		let nums = new dtype["arrayConstructor"](arrayBufferContents, offsetBytes);
 
 		return {
 			dtype: dtype.name,
@@ -106,11 +108,19 @@ class npy2js {
 		};
 	}
 
-	// load(filename) {
-	// 	var res = fs.readFileSync(filename, null);
-	// 	var out = this.parse(res.buffer);
-	// 	return out;
-	// }
+	async readFileAsync(file) {
+		return new Promise((resolve, reject) => {
+			let reader = new FileReader();
+
+			reader.onload = () => {
+				resolve(reader.result);
+			};
+
+			reader.onerror = reject;
+
+			reader.readAsArrayBuffer(file);
+		});
+	}
 
 	async load(filename, callback) {
 		/*
@@ -124,16 +134,13 @@ class npy2js {
 						.blob()
 						.then((i) => {
 							var content = i;
-							var reader = new FileReader();
-							reader.addEventListener("loadend", function () {
-								var text = reader.result;
-								var res = self.parse(text);
+							return self.readFileAsync(content).then((res) => {
+								var result = self.parse(res);
 								if (callback) {
-									return callback(res);
+									return callback(result);
 								}
-								return res;
+								return result;
 							});
-							reader.readAsArrayBuffer(content);
 						})
 						.catch((err) => console.error(err));
 				}
@@ -142,4 +149,4 @@ class npy2js {
 	}
 }
 
-module.exports = npy2js;
+module.exports = npyjs;

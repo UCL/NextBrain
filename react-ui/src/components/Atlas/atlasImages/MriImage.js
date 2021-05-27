@@ -66,11 +66,7 @@ const MriImage = (props) => {
 			</div> */}
 
 			<div className={`mri-img-container ${plane}`}>
-				<MousePointer
-					type="mri"
-					plane={plane}
-					mriImageCoords={mriImageCoords}
-				/>
+				<MousePointer type="mri" plane={plane} imageCoords={mriImageCoords} />
 
 				<img
 					onClick={(e) => computeMriImagesHandler(e)}
