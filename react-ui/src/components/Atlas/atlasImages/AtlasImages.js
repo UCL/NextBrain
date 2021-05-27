@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ndarray from "ndarray";
 
 import npyjs from "../../utils/npy";
-import readTxt from "../../utils/readTxt";
+import txtToArray from "../../utils/txtToArray";
 import matrixMultiplier from "../../utils/matrixMultiplier";
 
 import LoadingSpinner from "../../shared/LoadingSpinner";
@@ -100,7 +100,7 @@ const AtlasImages = () => {
 			return;
 		}
 
-		let read = new readTxt();
+		let readTxt = new txtToArray();
 
 		const paddedBlock = currentBlock.toString().padStart(2, 0);
 		console.log(paddedBlock);
@@ -109,9 +109,9 @@ const AtlasImages = () => {
 			await require(`../../../assets/P57-16/mri/matrices/block_${paddedBlock}.txt`)
 				.default;
 
-		const txtArray = await read.load2(txtFile);
+		const matrix = await readTxt.load(txtFile);
 
-		return txtArray;
+		return matrix;
 	};
 
 	const getCurrentBlock = async (
