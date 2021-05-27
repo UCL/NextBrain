@@ -83,12 +83,37 @@ const AtlasImages = () => {
 		}
 		console.log(matrix);
 
-		let histologyImageCoords = matrixMultiplier(matrix, [
-			mouseX,
-			mouseY,
-			currentSlice + 1,
-			1,
-		]);
+		// let histologyImageCoords = matrixMultiplier(matrix, [
+		// 	mouseX,
+		// 	mouseY,
+		// 	currentSlice + 1,
+		// 	1,
+		// ]);
+
+		// are these orders correct? Or do we always enter them as (mouseX, mouseY, slice, 1)?
+		let histologyImageCoords;
+		if (currentPlane === "sagittal") {
+			histologyImageCoords = matrixMultiplier(matrix, [
+				axisX,
+				axisY + 1,
+				axisZ,
+				1,
+			]);
+		} else if (currentPlane === "coronal") {
+			histologyImageCoords = matrixMultiplier(matrix, [
+				axisX + 1,
+				axisY,
+				axisZ,
+				1,
+			]);
+		} else if (currentPlane === "axial") {
+			histologyImageCoords = matrixMultiplier(matrix, [
+				axisX,
+				axisY,
+				axisZ + 1,
+				1,
+			]);
+		}
 
 		console.log(histologyImageCoords, currentBlock);
 		return { coords: histologyImageCoords, currentBlock: currentBlock };
@@ -121,7 +146,6 @@ const AtlasImages = () => {
 		mouseY
 	) => {
 		let n = new npyjs();
-		let block;
 
 		const paddedSlice = currentSlice.toString().padStart(3, 0);
 
@@ -132,29 +156,33 @@ const AtlasImages = () => {
 		const npyArray = await n.load(npyFile);
 		console.log(npyArray);
 
-		var testArray = ndarray(npyArray.data, npyArray.shape);
-
-		// initialise the ndarray with a stride that conforms to C contiguity
-		// this is done by editing the stride
-		// original Fortran contiguity stride = [448, 1] (which is the same as stride = [data.shape[1], 1])
-		// transforming this stride to C contiguous = [1, 224] (which is the same as stride = [1, data.shape[0]])
-		// this allows us to access array indexes correctly
-		// for more info see https://ajcr.net/stride-guide-part-2/
-		var reversedStride = ndarray(
-			npyArray.data,
-			npyArray.shape,
-			[1, npyArray.shape[0]],
-			npyArray.offset
-		);
-		console.log(reversedStride);
+		// axial seems to be in fortran order while the other two are in C order
+		let ndArray;
+		if (currentPlane === "axial") {
+			// initialise the ndarray with a stride that conforms to C contiguity
+			// this is done by editing the stride
+			// original Fortran contiguity stride = [448, 1] (which is the same as stride = [data.shape[1], 1])
+			// transforming this stride to C contiguous = [1, 224] (which is the same as stride = [1, data.shape[0]])
+			// this allows us to access array indexes correctly
+			// for more info see https://ajcr.net/stride-guide-part-2/
+			ndArray = ndarray(
+				npyArray.data,
+				npyArray.shape,
+				[1, npyArray.shape[0]],
+				npyArray.offset
+			);
+			console.log(ndArray);
+		} else {
+			ndArray = ndarray(npyArray.data, npyArray.shape);
+		}
 
 		console.log("plane: " + currentPlane);
-		console.log("slice: " + currentSlice);
-		console.log(reversedStride.shape);
+		console.log("slice: " + paddedSlice);
+		console.log(ndArray.shape);
 		console.log(mouseX, mouseY);
-		console.log(reversedStride.get(mouseX, mouseY));
+		console.log(ndArray.get(mouseX, mouseY));
 
-		const currentBlock = reversedStride.get(mouseX, mouseY);
+		const currentBlock = ndArray.get(mouseX, mouseY);
 
 		return currentBlock;
 	};

@@ -2,9 +2,6 @@
 import ndarray from "ndarray";
 
 import npyjs from "../components/utils/npy";
-//import npyjs from "../components/utils/npy2";
-//import npyjs from "../components/utils/npy3";
-
 import matrixMultiplier from "../components/utils/matrixMultiplier";
 
 import arrayF from "../assets/slice_102.npy";
@@ -67,7 +64,7 @@ const Atlas = () => {
 
 		const sliceIndices = ndarray(npyArray.data, npyArray.shape);
 		console.log(sliceIndices);
-		console.log(sliceIndices.get(47, 80));
+		console.log(sliceIndices.get(200, 200));
 
 		var reversedStride = ndarray(
 			npyArray.data,
@@ -77,15 +74,6 @@ const Atlas = () => {
 		);
 		console.log(reversedStride);
 		console.log(reversedStride.get(47, 80));
-
-		// n.load(arrayC, (array, shape) => {
-		// 	console.log(array);
-		// });
-		// console.log("jj");
-		// n.load(arrayC).then((res) => {
-		// 	console.log(res);
-		// });
-		// console.log("jj");
 	};
 
 	getNpyTest();

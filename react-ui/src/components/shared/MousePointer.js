@@ -3,8 +3,6 @@ import "./MousePointer.css";
 const MousePointer = (props) => {
 	const { type, plane, imageCoords } = props;
 
-	console.log(imageCoords);
-
 	if (imageCoords === null || imageCoords === undefined) {
 		return (
 			<div

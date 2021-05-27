@@ -124,18 +124,6 @@ class npyjs {
 						.blob()
 						.then((i) => {
 							var content = i;
-							// var reader = new FileReader();
-							// reader.addEventListener("loadend", function () {
-							// 	var text = reader.result;
-							// 	var res = self.parse(text);
-							// 	if (callback) {
-							// 		return callback(res);
-							// 	}
-							// 	console.log(res);
-							// 	return res;
-							// });
-							// reader.readAsArrayBuffer(content);
-
 							return self.readFileAsync(content).then((res) => {
 								// var text = res.result;
 								var result = self.parse(res);
@@ -150,29 +138,6 @@ class npyjs {
 				}
 			})
 			.catch((err) => console.error(err));
-	}
-
-	async ajax(url, callback) {
-		let self = this;
-		var xhr = new XMLHttpRequest();
-		xhr.onload = function (e) {
-			var buf = xhr.response; // not responseText
-			var ndarray = self.parse(buf);
-			callback(ndarray);
-		};
-		xhr.open("GET", url, true);
-		xhr.responseType = "arraybuffer";
-		xhr.send(null);
-	}
-
-	async load2(url) {
-		fetch(url)
-			.then((d) => {
-				console.log(d);
-				d.arrayBuffer();
-			})
-			.then((d) => new npyjs().parse(d))
-			.then((data) => console.log(data));
 	}
 }
 

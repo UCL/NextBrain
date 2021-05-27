@@ -8,7 +8,7 @@ class txtToArray {
 		return txtToArray;
 	}
 
-	async load(filename, callback) {
+	async load(filename) {
 		return fetch(filename)
 			.then((response) => {
 				return response.text();
