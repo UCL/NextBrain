@@ -148,8 +148,8 @@ const AtlasImages = () => {
 		);
 		console.log(reversedStride);
 
-		console.log(currentPlane);
-		console.log(currentSlice);
+		console.log("plane: " + currentPlane);
+		console.log("slice: " + currentSlice);
 		console.log(reversedStride.shape);
 		console.log(mouseX, mouseY);
 		console.log(reversedStride.get(mouseX, mouseY));
