@@ -83,15 +83,15 @@ const AtlasImages = () => {
 		}
 		console.log(matrix);
 
-		let result = matrixMultiplier(matrix, [
+		let histologyImageCoords = matrixMultiplier(matrix, [
 			mouseX,
 			mouseY,
 			currentSlice + 1,
 			1,
 		]);
 
-		console.log(result, currentBlock);
-		return { coords: result, currentBlock: currentBlock };
+		console.log(histologyImageCoords, currentBlock);
+		return { coords: histologyImageCoords, currentBlock: currentBlock };
 	};
 
 	const getCurrentMatrix = async (currentBlock) => {
