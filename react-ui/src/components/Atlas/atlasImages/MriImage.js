@@ -43,28 +43,6 @@ const MriImage = (props) => {
 
 	return (
 		<div className={`mri-img ${plane}`}>
-			{/* <div className="debug-info">
-				<div>{plane}</div>
-				<div>
-					{Object.keys(mriImages[plane]).map((prop, index) => (
-						<React.Fragment key={index}>
-							<div>
-								<strong>{prop}: </strong>
-								<strong>{mriImages[plane][prop]} </strong>
-							</div>
-						</React.Fragment>
-					))}
-					{Object.keys(mriDimensions[plane]).map((prop, index) => (
-						<React.Fragment key={index}>
-							<div>
-								<strong>{prop}: </strong>
-								<strong>{mriDimensions[plane][prop]} </strong>
-							</div>
-						</React.Fragment>
-					))}
-				</div>
-			</div> */}
-
 			<div className={`mri-img-container ${plane}`}>
 				<MousePointer type="mri" plane={plane} imageCoords={mriImageCoords} />
 

@@ -77,6 +77,7 @@ const AtlasImages = () => {
 		);
 		console.log(currentBlock);
 
+		// TODO: I need to convert the array of strings to numbers (although it still works regardless)
 		const matrix = await getCurrentMatrix(currentBlock);
 		if (matrix === undefined) {
 			return;
