@@ -9,7 +9,7 @@ const MainNavigation = () => {
 			<nav className="nav">
 				<ul>
 					<li>
-						<NavLink to="/Home" activeClassName="active">
+						<NavLink to="/home" activeClassName="active">
 							Home
 						</NavLink>
 					</li>
@@ -18,6 +18,14 @@ const MainNavigation = () => {
 							See Atlas
 						</NavLink>
 					</li>
+
+					{process.env.NODE_ENV === "development" && (
+						<li>
+							<NavLink to="/test" activeClassName="active">
+								Test
+							</NavLink>
+						</li>
+					)}
 				</ul>
 			</nav>
 		</header>
