@@ -34,8 +34,8 @@ const MousePointer = (props) => {
 				className="mouse-pointer"
 				// - 5 to account for element width and border offsets
 				style={{
-					top: +imageCoords.coords[0],
-					left: +imageCoords.coords[1],
+					top: +imageCoords.coords.mouseY,
+					left: +imageCoords.coords.mouseX,
 				}}
 			></div>
 		);

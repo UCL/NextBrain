@@ -91,33 +91,48 @@ const AtlasImages = () => {
 		// 	1,
 		// ]);
 
-		// are these orders correct? Or do we always enter them as (mouseX, mouseY, slice, 1)?
+		// TODO: I need to find out what order to enter the paramaters for the matrix multiplications
+		// TODO: I also need to find out what order to read the coords when loading in histology images
+		let coords;
 		let histologyImageCoords;
 		if (currentPlane === "sagittal") {
-			histologyImageCoords = matrixMultiplier(matrix, [
-				axisX,
-				axisY + 1,
-				axisZ,
-				1,
-			]);
+			coords = matrixMultiplier(matrix, [axisX, axisY, axisZ, 1]);
+			console.log(coords);
+			histologyImageCoords = {
+				axisX: coords[0],
+				axisY: coords[1],
+				axisZ: coords[2],
+				mouseX: coords[2],
+				mouseY: coords[0],
+			};
 		} else if (currentPlane === "coronal") {
-			histologyImageCoords = matrixMultiplier(matrix, [
-				axisX + 1,
-				axisY,
-				axisZ,
-				1,
-			]);
+			coords = matrixMultiplier(matrix, [axisX, axisY, axisZ, 1]);
+			console.log(coords);
+			histologyImageCoords = {
+				axisX: coords[0],
+				axisY: coords[1],
+				axisZ: coords[2],
+				mouseX: coords[2],
+				mouseY: coords[1],
+			};
 		} else if (currentPlane === "axial") {
-			histologyImageCoords = matrixMultiplier(matrix, [
-				axisX,
-				axisY,
-				axisZ + 1,
-				1,
-			]);
+			coords = matrixMultiplier(matrix, [axisX, axisY, axisZ, 1]);
+			console.log(coords);
+			histologyImageCoords = {
+				axisX: coords[0],
+				axisY: coords[1],
+				axisZ: coords[2],
+				mouseX: coords[0],
+				mouseY: coords[1],
+			};
 		}
 
 		console.log(histologyImageCoords, currentBlock);
-		return { coords: histologyImageCoords, currentBlock: currentBlock };
+		return {
+			coords: histologyImageCoords,
+			currentBlock: currentBlock,
+			currentPlane: currentPlane,
+		};
 	};
 
 	const getCurrentMatrix = async (currentBlock) => {
