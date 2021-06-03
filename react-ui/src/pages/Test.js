@@ -4,9 +4,8 @@ import ndarray from "ndarray";
 import npyjs from "../components/utils/npy";
 import matrixMultiplier from "../components/utils/matrixMultiplier";
 
-import arrayF from "../assets/slice_102.npy";
-import arrayC from "../assets/slice_102_C.npy";
-import testNpy from "../assets/P57-16/mri/indices_axial_C_order/slice_149.npy";
+import arrayF from "../assets/P57-16/mri/indices_axial/slice_149.npy";
+import arrayC from "../assets/P57-16/mri/indices_axial_C_order/slice_149.npy";
 
 const Test = () => {
 	let n = new npyjs();
@@ -57,7 +56,7 @@ const Test = () => {
 	// getNpyC();
 
 	const getNpyTest = async () => {
-		const npyArray = await n.load(testNpy);
+		const npyArray = await n.load(arrayC);
 		console.log(npyArray);
 		console.log("jj");
 
