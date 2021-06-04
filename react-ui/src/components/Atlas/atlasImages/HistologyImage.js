@@ -63,7 +63,7 @@ const HistologyImage = (props) => {
 					// onClick={(e) => computeMriImagesHandler(e)}
 					// className={`${plane}-img`}
 					src={histologyImage}
-					//alt={`${plane}-img`}
+					alt="histology"
 				></img>
 			</div>
 		</div>
