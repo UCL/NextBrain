@@ -1,0 +1,20 @@
+.debug-info {
+	position: relative;
+	left: -90px;
+}
+
+.mri-img-container {
+	display: flex;
+	position: relative;
+	/* scaling the image changes its size but maintains its x y coords (important for the app to work) */
+	transform: scale(0.6);
+	border: 1px solid white;
+}
+
+.mri-img-container img {
+	-webkit-user-drag: none;
+}
+
+.coronal-img {
+	zoom: 1.5;
+}

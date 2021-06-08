@@ -1,0 +1,94 @@
+import React, { useState, useEffect } from "react";
+
+import calculateMriImageCoords from "../../utils/calculateMriImageCoords";
+import calculateHistologyImageCoords from "../../utils/calculateHistologyImageCoords";
+
+import LoadingSpinner from "../../shared/LoadingSpinner";
+import ErrorModal from "../../shared/ErrorModal";
+import MriImages from "./MriImages";
+import HistologyImage from "./HistologyImage";
+
+import CORONAL_RESCALING_FACTOR from "../../utils/CoronalRescalingFactor";
+
+import "./AtlasImages.css";
+
+const AtlasImages = () => {
+	const [error, setError] = useState();
+	const [isLoading, setIsLoading] = useState(false);
+	const [mriImageCoords, setMriImageCoords] = useState(null);
+	const [histologyImageCoords, setHistologyImageCoords] = useState(null);
+
+	const clearError = () => {
+		setError(null);
+	};
+
+	useEffect(() => {
+		// initialize mri panels based on an arbitrary starting point
+		updateAtlasImages("sagittal", 113, 235, 113, 149, 47, 50);
+	}, []);
+
+	const updateAtlasImages = async (
+		currentPlane,
+		currentSlice,
+		axisX,
+		axisY,
+		axisZ,
+		mouseX,
+		mouseY
+	) => {
+		const newMriCoords = calculateMriImageCoords(
+			currentPlane,
+			currentSlice,
+			axisX,
+			axisY,
+			axisZ
+		);
+		const newHistologyCoords = await calculateHistologyImageCoords(
+			currentPlane,
+			currentSlice,
+			axisX,
+			axisY,
+			axisZ,
+			mouseX,
+			mouseY
+		);
+		//console.log(newHistologyCoords);
+
+		setMriImageCoords(newMriCoords);
+		setHistologyImageCoords(newHistologyCoords);
+	};
+
+	if (mriImageCoords === null) {
+		return <div>Could not build the atlas. No MRI images found.</div>;
+	}
+
+	return (
+		<section className="atlas-imgs-container">
+			<ErrorModal error={error} onClear={clearError} />
+			{isLoading && <LoadingSpinner asOverlay />}
+
+			<MriImages
+				plane="sagittal"
+				mriImageCoords={mriImageCoords}
+				updateAtlasImages={updateAtlasImages}
+			/>
+			<MriImages
+				plane="coronal"
+				mriImageCoords={mriImageCoords}
+				updateAtlasImages={updateAtlasImages}
+				coronalRescalingFactor={CORONAL_RESCALING_FACTOR}
+			/>
+			<MriImages
+				plane="axial"
+				mriImageCoords={mriImageCoords}
+				updateAtlasImages={updateAtlasImages}
+			/>
+
+			<HistologyImage histologyImageCoords={histologyImageCoords} />
+
+			<div className="scrollbar"></div>
+		</section>
+	);
+};
+
+export default AtlasImages;
