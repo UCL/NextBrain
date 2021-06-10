@@ -22,6 +22,8 @@ const calculateHistologyImageCoords = async (
 	);
 	console.log("current block: " + currentBlock);
 
+	if (currentBlock === 0) return console.log("block returned 0");
+
 	// TODO: I need to convert the array of strings to numbers (although it still works regardless)
 	const matrix = await getCurrentMatrix(currentBlock);
 	if (matrix === undefined) {
@@ -70,11 +72,6 @@ const calculateHistologyImageCoords = async (
 };
 
 const getCurrentMatrix = async (currentBlock) => {
-	if (currentBlock === 0) {
-		console.log("block returned 0");
-		return;
-	}
-
 	let readTxt = new txtToArray();
 
 	const paddedBlock = currentBlock.toString().padStart(2, 0);
@@ -95,33 +92,40 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 
 	const paddedSlice = currentSlice.toString().padStart(3, 0);
 
-	const npyFile =
-		await require(`../../assets/P57-16/mri/indices_${currentPlane}/slice_${paddedSlice}.npy`)
-			.default;
+	let npyFile;
+
+	if (currentPlane === "axial") {
+		npyFile =
+			await require(`../../assets/P57-16/mri/indices_${currentPlane}_C_order/slice_${paddedSlice}.npy`)
+				.default;
+	} else {
+		npyFile =
+			await require(`../../assets/P57-16/mri/indices_${currentPlane}/slice_${paddedSlice}.npy`)
+				.default;
+	}
 
 	const npyArray = await n.load(npyFile);
-	//console.log(npyArray);
 
 	// axial seems to be in fortran order while the other two are in C order
 	let ndArray;
-	if (currentPlane === "axial") {
-		// initialise the ndarray with a stride that conforms to C contiguity
-		// this is done by editing the stride
-		// original Fortran contiguity stride = [448, 1] (which is the same as stride = [data.shape[1], 1])
-		// transforming this stride to C contiguous = [1, 224] (which is the same as stride = [1, data.shape[0]])
-		// this allows us to access array indexes correctly
-		// for more info see https://ajcr.net/stride-guide-part-2/
-		ndArray = ndarray(
-			npyArray.data,
-			npyArray.shape,
-			[1, npyArray.shape[0]],
-			npyArray.offset
-		);
-		//console.log(ndArray);
-	} else {
-		ndArray = ndarray(npyArray.data, npyArray.shape);
-	}
-
+	// if (currentPlane === "axial") {
+	// 	// initialise the ndarray with a stride that conforms to C contiguity
+	// 	// this is done by editing the stride
+	// 	// original Fortran contiguity stride = [448, 1] (which is the same as stride = [data.shape[1], 1])
+	// 	// transforming this stride to C contiguous = [1, 224] (which is the same as stride = [1, data.shape[0]])
+	// 	// this allows us to access array indexes correctly
+	// 	// for more info see https://ajcr.net/stride-guide-part-2/
+	// 	ndArray = ndarray(
+	// 		npyArray.data,
+	// 		npyArray.shape,
+	// 		[1, npyArray.shape[0]],
+	// 		npyArray.offset
+	// 	);
+	// 	//console.log(ndArray);
+	// } else {
+	// 	ndArray = ndarray(npyArray.data, npyArray.shape);
+	// }
+	ndArray = ndarray(npyArray.data, npyArray.shape);
 	//ndArray = ndArray.transpose(1, 0);
 
 	console.log("npy shape: " + ndArray.shape);
