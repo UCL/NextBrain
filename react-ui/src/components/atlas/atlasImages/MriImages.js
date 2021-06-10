@@ -14,43 +14,9 @@ const MriImages = (props) => {
 
 		if (!mouseIsWithinBounds) return;
 
-		const { axisX, axisY, axisZ } = determinePlaneAxes(mouseX, mouseY);
+		//const { axisX, axisY, axisZ } = determinePlaneAxes(mouseX, mouseY);
 
-		if (plane === "sagittal") {
-			updateAtlasImages(
-				plane,
-				mriImageCoords[plane]["slice"],
-				axisX.toFixed(0),
-				axisY,
-				axisZ.toFixed(0),
-				mouseX,
-				mouseY
-			);
-		}
-
-		if (plane === "coronal") {
-			updateAtlasImages(
-				plane,
-				mriImageCoords[plane]["slice"],
-				axisX,
-				axisY.toFixed(0),
-				axisZ.toFixed(0),
-				mouseX,
-				mouseY
-			);
-		}
-
-		if (plane === "axial") {
-			updateAtlasImages(
-				plane,
-				mriImageCoords[plane]["slice"],
-				axisX.toFixed(0),
-				axisY.toFixed(0),
-				axisZ,
-				mouseX,
-				mouseY
-			);
-		}
+		updateAtlasImages(plane, mriImageCoords[plane]["slice"], mouseX, mouseY);
 	};
 
 	const determinePlaneAxes = (mouseX, mouseY) => {

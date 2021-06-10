@@ -10,37 +10,17 @@ const MriImage = (props) => {
 
 	const { plane, mriImageCoords, computeMriImagesHandler } = props;
 
-	//console.log(mriImageCoords);
+	console.log(mriImageCoords);
 
 	useEffect(() => {
 		// determine the correct mri image based on computed coordinates
 
-		let mriImage;
-		let paddedSlice;
+		const paddedSlice = props.mriImageCoords[plane]["slice"]
+			.toString()
+			.padStart(3, 0);
 
-		if (plane === "sagittal") {
-			paddedSlice = props.mriImageCoords[plane]["axisY"]
-				.toString()
-				.padStart(3, 0);
-			mriImage =
-				require(`../../../assets/P57-16/mri/slices_${plane}/slice_${paddedSlice}.png`).default;
-		}
-
-		if (plane === "coronal") {
-			paddedSlice = props.mriImageCoords[plane]["axisX"]
-				.toString()
-				.padStart(3, 0);
-			mriImage =
-				require(`../../../assets/P57-16/mri/slices_${plane}/slice_${paddedSlice}.png`).default;
-		}
-
-		if (plane === "axial") {
-			paddedSlice = props.mriImageCoords[plane]["axisZ"]
-				.toString()
-				.padStart(3, 0);
-			mriImage =
-				require(`../../../assets/P57-16/mri/slices_${plane}/slice_${paddedSlice}.png`).default;
-		}
+		const mriImage =
+			require(`../../../assets/P57-16/mri/slices_${plane}/slice_${paddedSlice}.png`).default;
 
 		setCurrentSlice(paddedSlice);
 		setMriImage(mriImage);

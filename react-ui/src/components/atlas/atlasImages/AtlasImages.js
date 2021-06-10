@@ -24,38 +24,34 @@ const AtlasImages = () => {
 
 	useEffect(() => {
 		// initialize mri panels based on an arbitrary starting point
-		updateAtlasImages("sagittal", 113, 235, 113, 149, 47, 50);
+		updateAtlasImages("sagittal", 7, 4, 10);
 	}, []);
 
 	const updateAtlasImages = async (
 		currentPlane,
 		currentSlice,
-		axisX,
-		axisY,
-		axisZ,
 		mouseX,
 		mouseY
 	) => {
 		const newMriCoords = calculateMriImageCoords(
 			currentPlane,
 			currentSlice,
-			axisX,
-			axisY,
-			axisZ
-		);
-		const newHistologyCoords = await calculateHistologyImageCoords(
-			currentPlane,
-			currentSlice,
-			axisX,
-			axisY,
-			axisZ,
 			mouseX,
 			mouseY
 		);
+		// const newHistologyCoords = await calculateHistologyImageCoords(
+		// 	currentPlane,
+		// 	currentSlice,
+		// 	axisX,
+		// 	axisY,
+		// 	axisZ,
+		// 	mouseX,
+		// 	mouseY
+		// );
 		//console.log(newHistologyCoords);
 
 		setMriImageCoords(newMriCoords);
-		setHistologyImageCoords(newHistologyCoords);
+		// setHistologyImageCoords(newHistologyCoords);
 	};
 
 	if (mriImageCoords === null) {
