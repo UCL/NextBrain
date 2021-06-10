@@ -19,36 +19,10 @@ const HistologyImage = (props) => {
 				.padStart(2, 0);
 			console.log(paddedBlock);
 
-			// const histologySlice = histologyImageCoords.coords[2].toFixed(0);
-			// const paddedSlice = histologySlice.toString().padStart(2, 0);
-			// console.log(histologySlice);
-
-			// const histologyImage =
-			// 	require(`../../../assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${paddedSlice}.jpg`).default;
-
-			// setHistologyImage(histologyImage);
-
-			let histologyImage;
-			if (histologyImageCoords.currentPlane === "sagittal") {
-				const histologySlice = histologyImageCoords.coords["axisY"].toFixed(0);
-				const paddedSlice = histologySlice.toString().padStart(2, 0);
-				histologyImage =
-					require(`../../../assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${paddedSlice}.jpg`).default;
-			}
-
-			if (histologyImageCoords.currentPlane === "coronal") {
-				const histologySlice = histologyImageCoords.coords["axisX"].toFixed(0);
-				const paddedSlice = histologySlice.toString().padStart(2, 0);
-				histologyImage =
-					require(`../../../assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${paddedSlice}.jpg`).default;
-			}
-
-			if (histologyImageCoords.currentPlane === "axial") {
-				const histologySlice = histologyImageCoords.coords["axisZ"].toFixed(0);
-				const paddedSlice = histologySlice.toString().padStart(2, 0);
-				histologyImage =
-					require(`../../../assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${paddedSlice}.jpg`).default;
-			}
+			const histologySlice = histologyImageCoords.coords["slice"];
+			const paddedSlice = histologySlice.toString().padStart(2, 0);
+			const histologyImage =
+				require(`../../../assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${paddedSlice}.jpg`).default;
 
 			setHistologyImage(histologyImage);
 		}

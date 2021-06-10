@@ -8,6 +8,9 @@ const calculateMriImageCoords = (
 ) => {
 	let newMriCoords;
 
+	console.log(mouseX, mouseY);
+	console.log(mouseX.toFixed(0), mouseY.toFixed(0));
+
 	switch (currentPlane) {
 		case "sagittal":
 			newMriCoords = {

@@ -33,25 +33,23 @@ const AtlasImages = () => {
 		mouseX,
 		mouseY
 	) => {
+		console.log(mouseX, mouseY);
 		const newMriCoords = calculateMriImageCoords(
 			currentPlane,
 			currentSlice,
 			mouseX,
 			mouseY
 		);
-		// const newHistologyCoords = await calculateHistologyImageCoords(
-		// 	currentPlane,
-		// 	currentSlice,
-		// 	axisX,
-		// 	axisY,
-		// 	axisZ,
-		// 	mouseX,
-		// 	mouseY
-		// );
+		const newHistologyCoords = await calculateHistologyImageCoords(
+			currentPlane,
+			currentSlice,
+			mouseX,
+			mouseY
+		);
 		//console.log(newHistologyCoords);
 
 		setMriImageCoords(newMriCoords);
-		// setHistologyImageCoords(newHistologyCoords);
+		setHistologyImageCoords(newHistologyCoords);
 	};
 
 	if (mriImageCoords === null) {

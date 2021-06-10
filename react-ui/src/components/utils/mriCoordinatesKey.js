@@ -1,7 +1,7 @@
 const mriCoordinatesKey = {
 	sagittal: {
 		width: 282,
-		height: 484,
+		height: 448,
 		coordinateMappings: {
 			axisX: "mouseY",
 			axisY: "slice",

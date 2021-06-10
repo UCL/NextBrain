@@ -7,71 +7,61 @@ import matrixMultiplier from "./matrixMultiplier";
 const calculateHistologyImageCoords = async (
 	currentPlane,
 	currentSlice,
-	axisX,
-	axisY,
-	axisZ,
 	mouseX,
 	mouseY
 ) => {
+	console.log("--------");
+	console.log("current plane: " + currentPlane);
+	console.log("current slice: " + currentSlice);
+	console.log("mouseX: " + mouseX, "mouseY: " + mouseY);
 	const currentBlock = await getCurrentBlock(
 		currentPlane,
 		currentSlice,
 		mouseX,
 		mouseY
 	);
-	console.log(currentBlock);
+	console.log("current block: " + currentBlock);
 
 	// TODO: I need to convert the array of strings to numbers (although it still works regardless)
 	const matrix = await getCurrentMatrix(currentBlock);
 	if (matrix === undefined) {
 		return;
 	}
-	console.log(matrix);
-
-	// let histologyImageCoords = matrixMultiplier(matrix, [
-	// 	mouseX,
-	// 	mouseY,
-	// 	currentSlice + 1,
-	// 	1,
-	// ]);
+	// console.log("matrix: " + matrix);
 
 	// TODO: I need to find out what order to enter the paramaters for the matrix multiplications
 	// TODO: I also need to find out what order to read the coords when loading in histology images
 	let coords;
 	let histologyImageCoords;
 	if (currentPlane === "sagittal") {
-		coords = matrixMultiplier(matrix, [axisX, axisY, axisZ, 1]);
+		coords = matrixMultiplier(matrix, [mouseY, currentSlice, mouseX, 1]);
 		console.log(coords);
 		histologyImageCoords = {
-			axisX: coords[0],
-			axisY: coords[1],
-			axisZ: coords[2],
+			slice: coords[1].toFixed(0),
 			mouseX: coords[2],
 			mouseY: coords[0],
 		};
 	} else if (currentPlane === "coronal") {
-		coords = matrixMultiplier(matrix, [axisX, axisY, axisZ, 1]);
+		coords = matrixMultiplier(matrix, [currentSlice, mouseY, mouseX, 1]);
 		console.log(coords);
 		histologyImageCoords = {
-			axisX: coords[0],
-			axisY: coords[1],
-			axisZ: coords[2],
+			slice: coords[0].toFixed(0),
 			mouseX: coords[2],
 			mouseY: coords[1],
 		};
 	} else if (currentPlane === "axial") {
-		coords = matrixMultiplier(matrix, [axisX, axisY, axisZ, 1]);
+		coords = matrixMultiplier(matrix, [mouseX, mouseY, currentSlice, 1]);
 		console.log(coords);
 		histologyImageCoords = {
-			axisX: coords[0],
-			axisY: coords[1],
-			axisZ: coords[2],
+			slice: coords[2].toFixed(0),
 			mouseX: coords[0],
 			mouseY: coords[1],
 		};
 	}
 
 	console.log(histologyImageCoords, currentBlock);
+	console.log("--------");
+
 	return {
 		coords: histologyImageCoords,
 		currentBlock: currentBlock,
@@ -88,7 +78,7 @@ const getCurrentMatrix = async (currentBlock) => {
 	let readTxt = new txtToArray();
 
 	const paddedBlock = currentBlock.toString().padStart(2, 0);
-	console.log(paddedBlock);
+	//console.log(paddedBlock);
 
 	const txtFile =
 		await require(`../../assets/P57-16/mri/matrices/block_${paddedBlock}.txt`)
@@ -101,7 +91,7 @@ const getCurrentMatrix = async (currentBlock) => {
 
 const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 	let n = new npyjs();
-	console.log(n);
+	//console.log(n);
 
 	const paddedSlice = currentSlice.toString().padStart(3, 0);
 
@@ -127,16 +117,14 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 			[1, npyArray.shape[0]],
 			npyArray.offset
 		);
-		console.log(ndArray);
+		//console.log(ndArray);
 	} else {
 		ndArray = ndarray(npyArray.data, npyArray.shape);
 	}
 
-	console.log("plane: " + currentPlane);
-	console.log("slice: " + paddedSlice);
-	console.log(ndArray.shape);
-	console.log(mouseX, mouseY);
-	console.log(ndArray.get(mouseX, mouseY));
+	//ndArray = ndArray.transpose(1, 0);
+
+	console.log("npy shape: " + ndArray.shape);
 
 	const currentBlock = ndArray.get(mouseX, mouseY);
 
