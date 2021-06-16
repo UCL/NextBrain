@@ -1,8 +1,10 @@
+import npyjs from "npyjs";
 import ndarray from "ndarray";
 
-import npyjs from "./npy";
+//import npyjs from "./npy";
 import txtToArray from "./txtToArray";
 import matrixMultiplier from "./matrixMultiplier";
+import countFiles from "./countFiles";
 
 const calculateHistologyImageCoords = async (
 	currentPlane,
@@ -14,6 +16,7 @@ const calculateHistologyImageCoords = async (
 	console.log("current plane: " + currentPlane);
 	console.log("current slice: " + currentSlice);
 	console.log("mouseX: " + mouseX, "mouseY: " + mouseY);
+
 	const currentBlock = await getCurrentBlock(
 		currentPlane,
 		currentSlice,
@@ -31,6 +34,70 @@ const calculateHistologyImageCoords = async (
 	}
 	// console.log("matrix: " + matrix);
 
+	const histologyImageCoords = getHistologyVector(
+		currentPlane,
+		currentSlice,
+		mouseX,
+		mouseY,
+		matrix
+	);
+
+	determineVectorBoundaries(currentPlane, currentBlock, histologyImageCoords);
+
+	console.log(histologyImageCoords, currentBlock);
+	console.log("--------");
+
+	return {
+		coords: histologyImageCoords,
+		currentBlock: currentBlock,
+		currentPlane: currentPlane,
+	};
+};
+
+const determineVectorBoundaries = async (
+	currentPlane,
+	currentBlock,
+	histologyImageCoords
+) => {
+	console.log("ll");
+
+	const paddedBlock = currentBlock.toString().padStart(2, 0);
+	console.log(paddedBlock);
+
+	// const histologySlice = histologyImageCoords.coords["slice"];
+	// const paddedSlice = histologySlice.toString().padStart(2, 0);
+	// const histologyImage =
+	// 	require(`../../../assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${paddedSlice}.jpg`).default;
+
+	//const images = await import("../../assets/P57-16/histology/45/slices_HE");
+
+	// let i = "00";
+	// let carryOn = true;
+	// while (carryOn === true) {
+	// 	const image = await import(
+	// 		`../../assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${i}.jpg`
+	// 	)
+	// 		.then((res) => {
+	// 			console.log("res");
+	// 		})
+	// 		.catch(() => {
+	// 			console.log("hh");
+	// 			carryOn = false;
+	// 		});
+	// 	console.log(image);
+	// }
+
+	const numberOfFiles = countFiles("01");
+	console.log(numberOfFiles);
+};
+
+const getHistologyVector = (
+	currentPlane,
+	currentSlice,
+	mouseX,
+	mouseY,
+	matrix
+) => {
 	// TODO: I need to find out what order to enter the paramaters for the matrix multiplications
 	// TODO: I also need to find out what order to read the coords when loading in histology images
 	let coords;
@@ -61,14 +128,7 @@ const calculateHistologyImageCoords = async (
 		};
 	}
 
-	console.log(histologyImageCoords, currentBlock);
-	console.log("--------");
-
-	return {
-		coords: histologyImageCoords,
-		currentBlock: currentBlock,
-		currentPlane: currentPlane,
-	};
+	return histologyImageCoords;
 };
 
 const getCurrentMatrix = async (currentBlock) => {
@@ -126,7 +186,7 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 	// 	ndArray = ndarray(npyArray.data, npyArray.shape);
 	// }
 	ndArray = ndarray(npyArray.data, npyArray.shape);
-	//ndArray = ndArray.transpose(1, 0);
+	//ndArray = ndArray.transpose(1, 0); // temporarily tanspose for debugging
 
 	console.log("npy shape: " + ndArray.shape);
 

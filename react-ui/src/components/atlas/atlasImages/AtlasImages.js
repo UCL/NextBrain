@@ -24,7 +24,7 @@ const AtlasImages = () => {
 
 	useEffect(() => {
 		// initialize mri panels based on an arbitrary starting point
-		updateAtlasImages("sagittal", 7, 4, 10);
+		updateAtlasImages("axial", 234, 55, 99);
 	}, []);
 
 	const updateAtlasImages = async (
