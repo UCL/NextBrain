@@ -24,7 +24,14 @@ const AtlasImages = () => {
 
 	useEffect(() => {
 		// initialize mri panels based on an arbitrary starting point
-		updateAtlasImages("axial", 234, 55, 99);
+		setIsLoading(true);
+
+		try {
+			updateAtlasImages("axial", 234, 55, 99);
+			setIsLoading(false);
+		} catch {
+			setError("error building atlas");
+		}
 	}, []);
 
 	const updateAtlasImages = async (
@@ -52,8 +59,14 @@ const AtlasImages = () => {
 		setHistologyImageCoords(newHistologyCoords);
 	};
 
-	if (mriImageCoords === null) {
-		return <div>Could not build the atlas. No MRI images found.</div>;
+	if (mriImageCoords === null || histologyImageCoords === null) {
+		return (
+			<>
+				<ErrorModal error={error} onClear={clearError} />
+				{isLoading && <LoadingSpinner asOverlay />}
+				<div>Builing atlas, please wait...</div>
+			</>
+		);
 	}
 
 	return (

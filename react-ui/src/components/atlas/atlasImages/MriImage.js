@@ -5,8 +5,8 @@ import MousePointer from "../../shared/MousePointer";
 import "./MriImage.css";
 
 const MriImage = (props) => {
-	const [mriImage, setMriImage] = useState();
-	const [currentSlice, setCurrentSlice] = useState();
+	const [mriImage, setMriImage] = useState(null);
+	const [currentSlice, setCurrentSlice] = useState(null);
 
 	const { plane, mriImageCoords, computeMriImagesHandler } = props;
 
@@ -19,12 +19,23 @@ const MriImage = (props) => {
 			.toString()
 			.padStart(3, 0);
 
-		const mriImage =
-			require(`../../../assets/P57-16/mri/slices_${plane}/slice_${paddedSlice}.png`).default;
+		try {
+			const mriImage =
+				require(`../../../assets/P57-16/mri/slices_${plane}/slice_${paddedSlice}.png`).default;
 
-		setCurrentSlice(paddedSlice);
-		setMriImage(mriImage);
+			setMriImage(mriImage);
+			setCurrentSlice(paddedSlice);
+		} catch {
+			console.log(
+				`%cerror, could not resolve path: assets/P57-16/mri/slices_${plane}/slice_${paddedSlice}.png`,
+				"color: red"
+			);
+		}
 	}, [mriImageCoords]);
+
+	if (mriImage === null || currentSlice === null) {
+		return <div>Could not build mri image</div>;
+	}
 
 	return (
 		<div className={`mri-img ${plane}`}>

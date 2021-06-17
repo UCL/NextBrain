@@ -4,7 +4,6 @@ import ndarray from "ndarray";
 //import npyjs from "./npy";
 import txtToArray from "./txtToArray";
 import matrixMultiplier from "./matrixMultiplier";
-import countFiles from "./countFiles";
 
 const calculateHistologyImageCoords = async (
 	currentPlane,
@@ -27,6 +26,13 @@ const calculateHistologyImageCoords = async (
 
 	if (currentBlock === 0) return console.log("block returned 0");
 
+	// this shouldnt be happening, but check for this anyway to help with debugging
+	if (currentBlock === undefined)
+		return console.log(
+			"%cError. Block returned undefined, check if the mouse coordinates were outside of the bounds of the numpy array",
+			"color: red"
+		);
+
 	// TODO: I need to convert the array of strings to numbers (although it still works regardless)
 	const matrix = await getCurrentMatrix(currentBlock);
 	if (matrix === undefined) {
@@ -34,15 +40,13 @@ const calculateHistologyImageCoords = async (
 	}
 	// console.log("matrix: " + matrix);
 
-	const histologyImageCoords = getHistologyVector(
+	const histologyImageCoords = getHistologyImageCoords(
 		currentPlane,
 		currentSlice,
 		mouseX,
 		mouseY,
 		matrix
 	);
-
-	determineVectorBoundaries(currentPlane, currentBlock, histologyImageCoords);
 
 	console.log(histologyImageCoords, currentBlock);
 	console.log("--------");
@@ -54,44 +58,7 @@ const calculateHistologyImageCoords = async (
 	};
 };
 
-const determineVectorBoundaries = async (
-	currentPlane,
-	currentBlock,
-	histologyImageCoords
-) => {
-	console.log("ll");
-
-	const paddedBlock = currentBlock.toString().padStart(2, 0);
-	console.log(paddedBlock);
-
-	// const histologySlice = histologyImageCoords.coords["slice"];
-	// const paddedSlice = histologySlice.toString().padStart(2, 0);
-	// const histologyImage =
-	// 	require(`../../../assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${paddedSlice}.jpg`).default;
-
-	//const images = await import("../../assets/P57-16/histology/45/slices_HE");
-
-	// let i = "00";
-	// let carryOn = true;
-	// while (carryOn === true) {
-	// 	const image = await import(
-	// 		`../../assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${i}.jpg`
-	// 	)
-	// 		.then((res) => {
-	// 			console.log("res");
-	// 		})
-	// 		.catch(() => {
-	// 			console.log("hh");
-	// 			carryOn = false;
-	// 		});
-	// 	console.log(image);
-	// }
-
-	const numberOfFiles = countFiles("01");
-	console.log(numberOfFiles);
-};
-
-const getHistologyVector = (
+const getHistologyImageCoords = (
 	currentPlane,
 	currentSlice,
 	mouseX,

@@ -5,7 +5,7 @@ import MousePointer from "../../shared/MousePointer";
 import "./HistologyImage.css";
 
 const HistologyImage = (props) => {
-	const [histologyImage, setHistologyImage] = useState();
+	const [histologyImage, setHistologyImage] = useState(null);
 
 	const { histologyImageCoords } = props;
 
@@ -21,12 +21,23 @@ const HistologyImage = (props) => {
 
 			const histologySlice = histologyImageCoords.coords["slice"];
 			const paddedSlice = histologySlice.toString().padStart(2, 0);
-			const histologyImage =
-				require(`../../../assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${paddedSlice}.jpg`).default;
 
-			setHistologyImage(histologyImage);
+			try {
+				const histologyImage =
+					require(`../../../assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${paddedSlice}.jpg`).default;
+				setHistologyImage(histologyImage);
+			} catch {
+				console.log(
+					`%cerror, could not resolve path: assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${paddedSlice}.jpg`,
+					"color: red"
+				);
+			}
 		}
 	}, [histologyImageCoords]);
+
+	if (histologyImage === null) {
+		return <div>Could not build histology image</div>;
+	}
 
 	return (
 		<div className="histology-img histology">
