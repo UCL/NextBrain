@@ -1,5 +1,3 @@
-import CORONAL_RESCALING_FACTOR from "./CoronalRescalingFactor";
-
 const calculateMriImageCoords = (
 	currentPlane,
 	currentSlice,
@@ -32,13 +30,6 @@ const calculateMriImageCoords = (
 			};
 			break;
 		case "coronal":
-			// a further adjustment of the coordinates is necessary to account for the rescaling of coronal image
-			// mouseX = mouseX / CORONAL_RESCALING_FACTOR;
-			// mouseY = mouseY / CORONAL_RESCALING_FACTOR;
-
-			// mouseX = Number(mouseX);
-			// mouseY = Number(mouseY);
-
 			newMriCoords = {
 				sagittal: {
 					slice: mouseY,
