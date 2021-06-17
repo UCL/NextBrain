@@ -14,43 +14,7 @@ const MriImages = (props) => {
 
 		if (!mouseIsWithinBounds) return;
 
-		//const { axisX, axisY, axisZ } = determinePlaneAxes(mouseX, mouseY);
-
 		updateAtlasImages(plane, mriImageCoords[plane]["slice"], mouseX, mouseY);
-	};
-
-	const determinePlaneAxes = (mouseX, mouseY) => {
-		// the eval function evaluates the argument as a variable, which in this case is mouseX and mouseY
-		// so the mouseX and mouseY arguments are necessary here (even though the IDE says their values are not read)
-
-		let axisX, axisY, axisZ;
-
-		if (plane === "sagittal") {
-			axisX = eval(mriCoordinatesKey.sagittal.coordinateMappings.axisX);
-			axisY =
-				mriImageCoords[plane][
-					mriCoordinatesKey.sagittal.coordinateMappings.axisY
-				];
-			axisZ = eval(mriCoordinatesKey.sagittal.coordinateMappings.axisZ);
-		}
-
-		if (plane === "coronal") {
-			axisX =
-				mriImageCoords[plane][
-					mriCoordinatesKey.coronal.coordinateMappings.axisX
-				];
-			axisY = eval(mriCoordinatesKey.coronal.coordinateMappings.axisY);
-			axisZ = eval(mriCoordinatesKey.coronal.coordinateMappings.axisZ);
-		}
-
-		if (plane === "axial") {
-			axisX = eval(mriCoordinatesKey.axial.coordinateMappings.axisX);
-			axisY = eval(mriCoordinatesKey.axial.coordinateMappings.axisY);
-			axisZ =
-				mriImageCoords[plane][mriCoordinatesKey.axial.coordinateMappings.axisZ];
-		}
-
-		return { axisX, axisY, axisZ };
 	};
 
 	const getMouseCoords = (e) => {
