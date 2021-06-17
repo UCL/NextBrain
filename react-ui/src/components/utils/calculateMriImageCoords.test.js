@@ -1,92 +1,63 @@
 import calculateMriImageCoords from "./calculateMriImageCoords";
 
 describe("unit tests for calculating correct mri image coords", () => {
-	// props order: plane, slice, axisX, axisY, axisZ
+	// props order: plane, slice, mouseX, mouseY
 	test("image coords return correctly with sagittal as props", () => {
-		expect(
-			calculateMriImageCoords("sagittal", 113, 235, 113, 149)
-		).toStrictEqual({
+		expect(calculateMriImageCoords("sagittal", 99, 163, 196)).toStrictEqual({
 			axial: {
-				axisX: 235,
-				axisY: 113,
-				axisZ: 149,
-				mouseX: 235,
-				mouseY: 113,
-				slice: 149,
+				slice: 163,
+				mouseX: 196,
+				mouseY: 99,
 			},
 			coronal: {
-				axisX: 235,
-				axisY: 113,
-				axisZ: 149,
-				mouseX: 223.5,
-				mouseY: 169.5,
-				slice: 235,
+				slice: 196,
+				mouseX: 163,
+				mouseY: 99,
 			},
 			sagittal: {
-				axisX: 235,
-				axisY: 113,
-				axisZ: 149,
-				mouseX: 149,
-				mouseY: 235,
-				slice: 113,
+				slice: 99,
+				mouseX: 163,
+				mouseY: 196,
 			},
 		});
 	});
 
 	test("image coords return correctly with coronal as props", () => {
-		expect(calculateMriImageCoords("coronal", 4, 10, 7, 4)).toStrictEqual({
+		expect(calculateMriImageCoords("coronal", 196, 163, 99)).toStrictEqual({
 			axial: {
-				axisX: 10,
-				axisY: 5,
-				axisZ: 3,
-				mouseX: 4,
-				mouseY: 5,
-				slice: 3,
+				slice: 163,
+				mouseX: 196,
+				mouseY: 99,
 			},
 			coronal: {
-				axisX: 10,
-				axisY: 5,
-				axisZ: 3,
-				mouseX: 4.5,
-				mouseY: 7.5,
-				slice: 4,
+				slice: 196,
+				mouseX: 163,
+				mouseY: 99,
 			},
 			sagittal: {
-				axisX: 10,
-				axisY: 5,
-				axisZ: 3,
-				mouseX: 3,
-				mouseY: 4,
-				slice: 5,
+				slice: 99,
+				mouseX: 163,
+				mouseY: 196,
 			},
 		});
 	});
 
 	test("image coords return correctly with axial as props", () => {
-		expect(calculateMriImageCoords("axial", 4, 10, 7, 4)).toStrictEqual({
+		expect(calculateMriImageCoords("axial", 163, 196, 99)).toStrictEqual({
 			axial: {
-				axisX: 10,
-				axisY: 7,
-				axisZ: 4,
-				mouseX: 10,
-				mouseY: 7,
-				slice: 4,
+				slice: 163,
+				mouseX: 196,
+				mouseY: 99,
 			},
 			coronal: {
-				axisX: 10,
-				axisY: 7,
-				axisZ: 4,
-				mouseX: 6,
-				mouseY: 10.5,
-				slice: 10,
+				slice: 196,
+				mouseX: 163,
+				mouseY: 99,
 			},
 			sagittal: {
-				axisX: 10,
-				axisY: 7,
-				axisZ: 4,
-				mouseX: 4,
-				mouseY: 10,
-				slice: 7,
+				slice: 99,
+				mouseX: 163,
+				mouseY: 196,
 			},
 		});
 	});

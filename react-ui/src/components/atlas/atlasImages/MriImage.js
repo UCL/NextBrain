@@ -16,6 +16,7 @@ const MriImage = (props) => {
 		// determine the correct mri image based on computed coordinates
 
 		const paddedSlice = props.mriImageCoords[plane]["slice"]
+			.toFixed(0)
 			.toString()
 			.padStart(3, 0);
 

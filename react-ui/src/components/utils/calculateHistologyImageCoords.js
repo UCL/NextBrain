@@ -114,12 +114,12 @@ const getCurrentMatrix = async (currentBlock) => {
 
 const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 	let n = new npyjs();
-	//console.log(n);
 
-	const paddedSlice = currentSlice.toString().padStart(3, 0);
+	const paddedSlice = currentSlice.toFixed(0).toString().padStart(3, 0);
 
 	let npyFile;
 
+	// need to wrap this in a try catch block
 	if (currentPlane === "axial") {
 		npyFile =
 			await require(`../../assets/P57-16/mri/indices_${currentPlane}_C_order/slice_${paddedSlice}.npy`)
