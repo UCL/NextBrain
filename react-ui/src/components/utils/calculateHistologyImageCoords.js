@@ -1,7 +1,6 @@
 import npyjs from "npyjs";
 import ndarray from "ndarray";
 
-//import npyjs from "./npy";
 import txtToArray from "./txtToArray";
 import matrixMultiplier from "./matrixMultiplier";
 

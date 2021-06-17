@@ -1,7 +1,6 @@
-//import npyjs from "npyjs";
+import npyjs from "npyjs";
 import ndarray from "ndarray";
 
-import npyjs from "../components/utils/npy";
 import matrixMultiplier from "../components/utils/matrixMultiplier";
 
 import arrayF from "../assets/P57-16/mri/indices_axial/slice_149.npy";
