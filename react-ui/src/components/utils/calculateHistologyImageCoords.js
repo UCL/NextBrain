@@ -1,6 +1,7 @@
 import npyjs from "npyjs";
 import ndarray from "ndarray";
 
+import mriCoordinatesKey from "./mriCoordinatesKey";
 import txtToArray from "./txtToArray";
 import matrixMultiplier from "./matrixMultiplier";
 
@@ -160,19 +161,40 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 
 	console.log("npy shape: " + ndArray.shape);
 
-	rotateNumpy(ndArray);
+	const { xRot, yRot } = rotateNumpy(
+		ndArray,
+		currentPlane,
+		currentSlice,
+		mouseX,
+		mouseY
+	);
 
-	const currentBlock = ndArray.get(mouseY, mouseX);
+	const currentBlock = ndArray.get(yRot, xRot);
 
 	return currentBlock;
 };
 
-const rotateNumpy = (ndArray) => {
-	console.log(ndArray.shape - 1);
-
+const rotateNumpy = (ndArray, currentPlane, currentSlice, mouseX, mouseY) => {
 	const ndArray0Modified = (ndArray.shape[0] - 1) / 2;
 	const ndArray1Modified = (ndArray.shape[1] - 1) / 2;
 	console.log(ndArray0Modified, ndArray1Modified);
+
+	let adjustedMouseX = mriCoordinatesKey.axial.width - mouseX;
+	let adjustedMouseY = mriCoordinatesKey.axial.height - mouseY;
+
+	console.log("adjusted axial x: " + adjustedMouseX);
+	console.log("adjusted axial y: " + adjustedMouseY);
+
+	// swap the x and y
+	// adjustedMouseX = adjustedMouseY;
+	// adjustedMouseY = adjustedMouseX;
+
+	const xRot = -adjustedMouseX + 2 * ndArray1Modified;
+	const yRot = 2 * ndArray0Modified - adjustedMouseY;
+
+	console.log(xRot, yRot);
+
+	return { xRot, yRot };
 };
 
 export default calculateHistologyImageCoords;

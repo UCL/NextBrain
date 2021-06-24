@@ -10,7 +10,7 @@ const MriImage = (props) => {
 
 	const { plane, mriImageCoords, computeMriImagesHandler } = props;
 
-	console.log(mriImageCoords);
+	//console.log(mriImageCoords);
 
 	useEffect(() => {
 		// determine the correct mri image based on computed coordinates

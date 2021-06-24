@@ -27,7 +27,7 @@ const AtlasImages = () => {
 		setIsLoading(true);
 
 		try {
-			updateAtlasImages("axial", 234, 55, 99);
+			updateAtlasImages("axial", 234, 88, 171);
 			setIsLoading(false);
 		} catch {
 			setError("error building atlas");
@@ -40,6 +40,7 @@ const AtlasImages = () => {
 		mouseX,
 		mouseY
 	) => {
+		console.log("BUILDING IMAGES");
 		console.log(mouseX, mouseY);
 		const newMriCoords = calculateMriImageCoords(
 			currentPlane,
