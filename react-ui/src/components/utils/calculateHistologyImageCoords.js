@@ -86,12 +86,17 @@ const getHistologyImageCoords = (
 			mouseY: coords[1],
 		};
 	} else if (currentPlane === "axial") {
-		coords = matrixMultiplier(matrix, [mouseX, mouseY, currentSlice, 1]);
+		coords = matrixMultiplier(matrix, [
+			mriCoordinatesKey.axial.width - mouseX,
+			mriCoordinatesKey.axial.height - mouseY,
+			currentSlice,
+			1,
+		]);
 		console.log(coords);
 		histologyImageCoords = {
 			slice: coords[2].toFixed(0),
-			mouseX: coords[0],
-			mouseY: coords[1],
+			mouseX: coords[1],
+			mouseY: coords[0],
 		};
 	}
 
@@ -161,20 +166,14 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 
 	console.log("npy shape: " + ndArray.shape);
 
-	const { xRot, yRot } = rotateNumpy(
-		ndArray,
-		currentPlane,
-		currentSlice,
-		mouseX,
-		mouseY
-	);
+	const { xRot, yRot } = rotateNumpy(ndArray, mouseX, mouseY);
 
 	const currentBlock = ndArray.get(yRot, xRot);
 
 	return currentBlock;
 };
 
-const rotateNumpy = (ndArray, currentPlane, currentSlice, mouseX, mouseY) => {
+const rotateNumpy = (ndArray, mouseX, mouseY) => {
 	const ndArray0Modified = (ndArray.shape[0] - 1) / 2;
 	const ndArray1Modified = (ndArray.shape[1] - 1) / 2;
 	console.log(ndArray0Modified, ndArray1Modified);
@@ -189,6 +188,7 @@ const rotateNumpy = (ndArray, currentPlane, currentSlice, mouseX, mouseY) => {
 	// adjustedMouseX = adjustedMouseY;
 	// adjustedMouseY = adjustedMouseX;
 
+	// the x and y have been swapped here compared to Peters python file
 	const xRot = -adjustedMouseX + 2 * ndArray1Modified;
 	const yRot = 2 * ndArray0Modified - adjustedMouseY;
 
