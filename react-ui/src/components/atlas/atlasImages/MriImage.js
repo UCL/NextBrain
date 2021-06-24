@@ -22,13 +22,13 @@ const MriImage = (props) => {
 
 		try {
 			const mriImage =
-				require(`../../../assets/P57-16/mri/slices_${plane}/slice_${paddedSlice}.png`).default;
+				require(`../../../assets/P57-16/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`).default;
 
 			setMriImage(mriImage);
 			setCurrentSlice(paddedSlice);
 		} catch {
 			console.log(
-				`%cerror, could not resolve path: assets/P57-16/mri/slices_${plane}/slice_${paddedSlice}.png`,
+				`%cerror, could not resolve path: assets/P57-16/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`,
 				"color: red"
 			);
 		}

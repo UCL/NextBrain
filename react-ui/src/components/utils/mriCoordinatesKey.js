@@ -1,25 +1,28 @@
 const mriCoordinatesKey = {
 	sagittal: {
-		width: 282,
-		height: 448,
+		width: 450,
+		height: 362,
+		slices: 226,
 		coordinateMappings: {
-			axisX: "mouseY",
-			axisY: "slice",
-			axisZ: "mouseX",
+			axisX: "slice",
+			axisY: "mouseX",
+			axisZ: "mouseY",
 		},
 	},
 	coronal: {
-		width: 282,
-		height: 224,
+		width: 226,
+		height: 362,
+		slices: 450,
 		coordinateMappings: {
-			axisX: "slice",
-			axisY: "mouseY",
-			axisZ: "mouseX",
+			axisX: "mouseX",
+			axisY: "slice",
+			axisZ: "mouseY",
 		},
 	},
 	axial: {
-		width: 448,
-		height: 224,
+		width: 226,
+		height: 450,
+		slices: 362,
 		coordinateMappings: {
 			axisX: "mouseX",
 			axisY: "mouseY",

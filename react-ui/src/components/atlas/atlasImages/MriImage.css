@@ -15,6 +15,10 @@
 	-webkit-user-drag: none;
 }
 
+/* .sagittal-img {
+	transform: rotateY(180deg);
+} */
+
 /* .coronal-img {
 	zoom: 1.5;
 } */

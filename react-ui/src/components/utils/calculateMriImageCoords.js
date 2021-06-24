@@ -1,3 +1,5 @@
+import mriCoordinatesKey from "./mriCoordinatesKey";
+
 const calculateMriImageCoords = (
 	currentPlane,
 	currentSlice,
@@ -18,23 +20,23 @@ const calculateMriImageCoords = (
 					mouseY: mouseY,
 				},
 				coronal: {
-					slice: mouseY,
-					mouseX: mouseX,
-					mouseY: currentSlice,
+					slice: mouseX,
+					mouseX: currentSlice,
+					mouseY: mouseY,
 				},
 				axial: {
-					slice: mouseX,
-					mouseX: mouseY,
-					mouseY: currentSlice,
+					slice: mriCoordinatesKey.sagittal.height - mouseY,
+					mouseX: mriCoordinatesKey.sagittal.slices - currentSlice,
+					mouseY: mriCoordinatesKey.sagittal.width - mouseX,
 				},
 			};
 			break;
 		case "coronal":
 			newMriCoords = {
 				sagittal: {
-					slice: mouseY,
-					mouseX: mouseX,
-					mouseY: currentSlice,
+					slice: mriCoordinatesKey.coronal.width - mouseX,
+					mouseX: currentSlice,
+					mouseY: mouseY,
 				},
 				coronal: {
 					slice: currentSlice,
@@ -42,23 +44,23 @@ const calculateMriImageCoords = (
 					mouseY: mouseY,
 				},
 				axial: {
-					slice: mouseX,
-					mouseX: currentSlice,
-					mouseY: mouseY,
+					slice: mriCoordinatesKey.coronal.height - mouseY,
+					mouseX: mouseX,
+					mouseY: mriCoordinatesKey.coronal.slices - currentSlice,
 				},
 			};
 			break;
 		case "axial":
 			newMriCoords = {
 				sagittal: {
-					slice: mouseY,
-					mouseX: currentSlice,
-					mouseY: mouseX,
+					slice: mriCoordinatesKey.axial.width - mouseX,
+					mouseX: mriCoordinatesKey.axial.height - mouseY,
+					mouseY: mriCoordinatesKey.axial.slices - currentSlice,
 				},
 				coronal: {
-					slice: mouseX,
-					mouseX: currentSlice,
-					mouseY: mouseY,
+					slice: mriCoordinatesKey.axial.height - mouseY,
+					mouseX: mouseX,
+					mouseY: mriCoordinatesKey.axial.slices - currentSlice,
 				},
 				axial: {
 					slice: currentSlice,
