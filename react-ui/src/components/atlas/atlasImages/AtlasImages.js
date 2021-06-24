@@ -47,16 +47,16 @@ const AtlasImages = () => {
 			mouseX,
 			mouseY
 		);
-		// const newHistologyCoords = await calculateHistologyImageCoords(
-		// 	currentPlane,
-		// 	currentSlice,
-		// 	mouseX,
-		// 	mouseY
-		// );
+		const newHistologyCoords = await calculateHistologyImageCoords(
+			currentPlane,
+			currentSlice,
+			mouseX,
+			mouseY
+		);
 		//console.log(newHistologyCoords);
 
 		setMriImageCoords(newMriCoords);
-		//setHistologyImageCoords(newHistologyCoords);
+		setHistologyImageCoords(newHistologyCoords);
 	};
 
 	if (mriImageCoords === null) {

@@ -4,7 +4,7 @@ import ndarray from "ndarray";
 import matrixMultiplier from "../components/utils/matrixMultiplier";
 
 import arrayF from "../assets/P57-16/mri/indices_axial/slice_149.npy";
-import arrayC from "../assets/P57-16/mri/indices_axial_C_order/slice_149.npy";
+import arrayC from "../assets/P57-16/mri/indices_axial/slice_149.npy"; // remember to put this back as c order
 
 const Test = () => {
 	let n = new npyjs();

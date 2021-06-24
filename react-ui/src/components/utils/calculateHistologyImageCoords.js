@@ -120,15 +120,19 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 	let npyFile;
 
 	// need to wrap this in a try catch block
-	if (currentPlane === "axial") {
-		npyFile =
-			await require(`../../assets/P57-16/mri/indices_${currentPlane}_C_order/slice_${paddedSlice}.npy`)
-				.default;
-	} else {
-		npyFile =
-			await require(`../../assets/P57-16/mri/indices_${currentPlane}/slice_${paddedSlice}.npy`)
-				.default;
-	}
+	// if (currentPlane === "axial") {
+	// 	npyFile =
+	// 		await require(`../../assets/P57-16/mri_rotated/indices_${currentPlane}_C_order/slice_${paddedSlice}.npy`)
+	// 			.default;
+	// } else {
+	// 	npyFile =
+	// 		await require(`../../assets/P57-16/mri_rotated/indices_${currentPlane}/slice_${paddedSlice}.npy`)
+	// 			.default;
+	// }
+
+	npyFile =
+		await require(`../../assets/P57-16/mri_rotated/indices_${currentPlane}/slice_${paddedSlice}.npy`)
+			.default;
 
 	const npyArray = await n.load(npyFile);
 
@@ -156,9 +160,19 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 
 	console.log("npy shape: " + ndArray.shape);
 
-	const currentBlock = ndArray.get(mouseX, mouseY);
+	rotateNumpy(ndArray);
+
+	const currentBlock = ndArray.get(mouseY, mouseX);
 
 	return currentBlock;
+};
+
+const rotateNumpy = (ndArray) => {
+	console.log(ndArray.shape - 1);
+
+	const ndArray0Modified = (ndArray.shape[0] - 1) / 2;
+	const ndArray1Modified = (ndArray.shape[1] - 1) / 2;
+	console.log(ndArray0Modified, ndArray1Modified);
 };
 
 export default calculateHistologyImageCoords;
