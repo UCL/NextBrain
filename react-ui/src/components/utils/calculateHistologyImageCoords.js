@@ -126,42 +126,13 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 	let npyFile;
 
 	// need to wrap this in a try catch block
-	// if (currentPlane === "axial") {
-	// 	npyFile =
-	// 		await require(`../../assets/P57-16/mri_rotated/indices_${currentPlane}_C_order/slice_${paddedSlice}.npy`)
-	// 			.default;
-	// } else {
-	// 	npyFile =
-	// 		await require(`../../assets/P57-16/mri_rotated/indices_${currentPlane}/slice_${paddedSlice}.npy`)
-	// 			.default;
-	// }
-
 	npyFile =
 		await require(`../../assets/P57-16/mri_rotated/indices_${currentPlane}/slice_${paddedSlice}.npy`)
 			.default;
 
 	const npyArray = await n.load(npyFile);
 
-	// axial seems to be in fortran order while the other two are in C order
-	let ndArray;
-	// if (currentPlane === "axial") {
-	// 	// initialise the ndarray with a stride that conforms to C contiguity
-	// 	// this is done by editing the stride
-	// 	// original Fortran contiguity stride = [448, 1] (which is the same as stride = [data.shape[1], 1])
-	// 	// transforming this stride to C contiguous = [1, 224] (which is the same as stride = [1, data.shape[0]])
-	// 	// this allows us to access array indexes correctly
-	// 	// for more info see https://ajcr.net/stride-guide-part-2/
-	// 	ndArray = ndarray(
-	// 		npyArray.data,
-	// 		npyArray.shape,
-	// 		[1, npyArray.shape[0]],
-	// 		npyArray.offset
-	// 	);
-	// 	//console.log(ndArray);
-	// } else {
-	// 	ndArray = ndarray(npyArray.data, npyArray.shape);
-	// }
-	ndArray = ndarray(npyArray.data, npyArray.shape);
+	const ndArray = ndarray(npyArray.data, npyArray.shape);
 	//ndArray = ndArray.transpose(1, 0); // temporarily tanspose for debugging
 
 	console.log("npy shape: " + ndArray.shape);
@@ -183,10 +154,6 @@ const rotateNumpy = (ndArray, mouseX, mouseY) => {
 
 	console.log("adjusted axial x: " + adjustedMouseX);
 	console.log("adjusted axial y: " + adjustedMouseY);
-
-	// swap the x and y
-	// adjustedMouseX = adjustedMouseY;
-	// adjustedMouseY = adjustedMouseX;
 
 	// the x and y have been swapped here compared to Peters python file
 	const xRot = -adjustedMouseX + 2 * ndArray1Modified;
