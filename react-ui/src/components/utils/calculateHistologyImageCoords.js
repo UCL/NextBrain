@@ -149,6 +149,7 @@ const rotateNumpy = (ndArray, mouseX, mouseY) => {
 	const ndArray1Modified = (ndArray.shape[1] - 1) / 2;
 	console.log(ndArray0Modified, ndArray1Modified);
 
+	// just doing this for axial right now to get at least one plane working
 	let adjustedMouseX = mriCoordinatesKey.axial.width - mouseX;
 	let adjustedMouseY = mriCoordinatesKey.axial.height - mouseY;
 

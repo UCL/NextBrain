@@ -11,8 +11,17 @@ const calculateMriImageCoords = (
 	// console.log(mouseX, mouseY);
 	// console.log(mouseX.toFixed(0), mouseY.toFixed(0));
 
+	let adjustedMouseY;
+	let adjustedSlice;
+	let adjustedMouseX;
+
 	switch (currentPlane) {
 		case "sagittal":
+			//adjusting coordinates to account for images not being in the right orientations
+			adjustedMouseX = mriCoordinatesKey.sagittal.width - mouseX;
+			adjustedMouseY = mriCoordinatesKey.sagittal.height - mouseY;
+			adjustedSlice = mriCoordinatesKey.sagittal.slices - currentSlice;
+
 			newMriCoords = {
 				sagittal: {
 					slice: currentSlice,
@@ -25,16 +34,20 @@ const calculateMriImageCoords = (
 					mouseY: mouseY,
 				},
 				axial: {
-					slice: mriCoordinatesKey.sagittal.height - mouseY,
-					mouseX: mriCoordinatesKey.sagittal.slices - currentSlice,
-					mouseY: mriCoordinatesKey.sagittal.width - mouseX,
+					slice: adjustedMouseY,
+					mouseX: adjustedSlice,
+					mouseY: adjustedMouseX,
 				},
 			};
 			break;
 		case "coronal":
+			adjustedMouseX = mriCoordinatesKey.coronal.width - mouseX;
+			adjustedMouseY = mriCoordinatesKey.coronal.height - mouseY;
+			adjustedSlice = mriCoordinatesKey.coronal.slices - currentSlice;
+
 			newMriCoords = {
 				sagittal: {
-					slice: mriCoordinatesKey.coronal.width - mouseX,
+					slice: adjustedMouseX,
 					mouseX: currentSlice,
 					mouseY: mouseY,
 				},
@@ -44,23 +57,27 @@ const calculateMriImageCoords = (
 					mouseY: mouseY,
 				},
 				axial: {
-					slice: mriCoordinatesKey.coronal.height - mouseY,
+					slice: adjustedMouseY,
 					mouseX: mouseX,
-					mouseY: mriCoordinatesKey.coronal.slices - currentSlice,
+					mouseY: adjustedSlice,
 				},
 			};
 			break;
 		case "axial":
+			adjustedMouseX = mriCoordinatesKey.axial.width - mouseX;
+			adjustedMouseY = mriCoordinatesKey.axial.height - mouseY;
+			adjustedSlice = mriCoordinatesKey.axial.slices - currentSlice;
+
 			newMriCoords = {
 				sagittal: {
-					slice: mriCoordinatesKey.axial.width - mouseX,
-					mouseX: mriCoordinatesKey.axial.height - mouseY,
-					mouseY: mriCoordinatesKey.axial.slices - currentSlice,
+					slice: adjustedMouseX,
+					mouseX: adjustedMouseY,
+					mouseY: adjustedSlice,
 				},
 				coronal: {
-					slice: mriCoordinatesKey.axial.height - mouseY,
+					slice: adjustedMouseY,
 					mouseX: mouseX,
-					mouseY: mriCoordinatesKey.axial.slices - currentSlice,
+					mouseY: adjustedSlice,
 				},
 				axial: {
 					slice: currentSlice,
