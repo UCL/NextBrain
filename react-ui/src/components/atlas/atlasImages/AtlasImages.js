@@ -27,7 +27,7 @@ const AtlasImages = () => {
 		setIsLoading(true);
 
 		try {
-			updateAtlasImages("axial", 234, 88, 171);
+			updateAtlasImages("sagittal", 138, 319, 170);
 			setIsLoading(false);
 		} catch {
 			setError("error building atlas");

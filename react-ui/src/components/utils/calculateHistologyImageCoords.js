@@ -70,7 +70,12 @@ const getHistologyImageCoords = (
 	let coords;
 	let histologyImageCoords;
 	if (currentPlane === "sagittal") {
-		coords = matrixMultiplier(matrix, [mouseY, currentSlice, mouseX, 1]);
+		coords = matrixMultiplier(matrix, [
+			currentSlice,
+			mriCoordinatesKey.sagittal.width - mouseX,
+			mriCoordinatesKey.sagittal.height - mouseY,
+			1,
+		]);
 		console.log(coords);
 		histologyImageCoords = {
 			slice: coords[1].toFixed(0),
@@ -78,11 +83,11 @@ const getHistologyImageCoords = (
 			mouseY: coords[0],
 		};
 	} else if (currentPlane === "coronal") {
-		coords = matrixMultiplier(matrix, [currentSlice, mouseY, mouseX, 1]);
+		coords = matrixMultiplier(matrix, [mouseX, currentSlice, mouseY, 1]);
 		console.log(coords);
 		histologyImageCoords = {
-			slice: coords[0].toFixed(0),
-			mouseX: coords[2],
+			slice: coords[2].toFixed(0),
+			mouseX: coords[0],
 			mouseY: coords[1],
 		};
 	} else if (currentPlane === "axial") {
@@ -132,10 +137,13 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 	console.log(npyArray);
 
 	let ndArray = ndarray(npyArray.data, npyArray.shape);
-	//ndArray = ndArray.transpose(1, 0); // temporarily tanspose for debugging
+
+	// the numpy arrays in the data are the opposite of the image dimensions, so a transposition is needed
+	// you can alternatively take the dimensions from rotateCoords() below and get the numpy block from xRotated and yRotated
+	ndArray = ndArray.transpose(1, 0);
 	console.log(ndArray);
 
-	console.log("npy shape: " + ndArray.shape);
+	console.log("npy shape (after transpose): " + ndArray.shape);
 
 	const { xRotated, yRotated } = rotateCoords(
 		ndArray,
@@ -146,8 +154,17 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 
 	let currentBlock;
 
+	console.log(ndArray.shape);
+
 	if (currentPlane === "sagittal") {
-		currentBlock = ndArray.get(xRotated, yRotated);
+		// sagittal has an additional horizontal flip, so we need to account for that here
+
+		let rotatedMouseX = mriCoordinatesKey.sagittal.width - mouseX;
+		let rotatedMouseY = mriCoordinatesKey.sagittal.height - mouseY;
+
+		// this implementation works!!!, but I need to understand why better
+		// since sagittal has been flipped hirozontally why are we only rotating the y axis?
+		currentBlock = ndArray.get(mouseX, ndArray.shape[1] - rotatedMouseY);
 	}
 
 	if (currentPlane === "coronal" || currentPlane === "axial") {

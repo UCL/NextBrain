@@ -95,18 +95,22 @@ const Test = () => {
 	// console.log(result);
 
 	const testNpy = async () => {
-		const npyArray = await n.load(npyFile);
+		let npyFile2 =
+			await require(`../assets/P57-16/mri_rotated/indices_axial/slice_256.npy`)
+				.default;
+
+		const npyArray = await n.load(npyFile2);
 		console.log(npyArray);
 		console.log("-----");
 
 		const ndArray = ndarray(npyArray.data, npyArray.shape);
 		console.log(ndArray);
-		console.log(ndArray.get(3, 2)); // row, column
+		console.log(ndArray.get(75, 155)); // row, column
 
 		const ndArrayT = ndArray.transpose(1, 0);
-		console.log(ndArrayT.get(3, 2)); // row, column
+		console.log(ndArrayT.get(75, 155)); // row, column
 
-		setArray(ndArray.data);
+		//setArray(ndArrayT.data);
 
 		// var reversedStride = ndarray(
 		// 	npyArray.data,
@@ -128,9 +132,9 @@ const Test = () => {
 
 	return (
 		<main className="grid">
-			{Object.entries(array).map(([key, value]) => {
+			{Object.entries(array).map(([key, value], index) => {
 				return (
-					<div>
+					<div key={index}>
 						{key} : {value.toString()}
 					</div>
 				);
