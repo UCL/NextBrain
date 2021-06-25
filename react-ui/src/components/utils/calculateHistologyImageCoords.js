@@ -123,46 +123,75 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 
 	const paddedSlice = currentSlice.toFixed(0).toString().padStart(3, 0);
 
-	let npyFile;
-
 	// need to wrap this in a try catch block
-	npyFile =
+	let npyFile =
 		await require(`../../assets/P57-16/mri_rotated/indices_${currentPlane}/slice_${paddedSlice}.npy`)
 			.default;
 
 	const npyArray = await n.load(npyFile);
+	console.log(npyArray);
 
-	const ndArray = ndarray(npyArray.data, npyArray.shape);
+	let ndArray = ndarray(npyArray.data, npyArray.shape);
 	//ndArray = ndArray.transpose(1, 0); // temporarily tanspose for debugging
+	console.log(ndArray);
 
 	console.log("npy shape: " + ndArray.shape);
 
-	const { xRot, yRot } = rotateCoords(ndArray, mouseX, mouseY);
+	const { xRotated, yRotated } = rotateCoords(
+		ndArray,
+		mouseX,
+		mouseY,
+		currentPlane
+	);
 
-	const currentBlock = ndArray.get(yRot, xRot);
+	let currentBlock;
+
+	if (currentPlane === "sagittal") {
+		currentBlock = ndArray.get(xRotated, yRotated);
+	}
+
+	if (currentPlane === "coronal" || currentPlane === "axial") {
+		currentBlock = ndArray.get(mouseX, mouseY);
+	}
 
 	return currentBlock;
 };
 
-const rotateCoords = (ndArray, mouseX, mouseY) => {
+const rotateCoords = (ndArray, mouseX, mouseY, currentPlane) => {
 	const ndArray0Modified = (ndArray.shape[0] - 1) / 2;
 	const ndArray1Modified = (ndArray.shape[1] - 1) / 2;
 	console.log(ndArray0Modified, ndArray1Modified);
 
 	// just doing this for axial right now to get at least one plane working
-	let adjustedMouseX = mriCoordinatesKey.axial.width - mouseX;
-	let adjustedMouseY = mriCoordinatesKey.axial.height - mouseY;
 
-	console.log("adjusted axial x: " + adjustedMouseX);
-	console.log("adjusted axial y: " + adjustedMouseY);
+	let rotatedMouseX;
+	let rotatedMouseY;
+
+	if (currentPlane === "sagittal") {
+		rotatedMouseX = mriCoordinatesKey.sagittal.width - mouseX;
+		rotatedMouseY = mriCoordinatesKey.sagittal.height - mouseY;
+	}
+
+	if (currentPlane === "coronal") {
+		rotatedMouseX = mriCoordinatesKey.coronal.width - mouseX;
+		rotatedMouseY = mriCoordinatesKey.coronal.height - mouseY;
+	}
+
+	if (currentPlane === "axial") {
+		rotatedMouseX = mriCoordinatesKey.axial.width - mouseX;
+		rotatedMouseY = mriCoordinatesKey.axial.height - mouseY;
+	}
+
+	console.log("rotated mouse x: " + rotatedMouseX);
+	console.log("rotatedmouse y: " + rotatedMouseY);
 
 	// the x and y have been swapped here compared to Peters python file
-	const xRot = -adjustedMouseX + 2 * ndArray1Modified;
-	const yRot = 2 * ndArray0Modified - adjustedMouseY;
+	const xRotated = -rotatedMouseX + 2 * ndArray1Modified;
+	const yRotated = 2 * ndArray0Modified - rotatedMouseY;
 
-	console.log(xRot, yRot);
+	console.log(xRotated, yRotated);
 
-	return { xRot, yRot };
+	return { xRotated, yRotated };
 };
 
 export default calculateHistologyImageCoords;

@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from "react";
+
 import npyjs from "npyjs";
 import ndarray from "ndarray";
 
@@ -6,7 +8,13 @@ import matrixMultiplier from "../components/utils/matrixMultiplier";
 import arrayF from "../assets/P57-16/mri/indices_axial/slice_149.npy";
 import arrayC from "../assets/P57-16/mri/indices_axial/slice_149.npy"; // remember to put this back as c order
 
+import npyFile from "../assets/5_5_array";
+
+import "./Test.css";
+
 const Test = () => {
+	const [array, setArray] = useState(null);
+
 	let n = new npyjs();
 
 	const getNpyFortran = async () => {
@@ -73,20 +81,62 @@ const Test = () => {
 		console.log(reversedStride.get(47, 80));
 	};
 
-	getNpyTest();
+	//getNpyTest();
 
-	let brainMatrix = [
-		0.31385434307807203, -3.664457652247729, 1.6199030926177134,
-		666.0080271821023, -0.7744411837137424, 1.4870493065731998,
-		3.6535143658756977, -139.31333561581766, -1.2110952755381341,
-		-0.18593341100766062, -0.1914204859080043, 118.27995513465419, 0.0, 0.0,
-		0.0, 1.0,
-	];
+	// let brainMatrix = [
+	// 	0.31385434307807203, -3.664457652247729, 1.6199030926177134,
+	// 	666.0080271821023, -0.7744411837137424, 1.4870493065731998,
+	// 	3.6535143658756977, -139.31333561581766, -1.2110952755381341,
+	// 	-0.18593341100766062, -0.1914204859080043, 118.27995513465419, 0.0, 0.0,
+	// 	0.0, 1.0,
+	// ];
 
-	let result = matrixMultiplier(brainMatrix, [47, 80, 103, 1]);
-	console.log(result);
+	// let result = matrixMultiplier(brainMatrix, [47, 80, 103, 1]);
+	// console.log(result);
 
-	return <main>Welcome to Brain Atlas, currently under construction</main>;
+	const testNpy = async () => {
+		const npyArray = await n.load(npyFile);
+		console.log(npyArray);
+		console.log("-----");
+
+		const ndArray = ndarray(npyArray.data, npyArray.shape);
+		console.log(ndArray);
+		console.log(ndArray.get(3, 2)); // row, column
+
+		const ndArrayT = ndArray.transpose(1, 0);
+		console.log(ndArrayT.get(3, 2)); // row, column
+
+		setArray(ndArray.data);
+
+		// var reversedStride = ndarray(
+		// 	npyArray.data,
+		// 	npyArray.shape,
+		// 	[1, npyArray.shape[0]],
+		// 	npyArray.offset
+		// );
+		// console.log(reversedStride);
+		// console.log(reversedStride.get(47, 80));
+	};
+
+	useEffect(() => {
+		testNpy();
+	}, []);
+
+	if (array === null) {
+		return <div>building...</div>;
+	}
+
+	return (
+		<main className="grid">
+			{Object.entries(array).map(([key, value]) => {
+				return (
+					<div>
+						{key} : {value.toString()}
+					</div>
+				);
+			})}
+		</main>
+	);
 };
 
 export default Test;
