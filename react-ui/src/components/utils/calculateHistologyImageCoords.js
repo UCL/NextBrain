@@ -137,14 +137,14 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 
 	console.log("npy shape: " + ndArray.shape);
 
-	const { xRot, yRot } = rotateNumpy(ndArray, mouseX, mouseY);
+	const { xRot, yRot } = rotateCoords(ndArray, mouseX, mouseY);
 
 	const currentBlock = ndArray.get(yRot, xRot);
 
 	return currentBlock;
 };
 
-const rotateNumpy = (ndArray, mouseX, mouseY) => {
+const rotateCoords = (ndArray, mouseX, mouseY) => {
 	const ndArray0Modified = (ndArray.shape[0] - 1) / 2;
 	const ndArray1Modified = (ndArray.shape[1] - 1) / 2;
 	console.log(ndArray0Modified, ndArray1Modified);
