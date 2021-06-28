@@ -158,12 +158,11 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 
 	if (currentPlane === "sagittal") {
 		// sagittal has an additional horizontal flip, so we need to account for that here
-
 		let rotatedMouseX = mriCoordinatesKey.sagittal.width - mouseX;
 		let rotatedMouseY = mriCoordinatesKey.sagittal.height - mouseY;
 
 		// this implementation works!!!, but I need to understand why better
-		// since sagittal has been flipped hirozontally why are we only rotating the y axis?
+		// since sagittal has been flipped hirozontally why are we rotating the y axis?
 		currentBlock = ndArray.get(mouseX, ndArray.shape[1] - rotatedMouseY);
 	}
 
@@ -178,8 +177,6 @@ const rotateCoords = (ndArray, mouseX, mouseY, currentPlane) => {
 	const ndArray0Modified = (ndArray.shape[0] - 1) / 2;
 	const ndArray1Modified = (ndArray.shape[1] - 1) / 2;
 	console.log(ndArray0Modified, ndArray1Modified);
-
-	// just doing this for axial right now to get at least one plane working
 
 	let rotatedMouseX;
 	let rotatedMouseY;
