@@ -12,6 +12,8 @@ images/*/mri/*nii.gz
 
 # Jupyter Notebook
 src/.ipynb_checkpoints/*
+.idea/*
+*/.idea/*
 
 
 
