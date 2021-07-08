@@ -27,6 +27,7 @@ const AtlasImages = () => {
 		setIsLoading(true);
 
 		try {
+			// plane, slice, mouseX, mouseY
 			updateAtlasImages("sagittal", 138, 319, 170);
 			setIsLoading(false);
 		} catch {
