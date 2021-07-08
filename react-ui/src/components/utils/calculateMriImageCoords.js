@@ -1,4 +1,5 @@
 import mriCoordinatesKey from "./mriCoordinatesKey";
+import logCoordsForDebugging from "./logCoordsForDebugging";
 
 const calculateMriImageCoords = (
 	currentPlane,
@@ -7,10 +8,6 @@ const calculateMriImageCoords = (
 	mouseY
 ) => {
 	let newMriCoords;
-
-	// console.log(mouseX, mouseY);
-	// console.log(mouseX.toFixed(0), mouseY.toFixed(0));
-
 	let adjustedMouseY;
 	let adjustedSlice;
 	let adjustedMouseX;
@@ -21,6 +18,16 @@ const calculateMriImageCoords = (
 			adjustedMouseX = mriCoordinatesKey.sagittal.width - mouseX;
 			adjustedMouseY = mriCoordinatesKey.sagittal.height - mouseY;
 			adjustedSlice = mriCoordinatesKey.sagittal.slices - currentSlice;
+
+			logCoordsForDebugging(
+				currentPlane,
+				currentSlice,
+				mouseX,
+				mouseY,
+				adjustedMouseX,
+				adjustedMouseY,
+				adjustedSlice
+			);
 
 			newMriCoords = {
 				sagittal: {
@@ -45,6 +52,16 @@ const calculateMriImageCoords = (
 			adjustedMouseY = mriCoordinatesKey.coronal.height - mouseY;
 			adjustedSlice = mriCoordinatesKey.coronal.slices - currentSlice;
 
+			logCoordsForDebugging(
+				currentPlane,
+				currentSlice,
+				mouseX,
+				mouseY,
+				adjustedMouseX,
+				adjustedMouseY,
+				adjustedSlice
+			);
+
 			newMriCoords = {
 				sagittal: {
 					slice: adjustedMouseX,
@@ -67,6 +84,16 @@ const calculateMriImageCoords = (
 			adjustedMouseX = mriCoordinatesKey.axial.width - mouseX;
 			adjustedMouseY = mriCoordinatesKey.axial.height - mouseY;
 			adjustedSlice = mriCoordinatesKey.axial.slices - currentSlice;
+
+			logCoordsForDebugging(
+				currentPlane,
+				currentSlice,
+				mouseX,
+				mouseY,
+				adjustedMouseX,
+				adjustedMouseY,
+				adjustedSlice
+			);
 
 			newMriCoords = {
 				sagittal: {

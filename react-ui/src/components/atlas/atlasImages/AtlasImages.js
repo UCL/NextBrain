@@ -41,8 +41,9 @@ const AtlasImages = () => {
 		mouseX,
 		mouseY
 	) => {
+		console.log("----------");
 		console.log("BUILDING IMAGES");
-		console.log(mouseX, mouseY);
+
 		const newMriCoords = calculateMriImageCoords(
 			currentPlane,
 			currentSlice,

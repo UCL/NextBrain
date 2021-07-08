@@ -12,12 +12,10 @@ const HistologyImage = (props) => {
 	useEffect(() => {
 		// determine the correct histology image based on computed coordinates
 		if (histologyImageCoords !== null && histologyImageCoords !== undefined) {
-			console.log(histologyImageCoords);
-
 			const paddedBlock = histologyImageCoords["currentBlock"]
 				.toString()
 				.padStart(2, 0);
-			console.log(paddedBlock);
+			//console.log(paddedBlock);
 
 			const histologySlice = histologyImageCoords.coords["slice"];
 			const paddedSlice = histologySlice.toString().padStart(2, 0);
