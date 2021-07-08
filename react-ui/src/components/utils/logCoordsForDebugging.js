@@ -6,9 +6,9 @@ const logCoordsForDebugging = (
 	currentSlice,
 	mouseX,
 	mouseY,
+	adjustedSlice,
 	adjustedMouseX,
-	adjustedMouseY,
-	adjustedSlice
+	adjustedMouseY
 ) => {
 	console.log(`current plane: ${currentPlane}`);
 

@@ -1,7 +1,6 @@
 import npyjs from "npyjs";
 import ndarray from "ndarray";
 
-import mriCoordinatesKey from "./mriCoordinatesKey";
 import txtToArray from "./txtToArray";
 import matrixMultiplier from "./matrixMultiplier";
 
@@ -9,10 +8,20 @@ const calculateHistologyImageCoords = async (
 	currentPlane,
 	currentSlice,
 	mouseX,
-	mouseY
+	mouseY,
+	adjustedSlice,
+	adjustedMouseX,
+	adjustedMouseY
 ) => {
-	const { currentBlock, rotatedMouseX1, rotatedMouseY1 } =
-		await getCurrentBlock(currentPlane, currentSlice, mouseX, mouseY);
+	const currentBlock = await getCurrentBlock(
+		currentPlane,
+		currentSlice,
+		mouseX,
+		mouseY,
+		adjustedSlice,
+		adjustedMouseX,
+		adjustedMouseY
+	);
 
 	console.log("current block: " + currentBlock);
 
@@ -27,9 +36,8 @@ const calculateHistologyImageCoords = async (
 
 	// TODO: I need to convert the array of strings to numbers (although it still works regardless)
 	const matrix = await getCurrentMatrix(currentBlock);
-	if (matrix === undefined) {
-		return;
-	}
+
+	if (matrix === undefined) return;
 	// console.log("matrix: " + matrix);
 
 	const histologyImageCoords = getHistologyImageCoords(
@@ -37,6 +45,9 @@ const calculateHistologyImageCoords = async (
 		currentSlice,
 		mouseX,
 		mouseY,
+		adjustedSlice,
+		adjustedMouseX,
+		adjustedMouseY,
 		matrix
 	);
 
@@ -54,6 +65,9 @@ const getHistologyImageCoords = (
 	currentSlice,
 	mouseX,
 	mouseY,
+	adjustedSlice,
+	adjustedMouseX,
+	adjustedMouseY,
 	matrix
 ) => {
 	// TODO: I need to find out what order to enter the paramaters for the matrix multiplications
@@ -63,38 +77,46 @@ const getHistologyImageCoords = (
 	if (currentPlane === "sagittal") {
 		coords = matrixMultiplier(matrix, [
 			currentSlice,
-			mriCoordinatesKey.sagittal.width - mouseX,
-			mriCoordinatesKey.sagittal.height - mouseY,
+			adjustedMouseX,
+			adjustedMouseY,
 			1,
 		]);
-		console.log("matrix calculation result: ", coords);
+
+		const { resultX, resultY, resultZ, resultW } = coords;
+
 		histologyImageCoords = {
-			slice: coords[1].toFixed(0),
-			mouseX: coords[2],
-			mouseY: coords[0],
+			slice: resultY.toFixed(0),
+			mouseX: resultZ,
+			mouseY: resultX,
 		};
 	} else if (currentPlane === "coronal") {
 		coords = matrixMultiplier(matrix, [mouseX, currentSlice, mouseY, 1]);
-		console.log(coords);
+
+		const { resultX, resultY, resultZ, resultW } = coords;
+
 		histologyImageCoords = {
-			slice: coords[2].toFixed(0),
-			mouseX: coords[0],
-			mouseY: coords[1],
+			slice: resultZ.toFixed(0),
+			mouseX: resultX,
+			mouseY: resultY,
 		};
 	} else if (currentPlane === "axial") {
 		coords = matrixMultiplier(matrix, [
-			mriCoordinatesKey.axial.width - mouseX,
-			mriCoordinatesKey.axial.height - mouseY,
+			adjustedMouseX,
+			adjustedMouseY,
 			currentSlice,
 			1,
 		]);
-		console.log(coords);
+
+		const { resultX, resultY, resultZ, resultW } = coords;
+
 		histologyImageCoords = {
-			slice: coords[2].toFixed(0),
-			mouseX: coords[1],
-			mouseY: coords[0],
+			slice: resultZ.toFixed(0),
+			mouseX: resultY,
+			mouseY: resultX,
 		};
 	}
+
+	console.log("matrix calculation result: ", coords);
 
 	return histologyImageCoords;
 };
@@ -114,7 +136,16 @@ const getCurrentMatrix = async (currentBlock) => {
 	return matrix;
 };
 
-const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
+const getCurrentBlock = async (
+	currentPlane,
+	currentSlice,
+	mouseX,
+	mouseY,
+	adjustedSlice,
+	adjustedMouseX,
+	adjustedMouseY
+) => {
+	let currentBlock;
 	let n = new npyjs();
 
 	const paddedSlice = currentSlice.toFixed(0).toString().padStart(3, 0);
@@ -134,73 +165,50 @@ const getCurrentBlock = async (currentPlane, currentSlice, mouseX, mouseY) => {
 
 	console.log("npy shape (after transpose): " + ndArray.shape);
 
-	const { rotatedMouseX1, rotatedMouseY1 } = rotateCoords(
+	const { xRotated, yRotated } = rotateCoords(
 		ndArray,
 		mouseX,
 		mouseY,
-		currentPlane
+		currentPlane,
+		adjustedSlice,
+		adjustedMouseX,
+		adjustedMouseY
 	);
-
-	let currentBlock;
-
-	//console.log(ndArray.shape);
 
 	if (currentPlane === "sagittal") {
 		// sagittal has an additional horizontal flip, so we need to account for that here
-		let rotatedMouseX = mriCoordinatesKey.sagittal.width - mouseX;
-		let rotatedMouseY = mriCoordinatesKey.sagittal.height - mouseY;
-
-		// this implementation works!!!, but I need to understand why better
-		// since sagittal has been flipped hirozontally why are we rotating the y axis?
-		currentBlock = ndArray.get(mouseX, ndArray.shape[1] - rotatedMouseY);
+		// since its been flipped, we dont need to take the adjustedMouseX... we just take the normal mouseX
+		currentBlock = ndArray.get(mouseX, ndArray.shape[1] - adjustedMouseY);
 	}
 
 	if (currentPlane === "coronal" || currentPlane === "axial") {
 		currentBlock = ndArray.get(mouseX, mouseY);
 	}
 
-	return { currentBlock, rotatedMouseX1, rotatedMouseY1 };
+	return currentBlock;
 };
 
-const rotateCoords = (ndArray, mouseX, mouseY, currentPlane) => {
+const rotateCoords = (
+	ndArray,
+	mouseX,
+	mouseY,
+	currentPlane,
+	adjustedSlice,
+	adjustedMouseX,
+	adjustedMouseY
+) => {
 	const ndArray0Modified = (ndArray.shape[0] - 1) / 2;
 	const ndArray1Modified = (ndArray.shape[1] - 1) / 2;
 	// console.log(ndArray0Modified, ndArray1Modified);
 
-	let rotatedMouseX1;
-	let rotatedMouseY1;
-
-	if (currentPlane === "sagittal") {
-		rotatedMouseX1 = mriCoordinatesKey.sagittal.width - mouseX;
-		rotatedMouseY1 = mriCoordinatesKey.sagittal.height - mouseY;
-	}
-
-	if (currentPlane === "coronal") {
-		rotatedMouseX1 = mriCoordinatesKey.coronal.width - mouseX;
-		rotatedMouseY1 = mriCoordinatesKey.coronal.height - mouseY;
-	}
-
-	if (currentPlane === "axial") {
-		rotatedMouseX1 = mriCoordinatesKey.axial.width - mouseX;
-		rotatedMouseY1 = mriCoordinatesKey.axial.height - mouseY;
-	}
-
-	if (currentPlane === "sagittal") {
-		console.log("adjusted mouse x: " + mouseX);
-		console.log("adjusted mouse y: " + rotatedMouseY1);
-	} else {
-		console.log("adjusted mouse x: " + rotatedMouseX1);
-		console.log("adjusted mouse y: " + rotatedMouseY1);
-	}
-
 	// the x and y have been swapped here compared to Peters python file
-	const xRotated = -rotatedMouseX1 + 2 * ndArray1Modified;
-	const yRotated = 2 * ndArray0Modified - rotatedMouseY1;
+	const xRotated = -adjustedMouseX + 2 * ndArray1Modified;
+	const yRotated = 2 * ndArray0Modified - adjustedMouseY;
 
 	console.log("rotated mouse x: " + xRotated);
 	console.log("rotated mouse y: " + yRotated);
 
-	return { rotatedMouseX1, rotatedMouseY1 };
+	return { xRotated, yRotated };
 };
 
 export default calculateHistologyImageCoords;

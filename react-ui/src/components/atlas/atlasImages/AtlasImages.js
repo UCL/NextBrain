@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import calculateMriImageCoords from "../../utils/calculateMriImageCoords";
 import calculateHistologyImageCoords from "../../utils/calculateHistologyImageCoords";
+import calculateAdjustedMouseCoords from "../../utils/calculateAdjustedMouseCoords";
+import logCoordsForDebugging from "../../utils/logCoordsForDebugging";
 
 import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
@@ -44,17 +46,37 @@ const AtlasImages = () => {
 		console.log("----------");
 		console.log("BUILDING IMAGES");
 
+		const { adjustedSlice, adjustedMouseX, adjustedMouseY } =
+			calculateAdjustedMouseCoords(currentPlane, currentSlice, mouseX, mouseY);
+
+		logCoordsForDebugging(
+			currentPlane,
+			currentSlice,
+			mouseX,
+			mouseY,
+			adjustedSlice,
+			adjustedMouseX,
+			adjustedMouseY
+		);
+
 		const newMriCoords = calculateMriImageCoords(
 			currentPlane,
 			currentSlice,
 			mouseX,
-			mouseY
+			mouseY,
+			adjustedSlice,
+			adjustedMouseX,
+			adjustedMouseY
 		);
+
 		const newHistologyCoords = await calculateHistologyImageCoords(
 			currentPlane,
 			currentSlice,
 			mouseX,
-			mouseY
+			mouseY,
+			adjustedSlice,
+			adjustedMouseX,
+			adjustedMouseY
 		);
 		//console.log(newHistologyCoords);
 

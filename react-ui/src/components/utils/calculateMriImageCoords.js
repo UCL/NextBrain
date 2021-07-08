@@ -1,34 +1,16 @@
-import mriCoordinatesKey from "./mriCoordinatesKey";
-import logCoordsForDebugging from "./logCoordsForDebugging";
-
 const calculateMriImageCoords = (
 	currentPlane,
 	currentSlice,
 	mouseX,
-	mouseY
+	mouseY,
+	adjustedSlice,
+	adjustedMouseX,
+	adjustedMouseY
 ) => {
 	let newMriCoords;
-	let adjustedMouseY;
-	let adjustedSlice;
-	let adjustedMouseX;
 
 	switch (currentPlane) {
 		case "sagittal":
-			//adjusting coordinates to account for images not being in the right orientations
-			adjustedMouseX = mriCoordinatesKey.sagittal.width - mouseX;
-			adjustedMouseY = mriCoordinatesKey.sagittal.height - mouseY;
-			adjustedSlice = mriCoordinatesKey.sagittal.slices - currentSlice;
-
-			logCoordsForDebugging(
-				currentPlane,
-				currentSlice,
-				mouseX,
-				mouseY,
-				adjustedMouseX,
-				adjustedMouseY,
-				adjustedSlice
-			);
-
 			newMriCoords = {
 				sagittal: {
 					slice: currentSlice,
@@ -48,20 +30,6 @@ const calculateMriImageCoords = (
 			};
 			break;
 		case "coronal":
-			adjustedMouseX = mriCoordinatesKey.coronal.width - mouseX;
-			adjustedMouseY = mriCoordinatesKey.coronal.height - mouseY;
-			adjustedSlice = mriCoordinatesKey.coronal.slices - currentSlice;
-
-			logCoordsForDebugging(
-				currentPlane,
-				currentSlice,
-				mouseX,
-				mouseY,
-				adjustedMouseX,
-				adjustedMouseY,
-				adjustedSlice
-			);
-
 			newMriCoords = {
 				sagittal: {
 					slice: adjustedMouseX,
@@ -81,20 +49,6 @@ const calculateMriImageCoords = (
 			};
 			break;
 		case "axial":
-			adjustedMouseX = mriCoordinatesKey.axial.width - mouseX;
-			adjustedMouseY = mriCoordinatesKey.axial.height - mouseY;
-			adjustedSlice = mriCoordinatesKey.axial.slices - currentSlice;
-
-			logCoordsForDebugging(
-				currentPlane,
-				currentSlice,
-				mouseX,
-				mouseY,
-				adjustedMouseX,
-				adjustedMouseY,
-				adjustedSlice
-			);
-
 			newMriCoords = {
 				sagittal: {
 					slice: adjustedMouseX,
