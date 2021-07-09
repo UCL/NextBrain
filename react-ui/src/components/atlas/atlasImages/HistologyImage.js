@@ -22,11 +22,11 @@ const HistologyImage = (props) => {
 
 			try {
 				const histologyImage =
-					require(`../../../assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${paddedSlice}.jpg`).default;
+					require(`../../../assets/P57-16/histology/${paddedBlock}/slices_LFB/slice_${paddedSlice}.jpg`).default;
 				setHistologyImage(histologyImage);
 			} catch {
 				console.log(
-					`%cerror, could not resolve path: assets/P57-16/histology/${paddedBlock}/slices_HE/slice_${paddedSlice}.jpg`,
+					`%cerror, could not resolve path: assets/P57-16/histology/${paddedBlock}/slices_LFB/slice_${paddedSlice}.jpg`,
 					"color: red"
 				);
 			}
