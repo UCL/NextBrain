@@ -30,7 +30,7 @@ const AtlasImages = () => {
 
 		try {
 			// plane, slice, mouseX, mouseY
-			updateAtlasImages("sagittal", 96, 266, 179);
+			updateAtlasImages("axial", 195, 158, 144);
 			setIsLoading(false);
 		} catch {
 			setError("error building atlas");

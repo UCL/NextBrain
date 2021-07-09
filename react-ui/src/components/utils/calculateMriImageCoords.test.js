@@ -11,7 +11,7 @@ describe("unit tests for calculating correct mri image coords", () => {
 			},
 			coronal: {
 				slice: 313,
-				mouseX: 83,
+				mouseX: 143,
 				mouseY: 173,
 			},
 			sagittal: {
