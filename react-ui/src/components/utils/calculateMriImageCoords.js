@@ -19,7 +19,7 @@ const calculateMriImageCoords = (
 				},
 				coronal: {
 					slice: mouseX,
-					mouseX: currentSlice,
+					mouseX: adjustedSlice,
 					mouseY: mouseY,
 				},
 				axial: {

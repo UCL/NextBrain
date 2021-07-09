@@ -11,7 +11,8 @@ const calculateHistologyImageCoords = async (
 	mouseY,
 	adjustedSlice,
 	adjustedMouseX,
-	adjustedMouseY
+	adjustedMouseY,
+	newMriCoords
 ) => {
 	const currentBlock = await getCurrentBlock(
 		currentPlane,
@@ -48,6 +49,7 @@ const calculateHistologyImageCoords = async (
 		adjustedSlice,
 		adjustedMouseX,
 		adjustedMouseY,
+		newMriCoords,
 		matrix
 	);
 
@@ -68,42 +70,50 @@ const getHistologyImageCoords = (
 	adjustedSlice,
 	adjustedMouseX,
 	adjustedMouseY,
+	newMriCoords,
 	matrix
 ) => {
+	console.log(newMriCoords);
+
 	// TODO: I need to find out what order to enter the paramaters for the matrix multiplications
 	// TODO: I also need to find out what order to read the coords when loading in histology images
 	let coords;
 	let histologyImageCoords;
 	if (currentPlane === "sagittal") {
 		coords = matrixMultiplier(matrix, [
-			currentSlice,
-			adjustedMouseX,
-			adjustedMouseY,
+			newMriCoords.sagittal.slice,
+			newMriCoords.coronal.slice,
+			newMriCoords.axial.slice,
 			1,
 		]);
 
 		const { resultX, resultY, resultZ, resultW } = coords;
 
 		histologyImageCoords = {
-			slice: resultY.toFixed(0),
-			mouseX: resultZ,
+			slice: resultZ.toFixed(0),
+			mouseX: resultY,
 			mouseY: resultX,
 		};
 	} else if (currentPlane === "coronal") {
-		coords = matrixMultiplier(matrix, [mouseX, currentSlice, mouseY, 1]);
+		coords = matrixMultiplier(matrix, [
+			newMriCoords.sagittal.slice,
+			newMriCoords.coronal.slice,
+			newMriCoords.axial.slice,
+			1,
+		]);
 
 		const { resultX, resultY, resultZ, resultW } = coords;
 
 		histologyImageCoords = {
 			slice: resultZ.toFixed(0),
-			mouseX: resultX,
-			mouseY: resultY,
+			mouseX: resultY,
+			mouseY: resultX,
 		};
 	} else if (currentPlane === "axial") {
 		coords = matrixMultiplier(matrix, [
-			adjustedMouseX,
-			adjustedMouseY,
-			currentSlice,
+			newMriCoords.sagittal.slice,
+			newMriCoords.coronal.slice,
+			newMriCoords.axial.slice,
 			1,
 		]);
 

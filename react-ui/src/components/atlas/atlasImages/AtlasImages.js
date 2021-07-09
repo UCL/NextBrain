@@ -30,7 +30,7 @@ const AtlasImages = () => {
 
 		try {
 			// plane, slice, mouseX, mouseY
-			updateAtlasImages("sagittal", 138, 319, 170);
+			updateAtlasImages("sagittal", 96, 266, 179);
 			setIsLoading(false);
 		} catch {
 			setError("error building atlas");
@@ -76,7 +76,8 @@ const AtlasImages = () => {
 			mouseY,
 			adjustedSlice,
 			adjustedMouseX,
-			adjustedMouseY
+			adjustedMouseY,
+			newMriCoords
 		);
 		//console.log(newHistologyCoords);
 
