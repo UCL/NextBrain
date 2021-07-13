@@ -1,11 +1,11 @@
-import CORONAL_RESCALING_FACTOR from "./CoronalRescalingFactor";
-
 const calculateMriImageCoords = (
 	currentPlane,
 	currentSlice,
-	axisX,
-	axisY,
-	axisZ
+	mouseX,
+	mouseY,
+	adjustedSlice,
+	adjustedMouseX,
+	adjustedMouseY
 ) => {
 	let newMriCoords;
 
@@ -14,90 +14,56 @@ const calculateMriImageCoords = (
 			newMriCoords = {
 				sagittal: {
 					slice: currentSlice,
-					axisX: axisX,
-					axisY: axisY,
-					axisZ: axisZ,
-					mouseX: axisZ,
-					mouseY: axisX,
+					mouseX: mouseX,
+					mouseY: mouseY,
 				},
 				coronal: {
-					slice: axisX,
-					axisX: axisX,
-					axisY: axisY,
-					axisZ: axisZ,
-					mouseX: axisZ * CORONAL_RESCALING_FACTOR,
-					mouseY: currentSlice * CORONAL_RESCALING_FACTOR,
+					slice: mouseX,
+					mouseX: adjustedSlice,
+					mouseY: mouseY,
 				},
 				axial: {
-					slice: axisZ,
-					axisX: axisX,
-					axisY: axisY,
-					axisZ: axisZ,
-					mouseX: axisX,
-					mouseY: currentSlice,
+					slice: adjustedMouseY,
+					mouseX: adjustedSlice,
+					mouseY: adjustedMouseX,
 				},
 			};
 			break;
 		case "coronal":
-			// a further adjustment of the coordinates is necessary to account for the rescaling of coronal image
-			axisY = (axisY / CORONAL_RESCALING_FACTOR).toFixed(0);
-			axisZ = (axisZ / CORONAL_RESCALING_FACTOR).toFixed(0);
-
-			axisY = Number(axisY);
-			axisZ = Number(axisZ);
-
 			newMriCoords = {
 				sagittal: {
-					slice: axisY,
-					axisX: axisX,
-					axisY: axisY,
-					axisZ: axisZ,
-					mouseX: axisZ,
-					mouseY: currentSlice,
+					slice: adjustedMouseX,
+					mouseX: currentSlice,
+					mouseY: mouseY,
 				},
 				coronal: {
 					slice: currentSlice,
-					axisX: axisX,
-					axisY: axisY,
-					axisZ: axisZ,
-					mouseX: axisZ * CORONAL_RESCALING_FACTOR,
-					mouseY: axisY * CORONAL_RESCALING_FACTOR,
+					mouseX: mouseX,
+					mouseY: mouseY,
 				},
 				axial: {
-					slice: axisZ,
-					axisX: axisX,
-					axisY: axisY,
-					axisZ: axisZ,
-					mouseX: currentSlice,
-					mouseY: axisY,
+					slice: adjustedMouseY,
+					mouseX: mouseX,
+					mouseY: adjustedSlice,
 				},
 			};
 			break;
 		case "axial":
 			newMriCoords = {
 				sagittal: {
-					slice: axisY,
-					axisX: axisX,
-					axisY: axisY,
-					axisZ: axisZ,
-					mouseX: currentSlice,
-					mouseY: axisX,
+					slice: adjustedMouseX,
+					mouseX: adjustedMouseY,
+					mouseY: adjustedSlice,
 				},
 				coronal: {
-					slice: axisX,
-					axisX: axisX,
-					axisY: axisY,
-					axisZ: axisZ,
-					mouseX: currentSlice * CORONAL_RESCALING_FACTOR,
-					mouseY: axisY * CORONAL_RESCALING_FACTOR,
+					slice: adjustedMouseY,
+					mouseX: mouseX,
+					mouseY: adjustedSlice,
 				},
 				axial: {
 					slice: currentSlice,
-					axisX: axisX,
-					axisY: axisY,
-					axisZ: axisZ,
-					mouseX: axisX,
-					mouseY: axisY,
+					mouseX: mouseX,
+					mouseY: mouseY,
 				},
 			};
 			break;

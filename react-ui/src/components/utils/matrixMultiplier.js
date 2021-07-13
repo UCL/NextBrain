@@ -30,7 +30,9 @@ const multiplyMatrixAndPoint = (matrix, point) => {
 	let resultZ = x * c0r2 + y * c1r2 + z * c2r2 + w * c3r2;
 	let resultW = x * c0r3 + y * c1r3 + z * c2r3 + w * c3r3;
 
-	return [resultX, resultY, resultZ, resultW];
+	const matrixResult = { resultX, resultY, resultZ, resultW };
+
+	return matrixResult;
 };
 
 export default multiplyMatrixAndPoint;

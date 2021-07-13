@@ -1,92 +1,118 @@
 import calculateMriImageCoords from "./calculateMriImageCoords";
+import calculateAdjustedMouseCoords from "./calculateAdjustedMouseCoords";
 
 describe("unit tests for calculating correct mri image coords", () => {
-	// props order: plane, slice, axisX, axisY, axisZ
+	// props order: plane, slice, mouseX, mouseY
 	test("image coords return correctly with sagittal as props", () => {
+		const currentPlane = "sagittal";
+		const currentSlice = 83;
+		const mouseX = 313;
+		const mouseY = 173;
+
+		const { adjustedSlice, adjustedMouseX, adjustedMouseY } =
+			calculateAdjustedMouseCoords(currentPlane, currentSlice, mouseX, mouseY);
+
 		expect(
-			calculateMriImageCoords("sagittal", 113, 235, 113, 149)
+			calculateMriImageCoords(
+				currentPlane,
+				currentSlice,
+				mouseX,
+				mouseY,
+				adjustedSlice,
+				adjustedMouseX,
+				adjustedMouseY
+			)
 		).toStrictEqual({
-			axial: {
-				axisX: 235,
-				axisY: 113,
-				axisZ: 149,
-				mouseX: 235,
-				mouseY: 113,
-				slice: 149,
+			sagittal: {
+				slice: 83,
+				mouseX: 313,
+				mouseY: 173,
 			},
 			coronal: {
-				axisX: 235,
-				axisY: 113,
-				axisZ: 149,
-				mouseX: 223.5,
-				mouseY: 169.5,
-				slice: 235,
+				slice: 313,
+				mouseX: adjustedSlice,
+				mouseY: 173,
 			},
-			sagittal: {
-				axisX: 235,
-				axisY: 113,
-				axisZ: 149,
-				mouseX: 149,
-				mouseY: 235,
-				slice: 113,
+			axial: {
+				slice: adjustedMouseY,
+				mouseX: adjustedSlice,
+				mouseY: adjustedMouseX,
 			},
 		});
 	});
 
 	test("image coords return correctly with coronal as props", () => {
-		expect(calculateMriImageCoords("coronal", 4, 10, 7, 4)).toStrictEqual({
-			axial: {
-				axisX: 10,
-				axisY: 5,
-				axisZ: 3,
-				mouseX: 4,
-				mouseY: 5,
-				slice: 3,
+		const currentPlane = "coronal";
+		const currentSlice = 319;
+		const mouseX = 98;
+		const mouseY = 167;
+
+		const { adjustedSlice, adjustedMouseX, adjustedMouseY } =
+			calculateAdjustedMouseCoords(currentPlane, currentSlice, mouseX, mouseY);
+
+		expect(
+			calculateMriImageCoords(
+				currentPlane,
+				currentSlice,
+				mouseX,
+				mouseY,
+				adjustedSlice,
+				adjustedMouseX,
+				adjustedMouseY
+			)
+		).toStrictEqual({
+			sagittal: {
+				slice: adjustedMouseX,
+				mouseX: 319,
+				mouseY: 167,
 			},
 			coronal: {
-				axisX: 10,
-				axisY: 5,
-				axisZ: 3,
-				mouseX: 4.5,
-				mouseY: 7.5,
-				slice: 4,
+				slice: 319,
+				mouseX: 98,
+				mouseY: 167,
 			},
-			sagittal: {
-				axisX: 10,
-				axisY: 5,
-				axisZ: 3,
-				mouseX: 3,
-				mouseY: 4,
-				slice: 5,
+			axial: {
+				slice: adjustedMouseY,
+				mouseX: 98,
+				mouseY: adjustedSlice,
 			},
 		});
 	});
 
 	test("image coords return correctly with axial as props", () => {
-		expect(calculateMriImageCoords("axial", 4, 10, 7, 4)).toStrictEqual({
-			axial: {
-				axisX: 10,
-				axisY: 7,
-				axisZ: 4,
-				mouseX: 10,
-				mouseY: 7,
-				slice: 4,
+		const currentPlane = "axial";
+		const currentSlice = 195;
+		const mouseX = 158;
+		const mouseY = 144;
+
+		const { adjustedSlice, adjustedMouseX, adjustedMouseY } =
+			calculateAdjustedMouseCoords(currentPlane, currentSlice, mouseX, mouseY);
+
+		expect(
+			calculateMriImageCoords(
+				currentPlane,
+				currentSlice,
+				mouseX,
+				mouseY,
+				adjustedSlice,
+				adjustedMouseX,
+				adjustedMouseY
+			)
+		).toStrictEqual({
+			sagittal: {
+				slice: adjustedMouseX,
+				mouseX: adjustedMouseY,
+				mouseY: adjustedSlice,
 			},
 			coronal: {
-				axisX: 10,
-				axisY: 7,
-				axisZ: 4,
-				mouseX: 6,
-				mouseY: 10.5,
-				slice: 10,
+				slice: adjustedMouseY,
+				mouseX: 158,
+				mouseY: adjustedSlice,
 			},
-			sagittal: {
-				axisX: 10,
-				axisY: 7,
-				axisZ: 4,
-				mouseX: 4,
-				mouseY: 10,
-				slice: 7,
+			axial: {
+				slice: 195,
+				mouseX: 158,
+				mouseY: 144,
 			},
 		});
 	});

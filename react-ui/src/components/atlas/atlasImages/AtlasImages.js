@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import calculateMriImageCoords from "../../utils/calculateMriImageCoords";
 import calculateHistologyImageCoords from "../../utils/calculateHistologyImageCoords";
+import calculateAdjustedMouseCoords from "../../utils/calculateAdjustedMouseCoords";
+import logCoordsForDebugging from "../../utils/logCoordsForDebugging";
 
 import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
@@ -24,33 +26,58 @@ const AtlasImages = () => {
 
 	useEffect(() => {
 		// initialize mri panels based on an arbitrary starting point
-		updateAtlasImages("sagittal", 113, 235, 113, 149, 47, 50);
+		setIsLoading(true);
+
+		try {
+			// plane, slice, mouseX, mouseY
+			updateAtlasImages("axial", 195, 158, 144);
+			setIsLoading(false);
+		} catch {
+			setError("error building atlas");
+		}
 	}, []);
 
 	const updateAtlasImages = async (
 		currentPlane,
 		currentSlice,
-		axisX,
-		axisY,
-		axisZ,
 		mouseX,
 		mouseY
 	) => {
+		console.log("----------");
+		console.log("BUILDING IMAGES");
+
+		const { adjustedSlice, adjustedMouseX, adjustedMouseY } =
+			calculateAdjustedMouseCoords(currentPlane, currentSlice, mouseX, mouseY);
+
+		logCoordsForDebugging(
+			currentPlane,
+			currentSlice,
+			mouseX,
+			mouseY,
+			adjustedSlice,
+			adjustedMouseX,
+			adjustedMouseY
+		);
+
 		const newMriCoords = calculateMriImageCoords(
 			currentPlane,
 			currentSlice,
-			axisX,
-			axisY,
-			axisZ
+			mouseX,
+			mouseY,
+			adjustedSlice,
+			adjustedMouseX,
+			adjustedMouseY
 		);
+
 		const newHistologyCoords = await calculateHistologyImageCoords(
 			currentPlane,
 			currentSlice,
-			axisX,
-			axisY,
-			axisZ,
 			mouseX,
-			mouseY
+			mouseY,
+			adjustedSlice,
+			adjustedMouseX,
+			adjustedMouseY,
+			newMriCoords
 		);
 		//console.log(newHistologyCoords);
 
@@ -59,7 +86,13 @@ const AtlasImages = () => {
 	};
 
 	if (mriImageCoords === null) {
-		return <div>Could not build the atlas. No MRI images found.</div>;
+		return (
+			<>
+				<ErrorModal error={error} onClear={clearError} />
+				{isLoading && <LoadingSpinner asOverlay />}
+				<div>Builing atlas, please wait...</div>
+			</>
+		);
 	}
 
 	return (
