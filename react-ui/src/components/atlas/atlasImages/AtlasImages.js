@@ -17,11 +17,35 @@ import CORONAL_RESCALING_FACTOR from "../../utils/CoronalRescalingFactor";
 
 import "./AtlasImages.css";
 
-const AtlasImages = () => {
+const AtlasImages = (props) => {
 	const [error, setError] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 	const [mriImageCoords, setMriImageCoords] = useState(null);
 	const [histologyImageCoords, setHistologyImageCoords] = useState(null);
+
+	const { channel } = props;
+
+	useEffect(() => {
+		// reset histology image following channel change (may be a better way of doing this)
+		const buildAtlas = async () => {
+			setIsLoading(true);
+			try {
+				// plane, slice, mouseX, mouseY
+				await updateAtlasImages(
+					mriImageCoords.currentPlane,
+					mriImageCoords[mriImageCoords.currentPlane]["slice"],
+					mriImageCoords[mriImageCoords.currentPlane]["mouseX"],
+					mriImageCoords[mriImageCoords.currentPlane]["mouseY"]
+				);
+			} catch {
+				setError("error building atlas");
+			}
+			setIsLoading(false);
+		};
+		if (mriImageCoords !== null) {
+			buildAtlas();
+		}
+	}, [channel]);
 
 	useEffect(() => {
 		// initialize mri panels based on an arbitrary starting point
@@ -172,6 +196,7 @@ const AtlasImages = () => {
 
 			<HistologyImage
 				histologyImageCoords={histologyImageCoords}
+				channel={channel}
 				histologyToMri={histologyToMri}
 				getMouseCoords={getMouseCoords}
 			/>

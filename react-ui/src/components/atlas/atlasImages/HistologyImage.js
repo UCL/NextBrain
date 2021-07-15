@@ -7,7 +7,7 @@ import "./HistologyImage.css";
 const HistologyImage = (props) => {
 	const [histologyImage, setHistologyImage] = useState(null);
 
-	const { histologyImageCoords, histologyToMri } = props;
+	const { histologyImageCoords, channel, histologyToMri } = props;
 
 	useEffect(() => {
 		// determine the correct histology image based on computed coordinates
@@ -22,11 +22,11 @@ const HistologyImage = (props) => {
 
 			try {
 				const histologyImage =
-					require(`../../../assets/P57-16/histology/${paddedBlock}/slices_LFB/slice_${paddedSlice}.jpg`).default;
+					require(`../../../assets/P57-16/histology/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`).default;
 				setHistologyImage(histologyImage);
 			} catch {
 				console.log(
-					`%cerror, could not resolve path: assets/P57-16/histology/${paddedBlock}/slices_LFB/slice_${paddedSlice}.jpg`,
+					`%cerror, could not resolve path: assets/P57-16/histology/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`,
 					"color: red"
 				);
 			}
