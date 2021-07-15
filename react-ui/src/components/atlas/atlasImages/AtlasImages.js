@@ -85,6 +85,21 @@ const AtlasImages = () => {
 		setHistologyImageCoords(newHistologyCoords);
 	};
 
+	const histologyToMri = (e) => {
+		console.log("histology to mri");
+
+		const { mouseX, mouseY } = getMouseCoords(e);
+
+		console.log(mouseX, mouseY);
+	};
+
+	const getMouseCoords = (e) => {
+		const mouseX = e.nativeEvent.offsetX;
+		const mouseY = e.nativeEvent.offsetY;
+
+		return { mouseX, mouseY };
+	};
+
 	if (mriImageCoords === null) {
 		return (
 			<>
@@ -104,20 +119,27 @@ const AtlasImages = () => {
 				plane="sagittal"
 				mriImageCoords={mriImageCoords}
 				updateAtlasImages={updateAtlasImages}
+				getMouseCoords={getMouseCoords}
 			/>
 			<MriImages
 				plane="coronal"
 				mriImageCoords={mriImageCoords}
 				updateAtlasImages={updateAtlasImages}
+				getMouseCoords={getMouseCoords}
 				coronalRescalingFactor={CORONAL_RESCALING_FACTOR}
 			/>
 			<MriImages
 				plane="axial"
 				mriImageCoords={mriImageCoords}
+				getMouseCoords={getMouseCoords}
 				updateAtlasImages={updateAtlasImages}
 			/>
 
-			<HistologyImage histologyImageCoords={histologyImageCoords} />
+			<HistologyImage
+				histologyImageCoords={histologyImageCoords}
+				histologyToMri={histologyToMri}
+				getMouseCoords={getMouseCoords}
+			/>
 
 			<div className="scrollbar"></div>
 		</section>

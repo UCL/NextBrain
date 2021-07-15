@@ -7,7 +7,9 @@ import "./HistologyImage.css";
 const HistologyImage = (props) => {
 	const [histologyImage, setHistologyImage] = useState(null);
 
-	const { histologyImageCoords } = props;
+	const { histologyImageCoords, histologyToMri } = props;
+
+	console.log(histologyImageCoords);
 
 	useEffect(() => {
 		// determine the correct histology image based on computed coordinates
@@ -43,8 +45,8 @@ const HistologyImage = (props) => {
 				<MousePointer type="histology" imageCoords={histologyImageCoords} />
 
 				<img
-					// onClick={(e) => computeMriImagesHandler(e)}
-					// className={`${plane}-img`}
+					onClick={(e) => histologyToMri(e)}
+					className="histology-img"
 					src={histologyImage}
 					alt="histology"
 				></img>

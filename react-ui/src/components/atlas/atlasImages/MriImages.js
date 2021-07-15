@@ -5,26 +5,24 @@ import mriCoordinatesKey from "../../utils/mriCoordinatesKey";
 import "./MriImages.css";
 
 const MriImages = (props) => {
-	const { plane, mriImageCoords, updateAtlasImages, coronalRescalingFactor } =
-		props;
+	const {
+		plane,
+		mriImageCoords,
+		updateAtlasImages,
+		coronalRescalingFactor,
+		getMouseCoords,
+	} = props;
 
 	const computeMriImagesHandler = (e) => {
 		const { mouseX, mouseY } = getMouseCoords(e);
-		const mouseIsWithinBounds = determineMouseBoundaries(mouseX, mouseY);
+		const mouseIsWithinBounds = determineMouseBoundariesMri(mouseX, mouseY);
 
 		if (!mouseIsWithinBounds) return;
 
 		updateAtlasImages(plane, mriImageCoords[plane]["slice"], mouseX, mouseY);
 	};
 
-	const getMouseCoords = (e) => {
-		const mouseX = e.nativeEvent.offsetX;
-		const mouseY = e.nativeEvent.offsetY;
-
-		return { mouseX, mouseY };
-	};
-
-	const determineMouseBoundaries = (mouseX, mouseY) => {
+	const determineMouseBoundariesMri = (mouseX, mouseY) => {
 		if (mouseX < 0 || mouseY < 0) return false;
 
 		if (plane === "sagittal") {
