@@ -1,7 +1,7 @@
 import npyjs from "npyjs";
 import ndarray from "ndarray";
 
-import txtToArray from "./txtToArray";
+import getMatrix from "./getMatrix";
 import matrixMultiplier from "./matrixMultiplier";
 
 const calculateHistologyImageCoords = async (
@@ -26,32 +26,14 @@ const calculateHistologyImageCoords = async (
 
 	console.log("current block: " + currentBlock);
 
-	if (currentBlock === 0) return console.log("block returned 0");
-
-	// this shouldnt be happening, but check for this anyway to help with debugging
-	if (currentBlock === undefined)
-		return console.log(
-			"%cError. Block returned undefined, check if the mouse coordinates were outside of the bounds of the numpy array",
-			"color: red"
-		);
+	if (currentBlock === 0 || currentBlock === undefined) return "no block found";
 
 	// TODO: I need to convert the array of strings to numbers (although it still works regardless)
-	const matrix = await getCurrentMatrix(currentBlock);
+	const matrix = await getMatrix(currentBlock, "mri");
 
-	if (matrix === undefined) return;
-	// console.log("matrix: " + matrix);
+	if (matrix === undefined) return "no matrix found";
 
-	const histologyImageCoords = getHistologyImageCoords(
-		currentPlane,
-		currentSlice,
-		mouseX,
-		mouseY,
-		adjustedSlice,
-		adjustedMouseX,
-		adjustedMouseY,
-		newMriCoords,
-		matrix
-	);
+	const histologyImageCoords = getHistologyImageCoords(newMriCoords, matrix);
 
 	console.log("histology image coords: ", histologyImageCoords);
 
@@ -62,88 +44,27 @@ const calculateHistologyImageCoords = async (
 	};
 };
 
-const getHistologyImageCoords = (
-	currentPlane,
-	currentSlice,
-	mouseX,
-	mouseY,
-	adjustedSlice,
-	adjustedMouseX,
-	adjustedMouseY,
-	newMriCoords,
-	matrix
-) => {
+const getHistologyImageCoords = (newMriCoords, matrix) => {
 	console.log(newMriCoords);
 
-	// TODO: I need to find out what order to enter the paramaters for the matrix multiplications
-	// TODO: I also need to find out what order to read the coords when loading in histology images
-	let coords;
-	let histologyImageCoords;
-	if (currentPlane === "sagittal") {
-		coords = matrixMultiplier(matrix, [
-			newMriCoords.sagittal.slice,
-			newMriCoords.coronal.slice,
-			newMriCoords.axial.slice,
-			1,
-		]);
+	const coords = matrixMultiplier(matrix, [
+		newMriCoords.sagittal.slice,
+		newMriCoords.coronal.slice,
+		newMriCoords.axial.slice,
+		1,
+	]);
 
-		const { resultX, resultY, resultZ, resultW } = coords;
+	const { resultX, resultY, resultZ, resultW } = coords;
 
-		histologyImageCoords = {
-			slice: resultZ.toFixed(0),
-			mouseX: resultY,
-			mouseY: resultX,
-		};
-	} else if (currentPlane === "coronal") {
-		coords = matrixMultiplier(matrix, [
-			newMriCoords.sagittal.slice,
-			newMriCoords.coronal.slice,
-			newMriCoords.axial.slice,
-			1,
-		]);
-
-		const { resultX, resultY, resultZ, resultW } = coords;
-
-		histologyImageCoords = {
-			slice: resultZ.toFixed(0),
-			mouseX: resultY,
-			mouseY: resultX,
-		};
-	} else if (currentPlane === "axial") {
-		coords = matrixMultiplier(matrix, [
-			newMriCoords.sagittal.slice,
-			newMriCoords.coronal.slice,
-			newMriCoords.axial.slice,
-			1,
-		]);
-
-		const { resultX, resultY, resultZ, resultW } = coords;
-
-		histologyImageCoords = {
-			slice: resultZ.toFixed(0),
-			mouseX: resultY,
-			mouseY: resultX,
-		};
-	}
+	const histologyImageCoords = {
+		slice: resultZ.toFixed(0),
+		mouseX: resultY,
+		mouseY: resultX,
+	};
 
 	console.log("matrix calculation result: ", coords);
 
 	return histologyImageCoords;
-};
-
-const getCurrentMatrix = async (currentBlock) => {
-	let readTxt = new txtToArray();
-
-	const paddedBlock = currentBlock.toString().padStart(2, 0);
-	//console.log(paddedBlock);
-
-	const txtFile =
-		await require(`../../assets/P57-16/mri/matrices/block_${paddedBlock}.txt`)
-			.default;
-
-	const matrix = await readTxt.load(txtFile);
-
-	return matrix;
 };
 
 const getCurrentBlock = async (
@@ -157,6 +78,8 @@ const getCurrentBlock = async (
 ) => {
 	let currentBlock;
 	let n = new npyjs();
+
+	console.log(currentSlice);
 
 	const paddedSlice = currentSlice.toFixed(0).toString().padStart(3, 0);
 

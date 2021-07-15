@@ -15,12 +15,6 @@ const MriImage = (props) => {
 
 	const { plane, mriImageCoords, computeMriImagesHandler } = props;
 
-	//console.log(mriImageCoords);
-
-	const clearError = () => {
-		setError(null);
-	};
-
 	useEffect(() => {
 		// preloadMriImages();
 	}, []);
@@ -83,7 +77,7 @@ const MriImage = (props) => {
 
 	return (
 		<>
-			<ErrorModal error={error} onClear={clearError} />
+			<ErrorModal error={error} onClear={() => setError(null)} />
 			{isLoading && <LoadingSpinner asOverlay />}
 			<div className={`mri-img ${plane}`}>
 				<div className={`mri-img-container ${plane}`}>

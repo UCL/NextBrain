@@ -4,11 +4,14 @@ import calculateMriImageCoords from "../../utils/calculateMriImageCoords";
 import calculateHistologyImageCoords from "../../utils/calculateHistologyImageCoords";
 import calculateAdjustedMouseCoords from "../../utils/calculateAdjustedMouseCoords";
 import logCoordsForDebugging from "../../utils/logCoordsForDebugging";
+import mriCoordinatesKey from "../../utils/mriCoordinatesKey";
 
 import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
 import MriImages from "./MriImages";
 import HistologyImage from "./HistologyImage";
+import getMatrix from "../../utils/getMatrix";
+import matrixMultiplier from "../../utils/matrixMultiplier";
 
 import CORONAL_RESCALING_FACTOR from "../../utils/CoronalRescalingFactor";
 
@@ -20,21 +23,20 @@ const AtlasImages = () => {
 	const [mriImageCoords, setMriImageCoords] = useState(null);
 	const [histologyImageCoords, setHistologyImageCoords] = useState(null);
 
-	const clearError = () => {
-		setError(null);
-	};
-
 	useEffect(() => {
 		// initialize mri panels based on an arbitrary starting point
-		setIsLoading(true);
-
-		try {
-			// plane, slice, mouseX, mouseY
-			updateAtlasImages("axial", 195, 158, 144);
+		const buildAtlas = async () => {
+			setIsLoading(true);
+			try {
+				// plane, slice, mouseX, mouseY
+				await updateAtlasImages("axial", 195, 158, 144);
+			} catch {
+				setError("error building atlas");
+			}
 			setIsLoading(false);
-		} catch {
-			setError("error building atlas");
-		}
+		};
+
+		buildAtlas();
 	}, []);
 
 	const updateAtlasImages = async (
@@ -79,18 +81,51 @@ const AtlasImages = () => {
 			adjustedMouseY,
 			newMriCoords
 		);
-		//console.log(newHistologyCoords);
+		console.log(newHistologyCoords);
+
+		if (newHistologyCoords === "no block found") {
+			setError("No block found for this coordinate");
+			return;
+		}
+
+		if (newHistologyCoords === "no matrix found") {
+			setError("No matrix found for this coordinate");
+			return;
+		}
 
 		setMriImageCoords(newMriCoords);
 		setHistologyImageCoords(newHistologyCoords);
 	};
 
-	const histologyToMri = (e) => {
+	const histologyToMri = async (e) => {
 		console.log("histology to mri");
 
 		const { mouseX, mouseY } = getMouseCoords(e);
 
-		console.log(mouseX, mouseY);
+		const matrix = await getMatrix(
+			histologyImageCoords.currentBlock,
+			"histology"
+		);
+
+		const coords = matrixMultiplier(matrix, [
+			mouseY,
+			mouseX,
+			histologyImageCoords.coords.slice,
+			1,
+		]);
+
+		const { resultX, resultY, resultZ, resultW } = coords;
+
+		console.log(coords);
+
+		// axial is picked arbitrarily here
+		// it could be any of the planes as long as the order of params is entered correctly
+		updateAtlasImages(
+			"axial",
+			Number(resultZ.toFixed(0)),
+			(mriCoordinatesKey.axial.width - resultX).toFixed(0),
+			(mriCoordinatesKey.axial.height - resultY).toFixed(0)
+		);
 	};
 
 	const getMouseCoords = (e) => {
@@ -103,7 +138,7 @@ const AtlasImages = () => {
 	if (mriImageCoords === null) {
 		return (
 			<>
-				<ErrorModal error={error} onClear={clearError} />
+				<ErrorModal error={error} onClear={() => setError(null)} />
 				{isLoading && <LoadingSpinner asOverlay />}
 				<div>Builing atlas, please wait...</div>
 			</>
@@ -112,7 +147,7 @@ const AtlasImages = () => {
 
 	return (
 		<section className="atlas-imgs-container">
-			<ErrorModal error={error} onClear={clearError} />
+			<ErrorModal error={error} onClear={() => setError(null)} />
 			{isLoading && <LoadingSpinner asOverlay />}
 
 			<MriImages

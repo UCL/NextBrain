@@ -9,8 +9,6 @@ const HistologyImage = (props) => {
 
 	const { histologyImageCoords, histologyToMri } = props;
 
-	console.log(histologyImageCoords);
-
 	useEffect(() => {
 		// determine the correct histology image based on computed coordinates
 		if (histologyImageCoords !== null && histologyImageCoords !== undefined) {
