@@ -1,6 +1,8 @@
 import "./ImageChannels.css";
 
 const ImageChannels = (props) => {
+	const { channel, setChannel } = props;
+
 	return (
 		<div className="image-channels-container">
 			Channel:
@@ -8,14 +10,11 @@ const ImageChannels = (props) => {
 				name="channels"
 				id="channels"
 				className="image-channel-picker"
-				value={props.channel}
+				value={channel}
 				onChange={(e) => {
-					props.setChannel(e.target.value);
+					setChannel(e.target.value);
 				}}
 			>
-				{"ll" === "Choose a unit" ? (
-					<option defaultValue="LFB">LFB</option>
-				) : null}
 				<option value="LFB">LFB</option>
 				<option value="HE">HE</option>
 				<option value="MRI">MRI</option>

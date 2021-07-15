@@ -3,13 +3,15 @@ import ImageChannels from "./ImageChannels";
 import "./AtlasOptions.css";
 
 const AtlasOptions = (props) => {
+	const { channel, setChannel } = props;
+
 	return (
 		<section className="options-container">
 			<div className="atlas-navigation">Atlas navigation</div>
 			<div className="show-labels"> Show labels</div>
 			<div className="label-transparency">Label transparency</div>
 
-			<ImageChannels channel={props.channel} setChannel={props.setChannel} />
+			<ImageChannels channel={channel} setChannel={setChannel} />
 
 			<div className="current-label"> Current label</div>
 		</section>
