@@ -1,5 +1,3 @@
-import { Scrollbars } from "react-custom-scrollbars";
-
 import ImageChannels from "./ImageChannels";
 
 import "./AtlasOptions.css";
