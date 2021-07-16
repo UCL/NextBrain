@@ -82,7 +82,7 @@ const AtlasImages = (props) => {
 			adjustedMouseY,
 			newMriCoords
 		);
-		console.log(newHistologyCoords);
+		console.log("histology image coords: ", histologyImageCoords);
 
 		if (newHistologyCoords === "no block found") {
 			setError("No block found for this coordinate");
@@ -99,7 +99,7 @@ const AtlasImages = (props) => {
 	};
 
 	const histologyToMri = async (e) => {
-		console.log("histology to mri");
+		console.log("getting coordinates from histology to mri");
 
 		const { mouseX, mouseY } = getMouseCoords(e);
 

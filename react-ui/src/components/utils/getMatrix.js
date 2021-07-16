@@ -1,6 +1,6 @@
 import txtToArray from "./txtToArray";
 
-const getCurrentMatrix = async (currentBlock, type) => {
+const getMatrix = async (currentBlock, type) => {
 	let readTxt = new txtToArray();
 
 	const paddedBlock = currentBlock.toString().padStart(2, 0);
@@ -29,4 +29,4 @@ const getCurrentMatrix = async (currentBlock, type) => {
 	return matrix;
 };
 
-export default getCurrentMatrix;
+export default getMatrix;

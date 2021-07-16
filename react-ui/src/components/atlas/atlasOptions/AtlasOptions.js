@@ -1,3 +1,5 @@
+import { Scrollbars } from "react-custom-scrollbars";
+
 import ImageChannels from "./ImageChannels";
 
 import "./AtlasOptions.css";
@@ -8,6 +10,7 @@ const AtlasOptions = (props) => {
 	return (
 		<section className="options-container">
 			<div className="scrollbar"></div>
+
 			<div className="atlas-navigation">Atlas navigation</div>
 			<div className="show-labels"> Show labels</div>
 			<div className="label-transparency">Label transparency</div>

@@ -5,7 +5,12 @@ class txtToArray {
 		var txtToArray = removedLineBreaks.split(" ");
 		txtToArray.pop();
 
-		return txtToArray;
+		// convert the array of strings to numbers
+		const arrayAsNumbers = txtToArray.map((element) => {
+			return Number(element);
+		});
+
+		return arrayAsNumbers;
 	}
 
 	async load(filename) {

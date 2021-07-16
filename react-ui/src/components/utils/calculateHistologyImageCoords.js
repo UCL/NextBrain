@@ -28,14 +28,12 @@ const calculateHistologyImageCoords = async (
 
 	if (currentBlock === 0 || currentBlock === undefined) return "no block found";
 
-	// TODO: I need to convert the array of strings to numbers (although it still works regardless)
 	const matrix = await getMatrix(currentBlock, "mri");
+	console.log(matrix);
 
 	if (matrix === undefined) return "no matrix found";
 
 	const histologyImageCoords = getHistologyImageCoords(newMriCoords, matrix);
-
-	console.log("histology image coords: ", histologyImageCoords);
 
 	return {
 		coords: histologyImageCoords,
@@ -45,8 +43,6 @@ const calculateHistologyImageCoords = async (
 };
 
 const getHistologyImageCoords = (newMriCoords, matrix) => {
-	console.log(newMriCoords);
-
 	const coords = matrixMultiplier(matrix, [
 		newMriCoords.sagittal.slice,
 		newMriCoords.coronal.slice,

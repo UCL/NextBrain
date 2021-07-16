@@ -1,5 +1,5 @@
 // this function is just for debugging purposes
-// it logs the mapping of the physical mouseX and mouseY coordinates in the web app to the x y z coords of ITKSnap
+// it logs the mapping of the physical mouseX, mouseY, and slice coordinates in the web app to the x y z coords of ITKSnap
 // I add +1 to each ITKSnap coord because the index for ITKSnap starts at 1
 
 const logCoordsForDebugging = (
