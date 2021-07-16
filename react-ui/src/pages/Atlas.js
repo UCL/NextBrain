@@ -9,12 +9,10 @@ const Atlas = () => {
 	const [channel, setChannel] = useState("LFB");
 
 	return (
-		<>
-			<main className="atlas-container">
-				<AtlasImages channel={channel} />
-				<AtlasOptions channel={channel} setChannel={setChannel} />
-			</main>
-		</>
+		<main className="atlas-container">
+			<AtlasImages channel={channel} />
+			<AtlasOptions channel={channel} setChannel={setChannel} />
+		</main>
 	);
 };
 

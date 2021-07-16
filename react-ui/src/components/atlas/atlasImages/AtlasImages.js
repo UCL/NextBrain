@@ -5,7 +5,6 @@ import calculateHistologyImageCoords from "../../utils/calculateHistologyImageCo
 import calculateAdjustedMouseCoords from "../../utils/calculateAdjustedMouseCoords";
 import logCoordsForDebugging from "../../utils/logCoordsForDebugging";
 import mriCoordinatesKey from "../../utils/mriCoordinatesKey";
-
 import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
 import MriImages from "./MriImages";
@@ -24,28 +23,6 @@ const AtlasImages = (props) => {
 	const [histologyImageCoords, setHistologyImageCoords] = useState(null);
 
 	const { channel } = props;
-
-	useEffect(() => {
-		// reset histology image following channel change (may be a better way of doing this)
-		const buildAtlas = async () => {
-			setIsLoading(true);
-			try {
-				// plane, slice, mouseX, mouseY
-				await updateAtlasImages(
-					mriImageCoords.currentPlane,
-					mriImageCoords[mriImageCoords.currentPlane]["slice"],
-					mriImageCoords[mriImageCoords.currentPlane]["mouseX"],
-					mriImageCoords[mriImageCoords.currentPlane]["mouseY"]
-				);
-			} catch {
-				setError("error building atlas");
-			}
-			setIsLoading(false);
-		};
-		if (mriImageCoords !== null) {
-			buildAtlas();
-		}
-	}, [channel]);
 
 	useEffect(() => {
 		// initialize mri panels based on an arbitrary starting point

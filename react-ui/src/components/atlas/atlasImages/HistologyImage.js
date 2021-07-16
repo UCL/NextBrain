@@ -31,7 +31,7 @@ const HistologyImage = (props) => {
 				);
 			}
 		}
-	}, [histologyImageCoords]);
+	}, [histologyImageCoords, channel]);
 
 	if (histologyImage === null) {
 		return <div>Could not build histology image</div>;
