@@ -200,8 +200,6 @@ const AtlasImages = (props) => {
 				histologyToMri={histologyToMri}
 				getMouseCoords={getMouseCoords}
 			/>
-
-			<div className="scrollbar"></div>
 		</section>
 	);
 };
