@@ -2,7 +2,7 @@
 	width: 300px;
 	display: grid;
 	grid-template-columns: 25px 1fr;
-	grid-template-rows: 6fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 6fr 1fr 1fr 1fr 1fr 1fr;
 	row-gap: 5px;
 	column-gap: 20px;
 	margin-left: 7px;
@@ -11,7 +11,8 @@
 		"scroll-bar show-labels"
 		"scroll-bar label-transparency"
 		"scroll-bar current-label"
-		"scroll-bar channel";
+		"scroll-bar channel"
+		"scroll-bar hi-res";
 }
 
 .options-container div {
@@ -44,4 +45,8 @@
 
 .options-container .current-label {
 	grid-area: channel;
+}
+
+.options-container .hi-res {
+	grid-area: hi-res;
 }

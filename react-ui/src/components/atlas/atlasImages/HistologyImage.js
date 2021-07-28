@@ -7,7 +7,7 @@ import "./HistologyImage.css";
 const HistologyImage = (props) => {
 	const [histologyImage, setHistologyImage] = useState(null);
 
-	const { histologyImageCoords, channel, histologyToMri } = props;
+	const { histologyImageCoords, hiRes, channel, histologyToMri } = props;
 
 	useEffect(() => {
 		// determine the correct histology image based on computed coordinates
@@ -20,18 +20,39 @@ const HistologyImage = (props) => {
 			const histologySlice = histologyImageCoords.coords["slice"];
 			const paddedSlice = histologySlice.toString().padStart(2, 0);
 
-			try {
-				const histologyImage =
-					require(`../../../assets/P57-16/histology/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`).default;
-				setHistologyImage(histologyImage);
-			} catch {
-				console.log(
-					`%cerror, could not resolve path: assets/P57-16/histology/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`,
-					"color: red"
-				);
+			console.log(hiRes);
+
+			const histologyFolder = hiRes ? "histology_hr" : "histology";
+
+			console.log(histologyFolder);
+
+			if (hiRes === false) {
+				try {
+					const histologyImage =
+						require(`../../../assets/P57-16/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`).default;
+					setHistologyImage(histologyImage);
+				} catch {
+					console.log(
+						`%cerror, could not resolve path: assets/P57-16/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`,
+						"color: red"
+					);
+				}
+			}
+
+			if (hiRes === true) {
+				try {
+					const histologyImage =
+						require(`../../../assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14.jpg`).default;
+					setHistologyImage(histologyImage);
+				} catch {
+					console.log(
+						`%cerror, could not resolve path: assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14.jpg`,
+						"color: red"
+					);
+				}
 			}
 		}
-	}, [histologyImageCoords, channel]);
+	}, [histologyImageCoords, hiRes, channel]);
 
 	if (histologyImage === null) {
 		return <div>Could not build histology image</div>;
@@ -43,8 +64,8 @@ const HistologyImage = (props) => {
 				<MousePointer type="histology" imageCoords={histologyImageCoords} />
 
 				<img
-					onClick={(e) => histologyToMri(e)}
-					className="histology-img"
+					onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
+					className={`histology-img ${hiRes ? "hi-res" : ""}`}
 					src={histologyImage}
 					alt="histology"
 				></img>

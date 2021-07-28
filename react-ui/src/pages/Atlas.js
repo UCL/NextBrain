@@ -7,11 +7,17 @@ import "./Atlas.css";
 
 const Atlas = () => {
 	const [channel, setChannel] = useState("LFB");
+	const [hiRes, setHiRes] = useState(false);
 
 	return (
 		<main className="atlas-container">
-			<AtlasImages channel={channel} />
-			<AtlasOptions channel={channel} setChannel={setChannel} />
+			<AtlasImages channel={channel} hiRes={hiRes} />
+			<AtlasOptions
+				channel={channel}
+				setChannel={setChannel}
+				hiRes={hiRes}
+				setHiRes={setHiRes}
+			/>
 		</main>
 	);
 };

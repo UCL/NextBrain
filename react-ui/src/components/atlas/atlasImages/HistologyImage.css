@@ -6,6 +6,13 @@
 	max-height: 824px;
 }
 
-.histology-img-container img {
+.histology-img-container .histology-img {
 	-webkit-user-drag: none;
+	max-height: 824px;
+	/* max-width: 400px; */
 }
+
+/* .histology-img-container .histology-img.hi-res {
+	max-height: 800px;
+	max-width: 400px;
+} */

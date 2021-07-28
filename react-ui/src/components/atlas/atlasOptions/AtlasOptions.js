@@ -3,7 +3,7 @@ import ImageChannels from "./ImageChannels";
 import "./AtlasOptions.css";
 
 const AtlasOptions = (props) => {
-	const { channel, setChannel } = props;
+	const { channel, setChannel, hiRes, setHiRes } = props;
 
 	return (
 		<section className="options-container">
@@ -16,6 +16,10 @@ const AtlasOptions = (props) => {
 			<ImageChannels channel={channel} setChannel={setChannel} />
 
 			<div className="current-label"> Current label</div>
+
+			<div className="hi-res" onClick={() => setHiRes(!hiRes)}>
+				<button>{hiRes ? "Hide" : "Show"} hi-res histology</button>
+			</div>
 		</section>
 	);
 };
