@@ -130,8 +130,12 @@ const AtlasImages = (props) => {
 	};
 
 	const getMouseCoords = (e) => {
+		console.log(e.offsetX);
+
 		const mouseX = e.nativeEvent.offsetX;
 		const mouseY = e.nativeEvent.offsetY;
+
+		console.log(mouseX);
 
 		return { mouseX, mouseY };
 	};

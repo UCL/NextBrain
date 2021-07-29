@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import MousePointer from "../../shared/MousePointer";
 
@@ -61,14 +62,37 @@ const HistologyImage = (props) => {
 	return (
 		<div className="histology-img histology">
 			<div className={`histology-img-container`}>
-				<MousePointer type="histology" imageCoords={histologyImageCoords} />
+				{!hiRes && (
+					<MousePointer type="histology" imageCoords={histologyImageCoords} />
+				)}
 
-				<img
-					onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
-					className={`histology-img ${hiRes ? "hi-res" : ""}`}
-					src={histologyImage}
-					alt="histology"
-				></img>
+				{!hiRes && (
+					<img
+						onClick={(e) => histologyToMri(e)}
+						className="histology-img"
+						src={histologyImage}
+						alt="histology"
+					></img>
+				)}
+
+				{hiRes && (
+					<TransformWrapper
+						onPanningStart={(ref, event) => {
+							console.log("clicked zoom image");
+							histologyToMri(event);
+						}}
+					>
+						<TransformComponent>
+							<img
+								//onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
+								onClick={console.log("clicked")}
+								className={`histology-img ${hiRes ? "hi-res" : ""}`}
+								src={histologyImage}
+								alt="histology"
+							></img>
+						</TransformComponent>
+					</TransformWrapper>
+				)}
 			</div>
 		</div>
 	);
