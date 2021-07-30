@@ -8,6 +8,7 @@ const MriImages = (props) => {
 	const {
 		plane,
 		mriImageCoords,
+		hiRes,
 		updateAtlasImages,
 		coronalRescalingFactor,
 		getMouseCoords,
@@ -58,6 +59,7 @@ const MriImages = (props) => {
 		<MriImage
 			plane={plane}
 			mriImageCoords={mriImageCoords}
+			hiRes={hiRes}
 			computeMriImagesHandler={computeMriImagesHandler}
 		/>
 	);

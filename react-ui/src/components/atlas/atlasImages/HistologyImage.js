@@ -62,18 +62,14 @@ const HistologyImage = (props) => {
 	return (
 		<div className="histology-img histology">
 			<div className={`histology-img-container`}>
-				{!hiRes && (
-					<MousePointer type="histology" imageCoords={histologyImageCoords} />
-				)}
+				<MousePointer type="histology" imageCoords={histologyImageCoords} />
 
-				{!hiRes && (
-					<img
-						onClick={(e) => histologyToMri(e)}
-						className="histology-img"
-						src={histologyImage}
-						alt="histology"
-					></img>
-				)}
+				<img
+					onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
+					className="histology-img"
+					src={histologyImage}
+					alt="histology"
+				></img>
 
 				{hiRes && (
 					<TransformWrapper
@@ -85,7 +81,6 @@ const HistologyImage = (props) => {
 						<TransformComponent>
 							<img
 								//onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
-								onClick={console.log("clicked")}
 								className={`histology-img ${hiRes ? "hi-res" : ""}`}
 								src={histologyImage}
 								alt="histology"

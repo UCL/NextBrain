@@ -158,6 +158,7 @@ const AtlasImages = (props) => {
 			<MriImages
 				plane="sagittal"
 				mriImageCoords={mriImageCoords}
+				hiRes={hiRes}
 				updateAtlasImages={updateAtlasImages}
 				getMouseCoords={getMouseCoords}
 			/>
@@ -165,12 +166,14 @@ const AtlasImages = (props) => {
 				plane="coronal"
 				mriImageCoords={mriImageCoords}
 				updateAtlasImages={updateAtlasImages}
+				hiRes={hiRes}
 				getMouseCoords={getMouseCoords}
 				coronalRescalingFactor={CORONAL_RESCALING_FACTOR}
 			/>
 			<MriImages
 				plane="axial"
 				mriImageCoords={mriImageCoords}
+				hiRes={hiRes}
 				getMouseCoords={getMouseCoords}
 				updateAtlasImages={updateAtlasImages}
 			/>

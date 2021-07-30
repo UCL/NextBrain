@@ -13,7 +13,7 @@ const MriImage = (props) => {
 	const [mriImage, setMriImage] = useState(null);
 	const [currentSlice, setCurrentSlice] = useState(null);
 
-	const { plane, mriImageCoords, computeMriImagesHandler } = props;
+	const { plane, mriImageCoords, hiRes, computeMriImagesHandler } = props;
 
 	useEffect(() => {
 		// preloadMriImages();
@@ -84,7 +84,7 @@ const MriImage = (props) => {
 					<MousePointer type="mri" plane={plane} imageCoords={mriImageCoords} />
 
 					<img
-						onClick={(e) => computeMriImagesHandler(e)}
+						onClick={!hiRes ? (e) => computeMriImagesHandler(e) : undefined}
 						// onWheel={(e) => console.log(e)}
 						className={`${plane}-img`}
 						src={mriImage}
