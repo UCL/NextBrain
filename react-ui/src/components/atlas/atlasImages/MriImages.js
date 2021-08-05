@@ -59,6 +59,7 @@ const MriImages = (props) => {
 
 	return (
 		<>
+			{/* use map here to loop through components? */}
 			<MriImage
 				plane="sagittal"
 				mriImageCoords={mriImageCoords}
