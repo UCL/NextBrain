@@ -6,7 +6,15 @@ import MousePointer from "../../shared/MousePointer";
 import "./HistologyImage.css";
 
 const HistologyImage = (props) => {
+	const initialOptions = {
+		centerContent: false,
+		limitToBounds: false,
+		limitToWrapper: true,
+		disabled: true,
+	};
+
 	const [histologyImage, setHistologyImage] = useState(null);
+	const [options, setOptions] = useState(initialOptions);
 
 	const { histologyImageCoords, hiRes, channel, histologyToMri } = props;
 
@@ -55,6 +63,20 @@ const HistologyImage = (props) => {
 		}
 	}, [histologyImageCoords, hiRes, channel]);
 
+	const onLoad = (e) => {
+		console.log(e.target.naturalWidth, e.target.width);
+		setOptions({
+			...initialOptions,
+			defaultScale: e.target.width / e.target.naturalWidth,
+		});
+	};
+
+	const onPan = (ref, event) => {
+		console.log("clicked zoom image");
+		console.log(ref);
+		histologyToMri(event);
+	};
+
 	if (histologyImage === null) {
 		return <div>Could not build histology image</div>;
 	}
@@ -73,19 +95,32 @@ const HistologyImage = (props) => {
 
 				{hiRes && (
 					<TransformWrapper
-						onPanningStart={(ref, event) => {
-							console.log("clicked zoom image");
-							histologyToMri(event);
-						}}
+						//disabled={true}
+						wheel={{ disabled: false }}
+						centerContent={true}
+						limitToBounds={true}
+						limitToWrapper={true}
+						onPanningStart={onPan}
 					>
-						<TransformComponent>
-							<img
-								//onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
-								className={`histology-img ${hiRes ? "hi-res" : ""}`}
-								src={histologyImage}
-								alt="histology"
-							></img>
-						</TransformComponent>
+						{({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+							<React.Fragment>
+								<div className="tools">
+									<button onClick={() => zoomIn()}>+</button>
+									<button onClick={() => zoomOut()}>-</button>
+									<button onClick={() => resetTransform()}>x</button>
+								</div>
+
+								<TransformComponent>
+									<img
+										//onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
+										className={`histology-img ${hiRes ? "hi-res" : ""}`}
+										src={histologyImage}
+										alt="histology"
+										onLoad={onLoad}
+									></img>
+								</TransformComponent>
+							</React.Fragment>
+						)}
 					</TransformWrapper>
 				)}
 			</div>
