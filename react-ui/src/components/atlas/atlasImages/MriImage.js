@@ -22,7 +22,7 @@ const MriImage = (props) => {
 	useEffect(() => {
 		// determine the correct mri image based on computed coordinates
 
-		const paddedSlice = props.mriImageCoords[plane]["slice"]
+		const paddedSlice = mriImageCoords[plane]?.slice
 			.toFixed(0)
 			.toString()
 			.padStart(3, 0);
@@ -41,6 +41,7 @@ const MriImage = (props) => {
 		}
 	}, [mriImageCoords]);
 
+	// used for loading all images at page load and adding them to the cache for quicker subsequent loading
 	const preloadMriImages = () => {
 		// preload all mri images
 		const limit = mriCoordinatesKey[plane]["slices"];
@@ -84,7 +85,9 @@ const MriImage = (props) => {
 					<MousePointer type="mri" plane={plane} imageCoords={mriImageCoords} />
 
 					<img
-						onClick={!hiRes ? (e) => computeMriImagesHandler(e) : undefined}
+						onClick={
+							!hiRes ? (e) => computeMriImagesHandler(e, plane) : undefined
+						}
 						// onWheel={(e) => console.log(e)}
 						className={`${plane}-img`}
 						src={mriImage}

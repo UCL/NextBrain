@@ -29,11 +29,7 @@ const HistologyImage = (props) => {
 			const histologySlice = histologyImageCoords.coords["slice"];
 			const paddedSlice = histologySlice.toString().padStart(2, 0);
 
-			console.log(hiRes);
-
 			const histologyFolder = hiRes ? "histology_hr" : "histology";
-
-			console.log(histologyFolder);
 
 			if (hiRes === false) {
 				try {
