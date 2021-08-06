@@ -19,9 +19,15 @@ const HistologyImage = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [histologyImage, setHistologyImage] = useState(null);
 	const [hiResHistologyImage, setHiResHistologyImage] = useState(null);
+	const [hiResHistologyImage2, setHiResHistologyImage2] = useState(null);
 	const [options, setOptions] = useState(initialOptions);
+	const [initialLoad, setInitialLoad] = useState(true);
 
 	const { histologyImageCoords, hiRes, channel, histologyToMri } = props;
+
+	console.log(initialLoad);
+	console.log(hiResHistologyImage);
+	console.log(hiResHistologyImage);
 
 	useEffect(() => {
 		fetchHistologyImage();
@@ -33,7 +39,6 @@ const HistologyImage = (props) => {
 			const paddedBlock = histologyImageCoords["currentBlock"]
 				.toString()
 				.padStart(2, 0);
-			//console.log(paddedBlock);
 
 			const histologySlice = histologyImageCoords.coords["slice"];
 			const paddedSlice = histologySlice.toString().padStart(2, 0);
@@ -41,8 +46,8 @@ const HistologyImage = (props) => {
 			const histologyFolder = hiRes ? "histology_hr" : "histology";
 
 			if (hiRes === false) {
-				setIsLoading(true);
 				try {
+					//setIsLoading(true);
 					const histologyImage =
 						await require(`../../../assets/P57-16/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`)
 							.default;
@@ -56,8 +61,8 @@ const HistologyImage = (props) => {
 			}
 
 			if (hiRes === true) {
-				setIsLoading(true);
 				try {
+					setIsLoading(true);
 					const hiResHistologyImage =
 						await require(`../../../assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14.jpg`)
 							.default;
@@ -69,6 +74,34 @@ const HistologyImage = (props) => {
 						"color: red"
 					);
 				}
+
+				// I do this because of a weird behaviour on the dev server causing the loading spinner to reappear
+				// I dont think this is an issue on the deployed site, so perhaps remove (or only run the logic on dev)
+				if (initialLoad === true && hiResHistologyImage !== null) {
+					setIsLoading(false);
+				}
+			}
+
+			if (hiRes === true) {
+				try {
+					setIsLoading(true);
+					const hiResHistologyImage2 =
+						await require(`../../../assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14_high_30.jpg`)
+							.default;
+
+					setHiResHistologyImage2(hiResHistologyImage2);
+				} catch {
+					console.log(
+						`%cerror, could not resolve path: assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14.jpg`,
+						"color: red"
+					);
+				}
+
+				// I do this because of a weird behaviour on the dev server causing the loading spinner to reappear
+				// I dont think this is an issue on the deployed site, so perhaps remove (or only run the logic on dev)
+				if (initialLoad === true && hiResHistologyImage !== null) {
+					setIsLoading(false);
+				}
 			}
 		}
 	};
@@ -76,20 +109,39 @@ const HistologyImage = (props) => {
 	const onImageLoad = (e, type) => {
 		console.log(e.target.naturalWidth, e.target.width);
 
+		if (type === "lowRes") setIsLoading(false);
+
 		if (type === "hiRes") {
 			setOptions({
 				...initialOptions,
 				defaultScale: e.target.width / e.target.naturalWidth,
 			});
+			setIsLoading(false);
 		}
-
-		setIsLoading(false);
 	};
 
 	const onPan = (ref, e) => {
-		console.log("clicked zoom image");
+		console.log("panning image");
 		console.log(ref);
-		histologyToMri(e);
+		//histologyToMri(e);
+	};
+
+	const onImageZoomStart = (ref, e) => {
+		//setIsLoading(true);
+		console.log("start zoom image");
+		console.log(ref);
+	};
+
+	const onImageZoom = (ref, e) => {
+		//setIsLoading(true);
+		console.log("during zoom image");
+		console.log(ref);
+	};
+
+	const onImageZoomStop = (ref, e) => {
+		//setIsLoading(false);
+		console.log("end zoom image");
+		console.log(ref);
 	};
 
 	if (histologyImage === null) {
@@ -103,25 +155,29 @@ const HistologyImage = (props) => {
 					{isLoading && <LoadingSpinner asOverlay />}
 					<MousePointer type="histology" imageCoords={histologyImageCoords} />
 
-					<img
+					{/* <img
 						onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
 						className="histology-img"
 						src={histologyImage}
 						alt="histology"
-						onLoad={(e) => onImageLoad(e, "lowRes")}
-					></img>
+						//onLoad={(e) => onImageLoad(e, "lowRes")}
+					></img> */}
 
 					{hiRes && (
 						<TransformWrapper
 							//disabled={true}
 							wheel={{ disabled: false }}
+							panning={{ velocityDisabled: true }}
 							centerContent={true}
 							limitToBounds={true}
 							limitToWrapper={true}
 							onPanningStart={onPan}
+							onZoomStart={onImageZoomStart}
+							onZoom={onImageZoom}
+							onZoomStop={onImageZoomStop}
 						>
 							{({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-								<React.Fragment>
+								<>
 									<div className="tools">
 										<button onClick={() => zoomIn()}>+</button>
 										<button onClick={() => zoomOut()}>-</button>
@@ -137,7 +193,42 @@ const HistologyImage = (props) => {
 											onLoad={(e) => onImageLoad(e, "hiRes")}
 										></img>
 									</TransformComponent>
-								</React.Fragment>
+								</>
+							)}
+						</TransformWrapper>
+					)}
+
+					{hiRes && (
+						<TransformWrapper
+							//disabled={true}
+							wheel={{ disabled: false }}
+							panning={{ velocityDisabled: true }}
+							centerContent={true}
+							limitToBounds={true}
+							limitToWrapper={true}
+							onPanningStart={onPan}
+							onZoomStart={onImageZoomStart}
+							onZoom={onImageZoom}
+							onZoomStop={onImageZoomStop}
+						>
+							{({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+								<>
+									<div className="tools">
+										<button onClick={() => zoomIn()}>+</button>
+										<button onClick={() => zoomOut()}>-</button>
+										<button onClick={() => resetTransform()}>x</button>
+									</div>
+
+									<TransformComponent>
+										<img
+											//onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
+											className={`histology-img ${hiRes ? "hi-res" : ""}`}
+											src={hiResHistologyImage2}
+											alt="histology"
+											onLoad={(e) => onImageLoad(e, "lowRes")}
+										></img>
+									</TransformComponent>
+								</>
 							)}
 						</TransformWrapper>
 					)}
