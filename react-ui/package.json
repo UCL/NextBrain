@@ -23,7 +23,8 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"predeploy": "npm run build",
-		"deploy": "gh-pages -d build"
+		"deploy": "gh-pages -d build",
+		"deployStaging": "rm -rf build && PUBLIC_URL=https://jhughes982.github.io/test-pages/ npm run build && cd build && git init && git add . && git commit -m \"Initial commit\" && git remote add origin https://github.com/jhughes982/test-pages.git && git push --force origin master:gh-pages"
 	},
 	"eslintConfig": {
 		"extends": [

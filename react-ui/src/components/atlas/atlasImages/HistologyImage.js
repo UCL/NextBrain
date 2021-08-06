@@ -47,7 +47,7 @@ const HistologyImage = (props) => {
 
 			if (hiRes === false) {
 				try {
-					setIsLoading(true);
+					//setIsLoading(true);
 					const histologyImage =
 						await require(`../../../assets/P57-16/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`)
 							.default;
@@ -109,14 +109,15 @@ const HistologyImage = (props) => {
 	const onImageLoad = (e, type) => {
 		console.log(e.target.naturalWidth, e.target.width);
 
+		if (type === "lowRes") setIsLoading(false);
+
 		if (type === "hiRes") {
 			setOptions({
 				...initialOptions,
 				defaultScale: e.target.width / e.target.naturalWidth,
 			});
+			setIsLoading(false);
 		}
-
-		setIsLoading(false);
 	};
 
 	const onPan = (ref, e) => {
@@ -154,13 +155,13 @@ const HistologyImage = (props) => {
 					{isLoading && <LoadingSpinner asOverlay />}
 					<MousePointer type="histology" imageCoords={histologyImageCoords} />
 
-					{/* <img
+					<img
 						onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
 						className="histology-img"
 						src={histologyImage}
 						alt="histology"
-						onLoad={(e) => onImageLoad(e, "lowRes")}
-					></img> */}
+						//onLoad={(e) => onImageLoad(e, "lowRes")}
+					></img>
 
 					{hiRes && (
 						<TransformWrapper
@@ -224,7 +225,7 @@ const HistologyImage = (props) => {
 											className={`histology-img ${hiRes ? "hi-res" : ""}`}
 											src={hiResHistologyImage2}
 											alt="histology"
-											onLoad={(e) => onImageLoad(e, "hiRes")}
+											onLoad={(e) => onImageLoad(e, "lowRes")}
 										></img>
 									</TransformComponent>
 								</>
