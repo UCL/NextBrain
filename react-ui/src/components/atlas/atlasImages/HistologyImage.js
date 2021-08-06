@@ -155,6 +155,8 @@ const HistologyImage = (props) => {
 					{isLoading && <LoadingSpinner asOverlay />}
 					<MousePointer type="histology" imageCoords={histologyImageCoords} />
 
+					<div className="label"></div>
+
 					<img
 						onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
 						className="histology-img"
