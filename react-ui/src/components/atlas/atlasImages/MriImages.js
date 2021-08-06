@@ -5,26 +5,27 @@ import mriCoordinatesKey from "../../utils/mriCoordinatesKey";
 import "./MriImages.css";
 
 const MriImages = (props) => {
-	const { plane, mriImageCoords, updateAtlasImages, coronalRescalingFactor } =
-		props;
+	const {
+		plane,
+		mriImageCoords,
+		hiRes,
+		updateAtlasImages,
+		coronalRescalingFactor,
+		getMouseCoords,
+	} = props;
 
-	const computeMriImagesHandler = (e) => {
+	console.log(mriImageCoords);
+
+	const computeMriImagesHandler = (e, plane) => {
 		const { mouseX, mouseY } = getMouseCoords(e);
-		const mouseIsWithinBounds = determineMouseBoundaries(mouseX, mouseY);
+		const mouseIsWithinBounds = determineMouseBoundariesMri(mouseX, mouseY);
 
 		if (!mouseIsWithinBounds) return;
 
 		updateAtlasImages(plane, mriImageCoords[plane]["slice"], mouseX, mouseY);
 	};
 
-	const getMouseCoords = (e) => {
-		const mouseX = e.nativeEvent.offsetX;
-		const mouseY = e.nativeEvent.offsetY;
-
-		return { mouseX, mouseY };
-	};
-
-	const determineMouseBoundaries = (mouseX, mouseY) => {
+	const determineMouseBoundariesMri = (mouseX, mouseY) => {
 		if (mouseX < 0 || mouseY < 0) return false;
 
 		if (plane === "sagittal") {
@@ -57,11 +58,35 @@ const MriImages = (props) => {
 	};
 
 	return (
-		<MriImage
-			plane={plane}
-			mriImageCoords={mriImageCoords}
-			computeMriImagesHandler={computeMriImagesHandler}
-		/>
+		<>
+			{/* use map here to loop through components? */}
+			<MriImage
+				plane="sagittal"
+				mriImageCoords={mriImageCoords}
+				hiRes={hiRes}
+				updateAtlasImages={updateAtlasImages}
+				getMouseCoords={getMouseCoords}
+				computeMriImagesHandler={computeMriImagesHandler}
+			/>
+
+			<MriImage
+				plane="coronal"
+				mriImageCoords={mriImageCoords}
+				hiRes={hiRes}
+				updateAtlasImages={updateAtlasImages}
+				getMouseCoords={getMouseCoords}
+				computeMriImagesHandler={computeMriImagesHandler}
+			/>
+
+			<MriImage
+				plane="axial"
+				mriImageCoords={mriImageCoords}
+				hiRes={hiRes}
+				updateAtlasImages={updateAtlasImages}
+				getMouseCoords={getMouseCoords}
+				computeMriImagesHandler={computeMriImagesHandler}
+			/>
+		</>
 	);
 };
 

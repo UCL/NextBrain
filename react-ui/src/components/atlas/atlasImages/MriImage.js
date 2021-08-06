@@ -13,13 +13,7 @@ const MriImage = (props) => {
 	const [mriImage, setMriImage] = useState(null);
 	const [currentSlice, setCurrentSlice] = useState(null);
 
-	const { plane, mriImageCoords, computeMriImagesHandler } = props;
-
-	//console.log(mriImageCoords);
-
-	const clearError = () => {
-		setError(null);
-	};
+	const { plane, mriImageCoords, hiRes, computeMriImagesHandler } = props;
 
 	useEffect(() => {
 		// preloadMriImages();
@@ -28,7 +22,7 @@ const MriImage = (props) => {
 	useEffect(() => {
 		// determine the correct mri image based on computed coordinates
 
-		const paddedSlice = props.mriImageCoords[plane]["slice"]
+		const paddedSlice = mriImageCoords[plane]?.slice
 			.toFixed(0)
 			.toString()
 			.padStart(3, 0);
@@ -47,6 +41,7 @@ const MriImage = (props) => {
 		}
 	}, [mriImageCoords]);
 
+	// used for loading all images at page load and adding them to the cache for quicker subsequent loading
 	const preloadMriImages = () => {
 		// preload all mri images
 		const limit = mriCoordinatesKey[plane]["slices"];
@@ -83,14 +78,17 @@ const MriImage = (props) => {
 
 	return (
 		<>
-			<ErrorModal error={error} onClear={clearError} />
+			<ErrorModal error={error} onClear={() => setError(null)} />
 			{isLoading && <LoadingSpinner asOverlay />}
 			<div className={`mri-img ${plane}`}>
 				<div className={`mri-img-container ${plane}`}>
 					<MousePointer type="mri" plane={plane} imageCoords={mriImageCoords} />
 
 					<img
-						onClick={(e) => computeMriImagesHandler(e)}
+						onClick={
+							!hiRes ? (e) => computeMriImagesHandler(e, plane) : undefined
+						}
+						// onWheel={(e) => console.log(e)}
 						className={`${plane}-img`}
 						src={mriImage}
 						alt={`${plane}-slice${currentSlice}`}
