@@ -17,9 +17,9 @@ const AtlasOptions = (props) => {
 
 			<div className="current-label"> Current label</div>
 
-			<div className="hi-res" onClick={() => setHiRes(!hiRes)}>
+			{/* <div className="hi-res" onClick={() => setHiRes(!hiRes)}>
 				<button>{hiRes ? "Hide" : "Show"} hi-res histology</button>
-			</div>
+			</div> */}
 		</section>
 	);
 };
