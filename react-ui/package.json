@@ -24,7 +24,8 @@
 		"eject": "react-scripts eject",
 		"predeploy": "npm run build",
 		"deploy": "gh-pages -d build",
-		"deployStaging": "rm -rf build && PUBLIC_URL=https://jhughes982.github.io/brain-atlas-staging/ npm run build && cd build && git init && git add . && git commit -m \"staging deployment\" && git remote add origin https://github.com/jhughes982/brain-atlas-staging.git && git push --force origin master:gh-pages"
+		"deployStaging": "rm -rf build && PUBLIC_URL=https://jhughes982.github.io/brain-atlas-staging/ npm run build && cd build && git init && git add . && git commit -m \"staging deployment\" && git remote add origin https://github.com/jhughes982/brain-atlas-staging.git && git push --force origin master:gh-pages",
+		"deployStagingSh": "./deploy-staging.sh"
 	},
 	"eslintConfig": {
 		"extends": [
