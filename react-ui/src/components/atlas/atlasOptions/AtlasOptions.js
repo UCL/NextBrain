@@ -12,7 +12,7 @@ const AtlasOptions = (props) => {
 			<div className="atlas-navigation">Atlas navigation</div>
 
 			<div className="show-labels" onClick={() => setLabels(!labels)}>
-				<button>{hiRes ? "Hide" : "Show"} labels</button>
+				<button>{labels ? "Hide" : "Show"} labels</button>
 			</div>
 
 			<div className="label-transparency">Label transparency</div>

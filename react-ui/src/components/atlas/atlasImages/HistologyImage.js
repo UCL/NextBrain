@@ -20,10 +20,12 @@ const HistologyImage = (props) => {
 	const [histologyImage, setHistologyImage] = useState(null);
 	const [hiResHistologyImage, setHiResHistologyImage] = useState(null);
 	const [hiResHistologyImage2, setHiResHistologyImage2] = useState(null);
+	const [labelsImage, setLabelsImage] = useState(null);
 	const [options, setOptions] = useState(initialOptions);
 	const [initialLoad, setInitialLoad] = useState(true);
 
-	const { histologyImageCoords, hiRes, channel, histologyToMri } = props;
+	const { histologyImageCoords, hiRes, labels, channel, histologyToMri } =
+		props;
 
 	console.log(initialLoad);
 	console.log(hiResHistologyImage);
@@ -103,6 +105,19 @@ const HistologyImage = (props) => {
 					setIsLoading(false);
 				}
 			}
+
+			try {
+				//setIsLoading(true);
+				const newLabelsImage =
+					await require(`../../../assets/P57-16/${histologyFolder}/45/slices_labels_rgb/slice_14.png`)
+						.default;
+				setLabelsImage(newLabelsImage);
+			} catch {
+				console.log(
+					`%cerror, could not resolve path: assets/P57-16/45/${paddedBlock}/slices_labels_rgb/slice_14.png`,
+					"color: red"
+				);
+			}
 		}
 	};
 
@@ -158,7 +173,15 @@ const HistologyImage = (props) => {
 						<MousePointer type="histology" imageCoords={histologyImageCoords} />
 					)}
 
-					{/* <div className="label"></div> */}
+					{labels && (
+						<img
+							//onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
+							className="histology-labels"
+							src={labelsImage}
+							alt="histology-labels"
+							//onLoad={(e) => onImageLoad(e, "lowRes")}
+						></img>
+					)}
 
 					{!hiRes && (
 						<img

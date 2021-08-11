@@ -16,11 +16,8 @@
 	/* max-width: 400px; */
 }
 
-.label {
-	top: 213px;
-	left: 270px;
-	width: 20px;
-	height: 20px;
-	background-color: rgba(255, 0, 0, 0.7);
+.histology-labels {
+	position: absolute;
+	opacity: 0.4;
 	z-index: 1;
 }

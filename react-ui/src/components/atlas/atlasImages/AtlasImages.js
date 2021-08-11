@@ -22,7 +22,7 @@ const AtlasImages = (props) => {
 	const [mriImageCoords, setMriImageCoords] = useState(null);
 	const [histologyImageCoords, setHistologyImageCoords] = useState(null);
 
-	const { channel, hiRes } = props;
+	const { channel, hiRes, labels } = props;
 
 	useEffect(() => {
 		// initialize mri panels based on an arbitrary starting point
@@ -30,7 +30,7 @@ const AtlasImages = (props) => {
 			setIsLoading(true);
 			try {
 				// plane, slice, mouseX, mouseY
-				await updateAtlasImages("axial", 195, 158, 144);
+				await updateAtlasImages("axial", 144, 97, 198);
 			} catch {
 				setError("error building atlas");
 			}
@@ -166,6 +166,7 @@ const AtlasImages = (props) => {
 				histologyImageCoords={histologyImageCoords}
 				channel={channel}
 				hiRes={hiRes}
+				labels={labels}
 				histologyToMri={histologyToMri}
 				getMouseCoords={getMouseCoords}
 			/>
