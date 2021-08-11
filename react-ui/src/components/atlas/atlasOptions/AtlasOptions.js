@@ -3,7 +3,16 @@ import ImageChannels from "./ImageChannels";
 import "./AtlasOptions.css";
 
 const AtlasOptions = (props) => {
-	const { channel, setChannel, hiRes, setHiRes, labels, setLabels } = props;
+	const {
+		channel,
+		setChannel,
+		hiRes,
+		setHiRes,
+		labels,
+		setLabels,
+		labelsTransparency,
+		setLabelsTransparency,
+	} = props;
 
 	return (
 		<section className="options-container">
@@ -15,7 +24,19 @@ const AtlasOptions = (props) => {
 				<button>{labels ? "Hide" : "Show"} labels</button>
 			</div>
 
-			<div className="label-transparency">Label transparency</div>
+			<input
+				type="range"
+				name="labels-transparency"
+				id="labels-transparency"
+				className="labels-transparency-slider"
+				value={labelsTransparency}
+				onChange={(e) => {
+					setLabelsTransparency(e.target.value);
+				}}
+				min="0"
+				max="1"
+				step="0.01"
+			/>
 
 			<ImageChannels channel={channel} setChannel={setChannel} />
 

@@ -24,8 +24,14 @@ const HistologyImage = (props) => {
 	const [options, setOptions] = useState(initialOptions);
 	const [initialLoad, setInitialLoad] = useState(true);
 
-	const { histologyImageCoords, hiRes, labels, channel, histologyToMri } =
-		props;
+	const {
+		histologyImageCoords,
+		hiRes,
+		labels,
+		labelsTransparency,
+		channel,
+		histologyToMri,
+	} = props;
 
 	console.log(initialLoad);
 	console.log(hiResHistologyImage);
@@ -180,6 +186,7 @@ const HistologyImage = (props) => {
 							src={labelsImage}
 							alt="histology-labels"
 							//onLoad={(e) => onImageLoad(e, "lowRes")}
+							style={{ opacity: `${labelsTransparency}` }}
 						></img>
 					)}
 
