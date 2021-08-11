@@ -153,19 +153,24 @@ const HistologyImage = (props) => {
 			<div className="histology-img histology">
 				<div className={`histology-img-container`}>
 					{isLoading && <LoadingSpinner asOverlay />}
-					<MousePointer type="histology" imageCoords={histologyImageCoords} />
 
-					<div className="label"></div>
+					{!hiRes && (
+						<MousePointer type="histology" imageCoords={histologyImageCoords} />
+					)}
 
-					<img
-						onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
-						className="histology-img"
-						src={histologyImage}
-						alt="histology"
-						//onLoad={(e) => onImageLoad(e, "lowRes")}
-					></img>
+					{/* <div className="label"></div> */}
 
-					{hiRes && (
+					{!hiRes && (
+						<img
+							onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
+							className="histology-img"
+							src={histologyImage}
+							alt="histology"
+							//onLoad={(e) => onImageLoad(e, "lowRes")}
+						></img>
+					)}
+
+					{/* {hiRes && (
 						<TransformWrapper
 							//disabled={true}
 							wheel={{ disabled: false }}
@@ -198,7 +203,7 @@ const HistologyImage = (props) => {
 								</>
 							)}
 						</TransformWrapper>
-					)}
+					)} */}
 
 					{hiRes && (
 						<TransformWrapper
