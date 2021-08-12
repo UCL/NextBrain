@@ -179,7 +179,7 @@ const HistologyImage = (props) => {
 						<MousePointer type="histology" imageCoords={histologyImageCoords} />
 					)}
 
-					{labels && (
+					{labels && !hiRes && (
 						<img
 							//onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
 							className="histology-labels"
@@ -257,6 +257,17 @@ const HistologyImage = (props) => {
 									</div>
 
 									<TransformComponent>
+										{labels && (
+											<img
+												//onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
+												className="histology-labels"
+												src={labelsImage}
+												alt="histology-labels"
+												//onLoad={(e) => onImageLoad(e, "lowRes")}
+												style={{ opacity: `${labelsTransparency}` }}
+											></img>
+										)}
+
 										<img
 											//onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
 											className={`histology-img ${hiRes ? "hi-res" : ""}`}
