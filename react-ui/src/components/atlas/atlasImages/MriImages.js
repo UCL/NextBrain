@@ -14,8 +14,6 @@ const MriImages = (props) => {
 		getMouseCoords,
 	} = props;
 
-	console.log(mriImageCoords);
-
 	const computeMriImagesHandler = (e, plane) => {
 		const { mouseX, mouseY } = getMouseCoords(e);
 		const mouseIsWithinBounds = determineMouseBoundariesMri(mouseX, mouseY);

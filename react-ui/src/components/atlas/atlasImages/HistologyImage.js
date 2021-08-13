@@ -34,10 +34,6 @@ const HistologyImage = (props) => {
 		histologyToMri,
 	} = props;
 
-	console.log(initialLoad);
-	console.log(hiResHistologyImage);
-	console.log(hiResHistologyImage);
-
 	useEffect(() => {
 		fetchHistologyImage();
 	}, [histologyImageCoords, showHiRes, channel]);
@@ -195,7 +191,8 @@ const HistologyImage = (props) => {
 							//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
 							onClick={(e) => {
 								!showHiRes && histologyToMri(e);
-								!showHiRes && getCurrentLabel(e);
+								!showHiRes &&
+									getCurrentLabel(e, histologyImageCoords, "lowRes");
 							}}
 							className="histology-img"
 							src={histologyImage}

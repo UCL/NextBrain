@@ -75,7 +75,7 @@ const getCurrentBlock = async (
 	let currentBlock;
 	let n = new npyjs();
 
-	console.log(currentSlice);
+	console.log("current slice: " + currentSlice);
 
 	const paddedSlice = currentSlice.toFixed(0).toString().padStart(3, 0);
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import AtlasImages from "../components/atlas/atlasImages/AtlasImages";
 import AtlasOptions from "../components/atlas/atlasOptions/AtlasOptions";
+import histologyLabelParser from "../components/utils/histologyLabelParser";
 
 import "./Atlas.css";
 
@@ -11,9 +12,17 @@ const Atlas = () => {
 	const [showLabels, setShowLabels] = useState(false);
 	const [labelsTransparency, setLabelsTransparency] = useState(0.5);
 
-	const getCurrentLabel = (e) => {
+	const getCurrentLabel = async (e, histologyImageCoords, type) => {
+		console.log("getting current histology label");
+		console.log(histologyImageCoords);
 		console.log(e);
-		console.log("test");
+
+		const currentLabel = await histologyLabelParser(
+			e,
+			histologyImageCoords,
+			type
+		);
+		console.log(currentLabel);
 	};
 
 	return (
