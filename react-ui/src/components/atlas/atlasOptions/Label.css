@@ -1,0 +1,9 @@
+.label-container {
+	flex-direction: column;
+}
+
+.label-color-box {
+	width: 10px;
+	height: 10px;
+	background-color: red;
+}

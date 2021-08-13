@@ -11,8 +11,6 @@ const Atlas = () => {
 	const [showLabels, setShowLabels] = useState(false);
 	const [labelsTransparency, setLabelsTransparency] = useState(0.5);
 
-	console.log(labelsTransparency);
-
 	return (
 		<main className="atlas-container">
 			<AtlasImages

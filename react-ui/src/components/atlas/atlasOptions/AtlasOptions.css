@@ -9,13 +9,13 @@
 	grid-template-areas:
 		"scroll-bar atlas-navigation"
 		"scroll-bar show-labels"
-		"scroll-bar label-transparency"
 		"scroll-bar current-label"
+		"scroll-bar label-transparency"
 		"scroll-bar channel"
 		"scroll-bar hi-res";
 }
 
-.options-container div {
+.options-container > div {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -31,7 +31,7 @@
 	grid-area: atlas-navigation;
 }
 
-.options-container .show-labels {
+.options-container .show-labels-container {
 	grid-area: show-labels;
 }
 
@@ -40,11 +40,11 @@
 }
 
 .options-container .channel {
-	grid-area: current-label;
+	grid-area: channel;
 }
 
-.options-container .current-label {
-	grid-area: channel;
+.options-container .current-label-container {
+	grid-area: current-label;
 }
 
 .options-container .hi-res {

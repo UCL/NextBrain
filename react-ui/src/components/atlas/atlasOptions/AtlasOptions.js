@@ -1,5 +1,6 @@
 import ImageChannels from "./ImageChannels";
 import TransparencySlider from "./TransparencySlider";
+import Label from "./Label";
 
 import "./AtlasOptions.css";
 
@@ -21,9 +22,16 @@ const AtlasOptions = (props) => {
 
 			<div className="atlas-navigation">Atlas navigation</div>
 
-			<div className="show-labels" onClick={() => setShowLabels(!showLabels)}>
-				<button>{showLabels ? "Hide" : "Show"} labels</button>
+			<div
+				className="show-labels-container"
+				onClick={() => setShowLabels(!showLabels)}
+			>
+				<button className="show-labels-btn">
+					{showLabels ? "Hide" : "Show"} labels
+				</button>
 			</div>
+
+			<Label showLabels={showLabels} />
 
 			<TransparencySlider
 				labelsTransparency={labelsTransparency}
@@ -31,8 +39,6 @@ const AtlasOptions = (props) => {
 			/>
 
 			<ImageChannels channel={channel} setChannel={setChannel} />
-
-			<div className="current-label"> Current label</div>
 
 			<div className="hi-res" onClick={() => setShowHiRes(!showHiRes)}>
 				<button>{showHiRes ? "Hide" : "Show"} hi-res histology</button>

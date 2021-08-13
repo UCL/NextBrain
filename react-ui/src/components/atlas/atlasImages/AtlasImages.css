@@ -5,9 +5,9 @@
 	row-gap: 5px;
 	column-gap: 5px;
 	grid-template-areas:
-		"mri-img-sagittal histology-img"
-		"mri-img-coronal histology-img"
-		"mri-img-axial histology-img";
+		"mri-img-sagittal histology-container"
+		"mri-img-coronal histology-container"
+		"mri-img-axial histology-container";
 }
 
 .atlas-imgs-container > * {
@@ -35,6 +35,6 @@
 	grid-area: mri-img-axial;
 }
 
-.atlas-imgs-container .histology-img.histology {
-	grid-area: histology-img;
+.atlas-imgs-container .histology-container {
+	grid-area: histology-container;
 }

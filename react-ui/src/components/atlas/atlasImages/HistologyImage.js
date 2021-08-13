@@ -171,7 +171,7 @@ const HistologyImage = (props) => {
 
 	return (
 		<>
-			<div className="histology-img histology">
+			<div className="histology-container">
 				<div className={`histology-img-container`}>
 					{isLoading && <LoadingSpinner asOverlay />}
 
