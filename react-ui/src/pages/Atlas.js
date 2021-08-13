@@ -11,6 +11,11 @@ const Atlas = () => {
 	const [showLabels, setShowLabels] = useState(false);
 	const [labelsTransparency, setLabelsTransparency] = useState(0.5);
 
+	const getCurrentLabel = (e) => {
+		console.log(e);
+		console.log("test");
+	};
+
 	return (
 		<main className="atlas-container">
 			<AtlasImages
@@ -18,6 +23,7 @@ const Atlas = () => {
 				showHiRes={showHiRes}
 				showLabels={showLabels}
 				labelsTransparency={labelsTransparency}
+				getCurrentLabel={getCurrentLabel}
 			/>
 			<AtlasOptions
 				channel={channel}

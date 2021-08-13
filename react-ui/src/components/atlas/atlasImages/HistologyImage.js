@@ -29,6 +29,7 @@ const HistologyImage = (props) => {
 		showHiRes,
 		showLabels,
 		labelsTransparency,
+		getCurrentLabel,
 		channel,
 		histologyToMri,
 	} = props;
@@ -181,10 +182,9 @@ const HistologyImage = (props) => {
 
 					{showLabels && !showHiRes && (
 						<img
-							//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
-							className="histology-labels"
+							className="histology-img-labels"
 							src={labelsImage}
-							alt="histology-showLabels"
+							alt="histology-labels"
 							//onLoad={(e) => onImageLoad(e, "lowRes")}
 							style={{ opacity: `${labelsTransparency}` }}
 						></img>
@@ -192,7 +192,11 @@ const HistologyImage = (props) => {
 
 					{!showHiRes && (
 						<img
-							onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
+							//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
+							onClick={(e) => {
+								!showHiRes && histologyToMri(e);
+								!showHiRes && getCurrentLabel(e);
+							}}
 							className="histology-img"
 							src={histologyImage}
 							alt="histology"
@@ -260,7 +264,7 @@ const HistologyImage = (props) => {
 										{showLabels && (
 											<img
 												//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
-												className="histology-labels"
+												className="histology-img-labels"
 												src={labelsImage}
 												alt="histology-labels"
 												//onLoad={(e) => onImageLoad(e, "lowRes")}

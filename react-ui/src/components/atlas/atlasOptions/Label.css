@@ -2,8 +2,15 @@
 	flex-direction: column;
 }
 
+.label-indicator {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
 .label-color-box {
-	width: 10px;
-	height: 10px;
+	width: 15px;
+	height: 15px;
 	background-color: red;
+	margin-right: 10px;
 }

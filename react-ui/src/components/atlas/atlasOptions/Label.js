@@ -8,7 +8,8 @@ const Label = (props) => {
 			<div>Current Label:</div>
 
 			<div className="label-indicator">
-				<div className="label-color-box"></div>
+				{showLabels && <div className="label-color-box"></div>}
+
 				<div>{showLabels ? "Label" : "N / A"}</div>
 			</div>
 		</div>

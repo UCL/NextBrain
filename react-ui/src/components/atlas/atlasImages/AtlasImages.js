@@ -22,7 +22,13 @@ const AtlasImages = (props) => {
 	const [mriImageCoords, setMriImageCoords] = useState(null);
 	const [histologyImageCoords, setHistologyImageCoords] = useState(null);
 
-	const { channel, showHiRes, showLabels, labelsTransparency } = props;
+	const {
+		channel,
+		showHiRes,
+		showLabels,
+		labelsTransparency,
+		getCurrentLabel,
+	} = props;
 
 	useEffect(() => {
 		// initialize mri panels based on an arbitrary starting point
@@ -168,6 +174,7 @@ const AtlasImages = (props) => {
 				showHiRes={showHiRes}
 				showLabels={showLabels}
 				labelsTransparency={labelsTransparency}
+				getCurrentLabel={getCurrentLabel}
 				histologyToMri={histologyToMri}
 				getMouseCoords={getMouseCoords}
 			/>
