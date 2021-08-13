@@ -26,8 +26,8 @@ const HistologyImage = (props) => {
 
 	const {
 		histologyImageCoords,
-		hiRes,
-		labels,
+		showHiRes,
+		showLabels,
 		labelsTransparency,
 		channel,
 		histologyToMri,
@@ -39,7 +39,7 @@ const HistologyImage = (props) => {
 
 	useEffect(() => {
 		fetchHistologyImage();
-	}, [histologyImageCoords, hiRes, channel]);
+	}, [histologyImageCoords, showHiRes, channel]);
 
 	const fetchHistologyImage = async () => {
 		// determine the correct histology image based on computed coordinates
@@ -51,9 +51,9 @@ const HistologyImage = (props) => {
 			const histologySlice = histologyImageCoords.coords["slice"];
 			const paddedSlice = histologySlice.toString().padStart(2, 0);
 
-			const histologyFolder = hiRes ? "histology_hr" : "histology";
+			const histologyFolder = showHiRes ? "histology_hr" : "histology";
 
-			if (hiRes === false) {
+			if (showHiRes === false) {
 				try {
 					//setIsLoading(true);
 					const histologyImage =
@@ -68,7 +68,7 @@ const HistologyImage = (props) => {
 				}
 			}
 
-			if (hiRes === true) {
+			if (showHiRes === true) {
 				try {
 					setIsLoading(true);
 					const hiResHistologyImage =
@@ -90,7 +90,7 @@ const HistologyImage = (props) => {
 				}
 			}
 
-			if (hiRes === true) {
+			if (showHiRes === true) {
 				try {
 					setIsLoading(true);
 					const hiResHistologyImage2 =
@@ -175,24 +175,24 @@ const HistologyImage = (props) => {
 				<div className={`histology-img-container`}>
 					{isLoading && <LoadingSpinner asOverlay />}
 
-					{!hiRes && (
+					{!showHiRes && (
 						<MousePointer type="histology" imageCoords={histologyImageCoords} />
 					)}
 
-					{labels && !hiRes && (
+					{showLabels && !showHiRes && (
 						<img
-							//onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
+							//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
 							className="histology-labels"
 							src={labelsImage}
-							alt="histology-labels"
+							alt="histology-showLabels"
 							//onLoad={(e) => onImageLoad(e, "lowRes")}
 							style={{ opacity: `${labelsTransparency}` }}
 						></img>
 					)}
 
-					{!hiRes && (
+					{!showHiRes && (
 						<img
-							onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
+							onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
 							className="histology-img"
 							src={histologyImage}
 							alt="histology"
@@ -200,7 +200,7 @@ const HistologyImage = (props) => {
 						></img>
 					)}
 
-					{/* {hiRes && (
+					{/* {showHiRes && (
 						<TransformWrapper
 							//disabled={true}
 							wheel={{ disabled: false }}
@@ -223,8 +223,8 @@ const HistologyImage = (props) => {
 
 									<TransformComponent>
 										<img
-											//onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
-											className={`histology-img ${hiRes ? "hi-res" : ""}`}
+											//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
+											className={`histology-img ${showHiRes ? "hi-res" : ""}`}
 											src={hiResHistologyImage}
 											alt="histology"
 											onLoad={(e) => onImageLoad(e, "hiRes")}
@@ -235,7 +235,7 @@ const HistologyImage = (props) => {
 						</TransformWrapper>
 					)} */}
 
-					{hiRes && (
+					{showHiRes && (
 						<TransformWrapper
 							//disabled={true}
 							wheel={{ disabled: false }}
@@ -257,9 +257,9 @@ const HistologyImage = (props) => {
 									</div>
 
 									<TransformComponent>
-										{labels && (
+										{showLabels && (
 											<img
-												//onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
+												//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
 												className="histology-labels"
 												src={labelsImage}
 												alt="histology-labels"
@@ -269,8 +269,8 @@ const HistologyImage = (props) => {
 										)}
 
 										<img
-											//onClick={!hiRes ? (e) => histologyToMri(e) : undefined}
-											className={`histology-img ${hiRes ? "hi-res" : ""}`}
+											//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
+											className={`histology-img ${showHiRes ? "hi-res" : ""}`}
 											src={hiResHistologyImage2}
 											alt="histology"
 											onLoad={(e) => onImageLoad(e, "lowRes")}

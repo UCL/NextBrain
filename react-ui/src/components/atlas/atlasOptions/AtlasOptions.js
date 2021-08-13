@@ -6,10 +6,10 @@ const AtlasOptions = (props) => {
 	const {
 		channel,
 		setChannel,
-		hiRes,
-		setHiRes,
-		labels,
-		setLabels,
+		showHiRes,
+		setShowHiRes,
+		showLabels,
+		setShowLabels,
 		labelsTransparency,
 		setLabelsTransparency,
 	} = props;
@@ -20,8 +20,8 @@ const AtlasOptions = (props) => {
 
 			<div className="atlas-navigation">Atlas navigation</div>
 
-			<div className="show-labels" onClick={() => setLabels(!labels)}>
-				<button>{labels ? "Hide" : "Show"} labels</button>
+			<div className="show-labels" onClick={() => setShowLabels(!showLabels)}>
+				<button>{showLabels ? "Hide" : "Show"} labels</button>
 			</div>
 
 			<input
@@ -42,8 +42,8 @@ const AtlasOptions = (props) => {
 
 			<div className="current-label"> Current label</div>
 
-			<div className="hi-res" onClick={() => setHiRes(!hiRes)}>
-				<button>{hiRes ? "Hide" : "Show"} hi-res histology</button>
+			<div className="hi-res" onClick={() => setShowHiRes(!showHiRes)}>
+				<button>{showHiRes ? "Hide" : "Show"} hi-res histology</button>
 			</div>
 		</section>
 	);

@@ -7,8 +7,8 @@ import "./Atlas.css";
 
 const Atlas = () => {
 	const [channel, setChannel] = useState("LFB");
-	const [hiRes, setHiRes] = useState(false);
-	const [labels, setLabels] = useState(false);
+	const [showHiRes, setShowHiRes] = useState(false);
+	const [showLabels, setShowLabels] = useState(false);
 	const [labelsTransparency, setLabelsTransparency] = useState(0.5);
 
 	console.log(labelsTransparency);
@@ -17,17 +17,17 @@ const Atlas = () => {
 		<main className="atlas-container">
 			<AtlasImages
 				channel={channel}
-				hiRes={hiRes}
-				labels={labels}
+				showHiRes={showHiRes}
+				showLabels={showLabels}
 				labelsTransparency={labelsTransparency}
 			/>
 			<AtlasOptions
 				channel={channel}
 				setChannel={setChannel}
-				hiRes={hiRes}
-				setHiRes={setHiRes}
-				labels={labels}
-				setLabels={setLabels}
+				showHiRes={showHiRes}
+				setShowHiRes={setShowHiRes}
+				showLabels={showLabels}
+				setShowLabels={setShowLabels}
 				labelsTransparency={labelsTransparency}
 				setLabelsTransparency={setLabelsTransparency}
 			/>
