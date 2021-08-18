@@ -10,6 +10,7 @@ import ErrorModal from "../../shared/ErrorModal";
 import MriImages from "./MriImages";
 import HistologyImage from "./HistologyImage";
 import getMatrix from "../../utils/getMatrix";
+import getMouseCoords from "../../utils/getmouseCoords";
 import matrixMultiplier from "../../utils/matrixMultiplier";
 
 import CORONAL_RESCALING_FACTOR from "../../utils/CoronalRescalingFactor";
@@ -133,17 +134,6 @@ const AtlasImages = (props) => {
 			(mriCoordinatesKey.axial.width - resultX).toFixed(0),
 			(mriCoordinatesKey.axial.height - resultY).toFixed(0)
 		);
-	};
-
-	const getMouseCoords = (e) => {
-		console.log(e.offsetX);
-
-		const mouseX = e.nativeEvent.offsetX;
-		const mouseY = e.nativeEvent.offsetY;
-
-		console.log(mouseX);
-
-		return { mouseX, mouseY };
 	};
 
 	if (mriImageCoords === null) {
