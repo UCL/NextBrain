@@ -3,8 +3,6 @@ import "./Label.css";
 const Label = (props) => {
 	const { showLabels, currentLabel } = props;
 
-	console.log(currentLabel);
-
 	if (currentLabel === null) {
 		return <div>no label found</div>;
 	}
@@ -24,7 +22,6 @@ const Label = (props) => {
 								100
 							)`,
 						}}
-						//style={{ backgroundColor: "rgba(41,10,100,100)" }}
 					></div>
 				)}
 

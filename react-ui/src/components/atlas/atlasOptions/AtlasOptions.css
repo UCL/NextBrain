@@ -22,7 +22,7 @@
 	border: 1px solid red;
 }
 
-.options-container .scrollbar {
+.options-container .histology-scrollbar {
 	grid-area: scroll-bar;
 	border: 1px solid black;
 }

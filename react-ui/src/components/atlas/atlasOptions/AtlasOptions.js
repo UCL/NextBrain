@@ -1,6 +1,10 @@
-import ImageChannels from "./ImageChannels";
+import HistologyScrollbar from "./HistologyScrollbar";
+import AtlasNavigation from "./AtlasNavigation";
+import LabelsBtn from "./LabelsBtn";
 import TransparencySlider from "./TransparencySlider";
 import Label from "./Label";
+import ImageChannels from "./ImageChannels";
+import HiResBtn from "./HiResBtn";
 
 import "./AtlasOptions.css";
 
@@ -19,18 +23,11 @@ const AtlasOptions = (props) => {
 
 	return (
 		<section className="options-container">
-			<div className="histology-scrollbar"></div>
+			<HistologyScrollbar />
 
-			<div className="atlas-navigation">Atlas navigation</div>
+			<AtlasNavigation />
 
-			<div
-				className="show-labels-container"
-				onClick={() => setShowLabels(!showLabels)}
-			>
-				<button className="show-labels-btn">
-					{showLabels ? "Hide" : "Show"} labels
-				</button>
-			</div>
+			<LabelsBtn showLabels={showLabels} setShowLabels={setShowLabels} />
 
 			<Label showLabels={showLabels} currentLabel={currentLabel} />
 
@@ -41,9 +38,7 @@ const AtlasOptions = (props) => {
 
 			<ImageChannels channel={channel} setChannel={setChannel} />
 
-			<div className="hi-res" onClick={() => setShowHiRes(!showHiRes)}>
-				<button>{showHiRes ? "Hide" : "Show"} hi-res histology</button>
-			</div>
+			<HiResBtn showHiRes={showHiRes} setShowHiRes={setShowHiRes} />
 		</section>
 	);
 };
