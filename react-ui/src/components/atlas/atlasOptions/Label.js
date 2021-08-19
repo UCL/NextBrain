@@ -3,8 +3,13 @@ import "./Label.css";
 const Label = (props) => {
 	const { showLabels, currentLabel } = props;
 
+	// initialise the label on page load?
 	if (currentLabel === null) {
 		return <div>no label found</div>;
+	}
+
+	if (!showLabels) {
+		return <div>Not showing labels</div>;
 	}
 
 	return (
@@ -12,20 +17,19 @@ const Label = (props) => {
 			<div>Current Label:</div>
 
 			<div className="label-indicator">
-				{showLabels && (
-					<div
-						className="label-color-box"
-						style={{
-							backgroundColor: `rgba(${currentLabel[2]},
+				<div
+					className="label-color-box"
+					style={{
+						backgroundColor: `rgba(${currentLabel[2]},
 								${currentLabel[3]},
 								${currentLabel[4]},
 								100
 							)`,
-						}}
-					></div>
-				)}
+						marginBottom: "10px",
+					}}
+				></div>
 
-				<div>{showLabels ? `${currentLabel[1]}` : "N / A"}</div>
+				<div>{currentLabel[1]}</div>
 			</div>
 		</div>
 	);
