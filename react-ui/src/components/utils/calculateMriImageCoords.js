@@ -27,7 +27,6 @@ const calculateMriImageCoords = (
 					mouseX: adjustedSlice,
 					mouseY: adjustedMouseX,
 				},
-				currentPlane: currentPlane,
 			};
 			break;
 		case "coronal":
@@ -47,7 +46,6 @@ const calculateMriImageCoords = (
 					mouseX: mouseX,
 					mouseY: adjustedSlice,
 				},
-				currentPlane: currentPlane,
 			};
 			break;
 		case "axial":
@@ -67,7 +65,6 @@ const calculateMriImageCoords = (
 					mouseX: mouseX,
 					mouseY: mouseY,
 				},
-				currentPlane: currentPlane,
 			};
 			break;
 	}

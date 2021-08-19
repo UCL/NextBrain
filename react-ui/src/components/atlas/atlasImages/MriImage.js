@@ -80,6 +80,7 @@ const MriImage = (props) => {
 		<>
 			<ErrorModal error={error} onClear={() => setError(null)} />
 			{isLoading && <LoadingSpinner asOverlay />}
+
 			<div className={`mri-img ${plane}`}>
 				<div className={`mri-img-container ${plane}`}>
 					<MousePointer type="mri" plane={plane} imageCoords={mriImageCoords} />

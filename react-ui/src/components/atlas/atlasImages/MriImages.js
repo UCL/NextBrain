@@ -1,5 +1,4 @@
 import MriImage from "./MriImage";
-
 import mriCoordinatesKey from "../../utils/mriCoordinatesKey";
 
 import "./MriImages.css";
@@ -13,6 +12,8 @@ const MriImages = (props) => {
 		coronalRescalingFactor,
 		getMouseCoords,
 	} = props;
+
+	console.log(mriImageCoords);
 
 	const computeMriImagesHandler = (e, plane) => {
 		const { mouseX, mouseY } = getMouseCoords(e);
