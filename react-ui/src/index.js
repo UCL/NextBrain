@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+// we use HashRouter to make it compatible with GiHub pages
+// https://medium.com/@bennirus/deploying-a-create-react-app-with-routing-to-github-pages-f386b6ce84c2
 import { HashRouter } from "react-router-dom";
 
 ReactDOM.render(
