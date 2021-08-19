@@ -1,3 +1,7 @@
+// a reference for the image dimensions of each plane
+// also shows how each plane axis is linked to its corresponding coordinates
+// refer to the top level readme for more guidance on how coordinates are calculated
+
 const mriCoordinatesKey = {
 	sagittal: {
 		width: 450,

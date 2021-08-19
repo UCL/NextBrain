@@ -1,8 +1,7 @@
+// loads in the histology txt labels and parses them for use in the application
+
 import npyjs from "npyjs";
 import ndarray from "ndarray";
-
-import txtLabelsToArray from "./txtLabelsToArray";
-import getMouseCoords from "./getmouseCoords";
 
 const histologyLabelParser = async (
 	mouseX,
@@ -91,5 +90,39 @@ const parseLabel = async (currentLabelNumber, type) => {
 
 	return currentLabel;
 };
+
+// custom parser to extract labels txt data into an array
+class txtLabelsToArray {
+	async parse(file) {
+		var txtToArray = file.split("\n");
+		txtToArray.pop();
+
+		// split each label item into its own array element
+		const labelsArray = txtToArray.map((element) => {
+			return element.split(/\s/g);
+		});
+
+		// remove empty strings in each label array
+		const parsedLabelsArray = labelsArray.map((element) => {
+			return element.filter((innerElement) => {
+				if (innerElement === "") return false; // skip
+				return true;
+			});
+		});
+
+		return parsedLabelsArray;
+	}
+
+	async load(filename) {
+		return fetch(filename)
+			.then((response) => {
+				return response.text();
+			})
+			.then((text) => {
+				const parsedTxt = this.parse(text);
+				return parsedTxt;
+			});
+	}
+}
 
 export default histologyLabelParser;

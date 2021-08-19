@@ -6,8 +6,9 @@ const calculateAdjustedMouseCoords = (
 	mouseX,
 	mouseY
 ) => {
-	// adjusting coordinates to account for images not being in the right orientations
+	// adjusting coordinates to account for images not being in the correct orientations
 	// in other words, I have to account for orientation differences between the web application and ITKSnap
+	// specifically, ITKSnap has the 0,0 coordinate at the bottom right, whereas the web application has 0,0 at the top left
 
 	let adjustedSlice;
 	let adjustedMouseX;

@@ -1,4 +1,4 @@
-import txtToArray from "./txtToArray";
+// a helper function that load in a vector txt file
 
 const getMatrix = async (currentBlock, type) => {
 	let readTxt = new txtToArray();
@@ -28,5 +28,33 @@ const getMatrix = async (currentBlock, type) => {
 
 	return matrix;
 };
+
+// custom parser to extract matrix txt data into an array
+class txtToArray {
+	async parse(file) {
+		let removedLineBreaks = file.replace(/\n/g, " ");
+
+		var txtToArray = removedLineBreaks.split(" ");
+		txtToArray.pop();
+
+		// convert the array of strings to numbers
+		const arrayAsNumbers = txtToArray.map((element) => {
+			return Number(element);
+		});
+
+		return arrayAsNumbers;
+	}
+
+	async load(filename) {
+		return fetch(filename)
+			.then((response) => {
+				return response.text();
+			})
+			.then((text) => {
+				const parsedTxt = this.parse(text);
+				return parsedTxt;
+			});
+	}
+}
 
 export default getMatrix;

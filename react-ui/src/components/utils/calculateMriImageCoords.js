@@ -1,3 +1,6 @@
+// coordinates are calculated specifically for each plane
+// refer to the top level readme for guidance on how the coordinates are calculated
+
 const calculateMriImageCoords = (
 	currentPlane,
 	currentSlice,
