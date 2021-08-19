@@ -11,6 +11,7 @@ const Atlas = () => {
 	const [showHiRes, setShowHiRes] = useState(false);
 	const [showLabels, setShowLabels] = useState(false);
 	const [labelsTransparency, setLabelsTransparency] = useState(0.5);
+	const [currentLabel, setCurrentLabel] = useState(null);
 
 	const getCurrentLabel = async (e, histologyImageCoords, type) => {
 		console.log("getting current histology label");
@@ -23,6 +24,8 @@ const Atlas = () => {
 			type
 		);
 		console.log(currentLabel);
+
+		setCurrentLabel(currentLabel);
 	};
 
 	return (
@@ -43,6 +46,7 @@ const Atlas = () => {
 				setShowLabels={setShowLabels}
 				labelsTransparency={labelsTransparency}
 				setLabelsTransparency={setLabelsTransparency}
+				currentLabel={currentLabel}
 			/>
 		</main>
 	);

@@ -89,7 +89,7 @@ const parseLabel = async (currentLabelNumber, type) => {
 
 	const currentLabel = parsedLabels[currentLabelNumber];
 
-	console.log(currentLabel);
+	return currentLabel;
 };
 
 export default histologyLabelParser;
