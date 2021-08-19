@@ -1,7 +1,7 @@
 import npyjs from "npyjs";
 import ndarray from "ndarray";
 
-import txtToArray from "./txtToArray";
+import txtLabelsToArray from "./txtLabelsToArray";
 import getMouseCoords from "./getmouseCoords";
 
 const histologyLabelParser = async (e, histologyImageCoords, type) => {
@@ -66,7 +66,7 @@ const getCurrentLabelNumber = async (
 };
 
 const parseLabel = async (currentLabelNumber, type) => {
-	let readTxt = new txtToArray();
+	let readTxt = new txtLabelsToArray();
 
 	console.log(currentLabelNumber);
 
@@ -83,9 +83,13 @@ const parseLabel = async (currentLabelNumber, type) => {
 	// 			.default;
 	// }
 
-	const parsedLabel = await readTxt.load(labelsFile);
+	const parsedLabels = await readTxt.load(labelsFile);
 
-	console.log(parsedLabel);
+	console.log(parsedLabels);
+
+	const currentLabel = parsedLabels[currentLabelNumber];
+
+	console.log(currentLabel);
 };
 
 export default histologyLabelParser;
