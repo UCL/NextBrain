@@ -28,7 +28,7 @@ const AtlasImages = (props) => {
 		showHiRes,
 		showLabels,
 		labelsTransparency,
-		getCurrentLabel,
+		setCurrentLabel,
 	} = props;
 
 	useEffect(() => {
@@ -164,7 +164,7 @@ const AtlasImages = (props) => {
 				showHiRes={showHiRes}
 				showLabels={showLabels}
 				labelsTransparency={labelsTransparency}
-				getCurrentLabel={getCurrentLabel}
+				setCurrentLabel={setCurrentLabel}
 				histologyToMri={histologyToMri}
 				getMouseCoords={getMouseCoords}
 			/>

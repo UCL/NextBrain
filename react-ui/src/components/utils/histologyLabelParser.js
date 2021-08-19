@@ -4,17 +4,18 @@ import ndarray from "ndarray";
 import txtLabelsToArray from "./txtLabelsToArray";
 import getMouseCoords from "./getmouseCoords";
 
-const histologyLabelParser = async (e, histologyImageCoords, type) => {
-	const { mouseX, mouseY } = getMouseCoords(e);
-
+const histologyLabelParser = async (
+	mouseX,
+	mouseY,
+	histologyImageCoords,
+	type
+) => {
 	const currentLabelNumber = await getCurrentLabelNumber(
 		mouseX,
 		mouseY,
 		histologyImageCoords,
 		type
 	);
-
-	console.log(currentLabelNumber);
 
 	const parsedLabel = await parseLabel(currentLabelNumber, type);
 
@@ -27,6 +28,10 @@ const getCurrentLabelNumber = async (
 	histologyImageCoords,
 	type
 ) => {
+	// label numbers are extracted from multi dimensional numpy arrays
+	// the numpy array takes in x and y mouse coordinates to point to an index
+	// the index returns the label number
+
 	let n = new npyjs();
 
 	const paddedBlock = histologyImageCoords.currentBlock
@@ -36,9 +41,6 @@ const getCurrentLabelNumber = async (
 	const paddedSlice = histologyImageCoords.coords.slice
 		.toString()
 		.padStart(2, 0);
-
-	// console.log(paddedBlock);
-	// console.log(paddedSlice);
 
 	let npyFile;
 
@@ -56,19 +58,19 @@ const getCurrentLabelNumber = async (
 
 	const npyArray = await n.load(npyFile);
 
-	let ndArray = ndarray(npyArray.data, npyArray.shape);
+	const ndArray = ndarray(npyArray.data, npyArray.shape);
 
-	console.log(ndArray);
+	const currentLabelNumber = ndArray.get(mouseX, mouseY);
 
-	const currentLabel = ndArray.get(mouseX, mouseY);
-
-	return currentLabel;
+	return currentLabelNumber;
 };
 
 const parseLabel = async (currentLabelNumber, type) => {
-	let readTxt = new txtLabelsToArray();
+	// we extract the current label, given the current label number
+	// the labels are contained in txt files so need to be parsed
+	// for each label we extract: [labelNumber, labelName, r, g, b, a]
 
-	console.log(currentLabelNumber);
+	let readTxt = new txtLabelsToArray();
 
 	let labelsFile;
 
@@ -84,8 +86,6 @@ const parseLabel = async (currentLabelNumber, type) => {
 	// }
 
 	const parsedLabels = await readTxt.load(labelsFile);
-
-	console.log(parsedLabels);
 
 	const currentLabel = parsedLabels[currentLabelNumber];
 

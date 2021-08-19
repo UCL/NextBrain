@@ -19,7 +19,7 @@ const AtlasOptions = (props) => {
 
 	return (
 		<section className="options-container">
-			<div className="scrollbar"></div>
+			<div className="histology-scrollbar"></div>
 
 			<div className="atlas-navigation">Atlas navigation</div>
 
