@@ -64,6 +64,11 @@ const HistologyImage = (props) => {
 						`%cerror, could not resolve path: assets/P57-16/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`,
 						"color: red"
 					);
+
+					setError(
+						`%cerror, could not resolve path: assets/P57-16/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`,
+						"color: red"
+					);
 				}
 			}
 
@@ -187,6 +192,7 @@ const HistologyImage = (props) => {
 		<>
 			<div className="histology-container">
 				<div className={`histology-img-container`}>
+					<ErrorModal error={error} onClear={() => setError(null)} />
 					{isLoading && <LoadingSpinner asOverlay />}
 
 					{!showHiRes && (

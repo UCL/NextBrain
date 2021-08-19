@@ -1,8 +1,6 @@
 import MriImage from "./MriImage";
 import mriCoordinatesKey from "../../utils/mriCoordinatesKey";
 
-import "./MriImages.css";
-
 const MriImages = (props) => {
 	const {
 		plane,
@@ -58,7 +56,7 @@ const MriImages = (props) => {
 
 	return (
 		<>
-			{/* use map here to loop through components? */}
+			{/* too much repetition here, use map to loop through components? */}
 			<MriImage
 				plane="sagittal"
 				mriImageCoords={mriImageCoords}
