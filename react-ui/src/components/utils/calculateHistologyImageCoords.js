@@ -29,7 +29,6 @@ const calculateHistologyImageCoords = async (
 	if (currentBlock === 0 || currentBlock === undefined) return "no block found";
 
 	const matrix = await getMatrix(currentBlock, "mri");
-	console.log(matrix);
 
 	if (matrix === undefined) return "no matrix found";
 

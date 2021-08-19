@@ -2,7 +2,6 @@ import calculateMriImageCoords from "./calculateMriImageCoords";
 import calculateAdjustedMouseCoords from "./calculateAdjustedMouseCoords";
 
 describe("unit tests for calculating correct mri image coords", () => {
-	// props order: plane, slice, mouseX, mouseY
 	test("image coords return correctly with sagittal as props", () => {
 		const currentPlane = "sagittal";
 		const currentSlice = 83;
@@ -38,7 +37,6 @@ describe("unit tests for calculating correct mri image coords", () => {
 				mouseX: adjustedSlice,
 				mouseY: adjustedMouseX,
 			},
-			currentPlane: "sagittal",
 		});
 	});
 
@@ -77,7 +75,6 @@ describe("unit tests for calculating correct mri image coords", () => {
 				mouseX: 98,
 				mouseY: adjustedSlice,
 			},
-			currentPlane: "coronal",
 		});
 	});
 
@@ -116,7 +113,6 @@ describe("unit tests for calculating correct mri image coords", () => {
 				mouseX: 158,
 				mouseY: 144,
 			},
-			currentPlane: "axial",
 		});
 	});
 });

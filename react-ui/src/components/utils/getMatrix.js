@@ -1,4 +1,4 @@
-// a helper function that load in a vector txt file
+// a helper function that load in a matrix txt file
 
 const getMatrix = async (currentBlock, type) => {
 	let readTxt = new txtToArray();
