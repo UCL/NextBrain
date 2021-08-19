@@ -1,3 +1,6 @@
+// multiplies a 4x4 matrix by a vector point
+// for a worked example of matrix multiplication see https://matrix.reshish.com/multCalculation.php
+
 const multiplyMatrixAndPoint = (matrix, point) => {
 	// Give a variable name to each part of the matrix, a column and row number
 	let c0r0 = matrix[0],
@@ -24,12 +27,12 @@ const multiplyMatrixAndPoint = (matrix, point) => {
 	let w = point[3];
 
 	// perform matrix multiplication operations
-	// for a worked example of matrix multiplication see https://matrix.reshish.com/multCalculation.php
 	let resultX = x * c0r0 + y * c1r0 + z * c2r0 + w * c3r0;
 	let resultY = x * c0r1 + y * c1r1 + z * c2r1 + w * c3r1;
 	let resultZ = x * c0r2 + y * c1r2 + z * c2r2 + w * c3r2;
 	let resultW = x * c0r3 + y * c1r3 + z * c2r3 + w * c3r3;
 
+	// resultW is not used but is necessary to perform the multiplication
 	const matrixResult = { resultX, resultY, resultZ, resultW };
 
 	return matrixResult;

@@ -36,7 +36,8 @@ const AtlasImages = (props) => {
 		const buildAtlas = async () => {
 			setIsLoading(true);
 			try {
-				// plane, slice, mouseX, mouseY
+				// args: plane, slice, mouseX, mouseY
+				// argument order is different for other planes
 				await updateAtlasImages("axial", 144, 97, 198);
 			} catch {
 				setError("error building atlas");
