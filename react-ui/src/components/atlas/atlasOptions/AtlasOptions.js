@@ -22,7 +22,7 @@ const AtlasOptions = (props) => {
 	} = props;
 
 	return (
-		<section className="options-container">
+		<div className="options-container">
 			<HistologyScrollbar />
 
 			<AtlasNavigation />
@@ -39,7 +39,7 @@ const AtlasOptions = (props) => {
 			<ImageChannels channel={channel} setChannel={setChannel} />
 
 			<HiResBtn showHiRes={showHiRes} setShowHiRes={setShowHiRes} />
-		</section>
+		</div>
 	);
 };
 

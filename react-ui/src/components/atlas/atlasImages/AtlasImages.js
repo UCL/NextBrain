@@ -148,7 +148,7 @@ const AtlasImages = (props) => {
 	}
 
 	return (
-		<section className="atlas-imgs-container">
+		<div className="atlas-imgs-container">
 			<ErrorModal error={error} onClear={() => setError(null)} />
 			{isLoading && <LoadingSpinner asOverlay />}
 
@@ -169,7 +169,7 @@ const AtlasImages = (props) => {
 				histologyToMri={histologyToMri}
 				getMouseCoords={getMouseCoords}
 			/>
-		</section>
+		</div>
 	);
 };
 
