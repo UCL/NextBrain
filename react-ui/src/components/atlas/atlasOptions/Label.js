@@ -3,13 +3,15 @@ import "./Label.css";
 const Label = (props) => {
 	const { showLabels, currentLabel } = props;
 
-	// initialise the label on page load?
-	if (currentLabel === null) {
-		return <div>no label found</div>;
-	}
+	console.log(currentLabel);
 
 	if (!showLabels) {
 		return <div>Not showing labels</div>;
+	}
+
+	// initialise the label on page load?
+	if (currentLabel === null) {
+		return <div>no label found</div>;
 	}
 
 	return (

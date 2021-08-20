@@ -12,6 +12,7 @@ import HistologyImage from "./HistologyImage";
 import getMatrix from "../../utils/getMatrix";
 import getMouseCoords from "../../utils/getmouseCoords";
 import matrixMultiplier from "../../utils/matrixMultiplier";
+import histologyLabelParser from "../../utils/histologyLabelParser";
 
 import CORONAL_RESCALING_FACTOR from "../../utils/CoronalRescalingFactor";
 
@@ -47,6 +48,17 @@ const AtlasImages = (props) => {
 
 		buildAtlas();
 	}, []);
+
+	useEffect(() => {
+		if (histologyImageCoords !== null && mriImageCoords !== null) {
+			setCurrentLabelHandler(
+				histologyImageCoords.coords.mouseX,
+				histologyImageCoords.coords.mouseY,
+				histologyImageCoords,
+				"lowRes"
+			);
+		}
+	}, [histologyImageCoords, mriImageCoords]);
 
 	const updateAtlasImages = async (
 		currentPlane,
@@ -111,6 +123,8 @@ const AtlasImages = (props) => {
 
 		const { mouseX, mouseY } = getMouseCoords(e);
 
+		console.log(mouseX, mouseY);
+
 		const matrix = await getMatrix(
 			histologyImageCoords.currentBlock,
 			"histology"
@@ -135,6 +149,26 @@ const AtlasImages = (props) => {
 			(mriCoordinatesKey.axial.width - resultX).toFixed(0),
 			(mriCoordinatesKey.axial.height - resultY).toFixed(0)
 		);
+	};
+
+	const setCurrentLabelHandler = async (
+		mouseX,
+		mouseY,
+		histologyImageCoords,
+		type
+	) => {
+		console.log("getting current histology label");
+
+		//const { mouseX, mouseY } = getMouseCoords(e);
+
+		const currentLabel = await histologyLabelParser(
+			mouseX,
+			mouseY,
+			histologyImageCoords,
+			type
+		);
+
+		setCurrentLabel(currentLabel);
 	};
 
 	if (mriImageCoords === null) {

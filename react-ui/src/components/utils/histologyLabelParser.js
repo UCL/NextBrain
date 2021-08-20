@@ -16,6 +16,8 @@ const histologyLabelParser = async (
 		type
 	);
 
+	console.log(mouseX, mouseY, histologyImageCoords, type);
+
 	const parsedLabel = await parseLabel(currentLabelNumber, type);
 
 	return parsedLabel;
@@ -59,7 +61,11 @@ const getCurrentLabelNumber = async (
 
 	const ndArray = ndarray(npyArray.data, npyArray.shape);
 
-	const currentLabelNumber = ndArray.get(mouseX, mouseY);
+	console.log(ndArray);
+
+	const currentLabelNumber = ndArray.get(mouseX.toFixed(0), mouseY.toFixed(0));
+
+	console.log(currentLabelNumber);
 
 	return currentLabelNumber;
 };

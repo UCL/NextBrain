@@ -4,8 +4,6 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
 import MousePointer from "../../shared/MousePointer";
-import histologyLabelParser from "../../utils/histologyLabelParser";
-import getMouseCoords from "../../utils/getmouseCoords";
 
 import "./HistologyImage.css";
 
@@ -35,6 +33,8 @@ const HistologyImage = (props) => {
 		channel,
 		histologyToMri,
 	} = props;
+
+	console.log(histologyImageCoords);
 
 	useEffect(() => {
 		fetchHistologyImage();
@@ -169,22 +169,7 @@ const HistologyImage = (props) => {
 		console.log(ref);
 	};
 
-	const setCurrentLabelHandler = async (e, histologyImageCoords, type) => {
-		console.log("getting current histology label");
-
-		const { mouseX, mouseY } = getMouseCoords(e);
-
-		const currentLabel = await histologyLabelParser(
-			mouseX,
-			mouseY,
-			histologyImageCoords,
-			type
-		);
-
-		setCurrentLabel(currentLabel);
-	};
-
-	if (histologyImage === null) {
+	if (histologyImage === null || histologyImageCoords === null) {
 		return <div>Could not build histology image</div>;
 	}
 
@@ -214,8 +199,8 @@ const HistologyImage = (props) => {
 							//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
 							onClick={(e) => {
 								!showHiRes && histologyToMri(e);
-								!showHiRes &&
-									setCurrentLabelHandler(e, histologyImageCoords, "lowRes");
+								// !showHiRes &&
+								// 	setCurrentLabelHandler(e, histologyImageCoords, "lowRes");
 							}}
 							className="histology-img"
 							src={histologyImage}
