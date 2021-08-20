@@ -87,7 +87,9 @@ const MriImage = (props) => {
 
 					<img
 						onClick={
-							!showHiRes ? (e) => computeMriImagesHandler(e, plane) : undefined
+							!showHiRes
+								? (e) => computeMriImagesHandler(e, plane)
+								: () => setError("Cannot navigate while in hi-res mode")
 						}
 						// onWheel={(e) => console.log(e)}
 						className={`${plane}-img`}

@@ -5,13 +5,15 @@ const MriImages = (props) => {
 	const {
 		plane,
 		mriImageCoords,
-		hiRes,
+		showHiRes,
 		updateAtlasImages,
 		coronalRescalingFactor,
 		getMouseCoords,
 	} = props;
 
 	const computeMriImagesHandler = (e, plane) => {
+		if (showHiRes) return;
+
 		const { mouseX, mouseY } = getMouseCoords(e);
 		const mouseIsWithinBounds = determineMouseBoundariesMri(mouseX, mouseY);
 
@@ -58,7 +60,7 @@ const MriImages = (props) => {
 			<MriImage
 				plane="sagittal"
 				mriImageCoords={mriImageCoords}
-				hiRes={hiRes}
+				showHiRes={showHiRes}
 				updateAtlasImages={updateAtlasImages}
 				getMouseCoords={getMouseCoords}
 				computeMriImagesHandler={computeMriImagesHandler}
@@ -67,7 +69,7 @@ const MriImages = (props) => {
 			<MriImage
 				plane="coronal"
 				mriImageCoords={mriImageCoords}
-				hiRes={hiRes}
+				showHiRes={showHiRes}
 				updateAtlasImages={updateAtlasImages}
 				getMouseCoords={getMouseCoords}
 				computeMriImagesHandler={computeMriImagesHandler}
@@ -76,7 +78,7 @@ const MriImages = (props) => {
 			<MriImage
 				plane="axial"
 				mriImageCoords={mriImageCoords}
-				hiRes={hiRes}
+				showHiRes={showHiRes}
 				updateAtlasImages={updateAtlasImages}
 				getMouseCoords={getMouseCoords}
 				computeMriImagesHandler={computeMriImagesHandler}

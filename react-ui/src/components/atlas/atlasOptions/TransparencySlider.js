@@ -1,5 +1,5 @@
 const TransparencySlider = (props) => {
-	const { labelsTransparency, setLabelsTransparency } = props;
+	const { showLabels, labelsTransparency, setLabelsTransparency } = props;
 
 	return (
 		<input
@@ -14,6 +14,7 @@ const TransparencySlider = (props) => {
 			min="0"
 			max="1"
 			step="0.01"
+			disabled={showLabels ? false : true}
 		/>
 	);
 };

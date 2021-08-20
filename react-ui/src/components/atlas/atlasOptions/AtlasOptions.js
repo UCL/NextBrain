@@ -32,6 +32,7 @@ const AtlasOptions = (props) => {
 			<Label showLabels={showLabels} currentLabel={currentLabel} />
 
 			<TransparencySlider
+				showLabels={showLabels}
 				labelsTransparency={labelsTransparency}
 				setLabelsTransparency={setLabelsTransparency}
 			/>
