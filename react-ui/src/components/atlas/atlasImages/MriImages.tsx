@@ -47,8 +47,8 @@ const MriImages: FC<Props> = (props) => {
 
 		if (plane === "sagittal") {
 			if (
-				mouseX > mriCoordinatesKey.sagittal.width - 1 ||
-				mouseY > mriCoordinatesKey.sagittal.height - 1
+				mouseX > +mriCoordinatesKey.sagittal.width - 1 ||
+				mouseY > +mriCoordinatesKey.sagittal.height - 1
 			)
 				return false;
 		}
@@ -56,16 +56,16 @@ const MriImages: FC<Props> = (props) => {
 		if (plane === "coronal") {
 			// account for coronal rescaling
 			if (
-				mouseX > mriCoordinatesKey.coronal.width - 1 ||
-				mouseY > mriCoordinatesKey.coronal.height - 1
+				mouseX > +mriCoordinatesKey.coronal.width - 1 ||
+				mouseY > +mriCoordinatesKey.coronal.height - 1
 			)
 				return false;
 		}
 
 		if (plane === "axial") {
 			if (
-				mouseX > mriCoordinatesKey.axial.width - 1 ||
-				mouseY > mriCoordinatesKey.axial.height - 1
+				mouseX > +mriCoordinatesKey.axial.width - 1 ||
+				mouseY > +mriCoordinatesKey.axial.height - 1
 			)
 				return false;
 		}

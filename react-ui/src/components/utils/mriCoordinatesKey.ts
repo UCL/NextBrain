@@ -2,7 +2,9 @@
 // also shows how each plane axis is linked to its corresponding coordinates
 // refer to the top level readme for more guidance on how coordinates are calculated
 
-const mriCoordinatesKey = {
+import { MriCoordsKey } from "../../models/mriCoordsKey.model";
+
+const mriCoordinatesKey: MriCoordsKey = {
 	sagittal: {
 		width: 450,
 		height: 362,

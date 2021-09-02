@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 
 import ErrorModal from "../../shared/ErrorModal";
-//import mriCoordinatesKey from "../../utils/mriCoordinatesKey";
+import mriCoordinatesKey from "../../utils/mriCoordinatesKey";
 import MousePointer from "../../shared/MousePointer";
 
 import { MriCoords } from "../../../models/mriCoords.model";
@@ -26,7 +26,7 @@ const MriImage: FC<Props> = (props) => {
 	const { plane, mriImageCoords, showHiRes, computeMriImagesHandler } = props;
 
 	useEffect(() => {
-		// preloadMriImages();
+		preloadMriImages();
 	}, []);
 
 	useEffect(() => {
@@ -53,35 +53,37 @@ const MriImage: FC<Props> = (props) => {
 	}, [mriImageCoords, plane]);
 
 	// used for loading all images at page load and adding them to the cache for quicker subsequent loading
-	// const preloadMriImages = () => {
-	// 	// preload all mri images
-	// 	const limit = mriCoordinatesKey[plane]["slices"];
+	const preloadMriImages = () => {
+		console.log("preloading all mri images");
 
-	// 	setError(null);
-	// 	setIsLoading(true);
+		// preload all mri images
+		const limit = mriCoordinatesKey[plane]["slices"];
 
-	// 	for (let i = 0; i < limit; i++) {
-	// 		const paddedSlice = i.toFixed(0).toString().padStart(3, 0);
+		setError(null);
+		//setIsLoading(true);
 
-	// 		const img = new Image();
+		for (let i = 0; i < limit; i++) {
+			const paddedSlice = i.toFixed(0).toString().padStart(3, "0");
 
-	// 		try {
-	// 			const mriImage =
-	// 				require(`../../../assets/P57-16/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`).default;
+			const img = new Image();
 
-	// 			console.log(mriImage);
+			try {
+				const mriImage =
+					require(`../../../assets/P57-16/mri_rotated/slices_${plane}_webp/slice_${paddedSlice}.webp`).default;
 
-	// 			img.src = mriImage;
-	// 		} catch {
-	// 			console.log(
-	// 				`%cerror, could not resolve path: assets/P57-16/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`,
-	// 				"color: red"
-	// 			);
-	// 		}
-	// 	}
+				console.log(mriImage);
 
-	// 	setIsLoading(false);
-	// };
+				img.src = mriImage;
+			} catch {
+				console.log(
+					`%cerror, could not resolve path: assets/P57-16/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`,
+					"color: red"
+				);
+			}
+		}
+
+		//setIsLoading(false);
+	};
 
 	if (mriImage === null || currentSlice === null) {
 		return <div>Could not build mri image</div>;

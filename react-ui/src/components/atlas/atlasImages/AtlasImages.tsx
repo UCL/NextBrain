@@ -91,7 +91,7 @@ const AtlasImages: FC<Props> = (props) => {
 			try {
 				// args: plane, slice, mouseX, mouseY
 				// argument order is different for other planes
-				await updateAtlasImages("axial", 144, 97, 198);
+				await updateAtlasImages("axial", 111, 97, 338);
 			} catch {
 				setError("error building atlas");
 			}
@@ -198,8 +198,8 @@ const AtlasImages: FC<Props> = (props) => {
 		updateAtlasImages(
 			"axial",
 			Number(resultZ.toFixed(0)),
-			Number((mriCoordinatesKey.axial.width - resultX).toFixed(0)),
-			Number((mriCoordinatesKey.axial.height - resultY).toFixed(0))
+			Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
+			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0))
 		);
 	};
 

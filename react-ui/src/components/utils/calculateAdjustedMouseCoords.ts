@@ -15,21 +15,21 @@ const calculateAdjustedMouseCoords = (
 	let adjustedMouseY;
 
 	if (currentPlane === "sagittal") {
-		adjustedSlice = mriCoordinatesKey.sagittal.slices - currentSlice;
-		adjustedMouseX = mriCoordinatesKey.sagittal.width - mouseX;
-		adjustedMouseY = mriCoordinatesKey.sagittal.height - mouseY;
+		adjustedSlice = +mriCoordinatesKey.sagittal.slices - currentSlice;
+		adjustedMouseX = +mriCoordinatesKey.sagittal.width - mouseX;
+		adjustedMouseY = +mriCoordinatesKey.sagittal.height - mouseY;
 	}
 
 	if (currentPlane === "coronal") {
-		adjustedSlice = mriCoordinatesKey.coronal.slices - currentSlice;
-		adjustedMouseX = mriCoordinatesKey.coronal.width - mouseX;
-		adjustedMouseY = mriCoordinatesKey.coronal.height - mouseY;
+		adjustedSlice = +mriCoordinatesKey.coronal.slices - currentSlice;
+		adjustedMouseX = +mriCoordinatesKey.coronal.width - mouseX;
+		adjustedMouseY = +mriCoordinatesKey.coronal.height - mouseY;
 	}
 
 	if (currentPlane === "axial") {
-		adjustedSlice = mriCoordinatesKey.axial.slices - currentSlice;
-		adjustedMouseX = mriCoordinatesKey.axial.width - mouseX;
-		adjustedMouseY = mriCoordinatesKey.axial.height - mouseY;
+		adjustedSlice = +mriCoordinatesKey.axial.slices - currentSlice;
+		adjustedMouseX = +mriCoordinatesKey.axial.width - mouseX;
+		adjustedMouseY = +mriCoordinatesKey.axial.height - mouseY;
 	}
 
 	return { adjustedSlice, adjustedMouseX, adjustedMouseY };
