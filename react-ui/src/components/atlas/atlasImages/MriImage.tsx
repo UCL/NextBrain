@@ -40,7 +40,7 @@ const MriImage: FC<Props> = (props) => {
 
 		try {
 			const mriImage =
-				require(`../../../assets/P57-16/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`).default;
+				require(`../../../assets/P57-16/mri_rotated/slices_${plane}_webp/slice_${paddedSlice}.webp`).default;
 
 			setMriImage(mriImage);
 			setCurrentSlice(paddedSlice);
