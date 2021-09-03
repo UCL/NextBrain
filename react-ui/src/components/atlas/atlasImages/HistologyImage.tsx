@@ -25,14 +25,13 @@ interface PanPinchZoomProps {
 	resetTransform: () => void;
 }
 
-const initialLoad = true;
-
 const HistologyImage: FC<Props> = (props) => {
 	const [error, setError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [histologyImage, setHistologyImage] = useState("");
 	const [hiResHistologyImage, setHiResHistologyImage] = useState("");
-	const [hiResHistologyImage2, setHiResHistologyImage2] = useState("");
+	const [hiResHistologyImageReduced, setHiResHistologyImageReduced] =
+		useState("");
 	const [labelsImage, setLabelsImage] = useState("");
 	//const [initialLoad, setInitialLoad] = useState(true);
 
@@ -79,6 +78,7 @@ const HistologyImage: FC<Props> = (props) => {
 					}
 				}
 
+				// load hi-res image (original size)
 				if (showHiRes === true) {
 					try {
 						setIsLoading(true);
@@ -96,19 +96,20 @@ const HistologyImage: FC<Props> = (props) => {
 
 					// I do this because of a weird behaviour on the dev server causing the loading spinner to reappear
 					// I dont think this is an issue on the deployed site, so perhaps remove (or only run the logic on dev)
-					if (initialLoad === true && hiResHistologyImage !== null) {
+					if (hiResHistologyImage !== null) {
 						setIsLoading(false);
 					}
 				}
 
+				// load hi-res image (reduced size)
 				if (showHiRes === true) {
 					try {
 						setIsLoading(true);
-						const hiResHistologyImage2 =
-							await require(`../../../assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14_high_30.jpg`)
+						const hiResHistologyImageReduced =
+							await require(`../../../assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14_high_30.webp`)
 								.default;
 
-						setHiResHistologyImage2(hiResHistologyImage2);
+						setHiResHistologyImageReduced(hiResHistologyImageReduced);
 					} catch {
 						console.log(
 							`%cerror, could not resolve path: assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14.jpg`,
@@ -118,11 +119,12 @@ const HistologyImage: FC<Props> = (props) => {
 
 					// I do this because of a weird behaviour on the dev server causing the loading spinner to reappear
 					// I dont think this is an issue on the deployed site, so perhaps remove (or only run the logic on dev)
-					if (initialLoad === true && hiResHistologyImage !== null) {
+					if (hiResHistologyImage !== null) {
 						setIsLoading(false);
 					}
 				}
 
+				// load label
 				try {
 					//setIsLoading(true);
 					const newLabelsImage =
@@ -222,18 +224,17 @@ const HistologyImage: FC<Props> = (props) => {
 						></img>
 					)}
 
-					{/* {showHiRes && (
+					{showHiRes && (
 						<TransformWrapper
 							//disabled={true}
 							wheel={{ disabled: false }}
 							panning={{ velocityDisabled: true }}
-							centerContent={true}
 							limitToBounds={true}
-							limitToWrapper={true}
 							onPanningStart={onPan}
 							onZoomStart={onImageZoomStart}
 							onZoom={onImageZoom}
 							onZoomStop={onImageZoomStop}
+							maxScale={25}
 						>
 							{({ zoomIn, zoomOut, resetTransform, ...rest }) => (
 								<>
@@ -255,7 +256,7 @@ const HistologyImage: FC<Props> = (props) => {
 								</>
 							)}
 						</TransformWrapper>
-					)} */}
+					)}
 
 					{showHiRes && (
 						<TransformWrapper
@@ -267,6 +268,7 @@ const HistologyImage: FC<Props> = (props) => {
 							onZoomStart={onImageZoomStart}
 							onZoom={onImageZoom}
 							onZoomStop={onImageZoomStop}
+							maxScale={25}
 						>
 							{({ zoomIn, zoomOut, resetTransform }: PanPinchZoomProps) => (
 								<>
@@ -291,7 +293,7 @@ const HistologyImage: FC<Props> = (props) => {
 										<img
 											//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
 											className={`histology-img ${showHiRes ? "hi-res" : ""}`}
-											src={hiResHistologyImage2}
+											src={hiResHistologyImageReduced}
 											alt="histology"
 											onLoad={(e) => onImageLoad(e, "lowRes")}
 										></img>
