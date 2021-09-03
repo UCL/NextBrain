@@ -22,6 +22,8 @@ interface Props {
 	labelsTransparency: string;
 	setLabelsTransparency: (labelsTransparency: string) => void;
 	currentLabel: CurrentLabel;
+	histologyScrollbarPos: number;
+	setHistologyScrollbarPos: (mouseY: number) => void;
 }
 
 const AtlasOptions: FC<Props> = (props) => {
@@ -35,11 +37,16 @@ const AtlasOptions: FC<Props> = (props) => {
 		labelsTransparency,
 		setLabelsTransparency,
 		currentLabel,
+		histologyScrollbarPos,
+		setHistologyScrollbarPos,
 	} = props;
 
 	return (
 		<div className="options-container">
-			<HistologyScrollbar />
+			<HistologyScrollbar
+				histologyScrollbarPos={histologyScrollbarPos}
+				setHistologyScrollbarPos={setHistologyScrollbarPos}
+			/>
 
 			<AtlasNavigation />
 

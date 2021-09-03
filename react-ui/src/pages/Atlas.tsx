@@ -12,6 +12,7 @@ const Atlas: FC = () => {
 	const [showLabels, setShowLabels] = useState(false);
 	const [labelsTransparency, setLabelsTransparency] = useState("0.5");
 	const [currentLabel, setCurrentLabel] = useState<CurrentLabel>([]);
+	const [histologyScrollbarPos, setHistologyScrollbarPos] = useState(0);
 
 	return (
 		<main className="atlas-container">
@@ -32,6 +33,8 @@ const Atlas: FC = () => {
 				labelsTransparency={labelsTransparency}
 				setLabelsTransparency={setLabelsTransparency}
 				currentLabel={currentLabel}
+				histologyScrollbarPos={histologyScrollbarPos}
+				setHistologyScrollbarPos={setHistologyScrollbarPos}
 			/>
 		</main>
 	);
