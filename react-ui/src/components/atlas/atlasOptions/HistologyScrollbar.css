@@ -1,0 +1,12 @@
+.histology-scrollbar-container {
+	position: relative;
+}
+
+.histology-scrollbar-widget {
+	width: 25px;
+	height: 10px;
+	background-color: black;
+	position: absolute;
+	top: 0;
+	pointer-events: none;
+}

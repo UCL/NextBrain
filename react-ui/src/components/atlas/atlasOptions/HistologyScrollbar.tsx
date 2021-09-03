@@ -20,6 +20,9 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		const maxHistologyScrollValue = 824;
 		const newScrollValue = mouseY / maxHistologyScrollValue;
 
+		// method for positioning the scrollbar based on the max number of slices in a histology block
+		// const histologySliceNumber = (mouseY / maxHistologyScrollValue) * maxHistologySliceNumber;
+
 		console.log(newScrollValue);
 
 		setHistologyScrollbarPos(mouseY);
