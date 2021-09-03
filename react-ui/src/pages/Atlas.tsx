@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 
 import AtlasImages from "../components/atlas/atlasImages/AtlasImages";
 import AtlasOptions from "../components/atlas/atlasOptions/AtlasOptions";
+import Scrollbars from "../components/atlas/atlasOptions/Scrollbars";
 import { CurrentLabel } from "../models/label.model";
 
 import "./Atlas.css";
@@ -22,7 +23,10 @@ const Atlas: FC = () => {
 				showLabels={showLabels}
 				labelsTransparency={labelsTransparency}
 				setCurrentLabel={setCurrentLabel}
+				histologyScrollbarPos={histologyScrollbarPos}
+				setHistologyScrollbarPos={setHistologyScrollbarPos}
 			/>
+
 			<AtlasOptions
 				channel={channel}
 				setChannel={setChannel}
@@ -36,6 +40,11 @@ const Atlas: FC = () => {
 				histologyScrollbarPos={histologyScrollbarPos}
 				setHistologyScrollbarPos={setHistologyScrollbarPos}
 			/>
+
+			{/* <Scrollbars
+				histologyScrollbarPos={histologyScrollbarPos}
+				setHistologyScrollbarPos={setHistologyScrollbarPos}
+			/> */}
 		</main>
 	);
 };

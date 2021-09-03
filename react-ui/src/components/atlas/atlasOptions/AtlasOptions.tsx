@@ -43,11 +43,6 @@ const AtlasOptions: FC<Props> = (props) => {
 
 	return (
 		<div className="options-container">
-			<HistologyScrollbar
-				histologyScrollbarPos={histologyScrollbarPos}
-				setHistologyScrollbarPos={setHistologyScrollbarPos}
-			/>
-
 			<AtlasNavigation />
 
 			<LabelsBtn showLabels={showLabels} setShowLabels={setShowLabels} />

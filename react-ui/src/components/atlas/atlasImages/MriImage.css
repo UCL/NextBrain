@@ -18,3 +18,11 @@
 /* .coronal-img {
 	zoom: 1.5;
 } */
+
+.mri-scrollbar {
+	width: 25px;
+	height: 10px;
+	background-color: white;
+	top: 0;
+	pointer-events: none;
+}

@@ -13,6 +13,8 @@ import getMatrix from "../../utils/getMatrix";
 import getMouseCoords from "../../utils/getmouseCoords";
 import matrixMultiplier from "../../utils/matrixMultiplier";
 import histologyLabelParser from "../../utils/histologyLabelParser";
+import Scrollbars from "../atlasOptions/Scrollbars";
+import HistologyScrollbar from "../atlasOptions/HistologyScrollbar";
 
 import { CurrentLabel } from "../../../models/label.model";
 import { MriCoords } from "../../../models/mriCoords.model";
@@ -26,6 +28,8 @@ interface Props {
 	showLabels: boolean;
 	labelsTransparency: string;
 	setCurrentLabel: (currentLabel: CurrentLabel) => void;
+	histologyScrollbarPos: number;
+	setHistologyScrollbarPos: (mouseY: number) => void;
 }
 
 // const initMriCoords = {
@@ -59,6 +63,8 @@ const AtlasImages: FC<Props> = (props) => {
 		showLabels,
 		labelsTransparency,
 		setCurrentLabel,
+		histologyScrollbarPos,
+		setHistologyScrollbarPos,
 	} = props;
 
 	const setCurrentLabelHandler = useCallback(
@@ -231,6 +237,16 @@ const AtlasImages: FC<Props> = (props) => {
 				showLabels={showLabels}
 				labelsTransparency={labelsTransparency}
 				histologyToMri={histologyToMri}
+			/>
+
+			<Scrollbars
+				histologyScrollbarPos={70}
+				setHistologyScrollbarPos={() => {}}
+			/>
+
+			<HistologyScrollbar
+				histologyScrollbarPos={histologyScrollbarPos}
+				setHistologyScrollbarPos={setHistologyScrollbarPos}
 			/>
 		</div>
 	);

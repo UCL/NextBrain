@@ -1,13 +1,13 @@
 .atlas-imgs-container {
 	display: grid;
-	grid-template-columns: 1fr 3fr;
+	grid-template-columns: 1fr 0.1fr 3fr 0.1fr;
 	grid-template-rows: 1fr 1fr 1fr;
 	row-gap: 5px;
 	column-gap: 5px;
 	grid-template-areas:
-		"mri-img-sagittal histology-container"
-		"mri-img-coronal histology-container"
-		"mri-img-axial histology-container";
+		"mri-img-sagittal sagittal-scrollbar histology-container histology-scrollbar"
+		"mri-img-coronal coronal-scrollbar histology-container histology-scrollbar"
+		"mri-img-axial axial-scrollbar histology-container histology-scrollbar";
 }
 
 .atlas-imgs-container > * {
@@ -37,4 +37,21 @@
 
 .atlas-imgs-container .histology-container {
 	grid-area: histology-container;
+	margin-left: 25px;
+}
+
+.mri-sagittal-scrollbar {
+	grid-area: sagittal-scrollbar;
+}
+
+.mri-coronal-scrollbar {
+	grid-area: coronal-scrollbar;
+}
+
+.mri-axial-scrollbar {
+	grid-area: axial-scrollbar;
+}
+
+.histology-scrollbar-container {
+	grid-area: histology-scrollbar;
 }
