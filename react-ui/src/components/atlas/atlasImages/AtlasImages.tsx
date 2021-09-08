@@ -13,8 +13,7 @@ import getMatrix from "../../utils/getMatrix";
 import getMouseCoords from "../../utils/getmouseCoords";
 import matrixMultiplier from "../../utils/matrixMultiplier";
 import histologyLabelParser from "../../utils/histologyLabelParser";
-import Scrollbars from "../atlasOptions/Scrollbars";
-import HistologyScrollbar from "../atlasOptions/HistologyScrollbar";
+import Scrollbars from "../scrollbars/Scrollbars";
 
 import { CurrentLabel } from "../../../models/label.model";
 import { MriCoords } from "../../../models/mriCoords.model";
@@ -246,19 +245,6 @@ const AtlasImages: FC<Props> = (props) => {
 			<Scrollbars
 				scrollbarPos={scrollbarPos}
 				setScrollbarPos={setScrollbarPos}
-			/>
-
-			{/* <div
-				className={`mri-scrollbar mri-sagittal-scrollbar`}
-				onClick={(e) => console.log("kk")}
-			>
-				<svg
-					className={`mri-scrollbar-widget mri-sagittal-scrollbar-widget`}
-					style={{ top: `${scrollbarPos}px` }}
-				></svg>
-			</div> */}
-
-			<HistologyScrollbar
 				histologyScrollbarPos={histologyScrollbarPos}
 				setHistologyScrollbarPos={setHistologyScrollbarPos}
 			/>

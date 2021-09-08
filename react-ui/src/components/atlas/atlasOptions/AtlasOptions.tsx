@@ -1,6 +1,5 @@
 import { FC } from "react";
 
-import HistologyScrollbar from "./HistologyScrollbar";
 import AtlasNavigation from "./AtlasNavigation";
 import LabelsBtn from "./LabelsBtn";
 import TransparencySlider from "./TransparencySlider";
@@ -22,8 +21,6 @@ interface Props {
 	labelsTransparency: string;
 	setLabelsTransparency: (labelsTransparency: string) => void;
 	currentLabel: CurrentLabel;
-	histologyScrollbarPos: number;
-	setHistologyScrollbarPos: (mouseY: number) => void;
 }
 
 const AtlasOptions: FC<Props> = (props) => {
@@ -37,8 +34,6 @@ const AtlasOptions: FC<Props> = (props) => {
 		labelsTransparency,
 		setLabelsTransparency,
 		currentLabel,
-		histologyScrollbarPos,
-		setHistologyScrollbarPos,
 	} = props;
 
 	return (

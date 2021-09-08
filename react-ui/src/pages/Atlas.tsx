@@ -39,8 +39,6 @@ const Atlas: FC = () => {
 				labelsTransparency={labelsTransparency}
 				setLabelsTransparency={setLabelsTransparency}
 				currentLabel={currentLabel}
-				histologyScrollbarPos={histologyScrollbarPos}
-				setHistologyScrollbarPos={setHistologyScrollbarPos}
 			/>
 
 			{/* <Scrollbars

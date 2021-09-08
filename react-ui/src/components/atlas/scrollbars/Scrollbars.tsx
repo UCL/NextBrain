@@ -3,15 +3,22 @@ import { FC } from "react";
 import MriScrollbar from "./MriScrollbar";
 
 import "./Scrollbars.css";
-//import HistologyScrollbar from "./HistologyScrollbar";
+import HistologyScrollbar from "./HistologyScrollbar";
 
 interface Props {
 	scrollbarPos: number;
 	setScrollbarPos: (mouseY: number) => void;
+	histologyScrollbarPos: number;
+	setHistologyScrollbarPos: (mouseY: number) => void;
 }
 
 const Scrollbars: FC<Props> = (props) => {
-	const { scrollbarPos, setScrollbarPos } = props;
+	const {
+		scrollbarPos,
+		setScrollbarPos,
+		histologyScrollbarPos,
+		setHistologyScrollbarPos,
+	} = props;
 
 	return (
 		<>
@@ -31,6 +38,11 @@ const Scrollbars: FC<Props> = (props) => {
 				plane="axial"
 				scrollbarPos={scrollbarPos}
 				setScrollbarPos={setScrollbarPos}
+			/>
+
+			<HistologyScrollbar
+				histologyScrollbarPos={histologyScrollbarPos}
+				setHistologyScrollbarPos={setHistologyScrollbarPos}
 			/>
 		</>
 	);
