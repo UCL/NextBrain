@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 
 import AtlasImages from "../components/atlas/atlasImages/AtlasImages";
 import AtlasOptions from "../components/atlas/atlasOptions/AtlasOptions";
-import Scrollbars from "../components/atlas/atlasOptions/Scrollbars";
 import { CurrentLabel } from "../models/label.model";
 
 import "./Atlas.css";
@@ -14,6 +13,7 @@ const Atlas: FC = () => {
 	const [labelsTransparency, setLabelsTransparency] = useState("0.5");
 	const [currentLabel, setCurrentLabel] = useState<CurrentLabel>([]);
 	const [histologyScrollbarPos, setHistologyScrollbarPos] = useState(0);
+	const [scrollbarPos, setScrollbarPos] = useState(0);
 
 	return (
 		<main className="atlas-container">
@@ -25,6 +25,8 @@ const Atlas: FC = () => {
 				setCurrentLabel={setCurrentLabel}
 				histologyScrollbarPos={histologyScrollbarPos}
 				setHistologyScrollbarPos={setHistologyScrollbarPos}
+				scrollbarPos={scrollbarPos}
+				setScrollbarPos={setScrollbarPos}
 			/>
 
 			<AtlasOptions

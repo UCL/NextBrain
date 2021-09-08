@@ -30,6 +30,8 @@ interface Props {
 	setCurrentLabel: (currentLabel: CurrentLabel) => void;
 	histologyScrollbarPos: number;
 	setHistologyScrollbarPos: (mouseY: number) => void;
+	scrollbarPos: number;
+	setScrollbarPos: (mouseY: number) => void;
 }
 
 // const initMriCoords = {
@@ -65,6 +67,8 @@ const AtlasImages: FC<Props> = (props) => {
 		setCurrentLabel,
 		histologyScrollbarPos,
 		setHistologyScrollbarPos,
+		scrollbarPos,
+		setScrollbarPos,
 	} = props;
 
 	const setCurrentLabelHandler = useCallback(
@@ -240,9 +244,19 @@ const AtlasImages: FC<Props> = (props) => {
 			/>
 
 			<Scrollbars
-				histologyScrollbarPos={70}
-				setHistologyScrollbarPos={() => {}}
+				scrollbarPos={scrollbarPos}
+				setScrollbarPos={setScrollbarPos}
 			/>
+
+			{/* <div
+				className={`mri-scrollbar mri-sagittal-scrollbar`}
+				onClick={(e) => console.log("kk")}
+			>
+				<svg
+					className={`mri-scrollbar-widget mri-sagittal-scrollbar-widget`}
+					style={{ top: `${scrollbarPos}px` }}
+				></svg>
+			</div> */}
 
 			<HistologyScrollbar
 				histologyScrollbarPos={histologyScrollbarPos}

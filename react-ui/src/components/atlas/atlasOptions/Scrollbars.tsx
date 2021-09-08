@@ -1,64 +1,37 @@
 import { FC } from "react";
 
-import getMouseCoords from "../../utils/getmouseCoords";
+import MriScrollbar from "./MriScrollbar";
 
 import "./Scrollbars.css";
+//import HistologyScrollbar from "./HistologyScrollbar";
 
 interface Props {
-	histologyScrollbarPos: number;
-	setHistologyScrollbarPos: (mouseY: number) => void;
+	scrollbarPos: number;
+	setScrollbarPos: (mouseY: number) => void;
 }
 
 const Scrollbars: FC<Props> = (props) => {
-	const { histologyScrollbarPos, setHistologyScrollbarPos } = props;
-
-	const updateHistologyScrollbarPos = (e: React.MouseEvent) => {
-		const { mouseX, mouseY } = getMouseCoords(e);
-
-		console.log(mouseX, mouseY);
-
-		const maxHistologyScrollValue = 824;
-		const newScrollValue = mouseY / maxHistologyScrollValue;
-
-		// method for positioning the scrollbar based on the max number of slices in a histology block
-		// const histologySliceNumber = (mouseY / maxHistologyScrollValue) * maxHistologySliceNumber;
-
-		console.log(newScrollValue);
-
-		setHistologyScrollbarPos(mouseY);
-	};
+	const { scrollbarPos, setScrollbarPos } = props;
 
 	return (
 		<>
-			<div
-				className="mri-scrollbar mri-sagittal-scrollbar"
-				onClick={(e) => updateHistologyScrollbarPos(e)}
-			>
-				<svg
-					className="mri-scrollbar-widget mri-sagittal-scrollbar-widget"
-					style={{ top: `${histologyScrollbarPos}px` }}
-				></svg>
-			</div>
+			<MriScrollbar
+				plane="sagittal"
+				scrollbarPos={scrollbarPos}
+				setScrollbarPos={setScrollbarPos}
+			/>
 
-			<div
-				className="mri-scrollbar mri-coronal-scrollbar"
-				onClick={(e) => updateHistologyScrollbarPos(e)}
-			>
-				<svg
-					className="mri-scrollbar-widget mri-coronal-scrollbar-widget"
-					style={{ top: `${histologyScrollbarPos}px` }}
-				></svg>
-			</div>
+			<MriScrollbar
+				plane="coronal"
+				scrollbarPos={scrollbarPos}
+				setScrollbarPos={setScrollbarPos}
+			/>
 
-			<div
-				className="mri-scrollbar mri-axial-scrollbar"
-				onClick={(e) => updateHistologyScrollbarPos(e)}
-			>
-				<svg
-					className="mri-scrollbar-widget mri-axial-scrollbar-widget"
-					style={{ top: `${histologyScrollbarPos}px` }}
-				></svg>
-			</div>
+			<MriScrollbar
+				plane="axial"
+				scrollbarPos={scrollbarPos}
+				setScrollbarPos={setScrollbarPos}
+			/>
 		</>
 	);
 };
