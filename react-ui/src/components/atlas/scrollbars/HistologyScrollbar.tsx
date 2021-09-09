@@ -36,8 +36,12 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		console.log(slicesInBlock);
 		console.log(newHistologySliceNumber.toFixed(0));
 
-		setHistologyScrollbarPos(mouseY);
-		adjustCoordsFromScrollbar(newHistologySliceNumber);
+		try {
+			adjustCoordsFromScrollbar(newHistologySliceNumber);
+			setHistologyScrollbarPos(mouseY);
+		} catch {
+			console.log("error found when adjusting histology scrollbar");
+		}
 	};
 
 	return (
