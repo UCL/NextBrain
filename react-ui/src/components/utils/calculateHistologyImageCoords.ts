@@ -53,11 +53,7 @@ const getHistologyImageCoords = (newMriCoords: MriCoords, matrix: number[]) => {
 
 	let { resultX, resultY, resultZ } = coords;
 
-	// const absResultX = Math.abs(+resultX.toFixed(0));
-	// const absResultY = Math.abs(+resultY.toFixed(0));
-	// const absResultZ = Math.abs(+resultZ.toFixed(0));
-
-	// removing negative signs to avoid errors
+	// we need to convert negative numbers to zero to avoid errors
 	resultX = resultX < 0 ? 0 : resultX;
 	resultY = resultY < 0 ? 0 : resultY;
 	resultZ = resultZ < 0 ? 0 : resultZ;
