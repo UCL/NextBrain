@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 
 import AtlasImages from "../components/atlas/atlasImages/AtlasImages";
 import AtlasOptions from "../components/atlas/atlasOptions/AtlasOptions";
+import Scrollbars from "../components/atlas/scrollbars/Scrollbars";
 import { CurrentLabel } from "../models/label.model";
 
 import "./Atlas.css";
@@ -42,6 +43,8 @@ const Atlas: FC = () => {
 			/>
 
 			{/* <Scrollbars
+				scrollbarPos={scrollbarPos}
+				setScrollbarPos={setScrollbarPos}
 				histologyScrollbarPos={histologyScrollbarPos}
 				setHistologyScrollbarPos={setHistologyScrollbarPos}
 			/> */}
