@@ -1,31 +1,43 @@
 import { FC } from "react";
 
+import histologySliceMap from "../../utils/histologySliceMap";
 import getMouseCoords from "../../utils/getmouseCoords";
+import { HistologyCoords } from "../../../models/histologyCoords.model";
 
 import "./HistologyScrollbar.css";
 
 interface Props {
 	histologyScrollbarPos: number;
 	setHistologyScrollbarPos: (mouseY: number) => void;
+	histologyImageCoords: HistologyCoords | null;
+	adjustCoordsFromScrollbar: (newSliceNumber: number) => void;
 }
 
 const HistologyScrollbar: FC<Props> = (props) => {
-	const { histologyScrollbarPos, setHistologyScrollbarPos } = props;
+	const {
+		histologyScrollbarPos,
+		setHistologyScrollbarPos,
+		histologyImageCoords,
+		adjustCoordsFromScrollbar,
+	} = props;
 
 	const updateHistologyScrollbarPos = (e: React.MouseEvent) => {
-		const { mouseX, mouseY } = getMouseCoords(e);
+		const { mouseY } = getMouseCoords(e);
 
-		console.log(mouseX, mouseY);
+		const currentBlock = histologyImageCoords!.currentBlock;
+		const slicesInBlock = histologySliceMap[currentBlock]["slices"];
 
-		const maxHistologyScrollValue = 824;
-		const newScrollValue = mouseY / maxHistologyScrollValue;
+		const scrollbarLength = 824;
 
 		// method for positioning the scrollbar based on the max number of slices in a histology block
-		// const histologySliceNumber = (mouseY / maxHistologyScrollValue) * maxHistologySliceNumber;
+		const newHistologySliceNumber = (mouseY / scrollbarLength) * slicesInBlock;
 
-		console.log(newScrollValue);
+		console.log(mouseY);
+		console.log(slicesInBlock);
+		console.log(newHistologySliceNumber.toFixed(0));
 
 		setHistologyScrollbarPos(mouseY);
+		adjustCoordsFromScrollbar(newHistologySliceNumber);
 	};
 
 	return (

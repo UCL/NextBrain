@@ -212,6 +212,36 @@ const AtlasImages: FC<Props> = (props) => {
 		);
 	};
 
+	const adjustCoordsFromScrollbar = async (newSliceNumber: number) => {
+		console.log(mriImageCoords);
+		console.log(histologyImageCoords);
+
+		const matrix = await getMatrix(
+			histologyImageCoords!.currentBlock,
+			"histology"
+		);
+
+		const coords = matrixMultiplier(matrix, [
+			histologyImageCoords!.coords.mouseY,
+			histologyImageCoords!.coords.mouseX,
+			+newSliceNumber.toFixed(0),
+			1,
+		]);
+
+		const { resultX, resultY, resultZ } = coords;
+
+		console.log(coords);
+
+		// axial is picked arbitrarily here
+		// it could be any of the planes as long as the order of params is entered correctly
+		updateAtlasImages(
+			"axial",
+			Number(resultZ.toFixed(0)),
+			Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
+			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0))
+		);
+	};
+
 	if (mriImageCoords === null) {
 		return (
 			<>
@@ -247,6 +277,8 @@ const AtlasImages: FC<Props> = (props) => {
 				setScrollbarPos={setScrollbarPos}
 				histologyScrollbarPos={histologyScrollbarPos}
 				setHistologyScrollbarPos={setHistologyScrollbarPos}
+				histologyImageCoords={histologyImageCoords}
+				adjustCoordsFromScrollbar={adjustCoordsFromScrollbar}
 			/>
 		</div>
 	);

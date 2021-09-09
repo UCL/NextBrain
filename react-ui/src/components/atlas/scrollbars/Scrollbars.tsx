@@ -1,15 +1,18 @@
 import { FC } from "react";
 
 import MriScrollbar from "./MriScrollbar";
+import HistologyScrollbar from "./HistologyScrollbar";
+import { HistologyCoords } from "../../../models/histologyCoords.model";
 
 import "./Scrollbars.css";
-import HistologyScrollbar from "./HistologyScrollbar";
 
 interface Props {
 	scrollbarPos: number;
 	setScrollbarPos: (mouseY: number) => void;
 	histologyScrollbarPos: number;
 	setHistologyScrollbarPos: (mouseY: number) => void;
+	histologyImageCoords: HistologyCoords | null;
+	adjustCoordsFromScrollbar: (newSliceNumber: number) => void;
 }
 
 const Scrollbars: FC<Props> = (props) => {
@@ -18,6 +21,8 @@ const Scrollbars: FC<Props> = (props) => {
 		setScrollbarPos,
 		histologyScrollbarPos,
 		setHistologyScrollbarPos,
+		histologyImageCoords,
+		adjustCoordsFromScrollbar,
 	} = props;
 
 	return (
@@ -43,6 +48,8 @@ const Scrollbars: FC<Props> = (props) => {
 			<HistologyScrollbar
 				histologyScrollbarPos={histologyScrollbarPos}
 				setHistologyScrollbarPos={setHistologyScrollbarPos}
+				histologyImageCoords={histologyImageCoords}
+				adjustCoordsFromScrollbar={adjustCoordsFromScrollbar}
 			/>
 		</>
 	);
