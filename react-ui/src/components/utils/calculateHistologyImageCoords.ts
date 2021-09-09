@@ -53,10 +53,15 @@ const getHistologyImageCoords = (newMriCoords: MriCoords, matrix: number[]) => {
 
 	const { resultX, resultY, resultZ } = coords;
 
+	// removing negative signs to avoid errors
+	const absResultX = Math.abs(+resultX.toFixed(0));
+	const absResultY = Math.abs(+resultY.toFixed(0));
+	const absResultZ = Math.abs(+resultZ.toFixed(0));
+
 	const histologyImageCoords = {
-		slice: resultZ.toFixed(0),
-		mouseX: resultY,
-		mouseY: resultX,
+		slice: absResultZ,
+		mouseX: absResultY,
+		mouseY: absResultX,
 	};
 
 	console.log("matrix calculation result: ", coords);

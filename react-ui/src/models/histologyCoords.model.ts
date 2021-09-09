@@ -1,6 +1,6 @@
 export interface HistologyCoords {
 	coords: {
-		slice: string;
+		slice: number;
 		mouseX: number;
 		mouseY: number;
 	};
