@@ -3,50 +3,39 @@ import { FC, useState, useEffect } from "react";
 import mriCoordinatesKey from "../../utils/mriCoordinatesKey";
 import getMouseCoords from "../../utils/getmouseCoords";
 
-import { ScrollbarPos } from "../../../models/scrollbarPos.model";
 import { MriCoords } from "../../../models/mriCoords.model";
 
 import "./MriScrollbar.css";
 
 interface Props {
 	plane: string;
-	scrollbarPos: ScrollbarPos;
-	setScrollbarPos: (newMriPos: ScrollbarPos) => void;
 	adjustMriCoordsFromScrollbar: (newSliceNumber: number, plane: string) => void;
 	mriImageCoords: MriCoords | null;
 }
 
 const MriScrollbar: FC<Props> = (props) => {
-	const [currentScrollbarPos, setCurrentScrollbarPos] = useState(
-		props.scrollbarPos[props.plane]
-	);
+	const [currentScrollbarPos, setCurrentScrollbarPos] = useState(0);
 
-	const {
-		plane,
-		scrollbarPos,
-		setScrollbarPos,
-		adjustMriCoordsFromScrollbar,
-		mriImageCoords,
-	} = props;
+	const { plane, adjustMriCoordsFromScrollbar, mriImageCoords } = props;
 
 	useEffect(() => {
 		// determine the scrollbar position for the current mri plane
 		console.log(mriImageCoords);
 
-		// const scrollbarLength = 272;
-		// const currentMriSliceNumber = mriImageCoords![plane]["slice"];
-		// const slicesInPlane = +mriCoordinatesKey[plane]["slices"];
-		// const currentSliceAsProportion = currentMriSliceNumber / slicesInPlane;
+		const scrollbarLength = 272;
+		const currentMriSliceNumber = mriImageCoords![plane]["slice"];
+		const slicesInPlane = +mriCoordinatesKey[plane]["slices"];
+		const currentSliceAsProportion = currentMriSliceNumber / slicesInPlane;
 
-		// const newMriScrollbarPos = +(
-		// 	scrollbarLength * currentSliceAsProportion
-		// ).toFixed(0);
+		const newMriScrollbarPos = +(
+			scrollbarLength * currentSliceAsProportion
+		).toFixed(0);
 
-		// console.log(newMriScrollbarPos);
+		console.log(newMriScrollbarPos);
 
-		// //const currentMriPlaneScrollbarPos = scrollbarPos[plane];
-		// setCurrentScrollbarPos(newMriScrollbarPos);
-	}, [plane, scrollbarPos, mriImageCoords]);
+		//const currentMriPlaneScrollbarPos = scrollbarPos[plane];
+		setCurrentScrollbarPos(newMriScrollbarPos);
+	}, [plane, mriImageCoords]);
 
 	const updateScrollbarPos = (e: React.MouseEvent) => {
 		const { mouseY } = getMouseCoords(e);
@@ -63,11 +52,11 @@ const MriScrollbar: FC<Props> = (props) => {
 		console.log(slicesInPlane);
 		console.log(newMriSliceNumber.toFixed(0));
 
-		setScrollbarPos({ sagittal: 100, coronal: 10, axial: 200 });
-
 		try {
 			adjustMriCoordsFromScrollbar(newMriSliceNumber, plane);
-			setCurrentScrollbarPos(mouseY);
+
+			// you could also set it this way (but the method in useEffect is more robust)
+			// setCurrentScrollbarPos(mouseY);
 		} catch {
 			console.log("error found when adjusting histology scrollbar");
 		}

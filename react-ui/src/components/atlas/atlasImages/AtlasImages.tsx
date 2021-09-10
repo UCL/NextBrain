@@ -18,7 +18,6 @@ import Scrollbars from "../scrollbars/Scrollbars";
 import { CurrentLabel } from "../../../models/label.model";
 import { MriCoords } from "../../../models/mriCoords.model";
 import { HistologyCoords } from "../../../models/histologyCoords.model";
-import { ScrollbarPos } from "../../../models/scrollbarPos.model";
 
 import "./AtlasImages.css";
 
@@ -30,27 +29,7 @@ interface Props {
 	setCurrentLabel: (currentLabel: CurrentLabel) => void;
 	histologyScrollbarPos: number;
 	setHistologyScrollbarPos: (mouseY: number) => void;
-	scrollbarPos: ScrollbarPos;
-	setScrollbarPos: (newMriPos: ScrollbarPos) => void;
 }
-
-// const initMriCoords = {
-// 	sagittal: {
-// 		slice: 10,
-// 		mouseX: 10,
-// 		mouseY: 10,
-// 	},
-// 	coronal: {
-// 		slice: 10,
-// 		mouseX: 10,
-// 		mouseY: 10,
-// 	},
-// 	axial: {
-// 		slice: 10,
-// 		mouseX: 10,
-// 		mouseY: 10,
-// 	},
-// };
 
 const AtlasImages: FC<Props> = (props) => {
 	const [error, setError] = useState<string | null>(null);
@@ -67,8 +46,6 @@ const AtlasImages: FC<Props> = (props) => {
 		setCurrentLabel,
 		histologyScrollbarPos,
 		setHistologyScrollbarPos,
-		scrollbarPos,
-		setScrollbarPos,
 	} = props;
 
 	const setCurrentLabelHandler = useCallback(
@@ -290,8 +267,6 @@ const AtlasImages: FC<Props> = (props) => {
 			/>
 
 			<Scrollbars
-				scrollbarPos={scrollbarPos}
-				setScrollbarPos={setScrollbarPos}
 				histologyScrollbarPos={histologyScrollbarPos}
 				setHistologyScrollbarPos={setHistologyScrollbarPos}
 				histologyImageCoords={histologyImageCoords}
