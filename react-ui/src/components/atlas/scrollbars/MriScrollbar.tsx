@@ -4,6 +4,7 @@ import mriCoordinatesKey from "../../utils/mriCoordinatesKey";
 import getMouseCoords from "../../utils/getmouseCoords";
 
 import { ScrollbarPos } from "../../../models/scrollbarPos.model";
+import { MriCoords } from "../../../models/mriCoords.model";
 
 import "./MriScrollbar.css";
 
@@ -11,35 +12,65 @@ interface Props {
 	plane: string;
 	scrollbarPos: ScrollbarPos;
 	setScrollbarPos: (newMriPos: ScrollbarPos) => void;
+	adjustMriCoordsFromScrollbar: (newSliceNumber: number, plane: string) => void;
+	mriImageCoords: MriCoords | null;
 }
 
 const MriScrollbar: FC<Props> = (props) => {
-	const [currentScrollbarPos, setCurrentScrollbarPos] = useState(70);
+	const [currentScrollbarPos, setCurrentScrollbarPos] = useState(
+		props.scrollbarPos[props.plane]
+	);
 
-	const { plane, scrollbarPos, setScrollbarPos } = props;
+	const {
+		plane,
+		scrollbarPos,
+		setScrollbarPos,
+		adjustMriCoordsFromScrollbar,
+		mriImageCoords,
+	} = props;
 
 	useEffect(() => {
 		// determine the scrollbar position for the current mri plane
+		console.log(mriImageCoords);
 
-		const currentMriPlaneScrollbarPos = scrollbarPos[plane];
+		// const scrollbarLength = 272;
+		// const currentMriSliceNumber = mriImageCoords![plane]["slice"];
+		// const slicesInPlane = +mriCoordinatesKey[plane]["slices"];
+		// const currentSliceAsProportion = currentMriSliceNumber / slicesInPlane;
 
-		setCurrentScrollbarPos(currentMriPlaneScrollbarPos);
-	}, [plane, scrollbarPos]);
+		// const newMriScrollbarPos = +(
+		// 	scrollbarLength * currentSliceAsProportion
+		// ).toFixed(0);
+
+		// console.log(newMriScrollbarPos);
+
+		// //const currentMriPlaneScrollbarPos = scrollbarPos[plane];
+		// setCurrentScrollbarPos(newMriScrollbarPos);
+	}, [plane, scrollbarPos, mriImageCoords]);
 
 	const updateScrollbarPos = (e: React.MouseEvent) => {
-		const { mouseX, mouseY } = getMouseCoords(e);
+		const { mouseY } = getMouseCoords(e);
 
-		console.log(mouseX, mouseY);
+		const scrollbarLength = 272;
 
-		const maxScrollValue = +mriCoordinatesKey[plane]["slices"];
-		const newScrollValue = mouseY / maxScrollValue;
+		const slicesInPlane = +mriCoordinatesKey[plane]["slices"];
+		//const newScrollValue = mouseY / slicesInPlane;
 
-		// method for positioning the scrollbar based on the max number of slices in a histology block
-		// const histologySliceNumber = (mouseY / maxHistologyScrollValue) * maxHistologySliceNumber;
+		// method for positioning the scrollbar based on the max number of slices in the mri plane
+		const newMriSliceNumber = (mouseY / scrollbarLength) * slicesInPlane;
 
-		console.log(newScrollValue);
+		console.log(mouseY);
+		console.log(slicesInPlane);
+		console.log(newMriSliceNumber.toFixed(0));
 
 		setScrollbarPos({ sagittal: 100, coronal: 10, axial: 200 });
+
+		try {
+			adjustMriCoordsFromScrollbar(newMriSliceNumber, plane);
+			setCurrentScrollbarPos(mouseY);
+		} catch {
+			console.log("error found when adjusting histology scrollbar");
+		}
 	};
 
 	return (

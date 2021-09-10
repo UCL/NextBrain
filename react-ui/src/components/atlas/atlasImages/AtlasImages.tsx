@@ -100,7 +100,6 @@ const AtlasImages: FC<Props> = (props) => {
 			setIsLoading(true);
 			try {
 				// args: plane, slice, mouseX, mouseY
-				// argument order is different for other planes
 				await updateAtlasImages("axial", 111, 97, 338);
 			} catch {
 				setError("error building atlas");
@@ -243,6 +242,23 @@ const AtlasImages: FC<Props> = (props) => {
 		);
 	};
 
+	const adjustMriCoordsFromScrollbar = async (
+		newSliceNumber: number,
+		plane: string
+	) => {
+		console.log(plane);
+		console.log(newSliceNumber);
+		console.log(mriImageCoords);
+		console.log(histologyImageCoords);
+
+		updateAtlasImages(
+			plane,
+			Number(+newSliceNumber.toFixed(0)),
+			Number(mriImageCoords![plane].mouseX),
+			Number(mriImageCoords![plane].mouseY)
+		);
+	};
+
 	if (mriImageCoords === null) {
 		return (
 			<>
@@ -280,6 +296,8 @@ const AtlasImages: FC<Props> = (props) => {
 				setHistologyScrollbarPos={setHistologyScrollbarPos}
 				histologyImageCoords={histologyImageCoords}
 				adjustHistologyCoordsFromScrollbar={adjustHistologyCoordsFromScrollbar}
+				adjustMriCoordsFromScrollbar={adjustMriCoordsFromScrollbar}
+				mriImageCoords={mriImageCoords}
 			/>
 		</div>
 	);
