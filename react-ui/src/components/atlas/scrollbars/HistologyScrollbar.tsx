@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 
 import histologySliceMap from "../../utils/histologySliceMap";
 import getMouseCoords from "../../utils/getmouseCoords";
@@ -14,12 +14,30 @@ interface Props {
 }
 
 const HistologyScrollbar: FC<Props> = (props) => {
-	const {
-		histologyScrollbarPos,
-		setHistologyScrollbarPos,
-		histologyImageCoords,
-		adjustHistologyCoordsFromScrollbar,
-	} = props;
+	const [scrollbarPos, setScrollbarPos] = useState(0);
+
+	const { histologyImageCoords, adjustHistologyCoordsFromScrollbar } = props;
+
+	useEffect(() => {
+		// determine the scrollbar position for the current histology slice
+		console.log(histologyImageCoords);
+
+		const scrollbarLength = 824;
+		const currentHistologySliceNumber = histologyImageCoords!.coords.slice;
+		const currentBlock = histologyImageCoords!.currentBlock;
+		const slicesInBlock = histologySliceMap[currentBlock]["slices"];
+		const currentSliceAsProportion =
+			currentHistologySliceNumber / slicesInBlock;
+
+		const newHistologyScrollbarPos = +(
+			scrollbarLength * currentSliceAsProportion
+		).toFixed(0);
+
+		console.log(newHistologyScrollbarPos);
+
+		//const currentMriPlaneScrollbarPos = scrollbarPos[plane];
+		setScrollbarPos(newHistologyScrollbarPos);
+	}, [histologyImageCoords]);
 
 	const updateHistologyScrollbarPos = (e: React.MouseEvent) => {
 		const { mouseY } = getMouseCoords(e);
@@ -38,7 +56,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 
 		try {
 			adjustHistologyCoordsFromScrollbar(newHistologySliceNumber);
-			setHistologyScrollbarPos(mouseY);
+			setScrollbarPos(mouseY);
 		} catch {
 			console.log("error found when adjusting histology scrollbar");
 		}
@@ -51,7 +69,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		>
 			<svg
 				className="histology-scrollbar-widget"
-				style={{ top: `${histologyScrollbarPos}px` }}
+				style={{ top: `${scrollbarPos}px` }}
 			></svg>
 		</div>
 	);

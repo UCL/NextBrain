@@ -236,7 +236,7 @@ const AtlasImages: FC<Props> = (props) => {
 		);
 	};
 
-	if (mriImageCoords === null) {
+	if (mriImageCoords === null || histologyImageCoords === null) {
 		return (
 			<>
 				<ErrorModal error={error} onClear={() => setError(null)} />
