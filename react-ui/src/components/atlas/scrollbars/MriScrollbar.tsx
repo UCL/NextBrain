@@ -10,7 +10,7 @@ import "./MriScrollbar.css";
 interface Props {
 	plane: string;
 	scrollbarPos: ScrollbarPos;
-	setScrollbarPos: (mouseY: number) => void;
+	setScrollbarPos: (newMriPos: ScrollbarPos) => void;
 }
 
 const MriScrollbar: FC<Props> = (props) => {
@@ -39,7 +39,7 @@ const MriScrollbar: FC<Props> = (props) => {
 
 		console.log(newScrollValue);
 
-		setScrollbarPos(mouseY);
+		setScrollbarPos({ sagittal: 100, coronal: 10, axial: 200 });
 	};
 
 	return (

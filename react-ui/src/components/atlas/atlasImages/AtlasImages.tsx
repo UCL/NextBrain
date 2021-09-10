@@ -31,7 +31,7 @@ interface Props {
 	histologyScrollbarPos: number;
 	setHistologyScrollbarPos: (mouseY: number) => void;
 	scrollbarPos: ScrollbarPos;
-	setScrollbarPos: (mouseY: number) => void;
+	setScrollbarPos: (newMriPos: ScrollbarPos) => void;
 }
 
 // const initMriCoords = {

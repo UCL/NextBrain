@@ -9,7 +9,7 @@ import "./Scrollbars.css";
 
 interface Props {
 	scrollbarPos: ScrollbarPos;
-	setScrollbarPos: (mouseY: number) => void;
+	setScrollbarPos: (newMriPos: ScrollbarPos) => void;
 	histologyScrollbarPos: number;
 	setHistologyScrollbarPos: (mouseY: number) => void;
 	histologyImageCoords: HistologyCoords | null;
