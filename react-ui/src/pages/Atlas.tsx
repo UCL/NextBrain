@@ -4,7 +4,7 @@ import AtlasImages from "../components/atlas/atlasImages/AtlasImages";
 import AtlasOptions from "../components/atlas/atlasOptions/AtlasOptions";
 //import Scrollbars from "../components/atlas/scrollbars/Scrollbars";
 import { CurrentLabel } from "../models/label.model";
-//import { ScrollbarPos } from "../models/scrollbarPos.model";
+import { ScrollbarPos } from "../models/scrollbarPos.model";
 
 import "./Atlas.css";
 
@@ -15,7 +15,11 @@ const Atlas: FC = () => {
 	const [labelsTransparency, setLabelsTransparency] = useState("0.5");
 	const [currentLabel, setCurrentLabel] = useState<CurrentLabel>([]);
 	const [histologyScrollbarPos, setHistologyScrollbarPos] = useState(0);
-	const [scrollbarPos, setScrollbarPos] = useState(0);
+	const [scrollbarPos, setScrollbarPos] = useState<ScrollbarPos>({
+		sagittal: 10,
+		coronal: 30,
+		axial: 70,
+	});
 
 	return (
 		<main className="atlas-container">

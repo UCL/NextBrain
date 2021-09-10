@@ -3,16 +3,17 @@ import { FC } from "react";
 import MriScrollbar from "./MriScrollbar";
 import HistologyScrollbar from "./HistologyScrollbar";
 import { HistologyCoords } from "../../../models/histologyCoords.model";
+import { ScrollbarPos } from "../../../models/scrollbarPos.model";
 
 import "./Scrollbars.css";
 
 interface Props {
-	scrollbarPos: number;
+	scrollbarPos: ScrollbarPos;
 	setScrollbarPos: (mouseY: number) => void;
 	histologyScrollbarPos: number;
 	setHistologyScrollbarPos: (mouseY: number) => void;
 	histologyImageCoords: HistologyCoords | null;
-	adjustCoordsFromScrollbar: (newSliceNumber: number) => void;
+	adjustHistologyCoordsFromScrollbar: (newSliceNumber: number) => void;
 }
 
 const Scrollbars: FC<Props> = (props) => {
@@ -22,8 +23,10 @@ const Scrollbars: FC<Props> = (props) => {
 		histologyScrollbarPos,
 		setHistologyScrollbarPos,
 		histologyImageCoords,
-		adjustCoordsFromScrollbar,
+		adjustHistologyCoordsFromScrollbar,
 	} = props;
+
+	// disable scrollbars while in hi-res mode?
 
 	return (
 		<>
@@ -49,7 +52,7 @@ const Scrollbars: FC<Props> = (props) => {
 				histologyScrollbarPos={histologyScrollbarPos}
 				setHistologyScrollbarPos={setHistologyScrollbarPos}
 				histologyImageCoords={histologyImageCoords}
-				adjustCoordsFromScrollbar={adjustCoordsFromScrollbar}
+				adjustHistologyCoordsFromScrollbar={adjustHistologyCoordsFromScrollbar}
 			/>
 		</>
 	);

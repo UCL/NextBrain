@@ -10,7 +10,7 @@ interface Props {
 	histologyScrollbarPos: number;
 	setHistologyScrollbarPos: (mouseY: number) => void;
 	histologyImageCoords: HistologyCoords | null;
-	adjustCoordsFromScrollbar: (newSliceNumber: number) => void;
+	adjustHistologyCoordsFromScrollbar: (newSliceNumber: number) => void;
 }
 
 const HistologyScrollbar: FC<Props> = (props) => {
@@ -18,7 +18,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		histologyScrollbarPos,
 		setHistologyScrollbarPos,
 		histologyImageCoords,
-		adjustCoordsFromScrollbar,
+		adjustHistologyCoordsFromScrollbar,
 	} = props;
 
 	const updateHistologyScrollbarPos = (e: React.MouseEvent) => {
@@ -37,7 +37,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		console.log(newHistologySliceNumber.toFixed(0));
 
 		try {
-			adjustCoordsFromScrollbar(newHistologySliceNumber);
+			adjustHistologyCoordsFromScrollbar(newHistologySliceNumber);
 			setHistologyScrollbarPos(mouseY);
 		} catch {
 			console.log("error found when adjusting histology scrollbar");

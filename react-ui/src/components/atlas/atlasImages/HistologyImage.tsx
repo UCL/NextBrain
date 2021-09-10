@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, SyntheticEvent } from "react";
+import React, { FC, useState, useEffect, SyntheticEvent } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import LoadingSpinner from "../../shared/LoadingSpinner";

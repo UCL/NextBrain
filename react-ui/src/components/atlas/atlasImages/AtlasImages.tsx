@@ -18,6 +18,7 @@ import Scrollbars from "../scrollbars/Scrollbars";
 import { CurrentLabel } from "../../../models/label.model";
 import { MriCoords } from "../../../models/mriCoords.model";
 import { HistologyCoords } from "../../../models/histologyCoords.model";
+import { ScrollbarPos } from "../../../models/scrollbarPos.model";
 
 import "./AtlasImages.css";
 
@@ -29,7 +30,7 @@ interface Props {
 	setCurrentLabel: (currentLabel: CurrentLabel) => void;
 	histologyScrollbarPos: number;
 	setHistologyScrollbarPos: (mouseY: number) => void;
-	scrollbarPos: number;
+	scrollbarPos: ScrollbarPos;
 	setScrollbarPos: (mouseY: number) => void;
 }
 
@@ -212,7 +213,7 @@ const AtlasImages: FC<Props> = (props) => {
 		);
 	};
 
-	const adjustCoordsFromScrollbar = async (newSliceNumber: number) => {
+	const adjustHistologyCoordsFromScrollbar = async (newSliceNumber: number) => {
 		console.log(mriImageCoords);
 		console.log(histologyImageCoords);
 
@@ -278,7 +279,7 @@ const AtlasImages: FC<Props> = (props) => {
 				histologyScrollbarPos={histologyScrollbarPos}
 				setHistologyScrollbarPos={setHistologyScrollbarPos}
 				histologyImageCoords={histologyImageCoords}
-				adjustCoordsFromScrollbar={adjustCoordsFromScrollbar}
+				adjustHistologyCoordsFromScrollbar={adjustHistologyCoordsFromScrollbar}
 			/>
 		</div>
 	);
