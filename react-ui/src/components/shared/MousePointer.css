@@ -15,6 +15,7 @@
 	width: 32px;
 	height: 32px;
 	transform: translate(-2px, -501px);
+	z-index: 2;
 }
 .mouse-pointer:before,
 .mouse-pointer:after {

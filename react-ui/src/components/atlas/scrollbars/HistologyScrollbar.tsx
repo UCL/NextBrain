@@ -63,7 +63,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 
 	return (
 		<div
-			className="histology-scrollbar-container"
+			className="scrollbar histology-scrollbar-container"
 			onClick={(e) => updateHistologyScrollbarPos(e)}
 		>
 			<svg

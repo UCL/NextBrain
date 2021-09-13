@@ -64,7 +64,7 @@ const MriScrollbar: FC<Props> = (props) => {
 
 	return (
 		<div
-			className={`mri-scrollbar-container`}
+			className={`scrollbar mri-scrollbar-container`}
 			onClick={(e) => updateScrollbarPos(e)}
 		>
 			<svg

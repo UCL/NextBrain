@@ -1,3 +1,7 @@
+.scrollbar {
+	border: 1px solid grey;
+}
+
 .mri-scrollbar-container {
 	position: relative;
 	height: 270px;

@@ -1,6 +1,6 @@
 .atlas-imgs-container {
 	display: grid;
-	grid-template-columns: 1fr 0.1fr 2.5fr 0.1fr;
+	grid-template-columns: 1fr 0.1fr 2.4fr 0.1fr;
 	grid-template-rows: 1fr 1fr 1fr;
 	row-gap: 5px;
 	column-gap: 5px;
@@ -14,7 +14,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid black;
+	/* border: 1px solid black; */
 }
 
 .atlas-imgs-container .mri-img {
@@ -39,7 +39,7 @@
 .atlas-imgs-container .histology-container {
 	grid-area: histology-container;
 	margin-left: 25px;
-	background-color: black;
+	background-color: white;
 }
 
 .mri-sagittal-scrollbar {
