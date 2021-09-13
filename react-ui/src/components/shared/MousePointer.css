@@ -1,4 +1,4 @@
-.mouse-pointer {
+/* .mouse-pointer {
 	position: absolute;
 	width: 7px;
 	height: 7px;
@@ -8,4 +8,23 @@
 	z-index: 5;
 	pointer-events: none;
 	transform: translate(-5px, -5px);
+} */
+
+.mouse-pointer {
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	transform: translate(-2px, -501px);
+}
+.mouse-pointer:before,
+.mouse-pointer:after {
+	position: absolute;
+	content: " ";
+	height: 1000px;
+	width: 1px;
+	background-color: white;
+	overflow: hidden;
+}
+.mouse-pointer:after {
+	transform: rotate(-90deg);
 }

@@ -35,7 +35,6 @@ const HistologyScrollbar: FC<Props> = (props) => {
 
 		console.log(newHistologyScrollbarPos);
 
-		//const currentMriPlaneScrollbarPos = scrollbarPos[plane];
 		setScrollbarPos(newHistologyScrollbarPos);
 	}, [histologyImageCoords]);
 
@@ -45,6 +44,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		const currentBlock = histologyImageCoords!.currentBlock;
 		const slicesInBlock = histologySliceMap[currentBlock]["slices"];
 
+		// look into improving this, is it necessary to hard code this value? Same for the mri scrollbars
 		const scrollbarLength = 824;
 
 		// method for positioning the scrollbar based on the max number of slices in a histology block
@@ -56,7 +56,6 @@ const HistologyScrollbar: FC<Props> = (props) => {
 
 		try {
 			adjustHistologyCoordsFromScrollbar(newHistologySliceNumber);
-			setScrollbarPos(mouseY);
 		} catch {
 			console.log("error found when adjusting histology scrollbar");
 		}

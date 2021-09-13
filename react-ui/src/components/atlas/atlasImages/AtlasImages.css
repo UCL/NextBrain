@@ -21,6 +21,7 @@
 	width: 270px;
 	height: 270px;
 	background-color: black;
+	overflow: hidden;
 }
 
 .atlas-imgs-container .mri-img.sagittal {
