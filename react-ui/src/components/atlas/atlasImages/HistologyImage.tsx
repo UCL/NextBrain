@@ -224,7 +224,7 @@ const HistologyImage: FC<Props> = (props) => {
 						></img>
 					)}
 
-					{showHiRes && (
+					{/* {showHiRes && (
 						<TransformWrapper
 							//disabled={true}
 							wheel={{ disabled: false }}
@@ -256,7 +256,7 @@ const HistologyImage: FC<Props> = (props) => {
 								</>
 							)}
 						</TransformWrapper>
-					)}
+					)} */}
 
 					{showHiRes && (
 						<TransformWrapper

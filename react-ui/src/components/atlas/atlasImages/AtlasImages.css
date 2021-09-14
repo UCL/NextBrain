@@ -1,6 +1,6 @@
 .atlas-imgs-container {
 	display: grid;
-	grid-template-columns: 1fr 0.1fr 2.4fr 0.1fr;
+	grid-template-columns: 1fr 25px 2.4fr 25px;
 	grid-template-rows: 1fr 1fr 1fr;
 	row-gap: 5px;
 	column-gap: 5px;
