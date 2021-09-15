@@ -28,10 +28,12 @@ const Scrollbars: FC<Props> = (props) => {
 	} = props;
 
 	// disable scrollbars while in hi-res mode?
+	// mri scrollbars have been disabled for now as they are not a priority
+	// the mri scrollbars should apparently adjust x and y values, not slices (so 2 scrollbars for each mri plane)
 
 	return (
 		<>
-			<MriScrollbar
+			{/* <MriScrollbar
 				plane="sagittal"
 				adjustMriCoordsFromScrollbar={adjustMriCoordsFromScrollbar}
 				mriImageCoords={mriImageCoords}
@@ -47,7 +49,7 @@ const Scrollbars: FC<Props> = (props) => {
 				plane="axial"
 				adjustMriCoordsFromScrollbar={adjustMriCoordsFromScrollbar}
 				mriImageCoords={mriImageCoords}
-			/>
+			/> */}
 
 			<HistologyScrollbar
 				histologyScrollbarPos={histologyScrollbarPos}
