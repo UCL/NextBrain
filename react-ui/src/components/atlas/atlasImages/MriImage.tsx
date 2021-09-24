@@ -9,6 +9,7 @@ import { MriCoords } from "../../../models/mriCoords.model";
 import "./MriImage.css";
 
 interface Props {
+	patientId: string;
 	plane: string;
 	mriImageCoords: MriCoords | null;
 	showHiRes: boolean;
@@ -23,7 +24,13 @@ const MriImage: FC<Props> = (props) => {
 	const [mriImage, setMriImage] = useState("");
 	const [currentSlice, setCurrentSlice] = useState("");
 
-	const { plane, mriImageCoords, showHiRes, computeMriImagesHandler } = props;
+	const {
+		patientId,
+		plane,
+		mriImageCoords,
+		showHiRes,
+		computeMriImagesHandler,
+	} = props;
 
 	// useEffect(() => {
 	// 	preloadMriImages();
@@ -40,17 +47,17 @@ const MriImage: FC<Props> = (props) => {
 
 		try {
 			const mriImage =
-				require(`../../../assets/P57-16/mri_rotated/slices_${plane}_webp/slice_${paddedSlice}.webp`).default;
+				require(`../../../assets/${patientId}/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`).default;
 
 			setMriImage(mriImage);
 			setCurrentSlice(paddedSlice);
 		} catch {
 			console.log(
-				`%cerror, could not resolve path: assets/P57-16/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`,
+				`%cerror, could not resolve path: assets/${patientId}/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`,
 				"color: red"
 			);
 		}
-	}, [mriImageCoords, plane]);
+	}, [mriImageCoords, plane, patientId]);
 
 	// used for loading all images at page load and adding them to the cache for quicker subsequent loading
 	// const preloadMriImages = () => {

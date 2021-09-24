@@ -7,18 +7,20 @@ import getMouseCoords from "../../utils/getmouseCoords";
 import { MriCoords } from "../../../models/mriCoords.model";
 
 interface Props {
+	patientId: string;
 	mriImageCoords: MriCoords | null;
 	showHiRes: boolean;
 	updateAtlasImages: (
 		plane: string,
 		currentSlice: number,
 		mouseX: number,
-		mouseY: number
+		mouseY: number,
+		patientId: string
 	) => void;
 }
 
 const MriImages: FC<Props> = (props) => {
-	const { mriImageCoords, showHiRes, updateAtlasImages } = props;
+	const { patientId, mriImageCoords, showHiRes, updateAtlasImages } = props;
 
 	const computeMriImagesHandler = (
 		e: React.MouseEvent<Element, MouseEvent>,
@@ -35,7 +37,13 @@ const MriImages: FC<Props> = (props) => {
 
 		if (!mouseIsWithinBounds) return;
 
-		updateAtlasImages(plane, mriImageCoords![plane]["slice"], mouseX, mouseY);
+		updateAtlasImages(
+			plane,
+			mriImageCoords![plane]["slice"],
+			mouseX,
+			mouseY,
+			patientId
+		);
 	};
 
 	const determineMouseBoundariesMri = (
@@ -81,6 +89,7 @@ const MriImages: FC<Props> = (props) => {
 				mriImageCoords={mriImageCoords}
 				showHiRes={showHiRes}
 				computeMriImagesHandler={computeMriImagesHandler}
+				patientId={patientId}
 			/>
 
 			<MriImage
@@ -88,6 +97,7 @@ const MriImages: FC<Props> = (props) => {
 				mriImageCoords={mriImageCoords}
 				showHiRes={showHiRes}
 				computeMriImagesHandler={computeMriImagesHandler}
+				patientId={patientId}
 			/>
 
 			<MriImage
@@ -95,6 +105,7 @@ const MriImages: FC<Props> = (props) => {
 				mriImageCoords={mriImageCoords}
 				showHiRes={showHiRes}
 				computeMriImagesHandler={computeMriImagesHandler}
+				patientId={patientId}
 			/>
 		</>
 	);

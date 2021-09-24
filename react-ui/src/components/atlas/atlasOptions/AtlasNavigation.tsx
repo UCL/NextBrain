@@ -1,32 +1,35 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 
+import atlasNavigationData from "../../../assets/atlas_navigation_data.json";
 import DropdownTreeSelect from "react-dropdown-tree-select";
 import "react-dropdown-tree-select/dist/styles.css";
 
 import "./AtlasNavigation.css";
 
-const AtlasNavigation: FC = () => {
-	const data = {
-		label: "Left Cerebral White Matter",
-		value: "lcwm",
-		children: [
-			{
-				label: "Frontomarginal gyrus",
-				value: "fmg",
-			},
-			{
-				label: "White matter of forebrain",
-				value: "wmof",
-			},
-		],
-	};
+interface Props {
+	getCentroid: (blockNumber: number) => void;
+}
+
+const AtlasNavigation: FC<Props> = (props) => {
+	const { getCentroid } = props;
 
 	const onChange = (currentNode: any, selectedNodes: any) => {
 		console.log("onChange::", currentNode, selectedNodes);
+
+		const currentNodeData = currentNode.data;
+
+		if (currentNodeData === undefined) {
+			console.log("navigation coords could not be found");
+			return;
+		}
+
+		getCentroid(currentNodeData);
 	};
+
 	const onAction = (node: any, action: any) => {
 		console.log("onAction::", action, node);
 	};
+
 	const onNodeToggle = (currentNode: any) => {
 		console.log("onNodeToggle::", currentNode);
 	};
@@ -34,7 +37,7 @@ const AtlasNavigation: FC = () => {
 	return (
 		<DropdownTreeSelect
 			className="atlas-navigation2"
-			data={data}
+			data={atlasNavigationData}
 			onChange={onChange}
 			onAction={onAction}
 			onNodeToggle={onNodeToggle}
@@ -47,4 +50,4 @@ const AtlasNavigation: FC = () => {
 	);
 };
 
-export default AtlasNavigation;
+export default memo(AtlasNavigation);

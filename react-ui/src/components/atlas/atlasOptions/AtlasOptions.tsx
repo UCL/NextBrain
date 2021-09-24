@@ -21,6 +21,7 @@ interface Props {
 	labelsTransparency: string;
 	setLabelsTransparency: (labelsTransparency: string) => void;
 	currentLabel: CurrentLabel;
+	getCentroid: (blockNumber: number) => void;
 }
 
 const AtlasOptions: FC<Props> = (props) => {
@@ -34,11 +35,12 @@ const AtlasOptions: FC<Props> = (props) => {
 		labelsTransparency,
 		setLabelsTransparency,
 		currentLabel,
+		getCentroid,
 	} = props;
 
 	return (
 		<div className="options-container">
-			<AtlasNavigation />
+			<AtlasNavigation getCentroid={getCentroid} />
 
 			<LabelsBtn showLabels={showLabels} setShowLabels={setShowLabels} />
 

@@ -14,7 +14,8 @@ const calculateHistologyImageCoords = async (
 	adjustedSlice: number,
 	adjustedMouseX: number,
 	adjustedMouseY: number,
-	newMriCoords: MriCoords
+	newMriCoords: MriCoords,
+	patientId: string
 ) => {
 	const currentBlock = await getCurrentBlock(
 		currentPlane,
@@ -23,14 +24,15 @@ const calculateHistologyImageCoords = async (
 		mouseY,
 		adjustedSlice,
 		adjustedMouseX,
-		adjustedMouseY
+		adjustedMouseY,
+		patientId
 	);
 
 	console.log("current block: " + currentBlock);
 
 	if (currentBlock === 0 || currentBlock === undefined) return "no block found";
 
-	const matrix = await getMatrix(currentBlock, "mri");
+	const matrix = await getMatrix(currentBlock, "mri", patientId);
 
 	if (matrix === undefined) return "no matrix found";
 
@@ -76,7 +78,8 @@ const getCurrentBlock = async (
 	mouseY: number,
 	adjustedSlice: number,
 	adjustedMouseX: number,
-	adjustedMouseY: number
+	adjustedMouseY: number,
+	patientId: string
 ) => {
 	let currentBlock;
 	let n = new npyjs();
@@ -87,7 +90,7 @@ const getCurrentBlock = async (
 
 	// need to wrap this in a try catch block
 	let npyFile =
-		await require(`../../assets/P57-16/mri_rotated/indices_${currentPlane}/slice_${paddedSlice}.npy`)
+		await require(`../../assets/${patientId}/mri_rotated/indices_${currentPlane}/slice_${paddedSlice}.npy`)
 			.default;
 
 	const npyArray = await n.load(npyFile);

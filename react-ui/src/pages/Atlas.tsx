@@ -1,24 +1,76 @@
-import { FC, useState } from "react";
+import { FC, useState, useCallback } from "react";
 
 import AtlasImages from "../components/atlas/atlasImages/AtlasImages";
 import AtlasOptions from "../components/atlas/atlasOptions/AtlasOptions";
 //import Scrollbars from "../components/atlas/scrollbars/Scrollbars";
 import { CurrentLabel } from "../models/label.model";
 import { ScrollbarPos } from "../models/scrollbarPos.model";
+import getMatrix from "../components/utils/getMatrix";
+import matrixMultiplier from "../components/utils/matrixMultiplier";
 
 import "./Atlas.css";
 
 const Atlas: FC = () => {
+	const [patientId, setPatientId] = useState("P57-16_updated");
 	const [channel, setChannel] = useState("LFB");
 	const [showHiRes, setShowHiRes] = useState(false);
 	const [showLabels, setShowLabels] = useState(false);
 	const [labelsTransparency, setLabelsTransparency] = useState("0.5");
 	const [currentLabel, setCurrentLabel] = useState<CurrentLabel>([]);
 	const [histologyScrollbarPos, setHistologyScrollbarPos] = useState(0);
+	const [centroid, setCentroid] = useState<any>();
+
+	// useCallback prevents unnecessary re-render of child component (AtlasNavigation.tsx)
+	const getCentroid = useCallback(
+		async (navCoords: any) => {
+			const matrix = await getMatrix(navCoords!.block, "histology", patientId);
+
+			const coords = matrixMultiplier(matrix, [
+				navCoords!.yh,
+				navCoords!.xh,
+				navCoords!.zh,
+				1,
+			]);
+
+			console.log(coords);
+
+			setCentroid(coords);
+		},
+		[patientId]
+	);
+
+	// this will need to be moved up a level to pass down to AtlasOptions
+	// const adjustHistologyCoordsFromNavigationTree = async (navCoords: any) => {
+	// 	console.log(navCoords);
+
+	// 	const matrix = await getMatrix(navCoords!.block, "histology", patientId);
+
+	// 	const coords = matrixMultiplier(matrix, [
+	// 		navCoords!.yh,
+	// 		navCoords!.xh,
+	// 		navCoords!.zh,
+	// 		1,
+	// 	]);
+
+	// 	const { resultX, resultY, resultZ } = coords;
+
+	// 	console.log(coords);
+
+	// 	// axial is picked arbitrarily here
+	// 	// it could be any of the planes as long as the order of params is entered correctly
+	// 	updateAtlasImages(
+	// 		"axial",
+	// 		Number(resultZ.toFixed(0)),
+	// 		Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
+	// 		Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
+	// 		patientId
+	// 	);
+	// };
 
 	return (
 		<main className="atlas-container">
 			<AtlasImages
+				patientId={patientId}
 				channel={channel}
 				showHiRes={showHiRes}
 				showLabels={showLabels}
@@ -26,6 +78,7 @@ const Atlas: FC = () => {
 				setCurrentLabel={setCurrentLabel}
 				histologyScrollbarPos={histologyScrollbarPos}
 				setHistologyScrollbarPos={setHistologyScrollbarPos}
+				centroid={centroid}
 			/>
 
 			<AtlasOptions
@@ -38,6 +91,7 @@ const Atlas: FC = () => {
 				labelsTransparency={labelsTransparency}
 				setLabelsTransparency={setLabelsTransparency}
 				currentLabel={currentLabel}
+				getCentroid={getCentroid}
 			/>
 
 			{/* <Scrollbars

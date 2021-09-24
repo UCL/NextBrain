@@ -1,6 +1,10 @@
 // a helper function that load in a matrix txt file
 
-const getMatrix = async (currentBlock: number, type: string) => {
+const getMatrix = async (
+	currentBlock: number,
+	type: string,
+	patientId: string
+) => {
 	let readTxt = new txtToArray();
 
 	const paddedBlock = currentBlock.toString().padStart(2, "0");
@@ -8,21 +12,23 @@ const getMatrix = async (currentBlock: number, type: string) => {
 	let txtFile;
 	if (type === "mri") {
 		txtFile =
-			await require(`../../assets/P57-16/mri/matrices/block_${paddedBlock}.txt`)
+			await require(`../../assets/${patientId}/mri_rotated/matrices/block_${paddedBlock}.txt`)
 				.default;
 	}
 
 	if (type === "histology") {
 		txtFile =
-			await require(`../../assets/P57-16/histology/${paddedBlock}/matrix.txt`)
+			await require(`../../assets/${patientId}/histology/${paddedBlock}/matrix.txt`)
 				.default;
 	}
 
-	if (type === "histology_hr") {
-		txtFile =
-			await require(`../../assets/P57-16/histology_hr/${paddedBlock}/matrix.txt`)
-				.default;
-	}
+	// need to update this to the latest updated url when hr is available
+	// for now, we are not doing any navigation from histology_hr, so no matrix is needed (this may change in the future)
+	// if (type === "histology_hr") {
+	// 	txtFile =
+	// 		await require(`../../assets/P57-16/histology_hr/${paddedBlock}/matrix.txt`)
+	// 			.default;
+	// }
 
 	const matrix = await readTxt.load(txtFile);
 

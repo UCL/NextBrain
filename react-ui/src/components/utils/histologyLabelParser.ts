@@ -9,13 +9,15 @@ const histologyLabelParser = async (
 	mouseX: number,
 	mouseY: number,
 	histologyImageCoords: HistologyCoords,
-	type: string
+	type: string,
+	patientId: string
 ) => {
 	const currentLabelNumber = await getCurrentLabelNumber(
 		mouseX,
 		mouseY,
 		histologyImageCoords,
-		type
+		type,
+		patientId
 	);
 
 	console.log(mouseX, mouseY, histologyImageCoords, type);
@@ -29,7 +31,8 @@ const getCurrentLabelNumber = async (
 	mouseX: number,
 	mouseY: number,
 	histologyImageCoords: HistologyCoords,
-	type: string
+	type: string,
+	patientId: string
 ) => {
 	// label numbers are extracted from multi dimensional numpy arrays
 	// the numpy array takes in x and y mouse coordinates to point to an index
@@ -47,6 +50,8 @@ const getCurrentLabelNumber = async (
 
 	let npyFile;
 
+	// the npy files are missing from the updated folder for the labels
+	// I need the npy files to parse the label (I think)
 	if (type === "lowRes") {
 		npyFile =
 			await require(`../../assets/P57-16/histology/${paddedBlock}/slices_labels/slice_${paddedSlice}.npy`)
@@ -82,8 +87,7 @@ const parseLabel = async (currentLabelNumber: number, type: string) => {
 	let labelsFile;
 
 	if (type === "lowRes") {
-		labelsFile = await require(`../../assets/P57-16/histology/lookup_table.txt`)
-			.default;
+		labelsFile = await require(`../../assets/lookup_table.txt`).default;
 	}
 
 	// if (type === "hiRes") {

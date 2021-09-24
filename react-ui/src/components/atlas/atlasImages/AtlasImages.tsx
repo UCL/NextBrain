@@ -22,6 +22,7 @@ import { HistologyCoords } from "../../../models/histologyCoords.model";
 import "./AtlasImages.css";
 
 interface Props {
+	patientId: string;
 	channel: string;
 	showHiRes: boolean;
 	showLabels: boolean;
@@ -29,6 +30,7 @@ interface Props {
 	setCurrentLabel: (currentLabel: CurrentLabel) => void;
 	histologyScrollbarPos: number;
 	setHistologyScrollbarPos: (mouseY: number) => void;
+	centroid: any;
 }
 
 const AtlasImages: FC<Props> = (props) => {
@@ -39,6 +41,7 @@ const AtlasImages: FC<Props> = (props) => {
 		useState<HistologyCoords | null>(null);
 
 	const {
+		patientId,
 		channel,
 		showHiRes,
 		showLabels,
@@ -46,30 +49,34 @@ const AtlasImages: FC<Props> = (props) => {
 		setCurrentLabel,
 		histologyScrollbarPos,
 		setHistologyScrollbarPos,
+		centroid,
 	} = props;
 
-	const setCurrentLabelHandler = useCallback(
-		async (
-			mouseX: number,
-			mouseY: number,
-			histologyImageCoords: HistologyCoords,
-			type: string
-		) => {
-			console.log("getting current histology label");
+	console.log(centroid);
 
-			//const { mouseX, mouseY } = getMouseCoords(e);
+	// const setCurrentLabelHandler = useCallback(
+	// 	async (
+	// 		mouseX: number,
+	// 		mouseY: number,
+	// 		histologyImageCoords: HistologyCoords,
+	// 		type: string
+	// 	) => {
+	// 		console.log("getting current histology label");
 
-			const currentLabel = await histologyLabelParser(
-				mouseX,
-				mouseY,
-				histologyImageCoords,
-				type
-			);
+	// 		//const { mouseX, mouseY } = getMouseCoords(e);
 
-			setCurrentLabel(currentLabel);
-		},
-		[setCurrentLabel]
-	);
+	// 		const currentLabel = await histologyLabelParser(
+	// 			mouseX,
+	// 			mouseY,
+	// 			histologyImageCoords,
+	// 			type,
+	// 			patientId
+	// 		);
+
+	// 		setCurrentLabel(currentLabel);
+	// 	},
+	// 	[setCurrentLabel, patientId]
+	// );
 
 	useEffect(() => {
 		// initialize mri panels based on an arbitrary starting point
@@ -77,7 +84,7 @@ const AtlasImages: FC<Props> = (props) => {
 			setIsLoading(true);
 			try {
 				// args: plane, slice, mouseX, mouseY
-				await updateAtlasImages("axial", 111, 97, 338);
+				await updateAtlasImages("axial", 111, 97, 338, patientId);
 			} catch {
 				setError("error building atlas");
 			}
@@ -85,27 +92,46 @@ const AtlasImages: FC<Props> = (props) => {
 		};
 
 		buildAtlas();
-	}, []);
+	}, [patientId]);
+
+	// useEffect(() => {
+	// 	if (histologyImageCoords !== null && mriImageCoords !== null) {
+	// 		setCurrentLabelHandler(
+	// 			histologyImageCoords.coords.mouseX,
+	// 			histologyImageCoords.coords.mouseY,
+	// 			histologyImageCoords,
+	// 			"lowRes"
+	// 		);
+	// 	}
+	// }, [histologyImageCoords, mriImageCoords, setCurrentLabelHandler]);
 
 	useEffect(() => {
-		if (histologyImageCoords !== null && mriImageCoords !== null) {
-			setCurrentLabelHandler(
-				histologyImageCoords.coords.mouseX,
-				histologyImageCoords.coords.mouseY,
-				histologyImageCoords,
-				"lowRes"
+		if (centroid !== null && centroid !== undefined) {
+			const resultX = centroid.resultX;
+			const resultY = centroid.resultY;
+			const resultZ = centroid.resultZ;
+
+			updateAtlasImages(
+				"axial",
+				Number(resultX.toFixed(0)),
+				Number(resultZ.toFixed(0)),
+				Number(resultY.toFixed(0)),
+				patientId
 			);
 		}
-	}, [histologyImageCoords, mriImageCoords, setCurrentLabelHandler]);
+	}, [centroid, patientId]);
 
 	const updateAtlasImages = async (
 		currentPlane: string,
 		currentSlice: number,
 		mouseX: number,
-		mouseY: number
+		mouseY: number,
+		patientId: string
 	) => {
 		console.log("----------");
 		console.log("BUILDING IMAGES");
+
+		console.log(currentPlane, currentSlice, mouseX, mouseY);
 
 		const { adjustedSlice, adjustedMouseX, adjustedMouseY } =
 			calculateAdjustedMouseCoords(currentPlane, currentSlice, mouseX, mouseY);
@@ -138,7 +164,8 @@ const AtlasImages: FC<Props> = (props) => {
 			adjustedSlice!,
 			adjustedMouseX!,
 			adjustedMouseY!,
-			newMriCoords!
+			newMriCoords!,
+			patientId
 		);
 		console.log("histology image coords: ", newHistologyCoords);
 
@@ -165,7 +192,8 @@ const AtlasImages: FC<Props> = (props) => {
 
 		const matrix = await getMatrix(
 			histologyImageCoords!.currentBlock,
-			"histology"
+			"histology",
+			patientId
 		);
 
 		const coords = matrixMultiplier(matrix, [
@@ -185,7 +213,8 @@ const AtlasImages: FC<Props> = (props) => {
 			"axial",
 			Number(resultZ.toFixed(0)),
 			Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
-			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0))
+			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
+			patientId
 		);
 	};
 
@@ -195,7 +224,8 @@ const AtlasImages: FC<Props> = (props) => {
 
 		const matrix = await getMatrix(
 			histologyImageCoords!.currentBlock,
-			"histology"
+			"histology",
+			patientId
 		);
 
 		const coords = matrixMultiplier(matrix, [
@@ -215,7 +245,8 @@ const AtlasImages: FC<Props> = (props) => {
 			"axial",
 			Number(resultZ.toFixed(0)),
 			Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
-			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0))
+			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
+			patientId
 		);
 	};
 
@@ -232,7 +263,8 @@ const AtlasImages: FC<Props> = (props) => {
 			plane,
 			Number(+newSliceNumber.toFixed(0)),
 			Number(mriImageCoords![plane].mouseX),
-			Number(mriImageCoords![plane].mouseY)
+			Number(mriImageCoords![plane].mouseY),
+			patientId
 		);
 	};
 
@@ -252,12 +284,14 @@ const AtlasImages: FC<Props> = (props) => {
 			{isLoading && <LoadingSpinner asOverlay />}
 
 			<MriImages
+				patientId={patientId}
 				mriImageCoords={mriImageCoords}
 				showHiRes={showHiRes}
 				updateAtlasImages={updateAtlasImages}
 			/>
 
 			<HistologyImage
+				patientId={patientId}
 				histologyImageCoords={histologyImageCoords}
 				channel={channel}
 				showHiRes={showHiRes}

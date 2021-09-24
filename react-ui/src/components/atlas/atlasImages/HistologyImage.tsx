@@ -11,6 +11,7 @@ import { HistologyCoords } from "../../../models/histologyCoords.model";
 import "./HistologyImage.css";
 
 interface Props {
+	patientId: string;
 	histologyImageCoords: HistologyCoords | null;
 	showHiRes: boolean;
 	showLabels: boolean;
@@ -36,6 +37,7 @@ const HistologyImage: FC<Props> = (props) => {
 	//const [initialLoad, setInitialLoad] = useState(true);
 
 	const {
+		patientId,
 		histologyImageCoords,
 		showHiRes,
 		showLabels,
@@ -63,17 +65,17 @@ const HistologyImage: FC<Props> = (props) => {
 					try {
 						//setIsLoading(true);
 						const histologyImage =
-							await require(`../../../assets/P57-16/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`)
+							await require(`../../../assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`)
 								.default;
 						setHistologyImage(histologyImage);
 					} catch {
 						console.log(
-							`%cerror, could not resolve path: assets/P57-16/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`,
+							`%cerror, could not resolve path: assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`,
 							"color: red"
 						);
 
 						setError(
-							`could not resolve path: assets/P57-16/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`
+							`could not resolve path: assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`
 						);
 					}
 				}
@@ -83,13 +85,13 @@ const HistologyImage: FC<Props> = (props) => {
 					try {
 						setIsLoading(true);
 						const hiResHistologyImage =
-							await require(`../../../assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14.jpg`)
+							await require(`../../../assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.webp`)
 								.default;
 
 						setHiResHistologyImage(hiResHistologyImage);
 					} catch {
 						console.log(
-							`%cerror, could not resolve path: assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14.jpg`,
+							`%cerror, could not resolve path: assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.webp`,
 							"color: red"
 						);
 					}
@@ -102,38 +104,38 @@ const HistologyImage: FC<Props> = (props) => {
 				}
 
 				// load hi-res image (reduced size)
-				if (showHiRes === true) {
-					try {
-						setIsLoading(true);
-						const hiResHistologyImageReduced =
-							await require(`../../../assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14_high_30.webp`)
-								.default;
+				// if (showHiRes === true) {
+				// 	try {
+				// 		setIsLoading(true);
+				// 		const hiResHistologyImageReduced =
+				// 			await require(`../../../assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14_high_30.webp`)
+				// 				.default;
 
-						setHiResHistologyImageReduced(hiResHistologyImageReduced);
-					} catch {
-						console.log(
-							`%cerror, could not resolve path: assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14.jpg`,
-							"color: red"
-						);
-					}
+				// 		setHiResHistologyImageReduced(hiResHistologyImageReduced);
+				// 	} catch {
+				// 		console.log(
+				// 			`%cerror, could not resolve path: assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14.jpg`,
+				// 			"color: red"
+				// 		);
+				// 	}
 
-					// I do this because of a weird behaviour on the dev server causing the loading spinner to reappear
-					// I dont think this is an issue on the deployed site, so perhaps remove (or only run the logic on dev)
-					if (hiResHistologyImage !== null) {
-						setIsLoading(false);
-					}
-				}
+				// 	// I do this because of a weird behaviour on the dev server causing the loading spinner to reappear
+				// 	// I dont think this is an issue on the deployed site, so perhaps remove (or only run the logic on dev)
+				// 	if (hiResHistologyImage !== null) {
+				// 		setIsLoading(false);
+				// 	}
+				// }
 
 				// load label
 				try {
 					//setIsLoading(true);
 					const newLabelsImage =
-						await require(`../../../assets/P57-16/${histologyFolder}/45/slices_labels_rgb/slice_14.png`)
+						await require(`../../../assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.png`)
 							.default;
 					setLabelsImage(newLabelsImage);
 				} catch {
 					console.log(
-						`%cerror, could not resolve path: assets/P57-16/45/${paddedBlock}/slices_labels_rgb/slice_14.png`,
+						`%cerror, could not resolve path: assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.png`,
 						"color: red"
 					);
 				}
@@ -141,7 +143,13 @@ const HistologyImage: FC<Props> = (props) => {
 		};
 
 		fetchHistologyImage();
-	}, [histologyImageCoords, showHiRes, channel, hiResHistologyImage]);
+	}, [
+		histologyImageCoords,
+		showHiRes,
+		channel,
+		hiResHistologyImage,
+		patientId,
+	]);
 
 	const onImageLoad = (e: SyntheticEvent, type: string) => {
 		//console.log(e.target.naturalWidth, e.target.width);
@@ -224,7 +232,7 @@ const HistologyImage: FC<Props> = (props) => {
 						></img>
 					)}
 
-					{/* {showHiRes && (
+					{showHiRes && (
 						<TransformWrapper
 							//disabled={true}
 							wheel={{ disabled: false }}
@@ -256,9 +264,9 @@ const HistologyImage: FC<Props> = (props) => {
 								</>
 							)}
 						</TransformWrapper>
-					)} */}
+					)}
 
-					{showHiRes && (
+					{/* {showHiRes && (
 						<TransformWrapper
 							//disabled={true}
 							wheel={{ disabled: false }}
@@ -301,7 +309,7 @@ const HistologyImage: FC<Props> = (props) => {
 								</>
 							)}
 						</TransformWrapper>
-					)}
+					)} */}
 				</div>
 			</div>
 		</>
