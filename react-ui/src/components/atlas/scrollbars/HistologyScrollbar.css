@@ -8,12 +8,13 @@
 	position: relative;
 	height: 824px;
 	width: 25px;
+	cursor: pointer;
 }
 
 .histology-scrollbar-widget {
 	width: 25px;
 	height: 7px;
-	background-color: black;
+	background-color: white;
 	position: absolute;
 	top: 0;
 	pointer-events: none;
@@ -29,9 +30,9 @@
 }
 
 .histology-scrollbar-increment-btn.up {
-	border-bottom: 13px solid black;
+	border-bottom: 13px solid white;
 }
 
 .histology-scrollbar-increment-btn.down {
-	border-top: 13px solid black;
+	border-top: 13px solid white;
 }

@@ -13,7 +13,6 @@
 	height: 2000px;
 	width: 2px;
 	background-color: white;
-	opacity: 0.75;
 }
 .mouse-pointer:after {
 	transform: rotate(-90deg);

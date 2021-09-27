@@ -1,0 +1,9 @@
+.options-container .transparency-slider-container {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.options-container .transparency-slider-container .labels-transparency-slider {
+	margin-top: 10px;
+}

@@ -1,5 +1,7 @@
 import { FC } from "react";
 
+import "./HiResBtn.css";
+
 interface Props {
 	showHiRes: boolean;
 	setShowHiRes: (showHiRes: boolean) => void;
@@ -10,11 +12,13 @@ const HiResBtn: FC<Props> = (props) => {
 	const { showHiRes, setShowHiRes, channel } = props;
 
 	return (
-		<div className="hi-res" onClick={() => setShowHiRes(!showHiRes)}>
-			<button disabled={channel === "MRI"}>
-				{showHiRes ? "Hide" : "Show"} hi-res histology
-			</button>
-		</div>
+		<button
+			className="hi-res btn"
+			onClick={() => setShowHiRes(!showHiRes)}
+			disabled={channel === "MRI"}
+		>
+			{showHiRes ? "Hide" : "Show"} hi-res histology
+		</button>
 	);
 };
 

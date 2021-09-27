@@ -25,10 +25,13 @@ const Label: FC<Props> = (props) => {
 
 	return (
 		<div className="label-container">
-			<div>Current Label:</div>
+			<div className="label-heading">Current Label</div>
 
-			<div className="label-indicator">
-				<div
+			<div className="label-name">Label name: {currentLabel[1]}</div>
+
+			<div className="label-color-container">
+				<span> Label color: </span>
+				<span
 					className="label-color-box"
 					style={{
 						backgroundColor: `rgba(${currentLabel[2]},
@@ -38,9 +41,7 @@ const Label: FC<Props> = (props) => {
 							)`,
 						marginBottom: "10px",
 					}}
-				></div>
-
-				<div>{currentLabel[1]}</div>
+				></span>
 			</div>
 		</div>
 	);

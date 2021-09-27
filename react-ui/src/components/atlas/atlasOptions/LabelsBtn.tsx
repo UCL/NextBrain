@@ -1,5 +1,7 @@
 import { FC } from "react";
 
+import "./LabelsBtn.css";
+
 interface Props {
 	showLabels: boolean;
 	setShowLabels: (showLabels: boolean) => void;
@@ -9,14 +11,12 @@ const LabelsBtn: FC<Props> = (props) => {
 	const { showLabels, setShowLabels } = props;
 
 	return (
-		<div
-			className="show-labels-container"
+		<button
 			onClick={() => setShowLabels(!showLabels)}
+			className="show-labels-btn"
 		>
-			<button className="show-labels-btn">
-				{showLabels ? "Hide" : "Show"} labels
-			</button>
-		</div>
+			{showLabels ? "Hide" : "Show"} labels
+		</button>
 	);
 };
 

@@ -1,3 +1,21 @@
-.dropdown-trigger {
-	width: 200px;
+.atlas-navigation .dropdown-trigger {
+	width: 250px;
+	border: none;
+}
+
+/* .atlas-navigation .dropdown {
+	background-color: rgb(119, 119, 119);
+} */
+
+.atlas-navigation .tag-item .tag {
+	color: black;
+}
+
+.atlas-navigation .dropdown .dropdown-trigger.arrow.bottom:after,
+.atlas-navigation .dropdown .dropdown-trigger.arrow.top:after {
+	color: white;
+}
+
+.atlas-navigation .dropdown .dropdown-content {
+	color: black;
 }

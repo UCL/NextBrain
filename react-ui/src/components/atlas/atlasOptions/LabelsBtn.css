@@ -1,0 +1,14 @@
+.show-labels-btn {
+	color: #dadada;
+	width: 175px;
+	height: 50px;
+	border-radius: 3px;
+	background-color: rgb(66 66 66);
+	cursor: pointer;
+	border: none;
+}
+
+.show-labels-btn:hover {
+	color: #000000;
+	background-color: rgb(119, 119, 119);
+}
