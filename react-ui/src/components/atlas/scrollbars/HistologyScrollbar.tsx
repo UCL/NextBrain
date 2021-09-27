@@ -63,9 +63,30 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		}
 	};
 
+	const incrementHistologyScrollbarPos = (increment: number) => {
+		const currentBlock = histologyImageCoords!.currentBlock;
+		const slicesInBlock = histologySliceMap[currentBlock]["slices"] - 1;
+
+		const currentHistologySliceNumber = histologyImageCoords!.coords.slice;
+		const newHistologySliceNumber = currentHistologySliceNumber + increment;
+
+		if (
+			newHistologySliceNumber < 0 ||
+			newHistologySliceNumber > slicesInBlock
+		) {
+			console.log("cannot increment histology slice");
+			return;
+		}
+
+		adjustHistologyCoordsFromScrollbar(newHistologySliceNumber);
+	};
+
 	return (
 		<div className="histology-scrollbar-container">
-			<div>up</div>
+			<div
+				className="histology-scrollbar-increment-btn up"
+				onClick={() => incrementHistologyScrollbarPos(-1)}
+			></div>
 			<div
 				className="scrollbar histology-scrollbar"
 				onClick={(e) => updateHistologyScrollbarPos(e)}
@@ -75,7 +96,10 @@ const HistologyScrollbar: FC<Props> = (props) => {
 					style={{ top: `${scrollbarPos}px` }}
 				></svg>
 			</div>
-			<div>down</div>
+			<div
+				className="histology-scrollbar-increment-btn down"
+				onClick={() => incrementHistologyScrollbarPos(1)}
+			></div>
 		</div>
 	);
 };
