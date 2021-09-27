@@ -3,6 +3,7 @@ import ndarray from "ndarray";
 
 import getMatrix from "./getMatrix";
 import matrixMultiplier from "./matrixMultiplier";
+import histologySliceMap from "./histologySliceMap";
 
 import { MriCoords } from "../../models/mriCoords.model";
 
@@ -36,7 +37,11 @@ const calculateHistologyImageCoords = async (
 
 	if (matrix === undefined) return "no matrix found";
 
-	const histologyImageCoords = getHistologyImageCoords(newMriCoords, matrix);
+	const histologyImageCoords = getHistologyImageCoords(
+		newMriCoords,
+		matrix,
+		currentBlock
+	);
 
 	return {
 		coords: histologyImageCoords,
@@ -45,7 +50,11 @@ const calculateHistologyImageCoords = async (
 	};
 };
 
-const getHistologyImageCoords = (newMriCoords: MriCoords, matrix: number[]) => {
+const getHistologyImageCoords = (
+	newMriCoords: MriCoords,
+	matrix: number[],
+	currentBlock: number
+) => {
 	const coords = matrixMultiplier(matrix, [
 		newMriCoords.sagittal.slice,
 		newMriCoords.coronal.slice,
@@ -53,12 +62,7 @@ const getHistologyImageCoords = (newMriCoords: MriCoords, matrix: number[]) => {
 		1,
 	]);
 
-	let { resultX, resultY, resultZ } = coords;
-
-	// we need to convert negative numbers to zero to avoid errors
-	resultX = resultX < 0 ? 0 : resultX;
-	resultY = resultY < 0 ? 0 : resultY;
-	resultZ = resultZ < 0 ? 0 : resultZ;
+	let { resultX, resultY, resultZ } = validateCoords(coords, currentBlock);
 
 	const histologyImageCoords = {
 		slice: +resultZ.toFixed(0),
@@ -69,6 +73,28 @@ const getHistologyImageCoords = (newMriCoords: MriCoords, matrix: number[]) => {
 	console.log("matrix calculation result: ", coords);
 
 	return histologyImageCoords;
+};
+
+const validateCoords = (
+	coords: { resultX: number; resultY: number; resultZ: number },
+	currentBlock: number
+) => {
+	// we need to convert negative numbers to zero to avoid errors and load the right slice
+	let resultX = coords.resultX < 0 ? 0 : coords.resultX;
+	let resultY = coords.resultY < 0 ? 0 : coords.resultY;
+	let resultZ = coords.resultZ < 0 ? 0 : coords.resultZ;
+
+	// if returned slice exceeds the number of slices in the block (within +2 slices) then return the maximum slice number
+	// we make an adjustment to account for the fact that slices start at 0 within a block
+	// if returned slice exceeds maximum number of slices +2 then its a calcultion bug
+	if (
+		resultZ > histologySliceMap[currentBlock].slices - 1 &&
+		resultZ < histologySliceMap[currentBlock].slices + 1
+	) {
+		resultZ = histologySliceMap[currentBlock].slices - 1;
+	}
+
+	return { resultX, resultY, resultZ };
 };
 
 const getCurrentBlock = async (
@@ -100,6 +126,8 @@ const getCurrentBlock = async (
 	// the numpy arrays in the data are the opposite of the image dimensions, so a transposition is needed
 	// you can alternatively take the dimensions from rotateCoords() below and get the numpy block from xRotated and yRotated
 	ndArray = ndArray.transpose(1, 0);
+
+	console.log(ndArray);
 
 	console.log("npy shape (after transpose): " + ndArray.shape);
 

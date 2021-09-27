@@ -1,6 +1,6 @@
 .atlas-imgs-container {
 	display: grid;
-	grid-template-columns: 1fr 25px 2.4fr 25px;
+	grid-template-columns: 1fr 25px 2.5fr 25px;
 	grid-template-rows: 1fr 1fr 1fr;
 	row-gap: 5px;
 	column-gap: 5px;
@@ -56,4 +56,32 @@
 
 .histology-scrollbar-container {
 	grid-area: histology-scrollbar;
+}
+
+/* @media (min-width: 1400px) {
+	.atlas-imgs-container {
+		display: grid;
+		grid-template-columns: 50px 25px 800px 25px;
+		grid-template-rows: 190px 190px 190px;
+		row-gap: 5px;
+		column-gap: 5px;
+	}
+
+	.atlas-imgs-container .mri-img {
+		transform: scale(0.7);
+	}
+
+	.atlas-imgs-container .histology-container {
+		transform: scale(0.6);
+	}
+} */
+
+@media (min-width: 1800px) {
+	.atlas-imgs-container {
+		display: grid;
+		grid-template-columns: 1fr 25px 950px 25px;
+		grid-template-rows: 1fr 1fr 1fr;
+		row-gap: 5px;
+		column-gap: 5px;
+	}
 }

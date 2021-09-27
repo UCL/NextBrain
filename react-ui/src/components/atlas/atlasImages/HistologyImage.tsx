@@ -62,8 +62,10 @@ const HistologyImage: FC<Props> = (props) => {
 				const histologyFolder = showHiRes ? "histology_hr" : "histology";
 
 				if (showHiRes === false) {
+					setHiResHistologyImage("");
+
 					try {
-						//setIsLoading(true);
+						// setIsLoading(true);
 						const histologyImage =
 							await require(`../../../assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`)
 								.default;
@@ -153,6 +155,7 @@ const HistologyImage: FC<Props> = (props) => {
 
 	const onImageLoad = (e: SyntheticEvent, type: string) => {
 		//console.log(e.target.naturalWidth, e.target.width);
+		console.log("hi res image loaded");
 
 		if (type === "lowRes") setIsLoading(false);
 
@@ -228,7 +231,7 @@ const HistologyImage: FC<Props> = (props) => {
 							className="histology-img"
 							src={histologyImage}
 							alt="histology"
-							//onLoad={(e) => onImageLoad(e, "lowRes")}
+							// onLoad={(e) => onImageLoad(e, "lowRes")}
 						></img>
 					)}
 

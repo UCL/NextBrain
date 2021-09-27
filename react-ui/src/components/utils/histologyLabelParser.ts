@@ -48,21 +48,13 @@ const getCurrentLabelNumber = async (
 		.toString()
 		.padStart(2, "0");
 
-	let npyFile;
+	const histologyFolder = type === "lowRes" ? "histology" : "histology_hr";
 
 	// the npy files are missing from the updated folder for the labels
 	// I need the npy files to parse the label (I think)
-	if (type === "lowRes") {
-		npyFile =
-			await require(`../../assets/P57-16/histology/${paddedBlock}/slices_labels/slice_${paddedSlice}.npy`)
-				.default;
-	}
-
-	if (type === "hiRes") {
-		npyFile =
-			await require(`../../assets/P57-16/histology_hr/${paddedBlock}/slices_labels/slices_${paddedSlice}.npy`)
-				.default;
-	}
+	const npyFile =
+		await require(`../../assets/P57-16/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.npy`)
+			.default;
 
 	const npyArray = await n.load(npyFile);
 

@@ -2,16 +2,17 @@
 	width: 300px;
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 6fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 6fr 1fr 1fr 1fr 1fr 1fr;
 	row-gap: 5px;
 	column-gap: 20px;
 	margin-left: 25px;
 	grid-template-areas:
+		"patient-select"
 		"atlas-navigation"
+		"channel"
 		"show-labels"
 		"current-label"
 		"label-transparency"
-		"channel"
 		"hi-res";
 }
 
@@ -25,6 +26,10 @@
 .options-container .histology-scrollbar-container {
 	grid-area: scroll-bar;
 	border: 1px solid black;
+}
+
+.options-container .patient-select {
+	grid-area: patient-select;
 }
 
 .options-container .atlas-navigation {
@@ -49,4 +54,10 @@
 
 .options-container .hi-res {
 	grid-area: hi-res;
+}
+
+@media (min-width: 1400px) {
+	.options-container {
+		width: 250px;
+	}
 }

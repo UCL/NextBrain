@@ -5,10 +5,11 @@ import "./ImageChannels.css";
 interface Props {
 	channel: string;
 	setChannel: (channel: string) => void; // review this type, is this correct?? check the react course
+	showHiRes: boolean;
 }
 
 const ImageChannels: FC<Props> = (props) => {
-	const { channel, setChannel } = props;
+	const { channel, setChannel, showHiRes } = props;
 
 	return (
 		<div className="image-channels-container">
@@ -24,7 +25,9 @@ const ImageChannels: FC<Props> = (props) => {
 			>
 				<option value="LFB">LFB</option>
 				<option value="HE">HE</option>
-				<option value="MRI">MRI</option>
+				<option disabled={showHiRes} value="MRI">
+					MRI
+				</option>
 			</select>
 		</div>
 	);

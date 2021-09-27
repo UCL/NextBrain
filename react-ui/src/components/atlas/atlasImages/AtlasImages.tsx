@@ -84,7 +84,7 @@ const AtlasImages: FC<Props> = (props) => {
 			setIsLoading(true);
 			try {
 				// args: plane, slice, mouseX, mouseY
-				await updateAtlasImages("axial", 111, 97, 338, patientId);
+				await updateAtlasImages("axial", 97, 116, 165, patientId);
 			} catch {
 				setError("error building atlas");
 			}
@@ -106,6 +106,7 @@ const AtlasImages: FC<Props> = (props) => {
 	// }, [histologyImageCoords, mriImageCoords, setCurrentLabelHandler]);
 
 	useEffect(() => {
+		console.log(centroid);
 		if (centroid !== null && centroid !== undefined) {
 			const resultX = centroid.resultX;
 			const resultY = centroid.resultY;
@@ -113,8 +114,8 @@ const AtlasImages: FC<Props> = (props) => {
 
 			updateAtlasImages(
 				"axial",
-				Number(resultX.toFixed(0)),
 				Number(resultZ.toFixed(0)),
+				Number(resultX.toFixed(0)),
 				Number(resultY.toFixed(0)),
 				patientId
 			);

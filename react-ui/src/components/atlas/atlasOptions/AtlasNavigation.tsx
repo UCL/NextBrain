@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 
-import atlasNavigationData from "../../../assets/atlas_navigation_data.json";
+import atlasNavigationData from "../../../assets/image_ontology_hierarchical.json";
 import DropdownTreeSelect from "react-dropdown-tree-select";
 import "react-dropdown-tree-select/dist/styles.css";
 
@@ -8,10 +8,11 @@ import "./AtlasNavigation.css";
 
 interface Props {
 	getCentroid: (blockNumber: number) => void;
+	showHiRes: boolean;
 }
 
 const AtlasNavigation: FC<Props> = (props) => {
-	const { getCentroid } = props;
+	const { getCentroid, showHiRes } = props;
 
 	const onChange = (currentNode: any, selectedNodes: any) => {
 		console.log("onChange::", currentNode, selectedNodes);
@@ -23,7 +24,11 @@ const AtlasNavigation: FC<Props> = (props) => {
 			return;
 		}
 
-		getCentroid(currentNodeData);
+		try {
+			getCentroid(currentNodeData);
+		} catch {
+			console.log("error, no valid block returned");
+		}
 	};
 
 	const onAction = (node: any, action: any) => {
@@ -36,7 +41,8 @@ const AtlasNavigation: FC<Props> = (props) => {
 
 	return (
 		<DropdownTreeSelect
-			className="atlas-navigation2"
+			disabled={showHiRes}
+			className="atlas-navigation"
 			data={atlasNavigationData}
 			onChange={onChange}
 			onAction={onAction}

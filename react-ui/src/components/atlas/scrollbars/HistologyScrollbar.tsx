@@ -25,7 +25,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		const scrollbarLength = 824;
 		const currentHistologySliceNumber = histologyImageCoords!.coords.slice;
 		const currentBlock = histologyImageCoords!.currentBlock;
-		const slicesInBlock = histologySliceMap[currentBlock]["slices"];
+		const slicesInBlock = histologySliceMap[currentBlock]["slices"] - 1; // -1 because slices start at 0
 		const currentSliceAsProportion =
 			currentHistologySliceNumber / slicesInBlock;
 
@@ -48,7 +48,9 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		const scrollbarLength = 824;
 
 		// method for positioning the scrollbar based on the max number of slices in a histology block
-		const newHistologySliceNumber = (mouseY / scrollbarLength) * slicesInBlock;
+		// -1 to account for the fact that slices start at 0
+		const newHistologySliceNumber =
+			(mouseY / scrollbarLength) * slicesInBlock - 1;
 
 		console.log(mouseY);
 		console.log(slicesInBlock);
@@ -62,14 +64,18 @@ const HistologyScrollbar: FC<Props> = (props) => {
 	};
 
 	return (
-		<div
-			className="scrollbar histology-scrollbar-container"
-			onClick={(e) => updateHistologyScrollbarPos(e)}
-		>
-			<svg
-				className="histology-scrollbar-widget"
-				style={{ top: `${scrollbarPos}px` }}
-			></svg>
+		<div className="histology-scrollbar-container">
+			<div>up</div>
+			<div
+				className="scrollbar histology-scrollbar"
+				onClick={(e) => updateHistologyScrollbarPos(e)}
+			>
+				<svg
+					className="histology-scrollbar-widget"
+					style={{ top: `${scrollbarPos}px` }}
+				></svg>
+			</div>
+			<div>down</div>
 		</div>
 	);
 };

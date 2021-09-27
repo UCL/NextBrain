@@ -23,11 +23,17 @@ const Atlas: FC = () => {
 	// useCallback prevents unnecessary re-render of child component (AtlasNavigation.tsx)
 	const getCentroid = useCallback(
 		async (navCoords: any) => {
-			const matrix = await getMatrix(navCoords!.block, "histology", patientId);
+			const matrix = await getMatrix(
+				navCoords!.blockNumber,
+				"histology",
+				patientId
+			);
+
+			console.log("matrix: " + matrix);
 
 			const coords = matrixMultiplier(matrix, [
-				navCoords!.yh,
 				navCoords!.xh,
+				navCoords!.yh,
 				navCoords!.zh,
 				1,
 			]);
@@ -38,34 +44,6 @@ const Atlas: FC = () => {
 		},
 		[patientId]
 	);
-
-	// this will need to be moved up a level to pass down to AtlasOptions
-	// const adjustHistologyCoordsFromNavigationTree = async (navCoords: any) => {
-	// 	console.log(navCoords);
-
-	// 	const matrix = await getMatrix(navCoords!.block, "histology", patientId);
-
-	// 	const coords = matrixMultiplier(matrix, [
-	// 		navCoords!.yh,
-	// 		navCoords!.xh,
-	// 		navCoords!.zh,
-	// 		1,
-	// 	]);
-
-	// 	const { resultX, resultY, resultZ } = coords;
-
-	// 	console.log(coords);
-
-	// 	// axial is picked arbitrarily here
-	// 	// it could be any of the planes as long as the order of params is entered correctly
-	// 	updateAtlasImages(
-	// 		"axial",
-	// 		Number(resultZ.toFixed(0)),
-	// 		Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
-	// 		Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
-	// 		patientId
-	// 	);
-	// };
 
 	return (
 		<main className="atlas-container">
@@ -82,6 +60,8 @@ const Atlas: FC = () => {
 			/>
 
 			<AtlasOptions
+				patientId={patientId}
+				setPatientId={setPatientId}
 				channel={channel}
 				setChannel={setChannel}
 				showHiRes={showHiRes}

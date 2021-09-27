@@ -26,3 +26,9 @@
 	top: 0;
 	pointer-events: none;
 }
+
+/* @media (min-width: 1400px) {
+	.mri-img-container {
+		transform: scale(0.4);
+	}
+} */

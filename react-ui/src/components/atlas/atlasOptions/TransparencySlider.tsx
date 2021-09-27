@@ -9,6 +9,10 @@ interface Props {
 const TransparencySlider: FC<Props> = (props) => {
 	const { showLabels, labelsTransparency, setLabelsTransparency } = props;
 
+	if (!showLabels) {
+		return null;
+	}
+
 	return (
 		<input
 			type="range"

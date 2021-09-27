@@ -1,5 +1,6 @@
 import { FC } from "react";
 
+import PatientSelect from "./PatientSelect";
 import AtlasNavigation from "./AtlasNavigation";
 import LabelsBtn from "./LabelsBtn";
 import TransparencySlider from "./TransparencySlider";
@@ -12,6 +13,8 @@ import { CurrentLabel } from "../../../models/label.model";
 import "./AtlasOptions.css";
 
 interface Props {
+	patientId: string;
+	setPatientId: (patientId: string) => void;
 	channel: string;
 	setChannel: (channel: string) => void;
 	showHiRes: boolean;
@@ -26,6 +29,8 @@ interface Props {
 
 const AtlasOptions: FC<Props> = (props) => {
 	const {
+		patientId,
+		setPatientId,
 		channel,
 		setChannel,
 		showHiRes,
@@ -40,7 +45,15 @@ const AtlasOptions: FC<Props> = (props) => {
 
 	return (
 		<div className="options-container">
-			<AtlasNavigation getCentroid={getCentroid} />
+			<PatientSelect patientId={patientId} setPatientId={setPatientId} />
+
+			<AtlasNavigation getCentroid={getCentroid} showHiRes={showHiRes} />
+
+			<ImageChannels
+				channel={channel}
+				setChannel={setChannel}
+				showHiRes={showHiRes}
+			/>
 
 			<LabelsBtn showLabels={showLabels} setShowLabels={setShowLabels} />
 
@@ -52,9 +65,11 @@ const AtlasOptions: FC<Props> = (props) => {
 				setLabelsTransparency={setLabelsTransparency}
 			/>
 
-			<ImageChannels channel={channel} setChannel={setChannel} />
-
-			<HiResBtn showHiRes={showHiRes} setShowHiRes={setShowHiRes} />
+			<HiResBtn
+				showHiRes={showHiRes}
+				setShowHiRes={setShowHiRes}
+				channel={channel}
+			/>
 		</div>
 	);
 };

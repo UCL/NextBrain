@@ -15,7 +15,7 @@ const Label: FC<Props> = (props) => {
 	console.log(currentLabel);
 
 	if (!showLabels) {
-		return <div>Not showing labels</div>;
+		return null;
 	}
 
 	// initialise the label on page load?

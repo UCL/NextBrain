@@ -1,5 +1,13 @@
 .histology-scrollbar-container {
+	height: 100%;
+	width: 45px;
+	flex-direction: column;
+}
+
+.histology-scrollbar {
 	position: relative;
+	height: 824px;
+	width: 25px;
 }
 
 .histology-scrollbar-widget {

@@ -11,8 +11,9 @@
 	position: absolute;
 	content: " ";
 	height: 2000px;
-	width: 1px;
+	width: 2px;
 	background-color: white;
+	opacity: 0.75;
 }
 .mouse-pointer:after {
 	transform: rotate(-90deg);
