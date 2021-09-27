@@ -302,12 +302,11 @@ const AtlasImages: FC<Props> = (props) => {
 			/>
 
 			<Scrollbars
-				histologyScrollbarPos={histologyScrollbarPos}
-				setHistologyScrollbarPos={setHistologyScrollbarPos}
 				histologyImageCoords={histologyImageCoords}
 				adjustHistologyCoordsFromScrollbar={adjustHistologyCoordsFromScrollbar}
 				adjustMriCoordsFromScrollbar={adjustMriCoordsFromScrollbar}
 				mriImageCoords={mriImageCoords}
+				showHiRes={showHiRes}
 			/>
 		</div>
 	);

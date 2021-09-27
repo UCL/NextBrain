@@ -9,22 +9,20 @@ import { MriCoords } from "../../../models/mriCoords.model";
 import "./Scrollbars.css";
 
 interface Props {
-	histologyScrollbarPos: number;
-	setHistologyScrollbarPos: (mouseY: number) => void;
 	histologyImageCoords: HistologyCoords | null;
 	adjustHistologyCoordsFromScrollbar: (newSliceNumber: number) => void;
 	adjustMriCoordsFromScrollbar: (newSliceNumber: number, plane: string) => void;
 	mriImageCoords: MriCoords | null;
+	showHiRes: boolean;
 }
 
 const Scrollbars: FC<Props> = (props) => {
 	const {
-		histologyScrollbarPos,
-		setHistologyScrollbarPos,
 		histologyImageCoords,
 		adjustHistologyCoordsFromScrollbar,
 		adjustMriCoordsFromScrollbar,
 		mriImageCoords,
+		showHiRes,
 	} = props;
 
 	// disable scrollbars while in hi-res mode?
@@ -52,10 +50,9 @@ const Scrollbars: FC<Props> = (props) => {
 			/> */}
 
 			<HistologyScrollbar
-				histologyScrollbarPos={histologyScrollbarPos}
-				setHistologyScrollbarPos={setHistologyScrollbarPos}
 				histologyImageCoords={histologyImageCoords}
 				adjustHistologyCoordsFromScrollbar={adjustHistologyCoordsFromScrollbar}
+				showHiRes={showHiRes}
 			/>
 		</>
 	);

@@ -1,3 +1,7 @@
+.hi-res-btn-container {
+	flex-direction: column;
+}
+
 .hi-res.btn {
 	color: #dadada;
 	width: 175px;
@@ -11,4 +15,8 @@
 .hi-res.btn:hover {
 	color: #000000;
 	background-color: rgb(119, 119, 119);
+}
+
+.hi-res-btn-message {
+	color: red;
 }

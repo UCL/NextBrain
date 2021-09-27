@@ -53,7 +53,7 @@
 	grid-area: current-label;
 }
 
-.options-container .hi-res {
+.options-container .hi-res-btn-container {
 	grid-area: hi-res;
 }
 

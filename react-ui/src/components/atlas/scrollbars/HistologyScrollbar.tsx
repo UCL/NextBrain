@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 
+import ErrorModal from "../../shared/ErrorModal";
 import histologySliceMap from "../../utils/histologySliceMap";
 import getMouseCoords from "../../utils/getmouseCoords";
 import { HistologyCoords } from "../../../models/histologyCoords.model";
@@ -7,16 +8,20 @@ import { HistologyCoords } from "../../../models/histologyCoords.model";
 import "./HistologyScrollbar.css";
 
 interface Props {
-	histologyScrollbarPos: number;
-	setHistologyScrollbarPos: (mouseY: number) => void;
 	histologyImageCoords: HistologyCoords | null;
 	adjustHistologyCoordsFromScrollbar: (newSliceNumber: number) => void;
+	showHiRes: boolean;
 }
 
 const HistologyScrollbar: FC<Props> = (props) => {
+	const [error, setError] = useState<string | null>(null);
 	const [scrollbarPos, setScrollbarPos] = useState(0);
 
-	const { histologyImageCoords, adjustHistologyCoordsFromScrollbar } = props;
+	const {
+		histologyImageCoords,
+		adjustHistologyCoordsFromScrollbar,
+		showHiRes,
+	} = props;
 
 	useEffect(() => {
 		// determine the scrollbar position for the current histology slice
@@ -39,6 +44,11 @@ const HistologyScrollbar: FC<Props> = (props) => {
 	}, [histologyImageCoords]);
 
 	const updateHistologyScrollbarPos = (e: React.MouseEvent) => {
+		if (showHiRes) {
+			setError("Navigation is disabled while in hi-res mode");
+			return;
+		}
+
 		const { mouseY } = getMouseCoords(e);
 
 		const currentBlock = histologyImageCoords!.currentBlock;
@@ -64,6 +74,11 @@ const HistologyScrollbar: FC<Props> = (props) => {
 	};
 
 	const incrementHistologyScrollbarPos = (increment: number) => {
+		if (showHiRes) {
+			setError("Navigation is disabled while in hi-res mode");
+			return;
+		}
+
 		const currentBlock = histologyImageCoords!.currentBlock;
 		const slicesInBlock = histologySliceMap[currentBlock]["slices"] - 1;
 
@@ -82,25 +97,28 @@ const HistologyScrollbar: FC<Props> = (props) => {
 	};
 
 	return (
-		<div className="histology-scrollbar-container">
-			<div
-				className="histology-scrollbar-increment-btn up"
-				onClick={() => incrementHistologyScrollbarPos(-1)}
-			></div>
-			<div
-				className="scrollbar histology-scrollbar"
-				onClick={(e) => updateHistologyScrollbarPos(e)}
-			>
-				<svg
-					className="histology-scrollbar-widget"
-					style={{ top: `${scrollbarPos}px` }}
-				></svg>
+		<>
+			<ErrorModal error={error} onClear={() => setError(null)} />
+			<div className="histology-scrollbar-container">
+				<div
+					className="histology-scrollbar-increment-btn up"
+					onClick={() => incrementHistologyScrollbarPos(-1)}
+				></div>
+				<div
+					className="scrollbar histology-scrollbar"
+					onClick={(e) => updateHistologyScrollbarPos(e)}
+				>
+					<svg
+						className="histology-scrollbar-widget"
+						style={{ top: `${scrollbarPos}px` }}
+					></svg>
+				</div>
+				<div
+					className="histology-scrollbar-increment-btn down"
+					onClick={() => incrementHistologyScrollbarPos(1)}
+				></div>
 			</div>
-			<div
-				className="histology-scrollbar-increment-btn down"
-				onClick={() => incrementHistologyScrollbarPos(1)}
-			></div>
-		</div>
+		</>
 	);
 };
 
