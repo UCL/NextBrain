@@ -47,7 +47,11 @@ const AtlasOptions: FC<Props> = (props) => {
 		<div className="options-container">
 			<PatientSelect patientId={patientId} setPatientId={setPatientId} />
 
-			<AtlasNavigation getCentroid={getCentroid} showHiRes={showHiRes} />
+			<AtlasNavigation
+				getCentroid={getCentroid}
+				showHiRes={showHiRes}
+				setShowHiRes={setShowHiRes}
+			/>
 
 			<ImageChannels
 				channel={channel}

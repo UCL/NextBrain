@@ -11,6 +11,7 @@ interface Props {
 	histologyImageCoords: HistologyCoords | null;
 	adjustHistologyCoordsFromScrollbar: (newSliceNumber: number) => void;
 	showHiRes: boolean;
+	setShowHiRes: (showHiRes: boolean) => void;
 }
 
 const HistologyScrollbar: FC<Props> = (props) => {
@@ -21,6 +22,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		histologyImageCoords,
 		adjustHistologyCoordsFromScrollbar,
 		showHiRes,
+		setShowHiRes,
 	} = props;
 
 	useEffect(() => {
@@ -44,10 +46,12 @@ const HistologyScrollbar: FC<Props> = (props) => {
 	}, [histologyImageCoords]);
 
 	const updateHistologyScrollbarPos = (e: React.MouseEvent) => {
-		if (showHiRes) {
-			setError("Navigation is disabled while in hi-res mode");
-			return;
-		}
+		// if (showHiRes) {
+		// 	setError("Navigation is disabled while in hi-res mode");
+		// 	return;
+		// }
+
+		setShowHiRes(false);
 
 		const { mouseY } = getMouseCoords(e);
 
@@ -74,10 +78,12 @@ const HistologyScrollbar: FC<Props> = (props) => {
 	};
 
 	const incrementHistologyScrollbarPos = (increment: number) => {
-		if (showHiRes) {
-			setError("Navigation is disabled while in hi-res mode");
-			return;
-		}
+		// if (showHiRes) {
+		// 	setError("Navigation is disabled while in hi-res mode");
+		// 	return;
+		// }
+
+		setShowHiRes(false);
 
 		const currentBlock = histologyImageCoords!.currentBlock;
 		const slicesInBlock = histologySliceMap[currentBlock]["slices"] - 1;

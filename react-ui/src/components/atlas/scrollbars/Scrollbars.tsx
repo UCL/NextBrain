@@ -14,6 +14,7 @@ interface Props {
 	adjustMriCoordsFromScrollbar: (newSliceNumber: number, plane: string) => void;
 	mriImageCoords: MriCoords | null;
 	showHiRes: boolean;
+	setShowHiRes: (showHiRes: boolean) => void;
 }
 
 const Scrollbars: FC<Props> = (props) => {
@@ -23,6 +24,7 @@ const Scrollbars: FC<Props> = (props) => {
 		adjustMriCoordsFromScrollbar,
 		mriImageCoords,
 		showHiRes,
+		setShowHiRes,
 	} = props;
 
 	// disable scrollbars while in hi-res mode?
@@ -53,6 +55,7 @@ const Scrollbars: FC<Props> = (props) => {
 				histologyImageCoords={histologyImageCoords}
 				adjustHistologyCoordsFromScrollbar={adjustHistologyCoordsFromScrollbar}
 				showHiRes={showHiRes}
+				setShowHiRes={setShowHiRes}
 			/>
 		</>
 	);

@@ -108,11 +108,7 @@ const MriImage: FC<Props> = (props) => {
 					/>
 
 					<img
-						onClick={
-							!showHiRes
-								? (e) => computeMriImagesHandler(e, plane)
-								: () => setError("Navigation is disabled in hi-res mode")
-						}
+						onClick={(e) => computeMriImagesHandler(e, plane)}
 						// onWheel={(e) => console.log(e)}
 						className={`${plane}-img`}
 						src={mriImage}

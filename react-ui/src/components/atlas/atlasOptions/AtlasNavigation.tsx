@@ -9,13 +9,16 @@ import "./AtlasNavigation.css";
 interface Props {
 	getCentroid: (blockNumber: number) => void;
 	showHiRes: boolean;
+	setShowHiRes: (showHiRes: boolean) => void;
 }
 
 const AtlasNavigation: FC<Props> = (props) => {
-	const { getCentroid, showHiRes } = props;
+	const { getCentroid, showHiRes, setShowHiRes } = props;
 
 	const onChange = (currentNode: any, selectedNodes: any) => {
 		console.log("onChange::", currentNode, selectedNodes);
+
+		if (showHiRes) setShowHiRes(false);
 
 		const currentNodeData = currentNode.data;
 
@@ -41,7 +44,6 @@ const AtlasNavigation: FC<Props> = (props) => {
 
 	return (
 		<DropdownTreeSelect
-			disabled={showHiRes}
 			className="atlas-navigation"
 			data={atlasNavigationData}
 			onChange={onChange}

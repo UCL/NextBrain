@@ -51,6 +51,7 @@ const Atlas: FC = () => {
 				patientId={patientId}
 				channel={channel}
 				showHiRes={showHiRes}
+				setShowHiRes={setShowHiRes}
 				showLabels={showLabels}
 				labelsTransparency={labelsTransparency}
 				setCurrentLabel={setCurrentLabel}

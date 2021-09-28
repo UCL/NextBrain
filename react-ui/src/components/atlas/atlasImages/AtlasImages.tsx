@@ -25,6 +25,7 @@ interface Props {
 	patientId: string;
 	channel: string;
 	showHiRes: boolean;
+	setShowHiRes: (showHiRes: boolean) => void;
 	showLabels: boolean;
 	labelsTransparency: string;
 	setCurrentLabel: (currentLabel: CurrentLabel) => void;
@@ -44,6 +45,7 @@ const AtlasImages: FC<Props> = (props) => {
 		patientId,
 		channel,
 		showHiRes,
+		setShowHiRes,
 		showLabels,
 		labelsTransparency,
 		setCurrentLabel,
@@ -288,6 +290,7 @@ const AtlasImages: FC<Props> = (props) => {
 				patientId={patientId}
 				mriImageCoords={mriImageCoords}
 				showHiRes={showHiRes}
+				setShowHiRes={setShowHiRes}
 				updateAtlasImages={updateAtlasImages}
 			/>
 
@@ -307,6 +310,7 @@ const AtlasImages: FC<Props> = (props) => {
 				adjustMriCoordsFromScrollbar={adjustMriCoordsFromScrollbar}
 				mriImageCoords={mriImageCoords}
 				showHiRes={showHiRes}
+				setShowHiRes={setShowHiRes}
 			/>
 		</div>
 	);
