@@ -31,6 +31,10 @@ const Atlas: FC = () => {
 
 			console.log("matrix: " + matrix);
 
+			// why is the order of params here different compared to the function that handles physical clicks?
+			// the x and y are swapped here compared to the histologyToMri function
+			// there must be some sort of flipping of axes somewhere
+			// regardless, the app seems to work with this configuration
 			const coords = matrixMultiplier(matrix, [
 				navCoords!.xh,
 				navCoords!.yh,

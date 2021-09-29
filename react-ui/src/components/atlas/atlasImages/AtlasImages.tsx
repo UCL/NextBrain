@@ -86,7 +86,8 @@ const AtlasImages: FC<Props> = (props) => {
 			setIsLoading(true);
 			try {
 				// args: plane, slice, mouseX, mouseY
-				await updateAtlasImages("axial", 97, 116, 165, patientId);
+				// I should pass the argument as an object to make it more clear
+				await updateAtlasImages("axial", 150, 145, 128, patientId);
 			} catch {
 				setError("error building atlas");
 			}
@@ -117,8 +118,8 @@ const AtlasImages: FC<Props> = (props) => {
 			updateAtlasImages(
 				"axial",
 				Number(resultZ.toFixed(0)),
-				Number(resultX.toFixed(0)),
-				Number(resultY.toFixed(0)),
+				Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
+				Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
 				patientId
 			);
 		}
