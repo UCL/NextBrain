@@ -1,6 +1,4 @@
-const fetch = this.fetch ? this.fetch : require("node-fetch");
-
-class npyjs {
+export default class npyjs {
 	constructor(opts) {
 		if (opts) {
 			console.error(
@@ -136,5 +134,3 @@ class npyjs {
 			.catch((err) => console.error(err));
 	}
 }
-
-module.exports = npyjs;

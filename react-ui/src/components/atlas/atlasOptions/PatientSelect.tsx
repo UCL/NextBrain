@@ -12,7 +12,7 @@ const PatientSelect: FC<Props> = (props) => {
 
 	return (
 		<div className="patient-select-container">
-			Select patient:
+			Select Case:
 			<select
 				name="patient-select"
 				id="patient-select"

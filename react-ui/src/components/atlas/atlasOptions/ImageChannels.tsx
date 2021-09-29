@@ -13,7 +13,7 @@ const ImageChannels: FC<Props> = (props) => {
 
 	return (
 		<div className="image-channels-container">
-			Channel:
+			Select histological stain or MRI:
 			<select
 				name="channels"
 				id="channels"
