@@ -36,6 +36,11 @@ const HistologyImage: FC<Props> = (props) => {
 	const [labelsImage, setLabelsImage] = useState("");
 	//const [initialLoad, setInitialLoad] = useState(true);
 
+	const [hiResMousePos, setHiResMousePos] = useState({
+		mouseX: 100,
+		mouseY: 100,
+	});
+
 	const {
 		patientId,
 		histologyImageCoords,
@@ -193,6 +198,20 @@ const HistologyImage: FC<Props> = (props) => {
 		console.log(ref);
 	};
 
+	const calculateHiResMousePos = (
+		naturalCoordinateX: number,
+		naturalCoordinateY: number,
+		naturalHeight: number,
+		naturalWidth: number,
+		scaledHeight: number,
+		scaledWidth: number
+	) => {
+		const hiResMousePosX = (scaledWidth / naturalWidth) * naturalCoordinateX;
+		const hiResMousePosY = (scaledHeight / naturalHeight) * naturalCoordinateY;
+
+		setHiResMousePos({ mouseX: hiResMousePosX, mouseY: hiResMousePosY });
+	};
+
 	// merge this with getMouseCoords.ts
 	const getHistologyMousePos = (e: any, type: string) => {
 		const offsetX = type === "lowRes" ? e.nativeEvent.offsetX : e.offsetX;
@@ -202,7 +221,23 @@ const HistologyImage: FC<Props> = (props) => {
 
 		console.log(e);
 
-		getNaturalCoordinates(e, offsetX, offsetY, type);
+		const {
+			naturalCoordinateX,
+			naturalCoordinateY,
+			naturalHeight,
+			naturalWidth,
+			scaledHeight,
+			scaledWidth,
+		} = getNaturalCoordinates(e, offsetX, offsetY, type);
+
+		calculateHiResMousePos(
+			naturalCoordinateX,
+			naturalCoordinateY,
+			naturalHeight,
+			naturalWidth,
+			scaledHeight,
+			scaledWidth
+		);
 	};
 
 	// account for the fact that we set max-height on the histology image
@@ -213,18 +248,19 @@ const HistologyImage: FC<Props> = (props) => {
 		offsetY: any,
 		type: string
 	) => {
+		// we target childNodes[1] because it points to the histology image
 		const naturalWidth =
 			type === "lowRes"
 				? e.target.naturalWidth
-				: e.target.childNodes[0].naturalWidth; // the original size of the image
+				: e.target.childNodes[1].naturalWidth; // the original size of the image
 		const naturalHeight =
 			type === "lowRes"
 				? e.target.naturalHeight
-				: e.target.childNodes[0].naturalHeight; // the original size of the image
+				: e.target.childNodes[1].naturalHeight; // the original size of the image
 		const scaledWidth =
-			type === "lowRes" ? e.target.width : e.target.childNodes[0].width; // the scaled size of the image
+			type === "lowRes" ? e.target.width : e.target.childNodes[1].width; // the scaled size of the image
 		const scaledHeight =
-			type === "lowRes" ? e.target.height : e.target.childNodes[0].height; // the scaled size of the image
+			type === "lowRes" ? e.target.height : e.target.childNodes[1].height; // the scaled size of the image
 
 		console.log("naturalWidth: " + naturalWidth);
 		console.log("naturalHeight: " + naturalHeight);
@@ -241,6 +277,15 @@ const HistologyImage: FC<Props> = (props) => {
 		console.log(
 			`natural coord x: ${naturalCoordinateX}, natural coord y: ${naturalCoordinateY}`
 		);
+
+		return {
+			naturalCoordinateX: naturalCoordinateX,
+			naturalCoordinateY: naturalCoordinateY,
+			naturalHeight: naturalHeight,
+			naturalWidth: naturalWidth,
+			scaledHeight: scaledHeight,
+			scaledWidth: scaledWidth,
+		};
 	};
 
 	if (histologyImage === null || histologyImageCoords === null) {
@@ -255,9 +300,13 @@ const HistologyImage: FC<Props> = (props) => {
 					{isLoading && <LoadingSpinner asOverlay />}
 
 					{!showHiRes && (
+						// <MousePointer
+						// 	mouseY={histologyImageCoords.coords.mouseY}
+						// 	mouseX={histologyImageCoords.coords.mouseX}
+						// />
 						<MousePointer
-							mouseY={histologyImageCoords.coords.mouseY}
-							mouseX={histologyImageCoords.coords.mouseX}
+							mouseY={hiResMousePos.mouseY}
+							mouseX={hiResMousePos.mouseX}
 						/>
 					)}
 
@@ -306,6 +355,11 @@ const HistologyImage: FC<Props> = (props) => {
 									</div>
 
 									<TransformComponent>
+										<MousePointer
+											mouseX={hiResMousePos.mouseX}
+											mouseY={hiResMousePos.mouseY}
+										/>
+
 										{showLabels && (
 											<img
 												className="histology-img-labels"
