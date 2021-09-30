@@ -53,7 +53,7 @@ const getCurrentLabelNumber = async (
 	// the npy files are missing from the updated folder for the labels
 	// I need the npy files to parse the label (I think)
 	const npyFile =
-		await require(`../../assets/P57-16/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.npy`)
+		await require(`../../assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels_npy/slice_${paddedSlice}.npy`)
 			.default;
 
 	const npyArray = await n.load(npyFile);
@@ -90,7 +90,11 @@ const parseLabel = async (currentLabelNumber: number, type: string) => {
 
 	const parsedLabels = await readTxt.load(labelsFile);
 
+	console.log(parsedLabels);
+
 	const currentLabel = parsedLabels[currentLabelNumber];
+
+	console.log(currentLabel);
 
 	return currentLabel;
 };

@@ -3,18 +3,18 @@
 }
 
 .hi-res.btn {
-	color: #dadada;
+	color: #ffffff;
 	width: 175px;
 	height: 50px;
 	border-radius: 3px;
-	background-color: rgb(66 66 66);
+	background-color: #545454;
 	cursor: pointer;
 	border: none;
 }
 
 .hi-res.btn:hover {
 	color: #000000;
-	background-color: rgb(119, 119, 119);
+	background-color: rgb(146, 146, 146);
 }
 
 .hi-res-btn-message {

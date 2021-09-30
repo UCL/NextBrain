@@ -256,6 +256,16 @@ const HistologyImage: FC<Props> = (props) => {
 									</div>
 
 									<TransformComponent>
+										{showLabels && (
+											<img
+												className="histology-img-labels"
+												src={labelsImage}
+												alt="histology-labels"
+												//onLoad={(e) => onImageLoad(e, "lowRes")}
+												style={{ opacity: `${labelsTransparency}` }}
+											></img>
+										)}
+
 										<img
 											//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
 											className={`histology-img ${showHiRes ? "hi-res" : ""}`}

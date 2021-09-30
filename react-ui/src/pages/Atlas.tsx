@@ -4,7 +4,6 @@ import AtlasImages from "../components/atlas/atlasImages/AtlasImages";
 import AtlasOptions from "../components/atlas/atlasOptions/AtlasOptions";
 //import Scrollbars from "../components/atlas/scrollbars/Scrollbars";
 import { CurrentLabel } from "../models/label.model";
-import { ScrollbarPos } from "../models/scrollbarPos.model";
 import getMatrix from "../components/utils/getMatrix";
 import matrixMultiplier from "../components/utils/matrixMultiplier";
 
@@ -17,7 +16,6 @@ const Atlas: FC = () => {
 	const [showLabels, setShowLabels] = useState(false);
 	const [labelsTransparency, setLabelsTransparency] = useState("0.5");
 	const [currentLabel, setCurrentLabel] = useState<CurrentLabel>([]);
-	const [histologyScrollbarPos, setHistologyScrollbarPos] = useState(0);
 	const [centroid, setCentroid] = useState<any>();
 
 	// useCallback prevents unnecessary re-render of child component (AtlasNavigation.tsx)
@@ -59,8 +57,6 @@ const Atlas: FC = () => {
 				showLabels={showLabels}
 				labelsTransparency={labelsTransparency}
 				setCurrentLabel={setCurrentLabel}
-				histologyScrollbarPos={histologyScrollbarPos}
-				setHistologyScrollbarPos={setHistologyScrollbarPos}
 				centroid={centroid}
 			/>
 

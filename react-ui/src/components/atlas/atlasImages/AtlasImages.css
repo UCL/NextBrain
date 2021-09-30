@@ -40,6 +40,7 @@
 .atlas-imgs-container .histology-container {
 	grid-area: histology-container;
 	margin-left: 25px;
+	background-color: black;
 }
 
 .mri-sagittal-scrollbar {

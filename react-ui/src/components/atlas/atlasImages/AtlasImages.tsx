@@ -29,8 +29,6 @@ interface Props {
 	showLabels: boolean;
 	labelsTransparency: string;
 	setCurrentLabel: (currentLabel: CurrentLabel) => void;
-	histologyScrollbarPos: number;
-	setHistologyScrollbarPos: (mouseY: number) => void;
 	centroid: any;
 }
 
@@ -49,36 +47,34 @@ const AtlasImages: FC<Props> = (props) => {
 		showLabels,
 		labelsTransparency,
 		setCurrentLabel,
-		histologyScrollbarPos,
-		setHistologyScrollbarPos,
 		centroid,
 	} = props;
 
 	console.log(centroid);
 
-	// const setCurrentLabelHandler = useCallback(
-	// 	async (
-	// 		mouseX: number,
-	// 		mouseY: number,
-	// 		histologyImageCoords: HistologyCoords,
-	// 		type: string
-	// 	) => {
-	// 		console.log("getting current histology label");
+	const setCurrentLabelHandler = useCallback(
+		async (
+			mouseX: number,
+			mouseY: number,
+			histologyImageCoords: HistologyCoords,
+			type: string
+		) => {
+			console.log("getting current histology label");
 
-	// 		//const { mouseX, mouseY } = getMouseCoords(e);
+			//const { mouseX, mouseY } = getMouseCoords(e);
 
-	// 		const currentLabel = await histologyLabelParser(
-	// 			mouseX,
-	// 			mouseY,
-	// 			histologyImageCoords,
-	// 			type,
-	// 			patientId
-	// 		);
+			const currentLabel = await histologyLabelParser(
+				mouseX,
+				mouseY,
+				histologyImageCoords,
+				type,
+				patientId
+			);
 
-	// 		setCurrentLabel(currentLabel);
-	// 	},
-	// 	[setCurrentLabel, patientId]
-	// );
+			setCurrentLabel(currentLabel);
+		},
+		[setCurrentLabel, patientId]
+	);
 
 	useEffect(() => {
 		// initialize mri panels based on an arbitrary starting point
@@ -87,7 +83,7 @@ const AtlasImages: FC<Props> = (props) => {
 			try {
 				// args: plane, slice, mouseX, mouseY
 				// I should pass the argument as an object to make it more clear
-				await updateAtlasImages("axial", 150, 145, 128, patientId);
+				await updateAtlasImages("axial", 194, 97, 131, patientId);
 			} catch {
 				setError("error building atlas");
 			}
@@ -97,16 +93,16 @@ const AtlasImages: FC<Props> = (props) => {
 		buildAtlas();
 	}, [patientId]);
 
-	// useEffect(() => {
-	// 	if (histologyImageCoords !== null && mriImageCoords !== null) {
-	// 		setCurrentLabelHandler(
-	// 			histologyImageCoords.coords.mouseX,
-	// 			histologyImageCoords.coords.mouseY,
-	// 			histologyImageCoords,
-	// 			"lowRes"
-	// 		);
-	// 	}
-	// }, [histologyImageCoords, mriImageCoords, setCurrentLabelHandler]);
+	useEffect(() => {
+		if (histologyImageCoords !== null && mriImageCoords !== null) {
+			setCurrentLabelHandler(
+				histologyImageCoords.coords.mouseX,
+				histologyImageCoords.coords.mouseY,
+				histologyImageCoords,
+				"lowRes"
+			);
+		}
+	}, [histologyImageCoords, mriImageCoords, setCurrentLabelHandler]);
 
 	useEffect(() => {
 		console.log(centroid);

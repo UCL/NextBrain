@@ -19,7 +19,7 @@ const Label: FC<Props> = (props) => {
 	}
 
 	// initialise the label on page load?
-	if (currentLabel === null) {
+	if (currentLabel == null) {
 		return <div>no label found</div>;
 	}
 
