@@ -20,7 +20,7 @@ const histologyLabelParser = async (
 		patientId
 	);
 
-	console.log(mouseX, mouseY, histologyImageCoords, type);
+	// console.log(mouseX, mouseY, histologyImageCoords, type);
 
 	const parsedLabel = await parseLabel(currentLabelNumber, type);
 
@@ -60,11 +60,7 @@ const getCurrentLabelNumber = async (
 
 	const ndArray = ndarray(npyArray.data, npyArray.shape);
 
-	console.log(ndArray);
-
 	const currentLabelNumber = ndArray.get(mouseX.toFixed(0), mouseY.toFixed(0));
-
-	console.log(currentLabelNumber);
 
 	return currentLabelNumber;
 };
@@ -90,11 +86,7 @@ const parseLabel = async (currentLabelNumber: number, type: string) => {
 
 	const parsedLabels = await readTxt.load(labelsFile);
 
-	console.log(parsedLabels);
-
 	const currentLabel = parsedLabels[currentLabelNumber];
-
-	console.log(currentLabel);
 
 	return currentLabel;
 };

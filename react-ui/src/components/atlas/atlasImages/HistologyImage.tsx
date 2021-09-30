@@ -46,8 +46,6 @@ const HistologyImage: FC<Props> = (props) => {
 		histologyToMri,
 	} = props;
 
-	console.log(histologyImageCoords);
-
 	useEffect(() => {
 		const fetchHistologyImage = async () => {
 			// determine the correct histology image based on computed coordinates
@@ -171,6 +169,9 @@ const HistologyImage: FC<Props> = (props) => {
 	const onPan = (ref: any, e: Event) => {
 		console.log("panning image");
 		console.log(ref);
+
+		getHistologyMousePos(e, "hiRes");
+
 		//histologyToMri(e);
 	};
 
@@ -190,6 +191,56 @@ const HistologyImage: FC<Props> = (props) => {
 		//setIsLoading(false);
 		console.log("end zoom image");
 		console.log(ref);
+	};
+
+	// merge this with getMouseCoords.ts
+	const getHistologyMousePos = (e: any, type: string) => {
+		const offsetX = type === "lowRes" ? e.nativeEvent.offsetX : e.offsetX;
+		const offsetY = type === "lowRes" ? e.nativeEvent.offsetY : e.offsetY;
+
+		console.log("offsetX: " + offsetX, "offsetY: " + offsetY);
+
+		console.log(e);
+
+		getNaturalCoordinates(e, offsetX, offsetY, type);
+	};
+
+	// account for the fact that we set max-height on the histology image
+	// this function allows us to extract the natural coordinates, given the max-height css property
+	const getNaturalCoordinates = (
+		e: any,
+		offsetX: any,
+		offsetY: any,
+		type: string
+	) => {
+		const naturalWidth =
+			type === "lowRes"
+				? e.target.naturalWidth
+				: e.target.childNodes[0].naturalWidth; // the original size of the image
+		const naturalHeight =
+			type === "lowRes"
+				? e.target.naturalHeight
+				: e.target.childNodes[0].naturalHeight; // the original size of the image
+		const scaledWidth =
+			type === "lowRes" ? e.target.width : e.target.childNodes[0].width; // the scaled size of the image
+		const scaledHeight =
+			type === "lowRes" ? e.target.height : e.target.childNodes[0].height; // the scaled size of the image
+
+		console.log("naturalWidth: " + naturalWidth);
+		console.log("naturalHeight: " + naturalHeight);
+		console.log("scaledWidth: " + scaledWidth);
+		console.log("scaledHeight: " + scaledHeight);
+
+		// make sure the coordinate does not exceed the maximum bounds (else the calculation will be off)
+		offsetX = offsetX > scaledWidth ? scaledWidth : offsetX;
+		offsetY = offsetY > scaledHeight ? scaledHeight : offsetY;
+
+		const naturalCoordinateX = (naturalWidth / scaledWidth) * offsetX;
+		const naturalCoordinateY = (naturalHeight / scaledHeight) * offsetY;
+
+		console.log(
+			`natural coord x: ${naturalCoordinateX}, natural coord y: ${naturalCoordinateY}`
+		);
 	};
 
 	if (histologyImage === null || histologyImageCoords === null) {
@@ -224,9 +275,8 @@ const HistologyImage: FC<Props> = (props) => {
 						<img
 							//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
 							onClick={(e) => {
-								!showHiRes && histologyToMri(e);
-								// !showHiRes &&
-								// 	setCurrentLabelHandler(e, histologyImageCoords, "lowRes");
+								histologyToMri(e);
+								// getHistologyMousePos(e, "lowRes");
 							}}
 							className="histology-img"
 							src={histologyImage}
@@ -245,7 +295,7 @@ const HistologyImage: FC<Props> = (props) => {
 							onZoomStart={onImageZoomStart}
 							onZoom={onImageZoom}
 							onZoomStop={onImageZoomStop}
-							maxScale={25}
+							maxScale={15}
 						>
 							{({ zoomIn, zoomOut, resetTransform, ...rest }) => (
 								<>
@@ -268,6 +318,7 @@ const HistologyImage: FC<Props> = (props) => {
 
 										<img
 											//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
+											//onClick={(e) => getMousePos(e)}
 											className={`histology-img ${showHiRes ? "hi-res" : ""}`}
 											src={hiResHistologyImage}
 											alt="histology"

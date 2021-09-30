@@ -50,8 +50,6 @@ const AtlasImages: FC<Props> = (props) => {
 		centroid,
 	} = props;
 
-	console.log(centroid);
-
 	const setCurrentLabelHandler = useCallback(
 		async (
 			mouseX: number,
@@ -59,7 +57,7 @@ const AtlasImages: FC<Props> = (props) => {
 			histologyImageCoords: HistologyCoords,
 			type: string
 		) => {
-			console.log("getting current histology label");
+			// console.log("getting current histology label");
 
 			//const { mouseX, mouseY } = getMouseCoords(e);
 

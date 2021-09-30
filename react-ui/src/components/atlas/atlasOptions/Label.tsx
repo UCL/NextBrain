@@ -12,8 +12,6 @@ interface Props {
 const Label: FC<Props> = (props) => {
 	const { showLabels, currentLabel } = props;
 
-	console.log(currentLabel);
-
 	if (!showLabels) {
 		return null;
 	}
@@ -23,6 +21,7 @@ const Label: FC<Props> = (props) => {
 		return <div>no label found</div>;
 	}
 
+	// make the label an object so it is more clear what its contents are
 	return (
 		<div className="label-container">
 			<div className="label-heading">Current Label</div>

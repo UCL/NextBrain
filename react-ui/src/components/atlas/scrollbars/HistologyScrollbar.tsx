@@ -27,7 +27,6 @@ const HistologyScrollbar: FC<Props> = (props) => {
 
 	useEffect(() => {
 		// determine the scrollbar position for the current histology slice
-		console.log(histologyImageCoords);
 
 		const scrollbarLength = 824;
 		const currentHistologySliceNumber = histologyImageCoords!.coords.slice;
@@ -39,8 +38,6 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		const newHistologyScrollbarPos = +(
 			scrollbarLength * currentSliceAsProportion
 		).toFixed(0);
-
-		console.log(newHistologyScrollbarPos);
 
 		setScrollbarPos(newHistologyScrollbarPos);
 	}, [histologyImageCoords]);
@@ -65,10 +62,6 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		// -1 to account for the fact that slices start at 0
 		const newHistologySliceNumber =
 			(mouseY / scrollbarLength) * slicesInBlock - 1;
-
-		console.log(mouseY);
-		console.log(slicesInBlock);
-		console.log(newHistologySliceNumber.toFixed(0));
 
 		try {
 			adjustHistologyCoordsFromScrollbar(newHistologySliceNumber);
