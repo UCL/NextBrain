@@ -53,7 +53,7 @@ const AtlasNavigation: FC<Props> = (props) => {
 			keepOpenOnSelect
 			mode="radioSelect"
 			inlineSearchInput
-			texts={{ placeholder: "Navigate" }}
+			texts={{ placeholder: "Navigate Atlas" }}
 		/>
 	);
 };

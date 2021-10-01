@@ -1,17 +1,3 @@
 .scrollbar {
 	border: 1px solid grey;
 }
-
-.mri-scrollbar-container {
-	position: relative;
-	height: 270px;
-}
-
-.mri-scrollbar-widget {
-	width: 25px;
-	height: 7px;
-	background-color: black;
-	position: absolute;
-	top: 0;
-	pointer-events: none;
-}

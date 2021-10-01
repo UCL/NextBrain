@@ -245,31 +245,12 @@ const AtlasImages: FC<Props> = (props) => {
 
 		console.log(coords);
 
-		// axial is picked arbitrarily here
-		// it could be any of the planes as long as the order of params is entered correctly
+		// axial is picked arbitrarily here, it could be any of the planes
 		updateAtlasImages(
 			"axial",
 			Number(resultZ.toFixed(0)),
 			Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
 			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
-			patientId
-		);
-	};
-
-	const adjustMriCoordsFromScrollbar = async (
-		newSliceNumber: number,
-		plane: string
-	) => {
-		console.log(plane);
-		console.log(newSliceNumber);
-		console.log(mriImageCoords);
-		console.log(histologyImageCoords);
-
-		updateAtlasImages(
-			plane,
-			Number(+newSliceNumber.toFixed(0)),
-			Number(mriImageCoords![plane].currentMriMouseX),
-			Number(mriImageCoords![plane].currentMriMouseY),
 			patientId
 		);
 	};
@@ -310,8 +291,6 @@ const AtlasImages: FC<Props> = (props) => {
 			<Scrollbars
 				histologyImageCoords={histologyImageCoords}
 				adjustHistologyCoordsFromScrollbar={adjustHistologyCoordsFromScrollbar}
-				adjustMriCoordsFromScrollbar={adjustMriCoordsFromScrollbar}
-				mriImageCoords={mriImageCoords}
 				showHiRes={showHiRes}
 				setShowHiRes={setShowHiRes}
 			/>
