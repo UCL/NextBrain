@@ -20,12 +20,6 @@ interface Props {
 	histologyToMri: (mouseX: number, mouseY: number) => void;
 }
 
-interface PanPinchZoomProps {
-	zoomIn: () => void;
-	zoomOut: () => void;
-	resetTransform: () => void;
-}
-
 const HistologyImage: FC<Props> = (props) => {
 	const [error, setError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
@@ -33,17 +27,11 @@ const HistologyImage: FC<Props> = (props) => {
 	const [hiResHistologyImage, setHiResHistologyImage] = useState("");
 	const [labelsImage, setLabelsImage] = useState("");
 	const [imageDimensions, setImageDimensions] = useState<{
-		naturalWidth: number;
-		naturalHeight: number;
-		scaledHeight: number;
-		scaledWidth: number;
+		[key: string]: number;
 	} | null>(null);
 	const [scaledHistologyMouseCoords, setScaledHistologyMouseCoords] = useState<{
-		mouseX: number;
-		mouseY: number;
+		[key: string]: number;
 	} | null>(null);
-
-	console.log(imageDimensions);
 
 	const {
 		patientId,
@@ -68,6 +56,7 @@ const HistologyImage: FC<Props> = (props) => {
 
 				const histologyFolder = showHiRes ? "histology_hr" : "histology";
 
+				// the below code chunks can probably be combined
 				if (showHiRes === false) {
 					setHiResHistologyImage("");
 
