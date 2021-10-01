@@ -11,12 +11,20 @@ interface Props {
 	plane: string;
 	adjustMriCoordsFromScrollbar: (newSliceNumber: number, plane: string) => void;
 	mriImageCoords: MriCoords | null;
+	showHiRes: boolean;
+	setShowHiRes: (showHiRes: boolean) => void;
 }
 
 const MriScrollbar: FC<Props> = (props) => {
 	const [currentScrollbarPos, setCurrentScrollbarPos] = useState(0);
 
-	const { plane, adjustMriCoordsFromScrollbar, mriImageCoords } = props;
+	const {
+		plane,
+		adjustMriCoordsFromScrollbar,
+		mriImageCoords,
+		showHiRes,
+		setShowHiRes,
+	} = props;
 
 	useEffect(() => {
 		// determine the scrollbar position for the current mri plane
@@ -38,7 +46,7 @@ const MriScrollbar: FC<Props> = (props) => {
 	}, [plane, mriImageCoords]);
 
 	const updateScrollbarPos = (e: React.MouseEvent) => {
-		const { mouseY } = getMouseCoords(e);
+		const { mouseY } = getMouseCoords(e, showHiRes);
 
 		const scrollbarLength = 272;
 

@@ -13,6 +13,7 @@
 
 .mri-img-container img {
 	-webkit-user-drag: none;
+	border: 1px solid white;
 }
 
 /* .coronal-img {

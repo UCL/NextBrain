@@ -22,15 +22,15 @@ const getMatrix = async (
 				.default;
 	}
 
-	// need to update this to the latest updated url when hr is available
-	// for now, we are not doing any navigation from histology_hr, so no matrix is needed (this may change in the future)
-	// if (type === "histology_hr") {
-	// 	txtFile =
-	// 		await require(`../../assets/P57-16/histology_hr/${paddedBlock}/matrix.txt`)
-	// 			.default;
-	// }
+	if (type === "histology_hr") {
+		txtFile =
+			await require(`../../assets/${patientId}/histology_hr/${paddedBlock}/matrix.txt`)
+				.default;
+	}
 
 	const matrix = await readTxt.load(txtFile);
+
+	console.log(matrix);
 
 	return matrix;
 };

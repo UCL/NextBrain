@@ -50,7 +50,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 
 		setShowHiRes(false);
 
-		const { mouseY } = getMouseCoords(e);
+		const { mouseY } = getMouseCoords(e, showHiRes);
 
 		const currentBlock = histologyImageCoords!.currentBlock;
 		const slicesInBlock = histologySliceMap[currentBlock]["slices"];

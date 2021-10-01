@@ -37,18 +37,24 @@ const Scrollbars: FC<Props> = (props) => {
 				plane="sagittal"
 				adjustMriCoordsFromScrollbar={adjustMriCoordsFromScrollbar}
 				mriImageCoords={mriImageCoords}
+				showHiRes={showHiRes}
+				setShowHiRes={setShowHiRes}
 			/>
 
 			<MriScrollbar
 				plane="coronal"
 				adjustMriCoordsFromScrollbar={adjustMriCoordsFromScrollbar}
 				mriImageCoords={mriImageCoords}
+				showHiRes={showHiRes}
+				setShowHiRes={setShowHiRes}
 			/>
 
 			<MriScrollbar
 				plane="axial"
 				adjustMriCoordsFromScrollbar={adjustMriCoordsFromScrollbar}
 				mriImageCoords={mriImageCoords}
+				showHiRes={showHiRes}
+				setShowHiRes={setShowHiRes}
 			/> */}
 
 			<HistologyScrollbar

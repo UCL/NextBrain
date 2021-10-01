@@ -81,7 +81,7 @@ const AtlasImages: FC<Props> = (props) => {
 			try {
 				// args: plane, slice, mouseX, mouseY
 				// I should pass the argument as an object to make it more clear
-				await updateAtlasImages("axial", 194, 97, 131, patientId);
+				await updateAtlasImages("axial", 124, 149, 357, patientId);
 			} catch {
 				setError("error building atlas");
 			}
@@ -128,6 +128,12 @@ const AtlasImages: FC<Props> = (props) => {
 	) => {
 		console.log("----------");
 		console.log("BUILDING IMAGES");
+
+		// I need to refactor this function so that it can take into account whether we are currently in hi-res mode
+		// the issue is that this function always returns coordinates that are for low res mode
+		// when we go from hi-res histology to mri, I need to pass in the hi-res x and y coords
+		// a current workaround is to store the hi-res x and y coords as state in HistologyImage.tsx
+		// in other words, I am currently storing low-res histology coords even when we are in hi-res mode
 
 		console.log(currentPlane, currentSlice, mouseX, mouseY);
 
@@ -181,16 +187,18 @@ const AtlasImages: FC<Props> = (props) => {
 		setHistologyImageCoords(newHistologyCoords);
 	};
 
-	const histologyToMri = async (e: React.MouseEvent) => {
+	const histologyToMri = async (mouseX: number, mouseY: number) => {
 		console.log("getting coordinates from histology to mri");
-
-		const { mouseX, mouseY } = getMouseCoords(e);
 
 		console.log(mouseX, mouseY);
 
+		const histologyFolder = showHiRes ? "histology_hr" : "histology";
+
+		console.log(histologyFolder);
+
 		const matrix = await getMatrix(
 			histologyImageCoords!.currentBlock,
-			"histology",
+			histologyFolder,
 			patientId
 		);
 

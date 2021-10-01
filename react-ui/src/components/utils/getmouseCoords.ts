@@ -1,6 +1,6 @@
-const getMouseCoords = (e: React.MouseEvent) => {
-	const mouseX = e.nativeEvent.offsetX;
-	const mouseY = e.nativeEvent.offsetY;
+const getMouseCoords = (e: any, showHiRes: boolean) => {
+	let mouseX = !showHiRes ? e.nativeEvent.offsetX : e.offsetX;
+	let mouseY = !showHiRes ? e.nativeEvent.offsetY : e.offsetY;
 
 	return { mouseX, mouseY };
 };
