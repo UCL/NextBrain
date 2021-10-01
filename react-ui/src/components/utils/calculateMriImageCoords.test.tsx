@@ -1,5 +1,5 @@
 import calculateMriImageCoords from "./calculateMriImageCoords";
-import calculateAdjustedMouseCoords from "./calculateAdjustedMouseCoords";
+import calculateAdjustedMriCoords from "./calculateAdjustedMriCoords";
 
 describe("unit tests for calculating correct mri image coords", () => {
 	test("image coords return correctly with sagittal as props", () => {
@@ -8,8 +8,8 @@ describe("unit tests for calculating correct mri image coords", () => {
 		const mouseX = 313;
 		const mouseY = 173;
 
-		const { adjustedSlice, adjustedMouseX, adjustedMouseY } =
-			calculateAdjustedMouseCoords(currentPlane, currentSlice, mouseX, mouseY);
+		const { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY } =
+			calculateAdjustedMriCoords(currentPlane, currentSlice, mouseX, mouseY);
 
 		expect(
 			calculateMriImageCoords(
@@ -17,9 +17,9 @@ describe("unit tests for calculating correct mri image coords", () => {
 				currentSlice,
 				mouseX,
 				mouseY,
-				adjustedSlice!,
-				adjustedMouseX!,
-				adjustedMouseY!
+				adjustedMriSlice!,
+				adjustedMriMouseX!,
+				adjustedMriMouseY!
 			)
 		).toStrictEqual({
 			sagittal: {
@@ -29,13 +29,13 @@ describe("unit tests for calculating correct mri image coords", () => {
 			},
 			coronal: {
 				slice: 313,
-				mouseX: adjustedSlice,
+				mouseX: adjustedMriSlice,
 				mouseY: 173,
 			},
 			axial: {
-				slice: adjustedMouseY,
-				mouseX: adjustedSlice,
-				mouseY: adjustedMouseX,
+				slice: adjustedMriMouseY,
+				mouseX: adjustedMriSlice,
+				mouseY: adjustedMriMouseX,
 			},
 		});
 	});
@@ -46,8 +46,8 @@ describe("unit tests for calculating correct mri image coords", () => {
 		const mouseX = 98;
 		const mouseY = 167;
 
-		const { adjustedSlice, adjustedMouseX, adjustedMouseY } =
-			calculateAdjustedMouseCoords(currentPlane, currentSlice, mouseX, mouseY);
+		const { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY } =
+			calculateAdjustedMriCoords(currentPlane, currentSlice, mouseX, mouseY);
 
 		expect(
 			calculateMriImageCoords(
@@ -55,13 +55,13 @@ describe("unit tests for calculating correct mri image coords", () => {
 				currentSlice,
 				mouseX,
 				mouseY,
-				adjustedSlice!,
-				adjustedMouseX!,
-				adjustedMouseY!
+				adjustedMriSlice!,
+				adjustedMriMouseX!,
+				adjustedMriMouseY!
 			)
 		).toStrictEqual({
 			sagittal: {
-				slice: adjustedMouseX,
+				slice: adjustedMriMouseX,
 				mouseX: 319,
 				mouseY: 167,
 			},
@@ -71,9 +71,9 @@ describe("unit tests for calculating correct mri image coords", () => {
 				mouseY: 167,
 			},
 			axial: {
-				slice: adjustedMouseY,
+				slice: adjustedMriMouseY,
 				mouseX: 98,
-				mouseY: adjustedSlice,
+				mouseY: adjustedMriSlice,
 			},
 		});
 	});
@@ -84,8 +84,8 @@ describe("unit tests for calculating correct mri image coords", () => {
 		const mouseX = 158;
 		const mouseY = 144;
 
-		const { adjustedSlice, adjustedMouseX, adjustedMouseY } =
-			calculateAdjustedMouseCoords(currentPlane, currentSlice, mouseX, mouseY);
+		const { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY } =
+			calculateAdjustedMriCoords(currentPlane, currentSlice, mouseX, mouseY);
 
 		expect(
 			calculateMriImageCoords(
@@ -93,20 +93,20 @@ describe("unit tests for calculating correct mri image coords", () => {
 				currentSlice,
 				mouseX,
 				mouseY,
-				adjustedSlice!,
-				adjustedMouseX!,
-				adjustedMouseY!
+				adjustedMriSlice!,
+				adjustedMriMouseX!,
+				adjustedMriMouseY!
 			)
 		).toStrictEqual({
 			sagittal: {
-				slice: adjustedMouseX,
-				mouseX: adjustedMouseY,
-				mouseY: adjustedSlice,
+				slice: adjustedMriMouseX,
+				mouseX: adjustedMriMouseY,
+				mouseY: adjustedMriSlice,
 			},
 			coronal: {
-				slice: adjustedMouseY,
+				slice: adjustedMriMouseY,
 				mouseX: 158,
-				mouseY: adjustedSlice,
+				mouseY: adjustedMriSlice,
 			},
 			axial: {
 				slice: 195,

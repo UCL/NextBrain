@@ -2,8 +2,8 @@ import { FC, useState, useEffect, useCallback } from "react";
 
 import calculateMriImageCoords from "../../utils/calculateMriImageCoords";
 import calculateHistologyImageCoords from "../../utils/calculateHistologyImageCoords";
-import calculateAdjustedMouseCoords from "../../utils/calculateAdjustedMouseCoords";
-import logCoordsForDebugging from "../../utils/logCoordsForDebugging";
+import calculateAdjustedMriCoords from "../../utils/calculateAdjustedMriCoords";
+import logMriCoordsForDebugging from "../../utils/logMriCoordsForDebugging";
 import mriCoordinatesKey from "../../utils/mriCoordinatesKey";
 import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
@@ -52,18 +52,18 @@ const AtlasImages: FC<Props> = (props) => {
 
 	const setCurrentLabelHandler = useCallback(
 		async (
-			mouseX: number,
-			mouseY: number,
+			currentMriMouseX: number,
+			currentMriMouseY: number,
 			histologyImageCoords: HistologyCoords,
 			type: string
 		) => {
 			// console.log("getting current histology label");
 
-			//const { mouseX, mouseY } = getMouseCoords(e);
+			//const { currentMriMouseX, currentMriMouseY } = getMouseCoords(e);
 
 			const currentLabel = await histologyLabelParser(
-				mouseX,
-				mouseY,
+				currentMriMouseX,
+				currentMriMouseY,
 				histologyImageCoords,
 				type,
 				patientId
@@ -79,8 +79,9 @@ const AtlasImages: FC<Props> = (props) => {
 		const buildAtlas = async () => {
 			setIsLoading(true);
 			try {
-				// args: plane, slice, mouseX, mouseY
+				// args: plane, slice, currentMriMouseX, currentMriMouseY
 				// I should pass the argument as an object to make it more clear
+
 				await updateAtlasImages("axial", 124, 149, 357, patientId);
 			} catch {
 				setError("error building atlas");
@@ -120,10 +121,10 @@ const AtlasImages: FC<Props> = (props) => {
 	}, [centroid, patientId]);
 
 	const updateAtlasImages = async (
-		currentPlane: string,
-		currentSlice: number,
-		mouseX: number,
-		mouseY: number,
+		currentMriPlane: string,
+		currentMriSlice: number,
+		currentMriMouseX: number,
+		currentMriMouseY: number,
 		patientId: string
 	) => {
 		console.log("----------");
@@ -135,39 +136,49 @@ const AtlasImages: FC<Props> = (props) => {
 		// a current workaround is to store the hi-res x and y coords as state in HistologyImage.tsx
 		// in other words, I am currently storing low-res histology coords even when we are in hi-res mode
 
-		console.log(currentPlane, currentSlice, mouseX, mouseY);
+		console.log(
+			currentMriPlane,
+			currentMriSlice,
+			currentMriMouseX,
+			currentMriMouseY
+		);
 
-		const { adjustedSlice, adjustedMouseX, adjustedMouseY } =
-			calculateAdjustedMouseCoords(currentPlane, currentSlice, mouseX, mouseY);
+		const { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY } =
+			calculateAdjustedMriCoords(
+				currentMriPlane,
+				currentMriSlice,
+				currentMriMouseX,
+				currentMriMouseY
+			);
 
-		logCoordsForDebugging(
-			currentPlane,
-			currentSlice,
-			mouseX,
-			mouseY,
-			adjustedSlice!,
-			adjustedMouseX!,
-			adjustedMouseY!
+		logMriCoordsForDebugging(
+			currentMriPlane,
+			currentMriSlice,
+			currentMriMouseX,
+			currentMriMouseY,
+			adjustedMriSlice!,
+			adjustedMriMouseX!,
+			adjustedMriMouseY!
 		);
 
 		const newMriCoords = calculateMriImageCoords(
-			currentPlane,
-			currentSlice,
-			mouseX,
-			mouseY,
-			adjustedSlice!,
-			adjustedMouseX!,
-			adjustedMouseY!
+			currentMriPlane,
+			currentMriSlice,
+			currentMriMouseX,
+			currentMriMouseY,
+			adjustedMriSlice!,
+			adjustedMriMouseX!,
+			adjustedMriMouseY!
 		);
 
 		const newHistologyCoords = await calculateHistologyImageCoords(
-			currentPlane,
-			currentSlice,
-			mouseX,
-			mouseY,
-			adjustedSlice!,
-			adjustedMouseX!,
-			adjustedMouseY!,
+			currentMriPlane,
+			currentMriSlice,
+			currentMriMouseX,
+			currentMriMouseY,
+			adjustedMriSlice!,
+			adjustedMriMouseX!,
+			adjustedMriMouseY!,
 			newMriCoords!,
 			patientId
 		);
@@ -187,10 +198,13 @@ const AtlasImages: FC<Props> = (props) => {
 		setHistologyImageCoords(newHistologyCoords);
 	};
 
-	const histologyToMri = async (mouseX: number, mouseY: number) => {
+	const histologyToMri = async (
+		currentMriMouseX: number,
+		currentMriMouseY: number
+	) => {
 		console.log("getting coordinates from histology to mri");
 
-		console.log(mouseX, mouseY);
+		console.log(currentMriMouseX, currentMriMouseY);
 
 		const histologyFolder = showHiRes ? "histology_hr" : "histology";
 
@@ -203,8 +217,8 @@ const AtlasImages: FC<Props> = (props) => {
 		);
 
 		const coords = matrixMultiplier(matrix, [
-			mouseY,
-			mouseX,
+			currentMriMouseY,
+			currentMriMouseX,
 			Number(histologyImageCoords!.coords.slice),
 			1,
 		]);
@@ -268,8 +282,8 @@ const AtlasImages: FC<Props> = (props) => {
 		updateAtlasImages(
 			plane,
 			Number(+newSliceNumber.toFixed(0)),
-			Number(mriImageCoords![plane].mouseX),
-			Number(mriImageCoords![plane].mouseY),
+			Number(mriImageCoords![plane].currentMriMouseX),
+			Number(mriImageCoords![plane].currentMriMouseY),
 			patientId
 		);
 	};

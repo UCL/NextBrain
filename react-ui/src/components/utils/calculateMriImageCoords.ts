@@ -2,71 +2,71 @@
 // refer to the top level readme for guidance on how the coordinates are calculated
 
 const calculateMriImageCoords = (
-	currentPlane: string,
-	currentSlice: number,
-	mouseX: number,
-	mouseY: number,
-	adjustedSlice: number,
-	adjustedMouseX: number,
-	adjustedMouseY: number
+	currentMriPlane: string,
+	currentMriSlice: number,
+	currentMriMouseX: number,
+	currentMriMouseY: number,
+	adjustedMriSlice: number,
+	adjustedMriMouseX: number,
+	adjustedMriMouseY: number
 ) => {
 	let newMriCoords;
 
-	switch (currentPlane) {
+	switch (currentMriPlane) {
 		case "sagittal":
 			newMriCoords = {
 				sagittal: {
-					slice: currentSlice,
-					mouseX: mouseX,
-					mouseY: mouseY,
+					slice: currentMriSlice,
+					mouseX: currentMriMouseX,
+					mouseY: currentMriMouseY,
 				},
 				coronal: {
-					slice: mouseX,
-					mouseX: adjustedSlice,
-					mouseY: mouseY,
+					slice: currentMriMouseX,
+					mouseX: adjustedMriSlice,
+					mouseY: currentMriMouseY,
 				},
 				axial: {
-					slice: adjustedMouseY,
-					mouseX: adjustedSlice,
-					mouseY: adjustedMouseX,
+					slice: adjustedMriMouseY,
+					mouseX: adjustedMriSlice,
+					mouseY: adjustedMriMouseX,
 				},
 			};
 			break;
 		case "coronal":
 			newMriCoords = {
 				sagittal: {
-					slice: adjustedMouseX,
-					mouseX: currentSlice,
-					mouseY: mouseY,
+					slice: adjustedMriMouseX,
+					mouseX: currentMriSlice,
+					mouseY: currentMriMouseY,
 				},
 				coronal: {
-					slice: currentSlice,
-					mouseX: mouseX,
-					mouseY: mouseY,
+					slice: currentMriSlice,
+					mouseX: currentMriMouseX,
+					mouseY: currentMriMouseY,
 				},
 				axial: {
-					slice: adjustedMouseY,
-					mouseX: mouseX,
-					mouseY: adjustedSlice,
+					slice: adjustedMriMouseY,
+					mouseX: currentMriMouseX,
+					mouseY: adjustedMriSlice,
 				},
 			};
 			break;
 		case "axial":
 			newMriCoords = {
 				sagittal: {
-					slice: adjustedMouseX,
-					mouseX: adjustedMouseY,
-					mouseY: adjustedSlice,
+					slice: adjustedMriMouseX,
+					mouseX: adjustedMriMouseY,
+					mouseY: adjustedMriSlice,
 				},
 				coronal: {
-					slice: adjustedMouseY,
-					mouseX: mouseX,
-					mouseY: adjustedSlice,
+					slice: adjustedMriMouseY,
+					mouseX: currentMriMouseX,
+					mouseY: adjustedMriSlice,
 				},
 				axial: {
-					slice: currentSlice,
-					mouseX: mouseX,
-					mouseY: mouseY,
+					slice: currentMriSlice,
+					mouseX: currentMriMouseX,
+					mouseY: currentMriMouseY,
 				},
 			};
 			break;

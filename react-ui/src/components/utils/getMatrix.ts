@@ -16,6 +16,12 @@ const getMatrix = async (
 				.default;
 	}
 
+	if (type === "mri_hr") {
+		txtFile =
+			await require(`../../assets/${patientId}/mri_rotated/matrices_hr/block_${paddedBlock}.txt`)
+				.default;
+	}
+
 	if (type === "histology") {
 		txtFile =
 			await require(`../../assets/${patientId}/histology/${paddedBlock}/matrix.txt`)

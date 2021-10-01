@@ -8,24 +8,24 @@ import histologySliceMap from "./histologySliceMap";
 import { MriCoords } from "../../models/mriCoords.model";
 
 const calculateHistologyImageCoords = async (
-	currentPlane: string,
-	currentSlice: number,
-	mouseX: number,
-	mouseY: number,
-	adjustedSlice: number,
-	adjustedMouseX: number,
-	adjustedMouseY: number,
+	currentMriPlane: string,
+	currentMriSlice: number,
+	currentMriMouseX: number,
+	currentMriMouseY: number,
+	adjustedMriSlice: number,
+	adjustedMriMouseX: number,
+	adjustedMriMouseY: number,
 	newMriCoords: MriCoords,
 	patientId: string
 ) => {
 	const currentBlock = await getCurrentBlock(
-		currentPlane,
-		currentSlice,
-		mouseX,
-		mouseY,
-		adjustedSlice,
-		adjustedMouseX,
-		adjustedMouseY,
+		currentMriPlane,
+		currentMriSlice,
+		currentMriMouseX,
+		currentMriMouseY,
+		adjustedMriSlice,
+		adjustedMriMouseX,
+		adjustedMriMouseY,
 		patientId
 	);
 
@@ -46,7 +46,7 @@ const calculateHistologyImageCoords = async (
 	return {
 		coords: histologyImageCoords,
 		currentBlock: currentBlock,
-		currentPlane: currentPlane,
+		currentPlane: currentMriPlane,
 	};
 };
 
@@ -98,25 +98,25 @@ const validateCoords = (
 };
 
 const getCurrentBlock = async (
-	currentPlane: string,
-	currentSlice: number,
-	mouseX: number,
-	mouseY: number,
-	adjustedSlice: number,
-	adjustedMouseX: number,
-	adjustedMouseY: number,
+	currentMriPlane: string,
+	currentMriSlice: number,
+	currentMriMouseX: number,
+	currentMriMouseY: number,
+	adjustedMriSlice: number,
+	adjustedMriMouseX: number,
+	adjustedMriMouseY: number,
 	patientId: string
 ) => {
 	let currentBlock;
 	let n = new npyjs();
 
-	console.log("current slice: " + currentSlice);
+	console.log("current slice: " + currentMriSlice);
 
-	const paddedSlice = currentSlice.toFixed(0).toString().padStart(3, "0");
+	const paddedSlice = currentMriSlice.toFixed(0).toString().padStart(3, "0");
 
 	// need to wrap this in a try catch block
 	let npyFile =
-		await require(`../../assets/${patientId}/mri_rotated/indices_${currentPlane}/slice_${paddedSlice}.npy`)
+		await require(`../../assets/${patientId}/mri_rotated/indices_${currentMriPlane}/slice_${paddedSlice}.npy`)
 			.default;
 
 	const npyArray = await n.load(npyFile);
@@ -133,22 +133,25 @@ const getCurrentBlock = async (
 
 	// const { xRotated, yRotated } = rotateCoords(
 	// 	ndArray,
-	// 	mouseX,
-	// 	mouseY,
-	// 	currentPlane,
-	// 	adjustedSlice,
-	// 	adjustedMouseX,
-	// 	adjustedMouseY
+	// 	currentMriMouseX,
+	// 	currentMriMouseY,
+	// 	currentMriPlane,
+	// 	adjustedMriSlice,
+	// 	adjustedMriMouseX,
+	// 	adjustedMriMouseY
 	// );
 
-	if (currentPlane === "sagittal") {
+	if (currentMriPlane === "sagittal") {
 		// sagittal has an additional horizontal flip, so we need to account for that here
-		// since its been flipped, we dont need to take the adjustedMouseX... we just take the normal mouseX
-		currentBlock = ndArray.get(mouseX, ndArray.shape[1] - adjustedMouseY);
+		// since its been flipped, we dont need to take the adjustedMriMouseX... we just take the normal currentMriMouseX
+		currentBlock = ndArray.get(
+			currentMriMouseX,
+			ndArray.shape[1] - adjustedMriMouseY
+		);
 	}
 
-	if (currentPlane === "coronal" || currentPlane === "axial") {
-		currentBlock = ndArray.get(mouseX, mouseY);
+	if (currentMriPlane === "coronal" || currentMriPlane === "axial") {
+		currentBlock = ndArray.get(currentMriMouseX, currentMriMouseY);
 	}
 
 	return currentBlock;
@@ -156,20 +159,20 @@ const getCurrentBlock = async (
 
 // const rotateCoords = (
 // 	ndArray,
-// 	mouseX,
-// 	mouseY,
-// 	currentPlane,
-// 	adjustedSlice,
-// 	adjustedMouseX,
-// 	adjustedMouseY
+// 	currentMriMouseX,
+// 	currentMriMouseY,
+// 	currentMriPlane,
+// 	adjustedMriSlice,
+// 	adjustedMriMouseX,
+// 	adjustedMriMouseY
 // ) => {
 // 	const ndArray0Modified = (ndArray.shape[0] - 1) / 2;
 // 	const ndArray1Modified = (ndArray.shape[1] - 1) / 2;
 // 	// console.log(ndArray0Modified, ndArray1Modified);
 
 // 	// the x and y have been swapped here compared to Peters python file
-// 	const xRotated = -adjustedMouseX + 2 * ndArray1Modified;
-// 	const yRotated = 2 * ndArray0Modified - adjustedMouseY;
+// 	const xRotated = -adjustedMriMouseX + 2 * ndArray1Modified;
+// 	const yRotated = 2 * ndArray0Modified - adjustedMriMouseY;
 
 // 	console.log("rotated mouse x: " + xRotated);
 // 	console.log("rotated mouse y: " + yRotated);
