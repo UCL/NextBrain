@@ -3,9 +3,11 @@ import { FC, useState, useCallback } from "react";
 import AtlasImages from "../components/atlas/atlasImages/AtlasImages";
 import AtlasOptions from "../components/atlas/atlasOptions/AtlasOptions";
 //import Scrollbars from "../components/atlas/scrollbars/Scrollbars";
-import { CurrentLabel } from "../models/label.model";
 import getMatrix from "../components/utils/getMatrix";
 import matrixMultiplier from "../components/utils/matrixMultiplier";
+
+import { CurrentLabel } from "../models/label.model";
+import { Centroid } from "../models/centroid.model";
 
 import "./Atlas.css";
 
@@ -16,7 +18,7 @@ const Atlas: FC = () => {
 	const [showLabels, setShowLabels] = useState(false);
 	const [labelsTransparency, setLabelsTransparency] = useState("0.5");
 	const [currentLabel, setCurrentLabel] = useState<CurrentLabel>([]);
-	const [centroid, setCentroid] = useState<any>();
+	const [centroid, setCentroid] = useState<Centroid | null>(null);
 
 	// useCallback prevents unnecessary re-render of child component (AtlasNavigation.tsx)
 	const getCentroid = useCallback(
@@ -26,8 +28,6 @@ const Atlas: FC = () => {
 				"histology",
 				patientId
 			);
-
-			console.log("matrix: " + matrix);
 
 			// why is the order of params here different compared to the function that handles physical clicks?
 			// the x and y are swapped here compared to the histologyToMri function
@@ -39,8 +39,6 @@ const Atlas: FC = () => {
 				navCoords!.zh,
 				1,
 			]);
-
-			console.log(coords);
 
 			setCentroid(coords);
 		},

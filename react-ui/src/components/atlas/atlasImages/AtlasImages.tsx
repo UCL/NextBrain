@@ -17,6 +17,7 @@ import Scrollbars from "../scrollbars/Scrollbars";
 import { CurrentLabel } from "../../../models/label.model";
 import { MriCoords } from "../../../models/mriCoords.model";
 import { HistologyCoords } from "../../../models/histologyCoords.model";
+import { Centroid } from "../../../models/centroid.model";
 
 import "./AtlasImages.css";
 
@@ -28,7 +29,7 @@ interface Props {
 	showLabels: boolean;
 	labelsTransparency: string;
 	setCurrentLabel: (currentLabel: CurrentLabel) => void;
-	centroid: any;
+	centroid: Centroid | null;
 }
 
 const AtlasImages: FC<Props> = (props) => {
@@ -176,8 +177,7 @@ const AtlasImages: FC<Props> = (props) => {
 	}, [histologyImageCoords, mriImageCoords, setCurrentLabelHandler]);
 
 	useEffect(() => {
-		console.log(centroid);
-		if (centroid !== null && centroid !== undefined) {
+		if (centroid != null) {
 			const resultX = centroid.resultX;
 			const resultY = centroid.resultY;
 			const resultZ = centroid.resultZ;
