@@ -1,4 +1,4 @@
-export interface HistologySliceMap {
+export interface HistologyCoordinatesKey {
 	[key: string]: {
 		[key: string]: number;
 	};

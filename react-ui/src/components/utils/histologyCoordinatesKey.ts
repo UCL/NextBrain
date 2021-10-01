@@ -1,8 +1,10 @@
 // a reference for the number of slices and image dimensions in each lowRes histology block
 
-import { HistologySliceMap } from "../../models/histologySliceMap.model";
+import { HistologyCoordinatesKey } from "../../models/histologyCoordinatesKey.model";
 
-const histologySliceMap: HistologySliceMap = {
+// add hi res here too?
+
+const histologyCoordinatesKeyLowRes: HistologyCoordinatesKey = {
 	"1": { width: 626, height: 851, slices: 17 },
 	"2": { width: 613, height: 922, slices: 18 },
 	"3": { width: 867, height: 564, slices: 18 },
@@ -50,4 +52,4 @@ const histologySliceMap: HistologySliceMap = {
 	"45": { width: 858, height: 611, slices: 39 },
 };
 
-export default histologySliceMap;
+export default histologyCoordinatesKeyLowRes;
