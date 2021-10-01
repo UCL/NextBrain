@@ -32,9 +32,16 @@ const HistologyImage: FC<Props> = (props) => {
 	const [histologyImage, setHistologyImage] = useState("");
 	const [hiResHistologyImage, setHiResHistologyImage] = useState("");
 	const [labelsImage, setLabelsImage] = useState("");
-	const [imageDimensions, setImageDimensions] = useState<any>(null);
-	const [scaledHistologyMouseCoords, setScaledHistologyMouseCoords] =
-		useState<any>(null);
+	const [imageDimensions, setImageDimensions] = useState<{
+		naturalWidth: number;
+		naturalHeight: number;
+		scaledHeight: number;
+		scaledWidth: number;
+	} | null>(null);
+	const [scaledHistologyMouseCoords, setScaledHistologyMouseCoords] = useState<{
+		mouseX: number;
+		mouseY: number;
+	} | null>(null);
 
 	console.log(imageDimensions);
 
@@ -197,7 +204,10 @@ const HistologyImage: FC<Props> = (props) => {
 	};
 
 	// called when user clicks on a lowRes or hiRes histology image
-	const updateHistologyCoordsHandler = (e: any, type: string) => {
+	const updateHistologyCoordsHandler = (
+		e: SyntheticEvent | Event,
+		type: string
+	) => {
 		const { naturalCoordinateX, naturalCoordinateY } = getHistologyMousePos(
 			e,
 			type
@@ -214,7 +224,7 @@ const HistologyImage: FC<Props> = (props) => {
 		updateHistologyCoordsHandler(e, "hiRes");
 	};
 
-	const getHistologyMousePos = (e: any, type: string) => {
+	const getHistologyMousePos = (e: SyntheticEvent | Event, type: string) => {
 		const { mouseX, mouseY } = getMouseCoords(e, showHiRes);
 
 		console.log("offsetX: " + mouseX, "offsetY: " + mouseY);
@@ -258,10 +268,11 @@ const HistologyImage: FC<Props> = (props) => {
 		offsetY: number
 	) => {
 		const naturalCoordinateX =
-			(imageDimensions.naturalWidth / imageDimensions.scaledWidth) * offsetX;
+			(imageDimensions!.naturalWidth / imageDimensions!.scaledWidth) * offsetX;
 
 		const naturalCoordinateY =
-			(imageDimensions.naturalHeight / imageDimensions.scaledHeight) * offsetY;
+			(imageDimensions!.naturalHeight / imageDimensions!.scaledHeight) *
+			offsetY;
 
 		console.log(
 			`natural coord x: ${naturalCoordinateX}, natural coord y: ${naturalCoordinateY}`
