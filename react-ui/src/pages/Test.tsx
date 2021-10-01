@@ -7,7 +7,7 @@ import parseNpz from "../components/utils/parseNpz";
 
 import getMatrix from "../components/utils/getMatrix";
 import matrixMultiplier from "../components/utils/matrixMultiplier";
-import histologySliceMap from "../components/utils/histologySliceMap";
+import histologySliceMap from "../components/utils/histologyCoordinatesKey";
 
 const Atlas: FC = () => {
 	useEffect(() => {

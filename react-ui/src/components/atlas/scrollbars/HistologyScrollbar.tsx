@@ -1,8 +1,9 @@
 import { FC, useEffect, useState } from "react";
 
 import ErrorModal from "../../shared/ErrorModal";
-import histologySliceMap from "../../utils/histologySliceMap";
+import histologyCoordinatesKey from "../../utils/histologyCoordinatesKey";
 import getMouseCoords from "../../utils/getmouseCoords";
+
 import { HistologyCoords } from "../../../models/histologyCoords.model";
 
 import "./HistologyScrollbar.css";
@@ -32,7 +33,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		const currentHistologySliceNumber =
 			histologyImageCoords!.currentHistologySlice;
 		const currentBlock = histologyImageCoords!.currentHistologyBlock;
-		const slicesInBlock = histologySliceMap[currentBlock]["slices"] - 1; // -1 because slices start at 0
+		const slicesInBlock = histologyCoordinatesKey[currentBlock]["slices"] - 1; // -1 because slices start at 0
 		const currentSliceAsProportion =
 			currentHistologySliceNumber / slicesInBlock;
 
@@ -49,7 +50,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		const { mouseY } = getMouseCoords(e, showHiRes);
 
 		const currentBlock = histologyImageCoords!.currentHistologyBlock;
-		const slicesInBlock = histologySliceMap[currentBlock]["slices"];
+		const slicesInBlock = histologyCoordinatesKey[currentBlock]["slices"];
 
 		// look into improving this, is it necessary to hard code this value? Same for the mri scrollbars
 		const scrollbarLength = 824;
@@ -70,7 +71,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		setShowHiRes(false);
 
 		const currentBlock = histologyImageCoords!.currentHistologyBlock;
-		const slicesInBlock = histologySliceMap[currentBlock]["slices"] - 1;
+		const slicesInBlock = histologyCoordinatesKey[currentBlock]["slices"] - 1;
 
 		const currentHistologySliceNumber =
 			histologyImageCoords!.currentHistologySlice;

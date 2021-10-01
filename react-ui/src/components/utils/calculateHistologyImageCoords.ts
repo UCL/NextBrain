@@ -3,7 +3,7 @@ import ndarray from "ndarray";
 
 import getMatrix from "./getMatrix";
 import matrixMultiplier from "./matrixMultiplier";
-import histologySliceMap from "./histologySliceMap";
+import histologyCoordinatesKey from "./histologyCoordinatesKey";
 
 import { MriCoords } from "../../models/mriCoords.model";
 
@@ -99,10 +99,10 @@ const validateCoords = (
 	// we make an adjustment to account for the fact that slices start at 0 within a block
 	// if returned slice exceeds maximum number of slices +2 then its a calcultion bug
 	if (
-		resultZ > histologySliceMap[currentBlock].slices - 1 &&
-		resultZ < histologySliceMap[currentBlock].slices + 1
+		resultZ > histologyCoordinatesKey[currentBlock].slices - 1 &&
+		resultZ < histologyCoordinatesKey[currentBlock].slices + 1
 	) {
-		resultZ = histologySliceMap[currentBlock].slices - 1;
+		resultZ = histologyCoordinatesKey[currentBlock].slices - 1;
 	}
 
 	return { resultX, resultY, resultZ };

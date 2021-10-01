@@ -1,4 +1,4 @@
-// a reference for the number of slices and image dimensions in each histology block
+// a reference for the number of slices and image dimensions in each lowRes histology block
 
 import { HistologySliceMap } from "../../models/histologySliceMap.model";
 
