@@ -40,11 +40,11 @@ const getCurrentLabelNumber = async (
 
 	let n = new npyjs();
 
-	const paddedBlock = histologyImageCoords.currentBlock
+	const paddedBlock = histologyImageCoords.currentHistologyBlock
 		.toString()
 		.padStart(2, "0");
 
-	const paddedSlice = histologyImageCoords.coordsLowRes.slice
+	const paddedSlice = histologyImageCoords.currentHistologySlice
 		.toString()
 		.padStart(2, "0");
 

@@ -10,7 +10,6 @@ import ErrorModal from "../../shared/ErrorModal";
 import MriImages from "./MriImages";
 import HistologyImage from "./HistologyImage";
 import getMatrix from "../../utils/getMatrix";
-import getMouseCoords from "../../utils/getmouseCoords";
 import matrixMultiplier from "../../utils/matrixMultiplier";
 import histologyLabelParser from "../../utils/histologyLabelParser";
 import Scrollbars from "../scrollbars/Scrollbars";
@@ -49,75 +48,6 @@ const AtlasImages: FC<Props> = (props) => {
 		setCurrentLabel,
 		centroid,
 	} = props;
-
-	const setCurrentLabelHandler = useCallback(
-		async (
-			currentMriMouseX: number,
-			currentMriMouseY: number,
-			histologyImageCoords: HistologyCoords,
-			type: string
-		) => {
-			// console.log("getting current histology label");
-
-			//const { currentMriMouseX, currentMriMouseY } = getMouseCoords(e);
-
-			const currentLabel = await histologyLabelParser(
-				currentMriMouseX,
-				currentMriMouseY,
-				histologyImageCoords,
-				type,
-				patientId
-			);
-
-			setCurrentLabel(currentLabel);
-		},
-		[setCurrentLabel, patientId]
-	);
-
-	useEffect(() => {
-		// initialize mri panels based on an arbitrary starting point
-		const buildAtlas = async () => {
-			setIsLoading(true);
-			try {
-				// args: plane, slice, currentMriMouseX, currentMriMouseY
-				// I should pass the argument as an object to make it more clear
-				await updateAtlasImages("axial", 124, 149, 357, patientId);
-			} catch {
-				setError("error building atlas");
-			}
-			setIsLoading(false);
-		};
-
-		buildAtlas();
-	}, [patientId]);
-
-	useEffect(() => {
-		if (histologyImageCoords !== null && mriImageCoords !== null) {
-			setCurrentLabelHandler(
-				histologyImageCoords.coordsLowRes.mouseX,
-				histologyImageCoords.coordsLowRes.mouseY,
-				histologyImageCoords,
-				"lowRes"
-			);
-		}
-	}, [histologyImageCoords, mriImageCoords, setCurrentLabelHandler]);
-
-	useEffect(() => {
-		console.log(centroid);
-		if (centroid !== null && centroid !== undefined) {
-			const resultX = centroid.resultX;
-			const resultY = centroid.resultY;
-			const resultZ = centroid.resultZ;
-
-			updateAtlasImages(
-				"axial",
-				Number(resultZ.toFixed(0)),
-				Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
-				Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
-				patientId
-			);
-		}
-	}, [centroid, patientId]);
 
 	const updateAtlasImages = async (
 		currentMriPlane: string,
@@ -193,20 +123,85 @@ const AtlasImages: FC<Props> = (props) => {
 		setHistologyImageCoords(newHistologyCoords);
 	};
 
+	const setCurrentLabelHandler = useCallback(
+		async (
+			currentMriMouseX: number,
+			currentMriMouseY: number,
+			histologyImageCoords: HistologyCoords,
+			type: string
+		) => {
+			// console.log("getting current histology label");
+
+			//const { currentMriMouseX, currentMriMouseY } = getMouseCoords(e);
+
+			const currentLabel = await histologyLabelParser(
+				currentMriMouseX,
+				currentMriMouseY,
+				histologyImageCoords,
+				type,
+				patientId
+			);
+
+			setCurrentLabel(currentLabel);
+		},
+		[setCurrentLabel, patientId]
+	);
+
+	useEffect(() => {
+		// initialize mri panels based on an arbitrary starting point
+		const buildAtlas = async () => {
+			setIsLoading(true);
+			try {
+				// args: plane, slice, currentMriMouseX, currentMriMouseY
+				// I should pass the argument as an object to make it more clear
+				await updateAtlasImages("axial", 124, 149, 357, patientId);
+			} catch {
+				setError("error building atlas");
+			}
+			setIsLoading(false);
+		};
+
+		buildAtlas();
+	}, [patientId]);
+
+	useEffect(() => {
+		if (histologyImageCoords !== null && mriImageCoords !== null) {
+			setCurrentLabelHandler(
+				histologyImageCoords.coordsLowRes.mouseX,
+				histologyImageCoords.coordsLowRes.mouseY,
+				histologyImageCoords,
+				"lowRes"
+			);
+		}
+	}, [histologyImageCoords, mriImageCoords, setCurrentLabelHandler]);
+
+	useEffect(() => {
+		console.log(centroid);
+		if (centroid !== null && centroid !== undefined) {
+			const resultX = centroid.resultX;
+			const resultY = centroid.resultY;
+			const resultZ = centroid.resultZ;
+
+			updateAtlasImages(
+				"axial",
+				Number(resultZ.toFixed(0)),
+				Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
+				Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
+				patientId
+			);
+		}
+	}, [centroid, patientId]);
+
 	const histologyToMri = async (
 		currentMriMouseX: number,
 		currentMriMouseY: number
 	) => {
 		console.log("getting coordinates from histology to mri");
 
-		console.log(currentMriMouseX, currentMriMouseY);
-
 		const histologyFolder = showHiRes ? "histology_hr" : "histology";
 
-		console.log(histologyFolder);
-
 		const matrix = await getMatrix(
-			histologyImageCoords!.currentBlock,
+			histologyImageCoords!.currentHistologyBlock,
 			histologyFolder,
 			patientId
 		);
@@ -215,13 +210,11 @@ const AtlasImages: FC<Props> = (props) => {
 		const coords = matrixMultiplier(matrix, [
 			currentMriMouseY,
 			currentMriMouseX,
-			Number(histologyImageCoords!.coordsLowRes.slice),
+			Number(histologyImageCoords!.currentHistologySlice),
 			1,
 		]);
 
 		const { resultX, resultY, resultZ } = coords;
-
-		console.log(coords);
 
 		// axial is picked arbitrarily here
 		// it could be any of the planes as long as the order of params is entered correctly
@@ -235,11 +228,8 @@ const AtlasImages: FC<Props> = (props) => {
 	};
 
 	const adjustHistologyCoordsFromScrollbar = async (newSliceNumber: number) => {
-		console.log(mriImageCoords);
-		console.log(histologyImageCoords);
-
 		const matrix = await getMatrix(
-			histologyImageCoords!.currentBlock,
+			histologyImageCoords!.currentHistologyBlock,
 			"histology",
 			patientId
 		);

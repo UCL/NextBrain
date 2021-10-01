@@ -6,7 +6,6 @@ import ErrorModal from "../../shared/ErrorModal";
 import MousePointer from "../../shared/MousePointer";
 import getMouseCoords from "../../utils/getmouseCoords";
 
-// import { CurrentLabel } from "../../../models/label.model";
 import { HistologyCoords } from "../../../models/histologyCoords.model";
 
 import "./HistologyImage.css";
@@ -32,16 +31,10 @@ const HistologyImage: FC<Props> = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [histologyImage, setHistologyImage] = useState("");
 	const [hiResHistologyImage, setHiResHistologyImage] = useState("");
-	const [hiResHistologyImageReduced, setHiResHistologyImageReduced] =
-		useState("");
 	const [labelsImage, setLabelsImage] = useState("");
 	const [imageDimensions, setImageDimensions] = useState<any>(null);
-	//const [initialLoad, setInitialLoad] = useState(true);
-
-	const [scaledHistologyMouseCoords, setScaledHistologymouseCoords] = useState({
-		mouseX: 100,
-		mouseY: 100,
-	});
+	const [scaledHistologyMouseCoords, setScaledHistologyMouseCoords] =
+		useState<any>(null);
 
 	console.log(imageDimensions);
 
@@ -59,11 +52,11 @@ const HistologyImage: FC<Props> = (props) => {
 		const fetchHistologyImage = async () => {
 			// determine the correct histology image based on computed coordinates
 			if (histologyImageCoords !== null && histologyImageCoords !== undefined) {
-				const paddedBlock = histologyImageCoords["currentBlock"]
+				const paddedBlock = histologyImageCoords["currentHistologyBlock"]
 					.toString()
 					.padStart(2, "0");
 
-				const histologySlice = histologyImageCoords.coordsLowRes["slice"];
+				const histologySlice = histologyImageCoords["currentHistologySlice"];
 				const paddedSlice = histologySlice.toString().padStart(2, "0");
 
 				const histologyFolder = showHiRes ? "histology_hr" : "histology";
@@ -112,29 +105,6 @@ const HistologyImage: FC<Props> = (props) => {
 					}
 				}
 
-				// load hi-res image (reduced size)
-				// if (showHiRes === true) {
-				// 	try {
-				// 		setIsLoading(true);
-				// 		const hiResHistologyImageReduced =
-				// 			await require(`../../../assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14_high_30.webp`)
-				// 				.default;
-
-				// 		setHiResHistologyImageReduced(hiResHistologyImageReduced);
-				// 	} catch {
-				// 		console.log(
-				// 			`%cerror, could not resolve path: assets/P57-16/${histologyFolder}/45/slices_LFB/slice_14.jpg`,
-				// 			"color: red"
-				// 		);
-				// 	}
-
-				// 	// I do this because of a weird behaviour on the dev server causing the loading spinner to reappear
-				// 	// I dont think this is an issue on the deployed site, so perhaps remove (or only run the logic on dev)
-				// 	if (hiResHistologyImage !== null) {
-				// 		setIsLoading(false);
-				// 	}
-				// }
-
 				// load label
 				try {
 					//setIsLoading(true);
@@ -160,96 +130,34 @@ const HistologyImage: FC<Props> = (props) => {
 		patientId,
 	]);
 
+	// take the current histology coords and calculate scaled mouseX and mouseY
+	// this is to account for the fact that we scale the histology image with css using the max-height property
 	useEffect(() => {
 		if (imageDimensions !== null) {
-			const mouseX = !showHiRes
+			const currentHistologyMouseX = !showHiRes
 				? histologyImageCoords!.coordsLowRes.mouseX
 				: histologyImageCoords!.coordsHiRes.mouseX;
-			const mouseY = !showHiRes
+
+			const currentHistologyMouseY = !showHiRes
 				? histologyImageCoords!.coordsLowRes.mouseY
 				: histologyImageCoords!.coordsHiRes.mouseY;
 
-			const naturalHeight = imageDimensions.naturalHeight;
-			const naturalWidth = imageDimensions.naturalWidth;
-			const scaledHeight = imageDimensions.scaledHeight;
-			const scaledWidth = imageDimensions.scaledWidth;
+			const { scaledHistologyMouseX, scaledHistologyMouseY } =
+				calculateScaledHistologyMousePos(
+					currentHistologyMouseX,
+					currentHistologyMouseY,
+					imageDimensions.naturalHeight,
+					imageDimensions.naturalWidth,
+					imageDimensions.scaledHeight,
+					imageDimensions.scaledWidth
+				);
 
-			calculateScaledHistologyMousePos(
-				mouseX,
-				mouseY,
-				naturalHeight,
-				naturalWidth,
-				scaledHeight,
-				scaledWidth
-			);
+			setScaledHistologyMouseCoords({
+				mouseX: scaledHistologyMouseX,
+				mouseY: scaledHistologyMouseY,
+			});
 		}
-	}, [histologyImageCoords, imageDimensions]);
-
-	const onImageLoad = (e: SyntheticEvent, type: string) => {
-		//console.log(e.target.naturalWidth, e.target.width);
-
-		console.log(e);
-
-		if (type === "lowRes") setIsLoading(false);
-
-		if (type === "hiRes") {
-			// setOptions({
-			// 	...initialOptions,
-			// 	defaultScale: e.target.width / e.target.naturalWidth,
-			// });
-			setIsLoading(false);
-		}
-
-		// const mouseX = histologyImageCoords!.coords.mouseX;
-		// const mouseY = histologyImageCoords!.coords.mouseY;
-
-		const { naturalHeight, naturalWidth, scaledHeight, scaledWidth } =
-			getImageDimensions(e, type);
-
-		// store image dimensions se we can correctly calculate the mouse coordinates for scaled images
-		setImageDimensions({
-			naturalHeight,
-			naturalWidth,
-			scaledHeight,
-			scaledWidth,
-		});
-
-		// calculateScaledHistologyMousePos(
-		// 	mouseX,
-		// 	mouseY,
-		// 	naturalHeight,
-		// 	naturalWidth,
-		// 	scaledHeight,
-		// 	scaledWidth
-		// );
-	};
-
-	const onPan = (ref: any, e: Event) => {
-		console.log("panning image");
-		console.log(ref);
-
-		getHistologyMousePos(e, "hiRes");
-
-		//histologyToMri(e);
-	};
-
-	const onImageZoomStart = (ref: any, e: Event) => {
-		//setIsLoading(true);
-		console.log("start zoom image");
-		console.log(ref);
-	};
-
-	const onImageZoom = (ref: any, e: Event) => {
-		//setIsLoading(true);
-		console.log("during zoom image");
-		console.log(ref);
-	};
-
-	const onImageZoomStop = (ref: any, e: Event) => {
-		//setIsLoading(false);
-		console.log("end zoom image");
-		console.log(ref);
-	};
+	}, [histologyImageCoords, imageDimensions, showHiRes]);
 
 	const calculateScaledHistologyMousePos = (
 		naturalCoordinateX: number,
@@ -259,17 +167,51 @@ const HistologyImage: FC<Props> = (props) => {
 		scaledHeight: number,
 		scaledWidth: number
 	) => {
-		const hiResMousePosX = (scaledWidth / naturalWidth) * naturalCoordinateX;
-		const hiResMousePosY = (scaledHeight / naturalHeight) * naturalCoordinateY;
+		const scaledHistologyMouseX =
+			(scaledWidth / naturalWidth) * naturalCoordinateX;
+
+		const scaledHistologyMouseY =
+			(scaledHeight / naturalHeight) * naturalCoordinateY;
 
 		console.log(
-			`scaled coord x: ${hiResMousePosX}, scaled coord y: ${hiResMousePosY}`
+			`scaled coord x: ${scaledHistologyMouseX}, scaled coord y: ${scaledHistologyMouseY}`
 		);
 
-		setScaledHistologymouseCoords({
-			mouseX: hiResMousePosX,
-			mouseY: hiResMousePosY,
+		return { scaledHistologyMouseX, scaledHistologyMouseY };
+	};
+
+	// we need to store the image dimensions so that we can correctly calculate the mouse coordinates for scaled images
+	// we store the image dimensions every time a new image gets loaded
+	const onImageLoad = (e: SyntheticEvent, type: string) => {
+		setIsLoading(false);
+
+		const { naturalHeight, naturalWidth, scaledHeight, scaledWidth } =
+			getImageDimensions(e, type);
+
+		setImageDimensions({
+			naturalHeight,
+			naturalWidth,
+			scaledHeight,
+			scaledWidth,
 		});
+	};
+
+	// called when user clicks on a lowRes or hiRes histology image
+	const updateHistologyCoordsHandler = (e: any, type: string) => {
+		const { naturalCoordinateX, naturalCoordinateY } = getHistologyMousePos(
+			e,
+			type
+		);
+
+		// update the atlas based on new histology coords
+		histologyToMri(naturalCoordinateX, naturalCoordinateY);
+	};
+
+	const onPan = (ref: any, e: Event) => {
+		console.log("panning image");
+		console.log(ref);
+
+		updateHistologyCoordsHandler(e, "hiRes");
 	};
 
 	const getHistologyMousePos = (e: any, type: string) => {
@@ -277,30 +219,10 @@ const HistologyImage: FC<Props> = (props) => {
 
 		console.log("offsetX: " + mouseX, "offsetY: " + mouseY);
 
-		console.log(e);
+		const { naturalCoordinateX, naturalCoordinateY } =
+			calculateNaturalMouseCoordinates(mouseX, mouseY);
 
-		const { naturalHeight, naturalWidth, scaledHeight, scaledWidth } =
-			getImageDimensions(e, type);
-
-		const { naturalCoordinateX, naturalCoordinateY } = getNaturalCoordinates(
-			mouseX,
-			mouseY,
-			naturalHeight,
-			naturalWidth,
-			scaledHeight,
-			scaledWidth
-		);
-
-		calculateScaledHistologyMousePos(
-			naturalCoordinateX,
-			naturalCoordinateY,
-			naturalHeight,
-			naturalWidth,
-			scaledHeight,
-			scaledWidth
-		);
-
-		histologyToMri(naturalCoordinateX, naturalCoordinateY);
+		return { naturalCoordinateX, naturalCoordinateY };
 	};
 
 	const getImageDimensions = (e: any, type: string) => {
@@ -316,13 +238,6 @@ const HistologyImage: FC<Props> = (props) => {
 			scaledHeight = e.target.height;
 		}
 
-		if (type === "hiRes") {
-			naturalWidth = e.target.childNodes[1].naturalWidth;
-			naturalHeight = e.target.childNodes[1].naturalHeight;
-			scaledWidth = e.target.childNodes[1].width;
-			scaledHeight = e.target.childNodes[1].height;
-		}
-
 		console.log("naturalWidth: " + naturalWidth);
 		console.log("naturalHeight: " + naturalHeight);
 		console.log("scaledWidth: " + scaledWidth);
@@ -336,18 +251,17 @@ const HistologyImage: FC<Props> = (props) => {
 		};
 	};
 
-	// account for the fact that we set max-height on the histology image
-	// this function allows us to extract the natural coordinates, given the max-height css property
-	const getNaturalCoordinates = (
+	// this function allows us to extract the natural x an y mouse coordinates
+	// accounts for the fact that we set max-height css property on the histology image
+	const calculateNaturalMouseCoordinates = (
 		offsetX: number,
-		offsetY: number,
-		naturalHeight: number,
-		naturalWidth: number,
-		scaledHeight: number,
-		scaledWidth: number
+		offsetY: number
 	) => {
-		const naturalCoordinateX = (naturalWidth / scaledWidth) * offsetX;
-		const naturalCoordinateY = (naturalHeight / scaledHeight) * offsetY;
+		const naturalCoordinateX =
+			(imageDimensions.naturalWidth / imageDimensions.scaledWidth) * offsetX;
+
+		const naturalCoordinateY =
+			(imageDimensions.naturalHeight / imageDimensions.scaledHeight) * offsetY;
 
 		console.log(
 			`natural coord x: ${naturalCoordinateX}, natural coord y: ${naturalCoordinateY}`
@@ -370,11 +284,7 @@ const HistologyImage: FC<Props> = (props) => {
 					<ErrorModal error={error} onClear={() => setError(null)} />
 					{isLoading && <LoadingSpinner asOverlay />}
 
-					{!showHiRes && (
-						// <MousePointer
-						// 	mouseY={histologyImageCoords.coords.mouseY}
-						// 	mouseX={histologyImageCoords.coords.mouseX}
-						// />
+					{!showHiRes && scaledHistologyMouseCoords && (
 						<MousePointer
 							mouseY={scaledHistologyMouseCoords.mouseY}
 							mouseX={scaledHistologyMouseCoords.mouseX}
@@ -393,10 +303,8 @@ const HistologyImage: FC<Props> = (props) => {
 
 					{!showHiRes && (
 						<img
-							//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
 							onClick={(e) => {
-								//histologyToMri(e);
-								getHistologyMousePos(e, "lowRes");
+								updateHistologyCoordsHandler(e, "lowRes");
 							}}
 							className="histology-img"
 							src={histologyImage}
@@ -407,14 +315,10 @@ const HistologyImage: FC<Props> = (props) => {
 
 					{showHiRes && (
 						<TransformWrapper
-							//disabled={true}
 							wheel={{ disabled: false }}
 							panning={{ velocityDisabled: true }}
 							limitToBounds={true}
 							onPanningStart={onPan}
-							onZoomStart={onImageZoomStart}
-							onZoom={onImageZoom}
-							onZoomStop={onImageZoomStop}
 							maxScale={15}
 						>
 							{({ zoomIn, zoomOut, resetTransform, ...rest }) => (
@@ -426,25 +330,24 @@ const HistologyImage: FC<Props> = (props) => {
 									</div>
 
 									<TransformComponent>
-										<MousePointer
-											mouseY={scaledHistologyMouseCoords.mouseY}
-											mouseX={scaledHistologyMouseCoords.mouseX}
-										/>
+										{scaledHistologyMouseCoords && (
+											<MousePointer
+												mouseY={scaledHistologyMouseCoords.mouseY}
+												mouseX={scaledHistologyMouseCoords.mouseX}
+											/>
+										)}
 
 										{showLabels && (
 											<img
 												className="histology-img-labels"
 												src={labelsImage}
 												alt="histology-labels"
-												//onLoad={(e) => onImageLoad(e, "lowRes")}
 												style={{ opacity: `${labelsTransparency}` }}
 											></img>
 										)}
 
 										<img
-											//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
-											//onClick={(e) => getMousePos(e)}
-											className={`histology-img ${showHiRes ? "hi-res" : ""}`}
+											className={`histology-img ${showHiRes && "hi-res"}`}
 											src={hiResHistologyImage}
 											alt="histology"
 											onLoad={(e) => onImageLoad(e, "onLoad")}
@@ -454,51 +357,6 @@ const HistologyImage: FC<Props> = (props) => {
 							)}
 						</TransformWrapper>
 					)}
-
-					{/* {showHiRes && (
-						<TransformWrapper
-							//disabled={true}
-							wheel={{ disabled: false }}
-							panning={{ velocityDisabled: true }}
-							limitToBounds={true}
-							onPanningStart={onPan}
-							onZoomStart={onImageZoomStart}
-							onZoom={onImageZoom}
-							onZoomStop={onImageZoomStop}
-							maxScale={25}
-						>
-							{({ zoomIn, zoomOut, resetTransform }: PanPinchZoomProps) => (
-								<>
-									<div className="tools">
-										<button onClick={() => zoomIn()}>+</button>
-										<button onClick={() => zoomOut()}>-</button>
-										<button onClick={() => resetTransform()}>x</button>
-									</div>
-
-									<TransformComponent>
-										{showLabels && (
-											<img
-												//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
-												className="histology-img-labels"
-												src={labelsImage}
-												alt="histology-labels"
-												//onLoad={(e) => onImageLoad(e, "lowRes")}
-												style={{ opacity: `${labelsTransparency}` }}
-											></img>
-										)}
-
-										<img
-											//onClick={!showHiRes ? (e) => histologyToMri(e) : undefined}
-											className={`histology-img ${showHiRes ? "hi-res" : ""}`}
-											src={hiResHistologyImageReduced}
-											alt="histology"
-											onLoad={(e) => onImageLoad(e, "lowRes")}
-										></img>
-									</TransformComponent>
-								</>
-							)}
-						</TransformWrapper>
-					)} */}
 				</div>
 			</div>
 		</>

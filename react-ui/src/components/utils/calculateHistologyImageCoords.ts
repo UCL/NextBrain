@@ -53,10 +53,10 @@ const calculateHistologyImageCoords = async (
 	);
 
 	return {
-		coordsLowRes: histologyImageCoordsLowRes,
-		coordsHiRes: histologyImageCoordsHiRes,
-		currentBlock: currentBlock,
-		currentPlane: currentMriPlane,
+		coordsLowRes: histologyImageCoordsLowRes.coords,
+		coordsHiRes: histologyImageCoordsHiRes.coords,
+		currentHistologySlice: histologyImageCoordsLowRes.slice, // slice is the same for both hi and low res
+		currentHistologyBlock: currentBlock,
 	};
 };
 
@@ -75,14 +75,15 @@ const getHistologyImageCoords = (
 	let { resultX, resultY, resultZ } = validateCoords(coords, currentBlock);
 
 	const histologyImageCoords = {
-		slice: +resultZ.toFixed(0),
 		mouseX: +resultY.toFixed(0),
 		mouseY: +resultX.toFixed(0),
 	};
 
+	const histologySlice = +resultZ.toFixed(0);
+
 	console.log("matrix calculation result: ", coords);
 
-	return histologyImageCoords;
+	return { coords: histologyImageCoords, slice: histologySlice };
 };
 
 const validateCoords = (

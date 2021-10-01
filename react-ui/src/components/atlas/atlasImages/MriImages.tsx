@@ -94,7 +94,6 @@ const MriImages: FC<Props> = (props) => {
 			<MriImage
 				plane="sagittal"
 				mriImageCoords={mriImageCoords}
-				showHiRes={showHiRes}
 				computeMriImagesHandler={computeMriImagesHandler}
 				patientId={patientId}
 			/>
@@ -102,7 +101,6 @@ const MriImages: FC<Props> = (props) => {
 			<MriImage
 				plane="coronal"
 				mriImageCoords={mriImageCoords}
-				showHiRes={showHiRes}
 				computeMriImagesHandler={computeMriImagesHandler}
 				patientId={patientId}
 			/>
@@ -110,7 +108,6 @@ const MriImages: FC<Props> = (props) => {
 			<MriImage
 				plane="axial"
 				mriImageCoords={mriImageCoords}
-				showHiRes={showHiRes}
 				computeMriImagesHandler={computeMriImagesHandler}
 				patientId={patientId}
 			/>

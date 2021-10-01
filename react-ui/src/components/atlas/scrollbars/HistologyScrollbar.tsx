@@ -30,8 +30,8 @@ const HistologyScrollbar: FC<Props> = (props) => {
 
 		const scrollbarLength = 824;
 		const currentHistologySliceNumber =
-			histologyImageCoords!.coordsLowRes.slice;
-		const currentBlock = histologyImageCoords!.currentBlock;
+			histologyImageCoords!.currentHistologySlice;
+		const currentBlock = histologyImageCoords!.currentHistologyBlock;
 		const slicesInBlock = histologySliceMap[currentBlock]["slices"] - 1; // -1 because slices start at 0
 		const currentSliceAsProportion =
 			currentHistologySliceNumber / slicesInBlock;
@@ -48,7 +48,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 
 		const { mouseY } = getMouseCoords(e, showHiRes);
 
-		const currentBlock = histologyImageCoords!.currentBlock;
+		const currentBlock = histologyImageCoords!.currentHistologyBlock;
 		const slicesInBlock = histologySliceMap[currentBlock]["slices"];
 
 		// look into improving this, is it necessary to hard code this value? Same for the mri scrollbars
@@ -69,11 +69,11 @@ const HistologyScrollbar: FC<Props> = (props) => {
 	const incrementHistologyScrollbarPos = (increment: number) => {
 		setShowHiRes(false);
 
-		const currentBlock = histologyImageCoords!.currentBlock;
+		const currentBlock = histologyImageCoords!.currentHistologyBlock;
 		const slicesInBlock = histologySliceMap[currentBlock]["slices"] - 1;
 
 		const currentHistologySliceNumber =
-			histologyImageCoords!.coordsLowRes.slice;
+			histologyImageCoords!.currentHistologySlice;
 		const newHistologySliceNumber = currentHistologySliceNumber + increment;
 
 		if (
