@@ -20,11 +20,6 @@ const HiResBtn: FC<Props> = (props) => {
 			>
 				{showHiRes ? "Hide" : "Show"} hi-res histology
 			</button>
-			{/* {showHiRes && (
-				<span className="hi-res-btn-message">
-					Navigation is disabled in hi-res mode
-				</span>
-			)} */}
 		</div>
 	);
 };

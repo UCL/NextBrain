@@ -95,6 +95,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 					className="histology-scrollbar-increment-btn up"
 					onClick={() => incrementHistologyScrollbarPos(-1)}
 				></div>
+
 				<div
 					className="scrollbar histology-scrollbar"
 					onClick={(e) => updateHistologyScrollbarPos(e)}
@@ -104,6 +105,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 						style={{ top: `${scrollbarPos}px` }}
 					></svg>
 				</div>
+
 				<div
 					className="histology-scrollbar-increment-btn down"
 					onClick={() => incrementHistologyScrollbarPos(1)}

@@ -4,7 +4,7 @@ import "./PatientSelect.css";
 
 interface Props {
 	patientId: string;
-	setPatientId: (patientId: string) => void; // review this type, is this correct?? check the react course
+	setPatientId: (patientId: string) => void;
 }
 
 const PatientSelect: FC<Props> = (props) => {

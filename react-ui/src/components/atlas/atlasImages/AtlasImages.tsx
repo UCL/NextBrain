@@ -206,7 +206,6 @@ const AtlasImages: FC<Props> = (props) => {
 			patientId
 		);
 
-		// refactor histologyImageCoords to move slice out of coords
 		const coords = matrixMultiplier(matrix, [
 			currentMriMouseY,
 			currentMriMouseX,

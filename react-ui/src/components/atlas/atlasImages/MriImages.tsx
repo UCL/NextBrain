@@ -35,7 +35,10 @@ const MriImages: FC<Props> = (props) => {
 	) => {
 		if (showHiRes) setShowHiRes(false);
 
-		const { mouseX, mouseY } = getMouseCoords(e, false); // always false to avoid errors
+		const tempShowHiRes = false; // avoid errors with application not catching up to latest state
+
+		const { mouseX, mouseY } = getMouseCoords(e, tempShowHiRes);
+
 		const mouseIsWithinBounds = determineMouseBoundariesMri(
 			mouseX,
 			mouseY,

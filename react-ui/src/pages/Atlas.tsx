@@ -75,6 +75,7 @@ const Atlas: FC = () => {
 				getCentroid={getCentroid}
 			/>
 
+			{/* ideally, scrollbars should go here */}
 			{/* <Scrollbars
 				scrollbarPos={scrollbarPos}
 				setScrollbarPos={setScrollbarPos}

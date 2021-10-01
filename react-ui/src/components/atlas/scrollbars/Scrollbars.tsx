@@ -1,7 +1,6 @@
 import { FC } from "react";
 
 import HistologyScrollbar from "./HistologyScrollbar";
-
 import { HistologyCoords } from "../../../models/histologyCoords.model";
 
 import "./Scrollbars.css";
