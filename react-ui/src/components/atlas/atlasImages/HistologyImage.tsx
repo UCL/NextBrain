@@ -38,7 +38,7 @@ const HistologyImage: FC<Props> = (props) => {
 	const [imageDimensions, setImageDimensions] = useState<any>(null);
 	//const [initialLoad, setInitialLoad] = useState(true);
 
-	const [hiResMousePos, setHiResMousePos] = useState({
+	const [scaledHistologyMouseCoords, setScaledHistologymouseCoords] = useState({
 		mouseX: 100,
 		mouseY: 100,
 	});
@@ -63,7 +63,7 @@ const HistologyImage: FC<Props> = (props) => {
 					.toString()
 					.padStart(2, "0");
 
-				const histologySlice = histologyImageCoords.coords["slice"];
+				const histologySlice = histologyImageCoords.coordsLowRes["slice"];
 				const paddedSlice = histologySlice.toString().padStart(2, "0");
 
 				const histologyFolder = showHiRes ? "histology_hr" : "histology";
@@ -162,15 +162,19 @@ const HistologyImage: FC<Props> = (props) => {
 
 	useEffect(() => {
 		if (imageDimensions !== null) {
-			const mouseX = histologyImageCoords!.coords.mouseX;
-			const mouseY = histologyImageCoords!.coords.mouseY;
+			const mouseX = !showHiRes
+				? histologyImageCoords!.coordsLowRes.mouseX
+				: histologyImageCoords!.coordsHiRes.mouseX;
+			const mouseY = !showHiRes
+				? histologyImageCoords!.coordsLowRes.mouseY
+				: histologyImageCoords!.coordsHiRes.mouseY;
 
 			const naturalHeight = imageDimensions.naturalHeight;
 			const naturalWidth = imageDimensions.naturalWidth;
 			const scaledHeight = imageDimensions.scaledHeight;
 			const scaledWidth = imageDimensions.scaledWidth;
 
-			calculateHiResMousePos(
+			calculateScaledHistologyMousePos(
 				mouseX,
 				mouseY,
 				naturalHeight,
@@ -210,7 +214,7 @@ const HistologyImage: FC<Props> = (props) => {
 			scaledWidth,
 		});
 
-		// calculateHiResMousePos(
+		// calculateScaledHistologyMousePos(
 		// 	mouseX,
 		// 	mouseY,
 		// 	naturalHeight,
@@ -247,7 +251,7 @@ const HistologyImage: FC<Props> = (props) => {
 		console.log(ref);
 	};
 
-	const calculateHiResMousePos = (
+	const calculateScaledHistologyMousePos = (
 		naturalCoordinateX: number,
 		naturalCoordinateY: number,
 		naturalHeight: number,
@@ -262,23 +266,10 @@ const HistologyImage: FC<Props> = (props) => {
 			`scaled coord x: ${hiResMousePosX}, scaled coord y: ${hiResMousePosY}`
 		);
 
-		// I should be getting the hi-res mouse pos from the data that is set when I call histologyToMri()
-		// but it seems the matrix calculation gives me mouse coordinates that are always off by a certain margin
-		// I need to investigate why the matrix calculation gives me coordinates that are always slightly off
-
-		// in fact, the coordinates are also slightly off when moving from mri to histology
-		// it looks like they are off by the same margin as described above
-		// so something is going on here
-
-		// it looks like it might be a matrix calculation problem
-		// I think I am following the steps correctly, so my hunch is that their matrices are not correct
-		// when I compared the matrices that I have against Adrias example pdf, the numbers were slightly different
-
-		// I have done some manual testing of the matrix multiplications in python and my maths is correct
-		// so the way I am calculating the vectors and the matrices is all mathematically correct in javascript
-		// I compared the result I got from python and the result i got in javascript and they were the same
-		// so again I think the problem is the fact that the matrices may not be correct on their end
-		setHiResMousePos({ mouseX: hiResMousePosX, mouseY: hiResMousePosY });
+		setScaledHistologymouseCoords({
+			mouseX: hiResMousePosX,
+			mouseY: hiResMousePosY,
+		});
 	};
 
 	const getHistologyMousePos = (e: any, type: string) => {
@@ -300,7 +291,7 @@ const HistologyImage: FC<Props> = (props) => {
 			scaledWidth
 		);
 
-		calculateHiResMousePos(
+		calculateScaledHistologyMousePos(
 			naturalCoordinateX,
 			naturalCoordinateY,
 			naturalHeight,
@@ -311,25 +302,6 @@ const HistologyImage: FC<Props> = (props) => {
 
 		histologyToMri(naturalCoordinateX, naturalCoordinateY);
 	};
-
-	// const getImageDimensions = (e: any, type: string) => {
-	// 	const naturalWidth = e.target.naturalWidth; // the original size of the image
-	// 	const naturalHeight = e.target.naturalHeight; // the original size of the image
-	// 	const scaledWidth = e.target.width; // the scaled size of the image
-	// 	const scaledHeight = e.target.height; // the scaled size of the image
-
-	// 	console.log("naturalWidth: " + naturalWidth);
-	// 	console.log("naturalHeight: " + naturalHeight);
-	// 	console.log("scaledWidth: " + scaledWidth);
-	// 	console.log("scaledHeight: " + scaledHeight);
-
-	// 	return {
-	// 		naturalHeight,
-	// 		naturalWidth,
-	// 		scaledHeight,
-	// 		scaledWidth,
-	// 	};
-	// };
 
 	const getImageDimensions = (e: any, type: string) => {
 		let naturalWidth; // the original size of the image
@@ -404,8 +376,8 @@ const HistologyImage: FC<Props> = (props) => {
 						// 	mouseX={histologyImageCoords.coords.mouseX}
 						// />
 						<MousePointer
-							mouseY={hiResMousePos.mouseY}
-							mouseX={hiResMousePos.mouseX}
+							mouseY={scaledHistologyMouseCoords.mouseY}
+							mouseX={scaledHistologyMouseCoords.mouseX}
 						/>
 					)}
 
@@ -455,8 +427,8 @@ const HistologyImage: FC<Props> = (props) => {
 
 									<TransformComponent>
 										<MousePointer
-											mouseY={histologyImageCoords.coords.mouseY}
-											mouseX={histologyImageCoords.coords.mouseX}
+											mouseY={scaledHistologyMouseCoords.mouseY}
+											mouseX={scaledHistologyMouseCoords.mouseX}
 										/>
 
 										{showLabels && (

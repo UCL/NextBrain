@@ -81,7 +81,6 @@ const AtlasImages: FC<Props> = (props) => {
 			try {
 				// args: plane, slice, currentMriMouseX, currentMriMouseY
 				// I should pass the argument as an object to make it more clear
-
 				await updateAtlasImages("axial", 124, 149, 357, patientId);
 			} catch {
 				setError("error building atlas");
@@ -95,8 +94,8 @@ const AtlasImages: FC<Props> = (props) => {
 	useEffect(() => {
 		if (histologyImageCoords !== null && mriImageCoords !== null) {
 			setCurrentLabelHandler(
-				histologyImageCoords.coords.mouseX,
-				histologyImageCoords.coords.mouseY,
+				histologyImageCoords.coordsLowRes.mouseX,
+				histologyImageCoords.coordsLowRes.mouseY,
 				histologyImageCoords,
 				"lowRes"
 			);
@@ -129,12 +128,6 @@ const AtlasImages: FC<Props> = (props) => {
 	) => {
 		console.log("----------");
 		console.log("BUILDING IMAGES");
-
-		// I need to refactor this function so that it can take into account whether we are currently in hi-res mode
-		// the issue is that this function always returns coordinates that are for low res mode
-		// when we go from hi-res histology to mri, I need to pass in the hi-res x and y coords
-		// a current workaround is to store the hi-res x and y coords as state in HistologyImage.tsx
-		// in other words, I am currently storing low-res histology coords even when we are in hi-res mode
 
 		console.log(
 			currentMriPlane,
@@ -171,6 +164,8 @@ const AtlasImages: FC<Props> = (props) => {
 			adjustedMriMouseY!
 		);
 
+		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
+
 		const newHistologyCoords = await calculateHistologyImageCoords(
 			currentMriPlane,
 			currentMriSlice,
@@ -180,7 +175,8 @@ const AtlasImages: FC<Props> = (props) => {
 			adjustedMriMouseX!,
 			adjustedMriMouseY!,
 			newMriCoords!,
-			patientId
+			patientId,
+			showHiRes
 		);
 		console.log("histology image coords: ", newHistologyCoords);
 
@@ -194,7 +190,6 @@ const AtlasImages: FC<Props> = (props) => {
 			return;
 		}
 
-		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
 		setHistologyImageCoords(newHistologyCoords);
 	};
 
@@ -216,10 +211,11 @@ const AtlasImages: FC<Props> = (props) => {
 			patientId
 		);
 
+		// refactor histologyImageCoords to move slice out of coords
 		const coords = matrixMultiplier(matrix, [
 			currentMriMouseY,
 			currentMriMouseX,
-			Number(histologyImageCoords!.coords.slice),
+			Number(histologyImageCoords!.coordsLowRes.slice),
 			1,
 		]);
 
@@ -249,8 +245,8 @@ const AtlasImages: FC<Props> = (props) => {
 		);
 
 		const coords = matrixMultiplier(matrix, [
-			histologyImageCoords!.coords.mouseY,
-			histologyImageCoords!.coords.mouseX,
+			histologyImageCoords!.coordsLowRes.mouseY,
+			histologyImageCoords!.coordsLowRes.mouseX,
 			+newSliceNumber.toFixed(0),
 			1,
 		]);

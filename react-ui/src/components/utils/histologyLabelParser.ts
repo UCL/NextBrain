@@ -44,7 +44,7 @@ const getCurrentLabelNumber = async (
 		.toString()
 		.padStart(2, "0");
 
-	const paddedSlice = histologyImageCoords.coords.slice
+	const paddedSlice = histologyImageCoords.coordsLowRes.slice
 		.toString()
 		.padStart(2, "0");
 

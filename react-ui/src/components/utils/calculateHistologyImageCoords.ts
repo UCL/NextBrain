@@ -16,7 +16,8 @@ const calculateHistologyImageCoords = async (
 	adjustedMriMouseX: number,
 	adjustedMriMouseY: number,
 	newMriCoords: MriCoords,
-	patientId: string
+	patientId: string,
+	showHiRes: boolean
 ) => {
 	const currentBlock = await getCurrentBlock(
 		currentMriPlane,
@@ -33,18 +34,27 @@ const calculateHistologyImageCoords = async (
 
 	if (currentBlock === 0 || currentBlock === undefined) return "no block found";
 
-	const matrix = await getMatrix(currentBlock, "mri", patientId);
+	const matrixLowRes = await getMatrix(currentBlock, "mri", patientId);
+	const matrixHiRes = await getMatrix(currentBlock, "mri_hr", patientId);
 
-	if (matrix === undefined) return "no matrix found";
+	if (matrixLowRes === undefined || matrixHiRes === undefined)
+		return "no matrix found";
 
-	const histologyImageCoords = getHistologyImageCoords(
+	const histologyImageCoordsLowRes = getHistologyImageCoords(
 		newMriCoords,
-		matrix,
+		matrixLowRes,
+		currentBlock
+	);
+
+	const histologyImageCoordsHiRes = getHistologyImageCoords(
+		newMriCoords,
+		matrixHiRes,
 		currentBlock
 	);
 
 	return {
-		coords: histologyImageCoords,
+		coordsLowRes: histologyImageCoordsLowRes,
+		coordsHiRes: histologyImageCoordsHiRes,
 		currentBlock: currentBlock,
 		currentPlane: currentMriPlane,
 	};
