@@ -195,7 +195,7 @@ const Atlas: FC = () => {
 
 			// process the array data accordingly
 			let ndArray = ndarray(npyData, header.shape);
-			const label = ndArray.get(5000, 2905);
+			const label = ndArray.get(5000, 2906);
 			console.log(label);
 		};
 
