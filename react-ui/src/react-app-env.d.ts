@@ -5,3 +5,4 @@
 
 declare module "npyjs"; // no types available, library still in its infancy
 declare module "ndarray"; // types have been installed but I still get a linting error
+declare module "pako";
