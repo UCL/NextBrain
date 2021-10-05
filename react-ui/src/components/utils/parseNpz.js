@@ -112,15 +112,12 @@ export default class npyjs {
 		let self = this;
 		return fetch(filename)
 			.then((fh) => {
-				console.log(fh);
 				if (fh.ok) {
 					return fh
 						.blob()
 						.then((i) => {
 							var content = i;
-							console.log(i);
 							return self.readFileAsync(content).then((res) => {
-								console.log(res);
 								var result = self.parse(res);
 								if (callback) {
 									return callback(result);

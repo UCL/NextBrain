@@ -23,10 +23,6 @@ const histologyLabelParser = async (
 		patientId
 	);
 
-	// console.log(mouseX, mouseY, histologyImageCoords, type);
-
-	console.log(currentLabelNumber);
-
 	const parsedLabel = await parseLabel(currentLabelNumber, type);
 
 	return parsedLabel;

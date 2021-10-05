@@ -60,13 +60,6 @@ const AtlasImages: FC<Props> = (props) => {
 		console.log("----------");
 		console.log("BUILDING IMAGES");
 
-		console.log(
-			currentMriPlane,
-			currentMriSlice,
-			currentMriMouseX,
-			currentMriMouseY
-		);
-
 		const { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY } =
 			calculateAdjustedMriCoords(
 				currentMriPlane,
@@ -131,10 +124,6 @@ const AtlasImages: FC<Props> = (props) => {
 			histologyImageCoords: HistologyCoords,
 			type: string
 		) => {
-			// console.log("getting current histology label");
-
-			//const { currentMriMouseX, currentMriMouseY } = getMouseCoords(e);
-
 			const currentLabel = await histologyLabelParser(
 				currentHistologyMouseX,
 				currentHistologyMouseY,
@@ -257,8 +246,6 @@ const AtlasImages: FC<Props> = (props) => {
 		]);
 
 		const { resultX, resultY, resultZ } = coords;
-
-		console.log(coords);
 
 		// axial is picked arbitrarily here, it could be any of the planes
 		updateAtlasImages(

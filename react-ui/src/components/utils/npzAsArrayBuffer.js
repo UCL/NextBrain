@@ -20,13 +20,11 @@ export default class npzAsArrayBuffer {
 		let self = this;
 		return fetch(filename)
 			.then((fh) => {
-				console.log(fh);
 				if (fh.ok) {
 					return fh
 						.blob()
 						.then((i) => {
 							var content = i;
-							console.log(i);
 
 							return self.readFileAsync(content).then((res) => {
 								return res;

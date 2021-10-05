@@ -65,13 +65,9 @@ export default class npyjs {
 		).getUint8(0);
 		const offsetBytes = 10 + headerLength;
 
-		console.log(headerLength);
-
 		let hcontents = new TextDecoder("utf-8").decode(
 			new Uint8Array(arrayBufferContents.slice(10, 10 + headerLength))
 		);
-
-		console.log(hcontents);
 
 		var header = JSON.parse(
 			hcontents
@@ -81,16 +77,12 @@ export default class npyjs {
 				.replace(/,*\),*/g, "]")
 		);
 
-		console.log(header);
-
 		var shape = header.shape;
 
 		let dtype = this.dtypes[header.descr];
 
 		let nums = new dtype["arrayConstructor"](arrayBufferContents, offsetBytes);
 		//let nums = new Uint8Array(arrayBufferContents, offsetBytes);
-
-		console.log(nums);
 
 		return {
 			dtype: dtype.name,
@@ -121,15 +113,12 @@ export default class npyjs {
 		let self = this;
 		return fetch(filename)
 			.then((fh) => {
-				console.log(fh);
 				if (fh.ok) {
 					return fh
 						.blob()
 						.then((i) => {
 							var content = i;
-							console.log(i);
 							return self.readFileAsync(content).then((res) => {
-								console.log(res);
 								var result = self.parse(res);
 								if (callback) {
 									return callback(result);

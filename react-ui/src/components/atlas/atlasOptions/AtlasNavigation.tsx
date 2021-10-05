@@ -16,8 +16,6 @@ const AtlasNavigation: FC<Props> = (props) => {
 	const { getCentroid, showHiRes, setShowHiRes } = props;
 
 	const onChange = (currentNode: any, selectedNodes: any) => {
-		console.log("onChange::", currentNode, selectedNodes);
-
 		if (showHiRes) setShowHiRes(false);
 
 		const currentNodeData = currentNode.data;

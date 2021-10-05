@@ -36,8 +36,6 @@ const getMatrix = async (
 
 	const matrix = await readTxt.load(txtFile);
 
-	console.log(matrix);
-
 	return matrix;
 };
 
