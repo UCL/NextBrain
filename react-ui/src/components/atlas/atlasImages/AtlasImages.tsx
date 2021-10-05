@@ -126,8 +126,8 @@ const AtlasImages: FC<Props> = (props) => {
 
 	const setCurrentLabelHandler = useCallback(
 		async (
-			currentMriMouseX: number,
-			currentMriMouseY: number,
+			currentHistologyMouseX: number,
+			currentHistologyMouseY: number,
 			histologyImageCoords: HistologyCoords,
 			type: string
 		) => {
@@ -136,8 +136,8 @@ const AtlasImages: FC<Props> = (props) => {
 			//const { currentMriMouseX, currentMriMouseY } = getMouseCoords(e);
 
 			const currentLabel = await histologyLabelParser(
-				currentMriMouseX,
-				currentMriMouseY,
+				currentHistologyMouseX,
+				currentHistologyMouseY,
 				histologyImageCoords,
 				type,
 				patientId
@@ -165,14 +165,30 @@ const AtlasImages: FC<Props> = (props) => {
 		buildAtlas();
 	}, [patientId]);
 
+	// needs refactoring
 	useEffect(() => {
+		const type = showHiRes ? "hiRes" : "lowRes";
+
+		// why am I passing both histologyImageCoords and the embedded mouseX and mouseY?
+		// I should just pass histologyImageCoords
 		if (histologyImageCoords !== null && mriImageCoords !== null) {
-			setCurrentLabelHandler(
-				histologyImageCoords.coordsLowRes.mouseX,
-				histologyImageCoords.coordsLowRes.mouseY,
-				histologyImageCoords,
-				"lowRes"
-			);
+			if (!showHiRes) {
+				setCurrentLabelHandler(
+					histologyImageCoords.coordsLowRes.mouseX,
+					histologyImageCoords.coordsLowRes.mouseY,
+					histologyImageCoords,
+					type
+				);
+			}
+
+			if (showHiRes) {
+				setCurrentLabelHandler(
+					histologyImageCoords.coordsHiRes.mouseX,
+					histologyImageCoords.coordsHiRes.mouseY,
+					histologyImageCoords,
+					type
+				);
+			}
 		}
 	}, [histologyImageCoords, mriImageCoords, setCurrentLabelHandler]);
 

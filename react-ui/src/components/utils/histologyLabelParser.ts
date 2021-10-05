@@ -1,7 +1,10 @@
 // loads in the histology txt labels and parses them for use in the application
 
-import npyjs from "npyjs";
+// import npyjs from "npyjs";
 import ndarray from "ndarray";
+import JSZip from "jszip";
+
+import npzAsArrayBuffer from "./npzAsArrayBuffer";
 
 import { HistologyCoords } from "../../models/histologyCoords.model";
 
@@ -22,6 +25,8 @@ const histologyLabelParser = async (
 
 	// console.log(mouseX, mouseY, histologyImageCoords, type);
 
+	console.log(currentLabelNumber);
+
 	const parsedLabel = await parseLabel(currentLabelNumber, type);
 
 	return parsedLabel;
@@ -34,11 +39,12 @@ const getCurrentLabelNumber = async (
 	type: string,
 	patientId: string
 ) => {
-	// label numbers are extracted from multi dimensional numpy arrays
+	// label numbers are extracted from multi dimensional numpy arrays (extracted from compressed npz files)
 	// the numpy array takes in x and y mouse coordinates to point to an index
 	// the index returns the label number
 
-	let n = new npyjs();
+	let n = new npzAsArrayBuffer();
+	let zip = new JSZip();
 
 	const paddedBlock = histologyImageCoords.currentHistologyBlock
 		.toString()
@@ -50,17 +56,49 @@ const getCurrentLabelNumber = async (
 
 	const histologyFolder = type === "lowRes" ? "histology" : "histology_hr";
 
-	// the npy files are missing from the updated folder for the labels
-	// I need the npy files to parse the label (I think)
-	const npyFile =
-		await require(`../../assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels_npy/slice_${paddedSlice}.npy`)
+	const npzFile =
+		await require(`../../assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels_npz/slice_${paddedSlice}.npz`)
 			.default;
 
-	const npyArray = await n.load(npyFile);
+	const npzArrayBuffer = await n.load(npzFile); // returns raw contents as an unparsed array buffer
 
-	const ndArray = ndarray(npyArray.data, npyArray.shape);
+	const npzUint8Array = new Uint8Array(npzArrayBuffer); // parse the arrayBuffer as a uint8Array
 
+	const loadedZip = await zip.loadAsync(npzUint8Array!); // get all files in the zip
+
+	const filesData = Object.entries(loadedZip.files)[0][0]; // the name of the file insise the zip file
+
+	// parse the loaded zip as an arrayBuffer
+	const unzippedArrayBuffer = await loadedZip
+		.file(filesData)!
+		.async("arraybuffer");
+
+	// we need to parse both the uint8array data and the uint16 array data from the zip
+	// we get the header info from the unit8 data
+	// and we get the actual npy array data from the uint16 data
+	// although it seems to work, this seems weird, so i'm probably just missing something
+
+	// create the header data from the uint8Array data
+	let headerData = new Uint8Array(unzippedArrayBuffer);
+	let hcontents = new TextDecoder("utf-8").decode(
+		new Uint8Array(headerData.slice(10, 10 + 118))
+	);
+	var header = JSON.parse(
+		hcontents
+			.toLowerCase() // True -> true
+			.replace(/'/g, '"')
+			.replace("(", "[")
+			.replace(/,*\),*/g, "]")
+	);
+	console.log(header);
+
+	// get the npy array data from the uint16array
+	let npyData = new Uint16Array(unzippedArrayBuffer.slice(128));
+
+	// process the array data accordingly
+	let ndArray = ndarray(npyData, header.shape);
 	const currentLabelNumber = ndArray.get(mouseX.toFixed(0), mouseY.toFixed(0));
+	console.log(currentLabelNumber);
 
 	return currentLabelNumber;
 };
@@ -74,15 +112,7 @@ const parseLabel = async (currentLabelNumber: number, type: string) => {
 
 	let labelsFile;
 
-	if (type === "lowRes") {
-		labelsFile = await require(`../../assets/lookup_table.txt`).default;
-	}
-
-	// if (type === "hiRes") {
-	// 	labelsFile =
-	// 		await require("../../assets/P57-16/histology_hr/lookup_table.txt")
-	// 			.default;
-	// }
+	labelsFile = await require(`../../assets/lookup_table.txt`).default;
 
 	const parsedLabels = await readTxt.load(labelsFile);
 

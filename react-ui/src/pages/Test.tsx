@@ -7,11 +7,7 @@ import pako from "pako";
 import JSZip from "jszip";
 
 import parseNpy from "../components/utils/parseNpy";
-import parseNpz_uncompressed from "../components/utils/parseNpz_uncompressed";
-import parseNpz_compressed from "../components/utils/parseNpz_compressed";
-import zipTest from "../components/utils/zipTest";
 import npzAsArrayBuffer from "../components/utils/npzAsArrayBuffer";
-import parseNpzFinal from "../components/utils/parseNpzFinal";
 
 const Atlas: FC = () => {
 	// testing out zipping a .npy file
@@ -149,26 +145,26 @@ const Atlas: FC = () => {
 	useEffect(() => {
 		const processNpzFile = async () => {
 			let n = new npzAsArrayBuffer();
-			let zip = new JSZip();
+			let zip: any = new JSZip();
 
-			const file =
+			let file =
 				await require(`../assets/zip_test/final_test/slice_02_big_npz_compressed.npz`)
 					.default;
 
-			const npzArrayBuffer = await n.load(file); // returns raw contents as an unparsed array buffer
+			let npzArrayBuffer: any = await n.load(file); // returns raw contents as an unparsed array buffer
 			console.log(npzArrayBuffer);
 
-			const npzUint8Array = new Uint8Array(npzArrayBuffer); // parse the arrayBuffer as a uint8Array
-			console.log(npzUint8Array);
+			let npzUint8Array: any = new Uint8Array(npzArrayBuffer); // parse the arrayBuffer as a uint8Array
+			//console.log(npzUint8Array);
 
-			const loadedZip = await zip.loadAsync(npzUint8Array!); // get all files in the zip
-			console.log(loadedZip);
+			let loadedZip: any = await zip.loadAsync(npzUint8Array!); // get all files in the zip
+			//console.log(loadedZip);
 
 			// parse the loaded zip as an arrayBuffer
-			const unzippedArrayBuffer = await loadedZip
+			let unzippedArrayBuffer: any = await loadedZip
 				.file("arr_0.npy")!
 				.async("arraybuffer");
-			console.log(unzippedArrayBuffer);
+			//console.log(unzippedArrayBuffer);
 
 			// we need to parse both the uint8array data and the uint16 array data from the zip
 			// we get the header info from the unit8 data
@@ -176,7 +172,7 @@ const Atlas: FC = () => {
 			// although it seems to work, this seems weird, so i'm probably just missing something
 
 			// create the header data from the uint8Array data
-			let headerData = new Uint8Array(unzippedArrayBuffer);
+			let headerData: any = new Uint8Array(unzippedArrayBuffer);
 			let hcontents = new TextDecoder("utf-8").decode(
 				new Uint8Array(headerData.slice(10, 10 + 118))
 			);
@@ -187,11 +183,11 @@ const Atlas: FC = () => {
 					.replace("(", "[")
 					.replace(/,*\),*/g, "]")
 			);
-			console.log(header);
+			//console.log(header);
 
 			// get the npy array data from the uint16array
-			let npyData = new Uint16Array(unzippedArrayBuffer.slice(128));
-			console.log(npyData);
+			let npyData: any = new Uint16Array(unzippedArrayBuffer.slice(128));
+			//console.log(npyData);
 
 			// process the array data accordingly
 			let ndArray = ndarray(npyData, header.shape);

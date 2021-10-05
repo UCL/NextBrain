@@ -14,8 +14,6 @@
 	/* this is a workaround to stop the browser downscaling images */
 	/* https://stackoverflow.com/questions/37906602/blurry-downscaled-images-in-chrome */
 	transform: translateZ(0);
-
-	border: 1px solid white;
 }
 
 .histology-img-labels {
