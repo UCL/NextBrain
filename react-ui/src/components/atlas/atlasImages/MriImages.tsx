@@ -7,6 +7,7 @@ import getMouseCoords from "../../utils/getmouseCoords";
 import { MriCoords } from "../../../models/mriCoords.model";
 
 interface Props {
+	baseAssetsUrl: string;
 	patientId: string;
 	mriImageCoords: MriCoords | null;
 	showHiRes: boolean;
@@ -22,6 +23,7 @@ interface Props {
 
 const MriImages: FC<Props> = (props) => {
 	const {
+		baseAssetsUrl,
 		patientId,
 		mriImageCoords,
 		showHiRes,
@@ -98,6 +100,7 @@ const MriImages: FC<Props> = (props) => {
 				plane="sagittal"
 				mriImageCoords={mriImageCoords}
 				computeMriImagesHandler={computeMriImagesHandler}
+				baseAssetsUrl={baseAssetsUrl}
 				patientId={patientId}
 			/>
 
@@ -105,6 +108,7 @@ const MriImages: FC<Props> = (props) => {
 				plane="coronal"
 				mriImageCoords={mriImageCoords}
 				computeMriImagesHandler={computeMriImagesHandler}
+				baseAssetsUrl={baseAssetsUrl}
 				patientId={patientId}
 			/>
 
@@ -112,6 +116,7 @@ const MriImages: FC<Props> = (props) => {
 				plane="axial"
 				mriImageCoords={mriImageCoords}
 				computeMriImagesHandler={computeMriImagesHandler}
+				baseAssetsUrl={baseAssetsUrl}
 				patientId={patientId}
 			/>
 		</>

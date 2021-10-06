@@ -124,11 +124,14 @@ const getCurrentBlock = async (
 	const paddedSlice = currentMriSlice.toFixed(0).toString().padStart(3, "0");
 
 	// need to wrap this in a try catch block
-	let npyFile =
-		await require(`../../assets/${patientId}/mri_rotated/indices_${currentMriPlane}/slice_${paddedSlice}.npy`)
-			.default;
-
-	console.log(npyFile);
+	let npyFile;
+	try {
+		npyFile =
+			await require(`../../assets/${patientId}/mri_rotated/indices_${currentMriPlane}/slice_${paddedSlice}.npy`)
+				.default;
+	} catch (e: any) {
+		console.error(e.message, e.name);
+	}
 
 	const npyArray = await n.load(npyFile);
 

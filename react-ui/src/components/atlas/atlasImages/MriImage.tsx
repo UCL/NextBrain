@@ -8,6 +8,7 @@ import { MriCoords } from "../../../models/mriCoords.model";
 import "./MriImage.css";
 
 interface Props {
+	baseAssetsUrl: string;
 	patientId: string;
 	plane: string;
 	mriImageCoords: MriCoords | null;
@@ -22,7 +23,13 @@ const MriImage: FC<Props> = (props) => {
 	const [mriImage, setMriImage] = useState("");
 	const [currentSlice, setCurrentSlice] = useState("");
 
-	const { patientId, plane, mriImageCoords, computeMriImagesHandler } = props;
+	const {
+		baseAssetsUrl,
+		patientId,
+		plane,
+		mriImageCoords,
+		computeMriImagesHandler,
+	} = props;
 
 	useEffect(() => {
 		// determine the correct mri image based on computed coordinates
@@ -34,8 +41,7 @@ const MriImage: FC<Props> = (props) => {
 			.padStart(3, "0");
 
 		try {
-			const mriImage =
-				require(`../../../assets/${patientId}/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`).default;
+			const mriImage = `${baseAssetsUrl}/main/${patientId}/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`;
 
 			setMriImage(mriImage);
 			setCurrentSlice(paddedSlice);

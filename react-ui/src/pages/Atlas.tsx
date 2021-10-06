@@ -13,9 +13,9 @@ import "./Atlas.css";
 
 const Atlas: FC = () => {
 	const [baseAssetsUrl, setBaseAssetsUrl] = useState(
-		"https://raw.githubusercontent.com/jhughes982/brainAtlas-"
+		"https://raw.githubusercontent.com/jhughes982/brainAtlas-P57-16"
 	);
-	const [patientId, setPatientId] = useState("P57-16");
+	const [patientId, setPatientId] = useState("P57-16_updated");
 	const [channel, setChannel] = useState("LFB");
 	const [showHiRes, setShowHiRes] = useState(false);
 	const [showLabels, setShowLabels] = useState(false);
@@ -51,6 +51,7 @@ const Atlas: FC = () => {
 	return (
 		<main className="atlas-container">
 			<AtlasImages
+				baseAssetsUrl={baseAssetsUrl}
 				patientId={patientId}
 				channel={channel}
 				showHiRes={showHiRes}

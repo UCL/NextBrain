@@ -22,6 +22,7 @@ import { Centroid } from "../../../models/centroid.model";
 import "./AtlasImages.css";
 
 interface Props {
+	baseAssetsUrl: string;
 	patientId: string;
 	channel: string;
 	showHiRes: boolean;
@@ -40,6 +41,7 @@ const AtlasImages: FC<Props> = (props) => {
 		useState<HistologyCoords | null>(null);
 
 	const {
+		baseAssetsUrl,
 		patientId,
 		channel,
 		showHiRes,
@@ -273,6 +275,7 @@ const AtlasImages: FC<Props> = (props) => {
 			{isLoading && <LoadingSpinner asOverlay />}
 
 			<MriImages
+				baseAssetsUrl={baseAssetsUrl}
 				patientId={patientId}
 				mriImageCoords={mriImageCoords}
 				showHiRes={showHiRes}
