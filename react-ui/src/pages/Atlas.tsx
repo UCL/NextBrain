@@ -29,7 +29,8 @@ const Atlas: FC = () => {
 			const matrix = await getMatrix(
 				navCoords!.blockNumber,
 				"histology",
-				patientId
+				patientId,
+				baseAssetsUrl
 			);
 
 			// why is the order of params here different compared to the function that handles physical clicks?

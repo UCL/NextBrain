@@ -126,6 +126,7 @@ const HistologyImage: FC<Props> = (props) => {
 		channel,
 		hiResHistologyImage,
 		patientId,
+		baseAssetsUrl,
 	]);
 
 	// take the current histology coords and calculate scaled mouseX and mouseY

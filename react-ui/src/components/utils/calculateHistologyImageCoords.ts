@@ -17,7 +17,7 @@ const calculateHistologyImageCoords = async (
 	adjustedMriMouseY: number,
 	newMriCoords: MriCoords,
 	patientId: string,
-	showHiRes: boolean
+	baseAssetsUrl: string
 ) => {
 	const currentBlock = await getCurrentBlock(
 		currentMriPlane,
@@ -34,8 +34,18 @@ const calculateHistologyImageCoords = async (
 
 	if (currentBlock === 0 || currentBlock === undefined) return "no block found";
 
-	const matrixLowRes = await getMatrix(currentBlock, "mri", patientId);
-	const matrixHiRes = await getMatrix(currentBlock, "mri_hr", patientId);
+	const matrixLowRes = await getMatrix(
+		currentBlock,
+		"mri",
+		patientId,
+		baseAssetsUrl
+	);
+	const matrixHiRes = await getMatrix(
+		currentBlock,
+		"mri_hr",
+		patientId,
+		baseAssetsUrl
+	);
 
 	if (matrixLowRes === undefined || matrixHiRes === undefined)
 		return "no matrix found";
@@ -130,10 +140,12 @@ const getCurrentBlock = async (
 			await require(`../../assets/${patientId}/mri_rotated/indices_${currentMriPlane}/slice_${paddedSlice}.npy`)
 				.default;
 	} catch (e: any) {
-		console.error(e.message, e.name);
+		throw new Error(e);
 	}
 
 	const npyArray = await n.load(npyFile);
+
+	console.log(npyArray);
 
 	let ndArray = ndarray(npyArray.data, npyArray.shape);
 

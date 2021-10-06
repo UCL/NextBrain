@@ -102,7 +102,7 @@ const AtlasImages: FC<Props> = (props) => {
 			adjustedMriMouseY!,
 			newMriCoords!,
 			patientId,
-			showHiRes
+			baseAssetsUrl
 		);
 		console.log("histology image coords: ", newHistologyCoords);
 
@@ -210,7 +210,8 @@ const AtlasImages: FC<Props> = (props) => {
 		const matrix = await getMatrix(
 			histologyImageCoords!.currentHistologyBlock,
 			histologyFolder,
-			patientId
+			patientId,
+			baseAssetsUrl
 		);
 
 		const coords = matrixMultiplier(matrix, [
@@ -237,7 +238,8 @@ const AtlasImages: FC<Props> = (props) => {
 		const matrix = await getMatrix(
 			histologyImageCoords!.currentHistologyBlock,
 			"histology",
-			patientId
+			patientId,
+			baseAssetsUrl
 		);
 
 		const coords = matrixMultiplier(matrix, [
