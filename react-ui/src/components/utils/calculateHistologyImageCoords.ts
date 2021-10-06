@@ -128,6 +128,8 @@ const getCurrentBlock = async (
 		await require(`../../assets/${patientId}/mri_rotated/indices_${currentMriPlane}/slice_${paddedSlice}.npy`)
 			.default;
 
+	console.log(npyFile);
+
 	const npyArray = await n.load(npyFile);
 
 	let ndArray = ndarray(npyArray.data, npyArray.shape);

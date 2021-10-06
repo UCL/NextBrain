@@ -142,63 +142,100 @@ const Atlas: FC = () => {
 	// 	runZipTest();
 	// }, []);
 
+	// useEffect(() => {
+	// 	const processNpzFile = async () => {
+	// 		let n = new npzAsArrayBuffer();
+	// 		let zip: any = new JSZip();
+
+	// 		let file =
+	// 			await require(`../assets/zip_test/final_test/slice_02_big_npz_compressed.npz`)
+	// 				.default;
+
+	// 		let npzArrayBuffer: any = await n.load(file); // returns raw contents as an unparsed array buffer
+	// 		console.log(npzArrayBuffer);
+
+	// 		let npzUint8Array: any = new Uint8Array(npzArrayBuffer); // parse the arrayBuffer as a uint8Array
+	// 		//console.log(npzUint8Array);
+
+	// 		let loadedZip: any = await zip.loadAsync(npzUint8Array!); // get all files in the zip
+	// 		//console.log(loadedZip);
+
+	// 		// parse the loaded zip as an arrayBuffer
+	// 		let unzippedArrayBuffer: any = await loadedZip
+	// 			.file("arr_0.npy")!
+	// 			.async("arraybuffer");
+	// 		//console.log(unzippedArrayBuffer);
+
+	// 		// we need to parse both the uint8array data and the uint16 array data from the zip
+	// 		// we get the header info from the unit8 data
+	// 		// and we get the actual npy array data from the uint16 data
+	// 		// although it seems to work, this seems weird, so i'm probably just missing something
+
+	// 		// create the header data from the uint8Array data
+	// 		let headerData: any = new Uint8Array(unzippedArrayBuffer);
+	// 		let hcontents = new TextDecoder("utf-8").decode(
+	// 			new Uint8Array(headerData.slice(10, 10 + 118))
+	// 		);
+	// 		var header = JSON.parse(
+	// 			hcontents
+	// 				.toLowerCase() // True -> true
+	// 				.replace(/'/g, '"')
+	// 				.replace("(", "[")
+	// 				.replace(/,*\),*/g, "]")
+	// 		);
+	// 		//console.log(header);
+
+	// 		// get the npy array data from the uint16array
+	// 		let npyData: any = new Uint16Array(unzippedArrayBuffer.slice(128));
+	// 		//console.log(npyData);
+
+	// 		// process the array data accordingly
+	// 		let ndArray = ndarray(npyData, header.shape);
+	// 		const label = ndArray.get(5000, 2906);
+	// 		console.log(label);
+	// 	};
+
+	// 	processNpzFile();
+	// }, []);
+
 	useEffect(() => {
 		const processNpzFile = async () => {
-			let n = new npzAsArrayBuffer();
-			let zip: any = new JSZip();
+			// const fileUrlJson =
+			// 	"https://raw.githubusercontent.com/jhughes982/brainAtlas-P57-16/main/WholeHemisphereFS.json";
 
-			let file =
-				await require(`../assets/zip_test/final_test/slice_02_big_npz_compressed.npz`)
-					.default;
+			// const fileJson = await fetch(fileUrlJson);
 
-			let npzArrayBuffer: any = await n.load(file); // returns raw contents as an unparsed array buffer
-			console.log(npzArrayBuffer);
+			// const parsedFile = await fileJson.json();
 
-			let npzUint8Array: any = new Uint8Array(npzArrayBuffer); // parse the arrayBuffer as a uint8Array
-			//console.log(npzUint8Array);
+			// console.log(parsedFile);
 
-			let loadedZip: any = await zip.loadAsync(npzUint8Array!); // get all files in the zip
-			//console.log(loadedZip);
+			// const fileUrl =
+			// 	"https://raw.githubusercontent.com/jhughes982/brainAtlas-P57-16/main/slice_000.npy";
+			const fileUrl =
+				"https://raw.githubusercontent.com/jhughes982/brainAtlas-P57-16/main/P57-16/mri_rotated/indices_axial/slice_000.npy";
 
-			// parse the loaded zip as an arrayBuffer
-			let unzippedArrayBuffer: any = await loadedZip
-				.file("arr_0.npy")!
-				.async("arraybuffer");
-			//console.log(unzippedArrayBuffer);
+			const file = await fetch(fileUrl);
 
-			// we need to parse both the uint8array data and the uint16 array data from the zip
-			// we get the header info from the unit8 data
-			// and we get the actual npy array data from the uint16 data
-			// although it seems to work, this seems weird, so i'm probably just missing something
+			//const parsedFile = await file.text();
 
-			// create the header data from the uint8Array data
-			let headerData: any = new Uint8Array(unzippedArrayBuffer);
-			let hcontents = new TextDecoder("utf-8").decode(
-				new Uint8Array(headerData.slice(10, 10 + 118))
-			);
-			var header = JSON.parse(
-				hcontents
-					.toLowerCase() // True -> true
-					.replace(/'/g, '"')
-					.replace("(", "[")
-					.replace(/,*\),*/g, "]")
-			);
-			//console.log(header);
+			let n = new npyjs();
 
-			// get the npy array data from the uint16array
-			let npyData: any = new Uint16Array(unzippedArrayBuffer.slice(128));
-			//console.log(npyData);
+			const npyArray = await n.load(fileUrl);
 
-			// process the array data accordingly
-			let ndArray = ndarray(npyData, header.shape);
-			const label = ndArray.get(5000, 2906);
-			console.log(label);
+			console.log(npyArray);
 		};
 
 		processNpzFile();
 	}, []);
 
-	return <main>Test page</main>;
+	return (
+		<div>
+			<img
+				src={"https://github.com/labnol/files/blob/master/trex.jpg?raw=true"}
+				alt="kk"
+			></img>
+		</div>
+	);
 };
 
 export default Atlas;

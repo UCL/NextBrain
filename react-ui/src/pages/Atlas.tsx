@@ -12,7 +12,10 @@ import { Centroid } from "../models/centroid.model";
 import "./Atlas.css";
 
 const Atlas: FC = () => {
-	const [patientId, setPatientId] = useState("P57-16_updated");
+	const [baseAssetsUrl, setBaseAssetsUrl] = useState(
+		"https://raw.githubusercontent.com/jhughes982/brainAtlas-"
+	);
+	const [patientId, setPatientId] = useState("P57-16");
 	const [channel, setChannel] = useState("LFB");
 	const [showHiRes, setShowHiRes] = useState(false);
 	const [showLabels, setShowLabels] = useState(false);
