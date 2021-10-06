@@ -17,7 +17,7 @@ const Atlas: FC = () => {
 	const [showHiRes, setShowHiRes] = useState(false);
 	const [showLabels, setShowLabels] = useState(false);
 	const [labelsTransparency, setLabelsTransparency] = useState("0.5");
-	const [currentLabel, setCurrentLabel] = useState<CurrentLabel>([]);
+	const [currentLabel, setCurrentLabel] = useState<CurrentLabel | null>(null);
 	const [centroid, setCentroid] = useState<Centroid | null>(null);
 
 	// useCallback prevents unnecessary re-render of child component (AtlasNavigation.tsx)

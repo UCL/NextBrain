@@ -1,5 +1,3 @@
-// loads in the histology txt labels and parses them for use in the application
-
 // import npyjs from "npyjs";
 import ndarray from "ndarray";
 import JSZip from "jszip";
@@ -23,9 +21,11 @@ const histologyLabelParser = async (
 		patientId
 	);
 
-	const parsedLabel = await parseLabel(currentLabelNumber, type);
+	const labelsFile = await require(`../../assets/WholeHemisphereFS.json`);
 
-	return parsedLabel;
+	const currentLabel = labelsFile[currentLabelNumber];
+
+	return currentLabel;
 };
 
 const getCurrentLabelNumber = async (
@@ -93,62 +93,12 @@ const getCurrentLabelNumber = async (
 
 	// process the array data accordingly
 	let ndArray = ndarray(npyData, header.shape);
+
+	// I might need to transpose the array like I do for histology???
+
 	const currentLabelNumber = ndArray.get(mouseX.toFixed(0), mouseY.toFixed(0));
-	console.log(currentLabelNumber);
 
 	return currentLabelNumber;
 };
-
-const parseLabel = async (currentLabelNumber: number, type: string) => {
-	// we extract the current label, given the current label number
-	// the labels are contained in txt files so need to be parsed
-	// for each label we extract: [labelNumber, labelName, r, g, b, a]
-
-	let readTxt = new txtLabelsToArray();
-
-	let labelsFile;
-
-	labelsFile = await require(`../../assets/lookup_table.txt`).default;
-
-	const parsedLabels = await readTxt.load(labelsFile);
-
-	const currentLabel = parsedLabels[currentLabelNumber];
-
-	return currentLabel;
-};
-
-// custom parser to extract labels txt data into an array
-class txtLabelsToArray {
-	async parse(file: string) {
-		var txtToArray = file.split("\n");
-		txtToArray.pop();
-
-		// split each label item into its own array element
-		const labelsArray = txtToArray.map((element) => {
-			return element.split(/\s/g);
-		});
-
-		// remove empty strings in each label array
-		const parsedLabelsArray = labelsArray.map((element) => {
-			return element.filter((innerElement) => {
-				if (innerElement === "") return false; // skip
-				return true;
-			});
-		});
-
-		return parsedLabelsArray;
-	}
-
-	async load(filename: RequestInfo) {
-		return fetch(filename)
-			.then((response) => {
-				return response.text();
-			})
-			.then((text) => {
-				const parsedTxt = this.parse(text);
-				return parsedTxt;
-			});
-	}
-}
 
 export default histologyLabelParser;

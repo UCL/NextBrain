@@ -6,11 +6,13 @@ import "./Label.css";
 
 interface Props {
 	showLabels: boolean;
-	currentLabel: CurrentLabel;
+	currentLabel: CurrentLabel | null;
 }
 
 const Label: FC<Props> = (props) => {
 	const { showLabels, currentLabel } = props;
+
+	console.log(currentLabel);
 
 	if (!showLabels) {
 		return null;
@@ -26,16 +28,16 @@ const Label: FC<Props> = (props) => {
 		<div className="label-container">
 			<div className="label-heading">Current Label</div>
 
-			<div className="label-name">Label name: {currentLabel[1]}</div>
+			<div className="label-name">Label name: {currentLabel.labelName}</div>
 
 			<div className="label-color-container">
 				<span> Label color: </span>
 				<span
 					className="label-color-box"
 					style={{
-						backgroundColor: `rgba(${currentLabel[2]},
-								${currentLabel[3]},
-								${currentLabel[4]},
+						backgroundColor: `rgba(${currentLabel.r},
+								${currentLabel.g},
+								${currentLabel.b},
 								100
 							)`,
 						marginBottom: "10px",

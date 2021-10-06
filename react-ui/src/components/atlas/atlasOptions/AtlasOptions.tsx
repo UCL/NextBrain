@@ -23,7 +23,7 @@ interface Props {
 	setShowLabels: (showLabels: boolean) => void;
 	labelsTransparency: string;
 	setLabelsTransparency: (labelsTransparency: string) => void;
-	currentLabel: CurrentLabel;
+	currentLabel: CurrentLabel | null;
 	getCentroid: (blockNumber: number) => void;
 }
 
