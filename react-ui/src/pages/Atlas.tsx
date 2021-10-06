@@ -63,6 +63,7 @@ const Atlas: FC = () => {
 			/>
 
 			<AtlasOptions
+				baseAssetsUrl={baseAssetsUrl}
 				patientId={patientId}
 				setPatientId={setPatientId}
 				channel={channel}

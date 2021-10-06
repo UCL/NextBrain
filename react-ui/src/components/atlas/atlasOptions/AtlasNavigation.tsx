@@ -1,19 +1,40 @@
-import { FC, memo } from "react";
+import { FC, memo, useEffect, useState } from "react";
 import DropdownTreeSelect from "react-dropdown-tree-select";
 
-import atlasNavigationData from "../../../assets/image_ontology_hierarchical.json";
+// import atlasNavigationData from "../../../assets/image_ontology_hierarchical.json";
 
 import "react-dropdown-tree-select/dist/styles.css";
 import "./AtlasNavigation.css";
 
 interface Props {
+	baseAssetsUrl: string;
+	patientId: string;
 	getCentroid: (blockNumber: number) => void;
 	showHiRes: boolean;
 	setShowHiRes: (showHiRes: boolean) => void;
 }
 
 const AtlasNavigation: FC<Props> = (props) => {
-	const { getCentroid, showHiRes, setShowHiRes } = props;
+	const [atlasNavigationData, setAtlasNavigationData] = useState<any>(null);
+
+	const { baseAssetsUrl, patientId, getCentroid, showHiRes, setShowHiRes } =
+		props;
+
+	useEffect(() => {
+		const getAtlasNavigationData = async () => {
+			const dataUrl = `${baseAssetsUrl}/main/${patientId}/image_ontology_hierarchical.json`;
+
+			const file = await fetch(dataUrl);
+
+			const parsedFile = await file.json();
+
+			console.log(parsedFile);
+
+			setAtlasNavigationData(parsedFile);
+		};
+
+		getAtlasNavigationData();
+	}, [patientId, baseAssetsUrl]);
 
 	const onChange = (currentNode: any, selectedNodes: any) => {
 		if (showHiRes) setShowHiRes(false);
@@ -39,6 +60,10 @@ const AtlasNavigation: FC<Props> = (props) => {
 	const onNodeToggle = (currentNode: any) => {
 		console.log("onNodeToggle::", currentNode);
 	};
+
+	if (atlasNavigationData == null) {
+		return <div>Could not find navigation data</div>;
+	}
 
 	return (
 		<DropdownTreeSelect
