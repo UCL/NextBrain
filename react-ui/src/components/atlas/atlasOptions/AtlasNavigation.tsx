@@ -1,8 +1,6 @@
 import { FC, memo, useEffect, useState } from "react";
 import DropdownTreeSelect from "react-dropdown-tree-select";
 
-// import atlasNavigationData from "../../../assets/image_ontology_hierarchical.json";
-
 import "react-dropdown-tree-select/dist/styles.css";
 import "./AtlasNavigation.css";
 
