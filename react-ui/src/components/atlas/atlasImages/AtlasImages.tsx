@@ -284,6 +284,7 @@ const AtlasImages: FC<Props> = (props) => {
 			/>
 
 			<HistologyImage
+				baseAssetsUrl={baseAssetsUrl}
 				patientId={patientId}
 				histologyImageCoords={histologyImageCoords}
 				channel={channel}

@@ -11,6 +11,7 @@ import { HistologyCoords } from "../../../models/histologyCoords.model";
 import "./HistologyImage.css";
 
 interface Props {
+	baseAssetsUrl: string;
 	patientId: string;
 	histologyImageCoords: HistologyCoords | null;
 	showHiRes: boolean;
@@ -34,6 +35,7 @@ const HistologyImage: FC<Props> = (props) => {
 	} | null>(null);
 
 	const {
+		baseAssetsUrl,
 		patientId,
 		histologyImageCoords,
 		showHiRes,
@@ -62,9 +64,9 @@ const HistologyImage: FC<Props> = (props) => {
 
 					try {
 						// setIsLoading(true);
-						const histologyImage =
-							await require(`../../../assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`)
-								.default;
+
+						const histologyImage = `${baseAssetsUrl}/main/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`;
+
 						setHistologyImage(histologyImage);
 					} catch {
 						console.log(
@@ -104,9 +106,9 @@ const HistologyImage: FC<Props> = (props) => {
 				// load label
 				try {
 					//setIsLoading(true);
-					const newLabelsImage =
-						await require(`../../../assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.png`)
-							.default;
+
+					const newLabelsImage = `${baseAssetsUrl}/main/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.png`;
+
 					setLabelsImage(newLabelsImage);
 				} catch {
 					console.log(
