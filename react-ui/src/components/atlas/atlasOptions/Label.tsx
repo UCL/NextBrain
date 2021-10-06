@@ -12,8 +12,6 @@ interface Props {
 const Label: FC<Props> = (props) => {
 	const { showLabels, currentLabel } = props;
 
-	console.log(currentLabel);
-
 	if (!showLabels) {
 		return null;
 	}
