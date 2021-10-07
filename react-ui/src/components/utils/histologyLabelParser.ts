@@ -11,14 +11,16 @@ const histologyLabelParser = async (
 	mouseY: number,
 	histologyImageCoords: HistologyCoords,
 	type: string,
-	patientId: string
+	patientId: string,
+	baseAssetsUrl: string
 ) => {
 	const currentLabelNumber = await getCurrentLabelNumber(
 		mouseX,
 		mouseY,
 		histologyImageCoords,
 		type,
-		patientId
+		patientId,
+		baseAssetsUrl
 	);
 
 	const labelsFile = await require(`../../assets/WholeHemisphereFS.json`);
@@ -33,7 +35,8 @@ const getCurrentLabelNumber = async (
 	mouseY: number,
 	histologyImageCoords: HistologyCoords,
 	type: string,
-	patientId: string
+	patientId: string,
+	baseAssetsUrl: string
 ) => {
 	// label numbers are extracted from multi dimensional numpy arrays (extracted from compressed npz files)
 	// the numpy array takes in x and y mouse coordinates to point to an index
@@ -52,9 +55,7 @@ const getCurrentLabelNumber = async (
 
 	const histologyFolder = type === "lowRes" ? "histology" : "histology_hr";
 
-	const npzFile =
-		await require(`../../assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels_npz/slice_${paddedSlice}.npz`)
-			.default;
+	const npzFile = `${baseAssetsUrl}/main/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels_npz/slice_${paddedSlice}.npz`;
 
 	const npzArrayBuffer = await n.load(npzFile); // returns raw contents as an unparsed array buffer
 

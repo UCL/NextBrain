@@ -131,12 +131,13 @@ const AtlasImages: FC<Props> = (props) => {
 				currentHistologyMouseY,
 				histologyImageCoords,
 				type,
-				patientId
+				patientId,
+				baseAssetsUrl
 			);
 
 			setCurrentLabel(currentLabel);
 		},
-		[setCurrentLabel, patientId]
+		[setCurrentLabel, patientId, baseAssetsUrl]
 	);
 
 	useEffect(() => {
