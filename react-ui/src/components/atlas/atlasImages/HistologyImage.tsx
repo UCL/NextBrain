@@ -84,9 +84,8 @@ const HistologyImage: FC<Props> = (props) => {
 				if (showHiRes === true) {
 					try {
 						setIsLoading(true);
-						const hiResHistologyImage =
-							await require(`../../../assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.webp`)
-								.default;
+
+						const hiResHistologyImage = `${baseAssetsUrl}/main/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.webp`;
 
 						setHiResHistologyImage(hiResHistologyImage);
 					} catch {
