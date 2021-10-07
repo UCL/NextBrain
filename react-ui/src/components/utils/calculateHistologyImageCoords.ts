@@ -149,7 +149,7 @@ const getCurrentBlock = async (
 
 	// the numpy arrays in the data are the opposite of the image dimensions, so a transposition is needed
 	// you can alternatively take the dimensions from rotateCoords() below and get the numpy block from xRotated and yRotated
-	ndArray = ndArray.transpose(1, 0);
+	ndArray = await ndArray.transpose(1, 0);
 
 	console.log("npy shape (after transpose): " + ndArray.shape);
 

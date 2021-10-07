@@ -126,6 +126,7 @@ const AtlasImages: FC<Props> = (props) => {
 			histologyImageCoords: HistologyCoords,
 			type: string
 		) => {
+			// loading spinner shows while the label is loading
 			setCurrentLabel(null);
 
 			const currentLabel = await histologyLabelParser(
@@ -184,7 +185,7 @@ const AtlasImages: FC<Props> = (props) => {
 				);
 			}
 		}
-	}, [histologyImageCoords, mriImageCoords, setCurrentLabelHandler]);
+	}, [histologyImageCoords, mriImageCoords, setCurrentLabelHandler, showHiRes]);
 
 	useEffect(() => {
 		if (centroid != null) {

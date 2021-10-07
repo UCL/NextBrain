@@ -57,6 +57,8 @@ const getCurrentLabelNumber = async (
 
 	const npzFile = `${baseAssetsUrl}/main/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels_npz/slice_${paddedSlice}.npz`;
 
+	console.log(npzFile);
+
 	const npzArrayBuffer = await n.load(npzFile); // returns raw contents as an unparsed array buffer
 
 	const npzUint8Array = new Uint8Array(npzArrayBuffer); // parse the arrayBuffer as a uint8Array
@@ -95,7 +97,8 @@ const getCurrentLabelNumber = async (
 	// process the array data accordingly
 	let ndArray = ndarray(npyData, header.shape);
 
-	// I might need to transpose the array like I do for histology???
+	// need to check if this is the right thing to do!!!
+	ndArray = await ndArray.transpose(1, 0);
 
 	const currentLabelNumber = ndArray.get(mouseX.toFixed(0), mouseY.toFixed(0));
 
