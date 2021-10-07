@@ -25,7 +25,6 @@ const HistologyImage: FC<Props> = (props) => {
 	const [error, setError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [histologyImage, setHistologyImage] = useState("");
-	const [hiResHistologyImage, setHiResHistologyImage] = useState("");
 	const [labelsImage, setLabelsImage] = useState("");
 	const [imageDimensions, setImageDimensions] = useState<{
 		[key: string]: number;
@@ -57,63 +56,28 @@ const HistologyImage: FC<Props> = (props) => {
 				const paddedSlice = histologySlice.toString().padStart(2, "0");
 
 				const histologyFolder = showHiRes ? "histology_hr" : "histology";
+				const fileExtension = showHiRes ? "webp" : "jpg";
 
-				// the below code chunks can probably be combined
-				if (showHiRes === false) {
-					setHiResHistologyImage("");
-
-					try {
-						// setIsLoading(true);
-
-						const histologyImage = `${baseAssetsUrl}/main/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`;
-
-						setHistologyImage(histologyImage);
-					} catch {
-						console.log(
-							`%cerror, could not resolve path: assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`,
-							"color: red"
-						);
-
-						setError(
-							`could not resolve path: assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.jpg`
-						);
-					}
-				}
-
-				// load hi-res image (original size)
-				if (showHiRes === true) {
-					try {
-						setIsLoading(true);
-
-						const hiResHistologyImage = `${baseAssetsUrl}/main/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.webp`;
-
-						setHiResHistologyImage(hiResHistologyImage);
-					} catch {
-						console.log(
-							`%cerror, could not resolve path: assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.webp`,
-							"color: red"
-						);
-					}
-
-					// I do this because of a weird behaviour on the dev server causing the loading spinner to reappear
-					// I dont think this is an issue on the deployed site, so perhaps remove (or only run the logic on dev)
-					if (hiResHistologyImage !== null) {
-						setIsLoading(false);
-					}
-				}
-
-				// load label
 				try {
-					//setIsLoading(true);
+					setIsLoading(true);
 
+					const histologyImage = `${baseAssetsUrl}/main/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.${fileExtension}`;
 					const newLabelsImage = `${baseAssetsUrl}/main/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.png`;
 
+					setHistologyImage(histologyImage);
 					setLabelsImage(newLabelsImage);
-				} catch {
+				} catch (e) {
 					console.log(
-						`%cerror, could not resolve path: assets/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.png`,
+						`%cerror, could not load histology image`,
+						e,
 						"color: red"
 					);
+				}
+
+				// I do this because of a weird behaviour on the dev server causing the loading spinner to reappear
+				// I dont think this is an issue on the deployed site, so perhaps remove (or only run the logic on dev)
+				if (histologyImage !== null) {
+					setIsLoading(false);
 				}
 			}
 		};
@@ -123,20 +87,20 @@ const HistologyImage: FC<Props> = (props) => {
 		histologyImageCoords,
 		showHiRes,
 		channel,
-		hiResHistologyImage,
 		patientId,
 		baseAssetsUrl,
+		histologyImage,
 	]);
 
 	// take the current histology coords and calculate scaled mouseX and mouseY
 	// this is to account for the fact that we scale the histology image with css using the max-height property
 	useEffect(() => {
 		if (imageDimensions !== null) {
-			const currentHistologyMouseX = !showHiRes
+			let currentHistologyMouseX = !showHiRes
 				? histologyImageCoords!.coordsLowRes.mouseX
 				: histologyImageCoords!.coordsHiRes.mouseX;
 
-			const currentHistologyMouseY = !showHiRes
+			let currentHistologyMouseY = !showHiRes
 				? histologyImageCoords!.coordsLowRes.mouseY
 				: histologyImageCoords!.coordsHiRes.mouseY;
 
@@ -350,7 +314,7 @@ const HistologyImage: FC<Props> = (props) => {
 
 										<img
 											className={`histology-img ${showHiRes && "hi-res"}`}
-											src={hiResHistologyImage}
+											src={histologyImage}
 											alt="histology"
 											onLoad={(e) => onImageLoad(e, "onLoad")}
 										></img>
