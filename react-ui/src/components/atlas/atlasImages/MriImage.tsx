@@ -41,17 +41,17 @@ const MriImage: FC<Props> = (props) => {
 			.padStart(3, "0");
 
 		try {
-			const mriImage = `${baseAssetsUrl}/main/${patientId}/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`;
+			const mriImage = `${baseAssetsUrl}${patientId}/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`;
 
 			setMriImage(mriImage);
 			setCurrentSlice(paddedSlice);
-		} catch {
+		} catch (e) {
 			console.log(
-				`%cerror, could not resolve path: assets/${patientId}/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`,
-				"color: red"
+				`%cerror, could not load mri image, ${e},
+				"color: red"`
 			);
 		}
-	}, [mriImageCoords, plane, patientId]);
+	}, [mriImageCoords, plane, patientId, baseAssetsUrl]);
 
 	if (mriImage === null || currentSlice === null) {
 		return <div>Could not build mri image</div>;

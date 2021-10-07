@@ -61,8 +61,8 @@ const HistologyImage: FC<Props> = (props) => {
 				try {
 					setIsLoading(true);
 
-					const histologyImage = `${baseAssetsUrl}/main/${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.${fileExtension}`;
-					const newLabelsImage = `${baseAssetsUrl}/main/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.png`;
+					const histologyImage = `${baseAssetsUrl}${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.${fileExtension}`;
+					const newLabelsImage = `${baseAssetsUrl}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.png`;
 
 					setHistologyImage(histologyImage);
 					setLabelsImage(newLabelsImage);

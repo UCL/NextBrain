@@ -15,19 +15,19 @@ const getMatrix = async (
 
 	// fetch the txt file from remote server
 	if (type === "mri") {
-		fileUrl = `${baseAssetsUrl}/main/${patientId}/mri_rotated/matrices/block_${paddedBlock}.txt`;
+		fileUrl = `${baseAssetsUrl}${patientId}/mri_rotated/matrices/block_${paddedBlock}.txt`;
 	}
 
 	if (type === "mri_hr") {
-		fileUrl = `${baseAssetsUrl}/main/${patientId}/mri_rotated/matrices_hr/block_${paddedBlock}.txt`;
+		fileUrl = `${baseAssetsUrl}${patientId}/mri_rotated/matrices_hr/block_${paddedBlock}.txt`;
 	}
 
 	if (type === "histology") {
-		fileUrl = `${baseAssetsUrl}/main/${patientId}/histology/${paddedBlock}/matrix.txt`;
+		fileUrl = `${baseAssetsUrl}${patientId}/histology/${paddedBlock}/matrix.txt`;
 	}
 
 	if (type === "histology_hr") {
-		fileUrl = `${baseAssetsUrl}/main/${patientId}/histology_hr/${paddedBlock}/matrix.txt`;
+		fileUrl = `${baseAssetsUrl}${patientId}/histology_hr/${paddedBlock}/matrix.txt`;
 	}
 
 	const file = await fetch(fileUrl);

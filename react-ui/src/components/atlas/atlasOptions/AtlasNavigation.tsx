@@ -20,7 +20,7 @@ const AtlasNavigation: FC<Props> = (props) => {
 
 	useEffect(() => {
 		const getAtlasNavigationData = async () => {
-			const dataUrl = `${baseAssetsUrl}/main/${patientId}/image_ontology_hierarchical.json`;
+			const dataUrl = `${baseAssetsUrl}${patientId}/image_ontology_hierarchical.json`;
 
 			const file = await fetch(dataUrl);
 

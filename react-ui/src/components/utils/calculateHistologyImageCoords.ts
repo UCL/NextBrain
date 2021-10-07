@@ -138,7 +138,7 @@ const getCurrentBlock = async (
 	// need to wrap this in a try catch block
 	let npyFile;
 	try {
-		npyFile = `${baseAssetsUrl}/main/${patientId}/mri_rotated/indices_${currentMriPlane}/slice_${paddedSlice}.npy`;
+		npyFile = `${baseAssetsUrl}${patientId}/mri_rotated/indices_${currentMriPlane}/slice_${paddedSlice}.npy`;
 	} catch (e: any) {
 		throw new Error(e);
 	}

@@ -55,7 +55,7 @@ const getCurrentLabelNumber = async (
 
 	const histologyFolder = type === "lowRes" ? "histology" : "histology_hr";
 
-	const npzFile = `${baseAssetsUrl}/main/${patientId}/${histologyFolder}/${paddedBlock}/slices_labels_npz/slice_${paddedSlice}.npz`;
+	const npzFile = `${baseAssetsUrl}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels_npz/slice_${paddedSlice}.npz`;
 
 	console.log(npzFile);
 

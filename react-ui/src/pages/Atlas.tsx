@@ -13,7 +13,7 @@ import "./Atlas.css";
 
 const Atlas: FC = () => {
 	const [baseAssetsUrl, setBaseAssetsUrl] = useState(
-		"https://raw.githubusercontent.com/jhughes982/brainAtlas-P57-16"
+		"https://raw.githubusercontent.com/jhughes982/brainAtlas-P57-16/main/"
 	);
 	const [patientId, setPatientId] = useState("P57-16_updated");
 	const [channel, setChannel] = useState("LFB");
