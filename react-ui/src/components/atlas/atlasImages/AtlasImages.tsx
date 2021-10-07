@@ -29,7 +29,7 @@ interface Props {
 	setShowHiRes: (showHiRes: boolean) => void;
 	showLabels: boolean;
 	labelsTransparency: string;
-	setCurrentLabel: (currentLabel: CurrentLabel) => void;
+	setCurrentLabel: (currentLabel: CurrentLabel | null) => void;
 	centroid: Centroid | null;
 }
 
@@ -126,6 +126,8 @@ const AtlasImages: FC<Props> = (props) => {
 			histologyImageCoords: HistologyCoords,
 			type: string
 		) => {
+			setCurrentLabel(null);
+
 			const currentLabel = await histologyLabelParser(
 				currentHistologyMouseX,
 				currentHistologyMouseY,
