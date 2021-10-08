@@ -75,7 +75,6 @@ const getCurrentLabelNumber = async (
 	// we need to parse both the uint8array data and the uint16 array data from the zip
 	// we get the header info from the unit8 data
 	// and we get the actual npy array data from the uint16 data
-	// although it seems to work, this seems weird, so i'm probably just missing something
 
 	// create the header data from the uint8Array data
 	let headerData = new Uint8Array(unzippedArrayBuffer);
@@ -97,10 +96,13 @@ const getCurrentLabelNumber = async (
 	// process the array data accordingly
 	let ndArray = ndarray(npyData, header.shape);
 
-	// need to check if this is the right thing to do!!!
 	ndArray = await ndArray.transpose(1, 0);
 
+	console.log(mouseX, mouseY);
+
 	const currentLabelNumber = ndArray.get(mouseX.toFixed(0), mouseY.toFixed(0));
+
+	console.log(currentLabelNumber);
 
 	return currentLabelNumber;
 };

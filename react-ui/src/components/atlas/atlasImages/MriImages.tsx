@@ -17,7 +17,8 @@ interface Props {
 		currentSlice: number,
 		mouseX: number,
 		mouseY: number,
-		patientId: string
+		patientId: string,
+		fromHistology: boolean
 	) => void;
 }
 
@@ -54,7 +55,8 @@ const MriImages: FC<Props> = (props) => {
 			mriImageCoords![plane]["slice"],
 			mouseX,
 			mouseY,
-			patientId
+			patientId,
+			false
 		);
 	};
 

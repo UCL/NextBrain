@@ -60,6 +60,15 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		const newHistologySliceNumber =
 			(mouseY / scrollbarLength) * slicesInBlock - 1;
 
+		// need to reduce this repetition across the other function
+		if (
+			newHistologySliceNumber < 0 ||
+			newHistologySliceNumber > slicesInBlock
+		) {
+			console.log("cannot increment histology slice");
+			return;
+		}
+
 		try {
 			adjustHistologyCoordsFromScrollbar(newHistologySliceNumber);
 		} catch {
@@ -77,6 +86,9 @@ const HistologyScrollbar: FC<Props> = (props) => {
 			histologyImageCoords!.currentHistologySlice;
 		const newHistologySliceNumber = currentHistologySliceNumber + increment;
 
+		console.log(currentHistologySliceNumber);
+		console.log(currentHistologySliceNumber + increment);
+
 		if (
 			newHistologySliceNumber < 0 ||
 			newHistologySliceNumber > slicesInBlock
@@ -84,6 +96,8 @@ const HistologyScrollbar: FC<Props> = (props) => {
 			console.log("cannot increment histology slice");
 			return;
 		}
+
+		console.log(newHistologySliceNumber);
 
 		adjustHistologyCoordsFromScrollbar(newHistologySliceNumber);
 	};

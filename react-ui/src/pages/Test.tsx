@@ -142,91 +142,92 @@ const Atlas: FC = () => {
 	// 	runZipTest();
 	// }, []);
 
-	// useEffect(() => {
-	// 	const processNpzFile = async () => {
-	// 		let n = new npzAsArrayBuffer();
-	// 		let zip: any = new JSZip();
-
-	// 		let file =
-	// 			await require(`../assets/zip_test/final_test/slice_02_big_npz_compressed.npz`)
-	// 				.default;
-
-	// 		let npzArrayBuffer: any = await n.load(file); // returns raw contents as an unparsed array buffer
-	// 		console.log(npzArrayBuffer);
-
-	// 		let npzUint8Array: any = new Uint8Array(npzArrayBuffer); // parse the arrayBuffer as a uint8Array
-	// 		//console.log(npzUint8Array);
-
-	// 		let loadedZip: any = await zip.loadAsync(npzUint8Array!); // get all files in the zip
-	// 		//console.log(loadedZip);
-
-	// 		// parse the loaded zip as an arrayBuffer
-	// 		let unzippedArrayBuffer: any = await loadedZip
-	// 			.file("arr_0.npy")!
-	// 			.async("arraybuffer");
-	// 		//console.log(unzippedArrayBuffer);
-
-	// 		// we need to parse both the uint8array data and the uint16 array data from the zip
-	// 		// we get the header info from the unit8 data
-	// 		// and we get the actual npy array data from the uint16 data
-	// 		// although it seems to work, this seems weird, so i'm probably just missing something
-
-	// 		// create the header data from the uint8Array data
-	// 		let headerData: any = new Uint8Array(unzippedArrayBuffer);
-	// 		let hcontents = new TextDecoder("utf-8").decode(
-	// 			new Uint8Array(headerData.slice(10, 10 + 118))
-	// 		);
-	// 		var header = JSON.parse(
-	// 			hcontents
-	// 				.toLowerCase() // True -> true
-	// 				.replace(/'/g, '"')
-	// 				.replace("(", "[")
-	// 				.replace(/,*\),*/g, "]")
-	// 		);
-	// 		//console.log(header);
-
-	// 		// get the npy array data from the uint16array
-	// 		let npyData: any = new Uint16Array(unzippedArrayBuffer.slice(128));
-	// 		//console.log(npyData);
-
-	// 		// process the array data accordingly
-	// 		let ndArray = ndarray(npyData, header.shape);
-	// 		const label = ndArray.get(5000, 2906);
-	// 		console.log(label);
-	// 	};
-
-	// 	processNpzFile();
-	// }, []);
-
 	useEffect(() => {
 		const processNpzFile = async () => {
-			// const fileUrlJson =
-			// 	"https://raw.githubusercontent.com/jhughes982/brainAtlas-P57-16/main/WholeHemisphereFS.json";
+			let n = new npzAsArrayBuffer();
+			let zip: any = new JSZip();
 
-			// const fileJson = await fetch(fileUrlJson);
+			let file =
+				await require(`../assets/zip_test/final_test/block_38_slice_04.npz`)
+					.default;
 
-			// const parsedFile = await fileJson.json();
+			let npzArrayBuffer: any = await n.load(file); // returns raw contents as an unparsed array buffer
+			//console.log(npzArrayBuffer);
 
-			// console.log(parsedFile);
+			let npzUint8Array: any = new Uint8Array(npzArrayBuffer); // parse the arrayBuffer as a uint8Array
+			//console.log(npzUint8Array);
 
-			// const fileUrl =
-			// 	"https://raw.githubusercontent.com/jhughes982/brainAtlas-P57-16/main/slice_000.npy";
-			const fileUrl =
-				"https://raw.githubusercontent.com/jhughes982/brainAtlas-P57-16/main/P57-16/mri_rotated/indices_axial/slice_000.npy";
+			let loadedZip: any = await zip.loadAsync(npzUint8Array!); // get all files in the zip
+			//console.log(loadedZip);
 
-			const file = await fetch(fileUrl);
+			// parse the loaded zip as an arrayBuffer
+			let unzippedArrayBuffer: any = await loadedZip
+				.file("arr_0.npy")!
+				.async("arraybuffer");
+			//console.log(unzippedArrayBuffer);
 
-			//const parsedFile = await file.text();
+			// we need to parse both the uint8array data and the uint16 array data from the zip
+			// we get the header info from the unit8 data
+			// and we get the actual npy array data from the uint16 data
+			// although it seems to work, this seems weird, so i'm probably just missing something
 
-			let n = new npyjs();
+			// create the header data from the uint8Array data
+			let headerData: any = new Uint8Array(unzippedArrayBuffer);
+			let hcontents = new TextDecoder("utf-8").decode(
+				new Uint8Array(headerData.slice(10, 10 + 118))
+			);
+			var header = JSON.parse(
+				hcontents
+					.toLowerCase() // True -> true
+					.replace(/'/g, '"')
+					.replace("(", "[")
+					.replace(/,*\),*/g, "]")
+			);
+			console.log(header);
 
-			const npyArray = await n.load(fileUrl);
+			// get the npy array data from the uint16array
+			let npyData: any = new Uint16Array(unzippedArrayBuffer.slice(128));
 
-			console.log(npyArray);
+			// process the array data accordingly
+			let ndArray = ndarray(npyData, header.shape);
+			console.log(ndArray);
+
+			const label = ndArray.get(124, 300);
+			console.log(label);
 		};
 
 		processNpzFile();
 	}, []);
+
+	// useEffect(() => {
+	// 	const processNpzFile = async () => {
+	// 		// const fileUrlJson =
+	// 		// 	"https://raw.githubusercontent.com/jhughes982/brainAtlas-P57-16/main/WholeHemisphereFS.json";
+
+	// 		// const fileJson = await fetch(fileUrlJson);
+
+	// 		// const parsedFile = await fileJson.json();
+
+	// 		// console.log(parsedFile);
+
+	// 		// const fileUrl =
+	// 		// 	"https://raw.githubusercontent.com/jhughes982/brainAtlas-P57-16/main/slice_000.npy";
+	// 		const fileUrl =
+	// 			"https://raw.githubusercontent.com/jhughes982/brainAtlas-P57-16/main/P57-16/mri_rotated/indices_axial/slice_000.npy";
+
+	// 		const file = await fetch(fileUrl);
+
+	// 		//const parsedFile = await file.text();
+
+	// 		let n = new npyjs();
+
+	// 		const npyArray = await n.load(fileUrl);
+
+	// 		console.log(npyArray);
+	// 	};
+
+	// 	processNpzFile();
+	// }, []);
 
 	return (
 		<div>

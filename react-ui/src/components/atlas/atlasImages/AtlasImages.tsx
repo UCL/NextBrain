@@ -57,7 +57,8 @@ const AtlasImages: FC<Props> = (props) => {
 		currentMriSlice: number,
 		currentMriMouseX: number,
 		currentMriMouseY: number,
-		patientId: string
+		patientId: string,
+		fromHistology: boolean
 	) => {
 		console.log("----------");
 		console.log("BUILDING IMAGES");
@@ -92,6 +93,13 @@ const AtlasImages: FC<Props> = (props) => {
 
 		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
 
+		// if we are coming from histology then we dont need to recalculate the histology coords
+		// I should refactor this function so we separate out the recalculation steps
+		// or maybe this is ok as it is??
+		// at least refactor so that the flag isnt a boolean (or just make it more explicit by setting a variable)
+		if (fromHistology) return;
+
+		// perhaps we dont run this if we are navigating via the scrollbar??
 		const newHistologyCoords = await calculateHistologyImageCoords(
 			currentMriPlane,
 			currentMriSlice,
@@ -150,7 +158,7 @@ const AtlasImages: FC<Props> = (props) => {
 			try {
 				// args: plane, slice, currentMriMouseX, currentMriMouseY
 				// I should pass the argument as an object to make it more clear
-				await updateAtlasImages("axial", 124, 149, 357, patientId);
+				await updateAtlasImages("axial", 124, 149, 357, patientId, false);
 			} catch {
 				setError("error building atlas");
 			}
@@ -198,7 +206,8 @@ const AtlasImages: FC<Props> = (props) => {
 				Number(resultZ.toFixed(0)),
 				Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
 				Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
-				patientId
+				patientId,
+				false
 			);
 		}
 	}, [centroid, patientId]);
@@ -234,11 +243,21 @@ const AtlasImages: FC<Props> = (props) => {
 			Number(resultZ.toFixed(0)),
 			Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
 			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
-			patientId
+			patientId,
+			false
 		);
+		// I need to refactor this so the flag at the bottom is true!!!
+		// this will require a bit of effort but it should be the way I do things!!!
+		// doing this will stop the application from jumping around when you click in certain areas
+		// so the idea is to update histology and mri separately, but still have them in sync
+
+		// this is what I should be doing here
+		// setHistologyImageCoords(newHistologyCoords as HistologyCoords);
 	};
 
 	const adjustHistologyCoordsFromScrollbar = async (newSliceNumber: number) => {
+		console.log(newSliceNumber);
+
 		const matrix = await getMatrix(
 			histologyImageCoords!.currentHistologyBlock,
 			"histology",
@@ -261,8 +280,16 @@ const AtlasImages: FC<Props> = (props) => {
 			Number(resultZ.toFixed(0)),
 			Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
 			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
-			patientId
+			patientId,
+			true
 		);
+
+		// an alternative method - but mri planes do not update alongside
+		const newHistologyCoords = { ...histologyImageCoords };
+		newHistologyCoords.currentHistologySlice = +newSliceNumber.toFixed(0);
+
+		console.log(newHistologyCoords);
+		setHistologyImageCoords(newHistologyCoords as HistologyCoords);
 	};
 
 	if (mriImageCoords === null || histologyImageCoords === null) {
