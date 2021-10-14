@@ -16,7 +16,7 @@ const MainNavigation = () => {
 
 					<li>
 						<NavLink to="/atlas" activeClassName="active">
-							See Atlas
+							Atlas
 						</NavLink>
 					</li>
 

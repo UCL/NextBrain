@@ -2,17 +2,5 @@
 	padding: 10px;
 	margin: 3rem auto;
 	width: 90vw;
-	/* border: 1px solid black; */
-}
-
-@media (min-width: 1400px) {
-	.main {
-		transform: scale(0.8);
-	}
-}
-
-@media (min-width: 1800px) {
-	.main {
-		transform: scale(1);
-	}
+	/* border: 1px solid white; */
 }
