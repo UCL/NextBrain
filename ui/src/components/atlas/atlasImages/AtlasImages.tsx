@@ -57,8 +57,7 @@ const AtlasImages: FC<Props> = (props) => {
 		currentMriSlice: number,
 		currentMriMouseX: number,
 		currentMriMouseY: number,
-		patientId: string,
-		fromHistology: boolean
+		patientId: string
 	) => {
 		console.log("----------");
 		console.log("BUILDING IMAGES");
@@ -98,9 +97,6 @@ const AtlasImages: FC<Props> = (props) => {
 			currentMriSlice,
 			currentMriMouseX,
 			currentMriMouseY,
-			adjustedMriSlice!,
-			adjustedMriMouseX!,
-			adjustedMriMouseY!,
 			newMriCoords!,
 			patientId,
 			baseAssetsUrl
@@ -124,12 +120,9 @@ const AtlasImages: FC<Props> = (props) => {
 		currentMriPlane: string,
 		currentMriSlice: number,
 		currentMriMouseX: number,
-		currentMriMouseY: number,
-		patientId: string,
-		fromHistology: boolean
+		currentMriMouseY: number
 	) => {
-		console.log("----------");
-		console.log("BUILDING IMAGES");
+		console.log("BUILDING MRI IMAGES");
 
 		const { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY } =
 			calculateAdjustedMriCoords(
@@ -193,7 +186,7 @@ const AtlasImages: FC<Props> = (props) => {
 			try {
 				// args: plane, slice, currentMriMouseX, currentMriMouseY
 				// I should pass the argument as an object to make it more clear
-				await updateAtlasImages("axial", 124, 149, 357, patientId, false);
+				await updateAtlasImages("axial", 124, 149, 357, patientId);
 			} catch {
 				setError("error building atlas");
 			}
@@ -241,8 +234,7 @@ const AtlasImages: FC<Props> = (props) => {
 				Number(resultZ.toFixed(0)),
 				Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
 				Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
-				patientId,
-				false
+				patientId
 			);
 		}
 	}, [centroid, patientId]);
@@ -251,7 +243,8 @@ const AtlasImages: FC<Props> = (props) => {
 		currentHistologyMouseX: number,
 		currentHistologyMouseY: number
 	) => {
-		console.log("getting coordinates from histology to mri");
+		// first we calculate new mri coords based on the current histology coords
+		// then below we set the current histology coords based on the mouseX and mouseY positions
 
 		const histologyFolder = showHiRes ? "histology_hr" : "histology";
 
@@ -265,12 +258,20 @@ const AtlasImages: FC<Props> = (props) => {
 		const newMriCoords = matrixMultiplier(matrix, [
 			currentHistologyMouseY,
 			currentHistologyMouseX,
-			Number(histologyImageCoords!.currentHistologySlice),
+			histologyImageCoords!.currentHistologySlice,
 			1,
 		]);
 
 		const { resultX, resultY, resultZ } = newMriCoords;
 
+		updateMriImagesHandler(
+			"axial",
+			+resultZ.toFixed(0),
+			+mriCoordinatesKey.axial.width - +resultX.toFixed(0),
+			+mriCoordinatesKey.axial.height - +resultY.toFixed(0)
+		);
+
+		// calculate new histology coords
 		const newHistologyCoords = { ...histologyImageCoords };
 
 		if (showHiRes) {
@@ -282,15 +283,6 @@ const AtlasImages: FC<Props> = (props) => {
 		}
 
 		setHistologyImageCoords(newHistologyCoords as HistologyCoords);
-
-		updateMriImagesHandler(
-			"axial",
-			Number(resultZ.toFixed(0)),
-			Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
-			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
-			patientId,
-			false
-		);
 	};
 
 	const adjustHistologyCoordsFromScrollbar = async (newSliceNumber: number) => {
@@ -314,9 +306,7 @@ const AtlasImages: FC<Props> = (props) => {
 			"axial",
 			Number(resultZ.toFixed(0)),
 			Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
-			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
-			patientId,
-			false
+			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0))
 		);
 
 		const newHistologyCoords = { ...histologyImageCoords };

@@ -1,4 +1,5 @@
-// a helper function that load in a matrix txt file
+// a helper function that loads in a matrix txt file
+// we multiply the matrix by a vector point (i.e. our image coords) to get a new set of coords
 
 const getMatrix = async (
 	currentBlock: number,

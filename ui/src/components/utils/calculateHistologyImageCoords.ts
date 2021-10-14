@@ -4,6 +4,7 @@ import ndarray from "ndarray";
 import getMatrix from "./getMatrix";
 import matrixMultiplier from "./matrixMultiplier";
 import histologyCoordinatesKey from "./histologyCoordinatesKey";
+import mriCoordinatesKey from "./mriCoordinatesKey";
 
 import { MriCoords } from "../../models/mriCoords.model";
 
@@ -12,9 +13,6 @@ const calculateHistologyImageCoords = async (
 	currentMriSlice: number,
 	currentMriMouseX: number,
 	currentMriMouseY: number,
-	adjustedMriSlice: number,
-	adjustedMriMouseX: number,
-	adjustedMriMouseY: number,
 	newMriCoords: MriCoords,
 	patientId: string,
 	baseAssetsUrl: string
@@ -24,9 +22,6 @@ const calculateHistologyImageCoords = async (
 		currentMriSlice,
 		currentMriMouseX,
 		currentMriMouseY,
-		adjustedMriSlice,
-		adjustedMriMouseX,
-		adjustedMriMouseY,
 		patientId,
 		baseAssetsUrl
 	);
@@ -122,9 +117,6 @@ const getCurrentBlock = async (
 	currentMriSlice: number,
 	currentMriMouseX: number,
 	currentMriMouseY: number,
-	adjustedMriSlice: number,
-	adjustedMriMouseX: number,
-	adjustedMriMouseY: number,
 	patientId: string,
 	baseAssetsUrl: string
 ) => {
@@ -168,7 +160,7 @@ const getCurrentBlock = async (
 		// since its been flipped, we dont need to take the adjustedMriMouseX... we just take the normal currentMriMouseX
 		currentBlock = ndArray.get(
 			currentMriMouseX,
-			ndArray.shape[1] - adjustedMriMouseY
+			ndArray.shape[1] - (+mriCoordinatesKey.sagittal.height - currentMriMouseY)
 		);
 	}
 
