@@ -93,13 +93,6 @@ const AtlasImages: FC<Props> = (props) => {
 
 		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
 
-		// if we are coming from histology then we dont need to recalculate the histology coords
-		// I should refactor this function so we separate out the recalculation steps
-		// or maybe this is ok as it is??
-		// at least refactor so that the flag isnt a boolean (or just make it more explicit by setting a variable)
-		if (fromHistology) return;
-
-		// perhaps we dont run this if we are navigating via the scrollbar??
 		const newHistologyCoords = await calculateHistologyImageCoords(
 			currentMriPlane,
 			currentMriSlice,
@@ -278,21 +271,6 @@ const AtlasImages: FC<Props> = (props) => {
 
 		const { resultX, resultY, resultZ } = newMriCoords;
 
-		// axial is picked arbitrarily here
-		// it could be any of the planes as long as the order of params is entered correctly
-		// updateAtlasImages(
-		// 	"axial",
-		// 	Number(resultZ.toFixed(0)),
-		// 	Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
-		// 	Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
-		// 	patientId,
-		// 	true
-		// );
-		// I need to refactor this so the flag at the bottom is true!!!
-		// this will require a bit of effort but it should be the way I do things!!!
-		// doing this will stop the application from jumping around when you click in certain areas
-		// so the idea is to update histology and mri separately, but still have them in sync
-
 		const newHistologyCoords = { ...histologyImageCoords };
 
 		if (showHiRes) {
@@ -303,7 +281,6 @@ const AtlasImages: FC<Props> = (props) => {
 			newHistologyCoords.coordsLowRes!.mouseY = currentHistologyMouseY;
 		}
 
-		// this is what I should be doing here
 		setHistologyImageCoords(newHistologyCoords as HistologyCoords);
 
 		updateMriImagesHandler(
@@ -333,16 +310,6 @@ const AtlasImages: FC<Props> = (props) => {
 
 		const { resultX, resultY, resultZ } = coords;
 
-		// axial is picked arbitrarily here, it could be any of the planes
-		// updateAtlasImages(
-		// 	"axial",
-		// 	Number(resultZ.toFixed(0)),
-		// 	Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
-		// 	Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
-		// 	patientId,
-		// 	true
-		// );
-
 		updateMriImagesHandler(
 			"axial",
 			Number(resultZ.toFixed(0)),
@@ -352,7 +319,6 @@ const AtlasImages: FC<Props> = (props) => {
 			false
 		);
 
-		// an alternative method - but mri planes do not update alongside
 		const newHistologyCoords = { ...histologyImageCoords };
 		newHistologyCoords.currentHistologySlice = +newSliceNumber.toFixed(0);
 
