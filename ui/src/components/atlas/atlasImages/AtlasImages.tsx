@@ -59,44 +59,17 @@ const AtlasImages: FC<Props> = (props) => {
 		currentMriMouseY: number,
 		patientId: string
 	) => {
-		console.log("----------");
-		console.log("BUILDING IMAGES");
-
-		const { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY } =
-			calculateAdjustedMriCoords(
-				currentMriPlane,
-				currentMriSlice,
-				currentMriMouseX,
-				currentMriMouseY
-			);
-
-		logMriCoordsForDebugging(
+		const newMriCoords = updateMriImagesHandler(
 			currentMriPlane,
 			currentMriSlice,
 			currentMriMouseX,
-			currentMriMouseY,
-			adjustedMriSlice!,
-			adjustedMriMouseX!,
-			adjustedMriMouseY!
-		);
-
-		const newMriCoords = calculateMriImageCoords(
-			currentMriPlane,
-			currentMriSlice,
-			currentMriMouseX,
-			currentMriMouseY,
-			adjustedMriSlice!,
-			adjustedMriMouseX!,
-			adjustedMriMouseY!
+			currentMriMouseY
 		);
 
 		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
 
 		const newHistologyCoords = await calculateHistologyImageCoords(
 			currentMriPlane,
-			currentMriSlice,
-			currentMriMouseX,
-			currentMriMouseY,
 			newMriCoords!,
 			patientId,
 			baseAssetsUrl
@@ -152,7 +125,7 @@ const AtlasImages: FC<Props> = (props) => {
 			adjustedMriMouseY!
 		);
 
-		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
+		return newMriCoords;
 	};
 
 	const setCurrentLabelHandler = useCallback(
@@ -179,8 +152,8 @@ const AtlasImages: FC<Props> = (props) => {
 		[setCurrentLabel, patientId, baseAssetsUrl]
 	);
 
+	// initialize mri panels based on an arbitrary starting point
 	useEffect(() => {
-		// initialize mri panels based on an arbitrary starting point
 		const buildAtlas = async () => {
 			setIsLoading(true);
 			try {
@@ -196,6 +169,7 @@ const AtlasImages: FC<Props> = (props) => {
 		buildAtlas();
 	}, [patientId]);
 
+	// sets the current label every time new coords are detected
 	// needs refactoring
 	useEffect(() => {
 		const type = showHiRes ? "hiRes" : "lowRes";
@@ -223,6 +197,7 @@ const AtlasImages: FC<Props> = (props) => {
 		}
 	}, [histologyImageCoords, mriImageCoords, setCurrentLabelHandler, showHiRes]);
 
+	// sets the mri and histology coords when navigating from the drop-down list
 	useEffect(() => {
 		if (centroid != null) {
 			const resultX = centroid.resultX;
@@ -255,21 +230,23 @@ const AtlasImages: FC<Props> = (props) => {
 			baseAssetsUrl
 		);
 
-		const newMriCoords = matrixMultiplier(matrix, [
+		const singleMriCoord = matrixMultiplier(matrix, [
 			currentHistologyMouseY,
 			currentHistologyMouseX,
 			histologyImageCoords!.currentHistologySlice,
 			1,
 		]);
 
-		const { resultX, resultY, resultZ } = newMriCoords;
+		const { resultX, resultY, resultZ } = singleMriCoord;
 
-		updateMriImagesHandler(
+		const newMriCoords = updateMriImagesHandler(
 			"axial",
 			+resultZ.toFixed(0),
 			+mriCoordinatesKey.axial.width - +resultX.toFixed(0),
 			+mriCoordinatesKey.axial.height - +resultY.toFixed(0)
 		);
+
+		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
 
 		// calculate new histology coords
 		const newHistologyCoords = { ...histologyImageCoords };
@@ -293,21 +270,23 @@ const AtlasImages: FC<Props> = (props) => {
 			baseAssetsUrl
 		);
 
-		const coords = matrixMultiplier(matrix, [
+		const singleMriCoord = matrixMultiplier(matrix, [
 			histologyImageCoords!.coordsLowRes.mouseY,
 			histologyImageCoords!.coordsLowRes.mouseX,
 			+newSliceNumber.toFixed(0),
 			1,
 		]);
 
-		const { resultX, resultY, resultZ } = coords;
+		const { resultX, resultY, resultZ } = singleMriCoord;
 
-		updateMriImagesHandler(
+		const newMriCoords = updateMriImagesHandler(
 			"axial",
 			Number(resultZ.toFixed(0)),
 			Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
 			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0))
 		);
+
+		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
 
 		const newHistologyCoords = { ...histologyImageCoords };
 		newHistologyCoords.currentHistologySlice = +newSliceNumber.toFixed(0);

@@ -51,7 +51,7 @@ const MriImages: FC<Props> = (props) => {
 
 		updateAtlasImages(
 			plane,
-			mriImageCoords![plane]["slice"],
+			+mriImageCoords![plane]["slice"],
 			mouseX,
 			mouseY,
 			patientId

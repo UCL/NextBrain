@@ -10,18 +10,19 @@ import { MriCoords } from "../../models/mriCoords.model";
 
 const calculateHistologyImageCoords = async (
 	currentMriPlane: string,
-	currentMriSlice: number,
-	currentMriMouseX: number,
-	currentMriMouseY: number,
 	newMriCoords: MriCoords,
 	patientId: string,
 	baseAssetsUrl: string
 ) => {
+	const currentMriMouseX = newMriCoords[currentMriPlane]["mouseX"];
+	const currentMriMouseY = newMriCoords[currentMriPlane]["mouseY"];
+	const currentMriSlice = newMriCoords[currentMriPlane]["slice"];
+
 	const currentBlock = await getCurrentBlock(
 		currentMriPlane,
-		currentMriSlice,
 		currentMriMouseX,
 		currentMriMouseY,
+		currentMriSlice,
 		patientId,
 		baseAssetsUrl
 	);
@@ -114,9 +115,9 @@ const validateCoords = (
 
 const getCurrentBlock = async (
 	currentMriPlane: string,
-	currentMriSlice: number,
 	currentMriMouseX: number,
 	currentMriMouseY: number,
+	currentMriSlice: number,
 	patientId: string,
 	baseAssetsUrl: string
 ) => {
@@ -125,9 +126,8 @@ const getCurrentBlock = async (
 
 	console.log("current slice: " + currentMriSlice);
 
-	const paddedSlice = currentMriSlice.toFixed(0).toString().padStart(3, "0");
+	const paddedSlice = currentMriSlice.toFixed(0).padStart(3, "0");
 
-	// need to wrap this in a try catch block
 	let npyFile;
 	try {
 		npyFile = `${baseAssetsUrl}${patientId}/mri_rotated/indices_${currentMriPlane}/slice_${paddedSlice}.npy`;
