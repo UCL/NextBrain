@@ -1,11 +1,12 @@
 import { FC, memo, useEffect, useState } from "react";
 import DropdownTreeSelect from "react-dropdown-tree-select";
 
+import { ASSETS_URL } from "../../utils/ASSETS_URL";
+
 import "react-dropdown-tree-select/dist/styles.css";
 import "./AtlasNavigation.css";
 
 interface Props {
-	baseAssetsUrl: string;
 	patientId: string;
 	getCentroid: (blockNumber: number) => void;
 	showHiRes: boolean;
@@ -15,12 +16,11 @@ interface Props {
 const AtlasNavigation: FC<Props> = (props) => {
 	const [atlasNavigationData, setAtlasNavigationData] = useState<any>(null);
 
-	const { baseAssetsUrl, patientId, getCentroid, showHiRes, setShowHiRes } =
-		props;
+	const { patientId, getCentroid, showHiRes, setShowHiRes } = props;
 
 	useEffect(() => {
 		const getAtlasNavigationData = async () => {
-			const dataUrl = `${baseAssetsUrl}${patientId}/image_ontology_hierarchical.json`;
+			const dataUrl = `${ASSETS_URL}${patientId}/image_ontology_hierarchical.json`;
 
 			const file = await fetch(dataUrl);
 
@@ -30,7 +30,7 @@ const AtlasNavigation: FC<Props> = (props) => {
 		};
 
 		getAtlasNavigationData();
-	}, [patientId, baseAssetsUrl]);
+	}, [patientId]);
 
 	const onChange = (currentNode: any, selectedNodes: any) => {
 		if (showHiRes) setShowHiRes(false);

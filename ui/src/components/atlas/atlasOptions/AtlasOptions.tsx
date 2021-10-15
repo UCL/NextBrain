@@ -13,7 +13,6 @@ import { CurrentLabel } from "../../../models/label.model";
 import "./AtlasOptions.css";
 
 interface Props {
-	baseAssetsUrl: string;
 	patientId: string;
 	setPatientId: (patientId: string) => void;
 	channel: string;
@@ -30,7 +29,6 @@ interface Props {
 
 const AtlasOptions: FC<Props> = (props) => {
 	const {
-		baseAssetsUrl,
 		patientId,
 		setPatientId,
 		channel,
@@ -50,7 +48,6 @@ const AtlasOptions: FC<Props> = (props) => {
 			<PatientSelect patientId={patientId} setPatientId={setPatientId} />
 
 			<AtlasNavigation
-				baseAssetsUrl={baseAssetsUrl}
 				patientId={patientId}
 				getCentroid={getCentroid}
 				showHiRes={showHiRes}

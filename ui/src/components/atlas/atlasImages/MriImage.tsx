@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 
+import { ASSETS_URL } from "../../utils/ASSETS_URL";
 import ErrorModal from "../../shared/ErrorModal";
 import MousePointer from "../../shared/MousePointer";
 
@@ -8,7 +9,6 @@ import { MriCoords } from "../../../models/mriCoords.model";
 import "./MriImage.css";
 
 interface Props {
-	baseAssetsUrl: string;
 	patientId: string;
 	plane: string;
 	mriImageCoords: MriCoords | null;
@@ -23,13 +23,7 @@ const MriImage: FC<Props> = (props) => {
 	const [mriImage, setMriImage] = useState("");
 	const [currentSlice, setCurrentSlice] = useState("");
 
-	const {
-		baseAssetsUrl,
-		patientId,
-		plane,
-		mriImageCoords,
-		computeMriImagesHandler,
-	} = props;
+	const { patientId, plane, mriImageCoords, computeMriImagesHandler } = props;
 
 	useEffect(() => {
 		// determine the correct mri image based on computed coordinates
@@ -39,7 +33,7 @@ const MriImage: FC<Props> = (props) => {
 			.padStart(3, "0");
 
 		try {
-			const mriImage = `${baseAssetsUrl}${patientId}/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`;
+			const mriImage = `${ASSETS_URL}${patientId}/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`;
 
 			setMriImage(mriImage);
 			setCurrentSlice(paddedSlice);
@@ -49,7 +43,7 @@ const MriImage: FC<Props> = (props) => {
 				"color: red"`
 			);
 		}
-	}, [mriImageCoords, plane, patientId, baseAssetsUrl]);
+	}, [mriImageCoords, plane, patientId]);
 
 	if (mriImage === null || currentSlice === null) {
 		return <div>Could not build mri image</div>;

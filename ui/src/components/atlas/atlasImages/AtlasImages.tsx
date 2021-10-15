@@ -22,7 +22,6 @@ import { Centroid } from "../../../models/centroid.model";
 import "./AtlasImages.css";
 
 interface Props {
-	baseAssetsUrl: string;
 	patientId: string;
 	channel: string;
 	showHiRes: boolean;
@@ -41,7 +40,6 @@ const AtlasImages: FC<Props> = (props) => {
 		useState<HistologyCoords | null>(null);
 
 	const {
-		baseAssetsUrl,
 		patientId,
 		channel,
 		showHiRes,
@@ -71,8 +69,7 @@ const AtlasImages: FC<Props> = (props) => {
 		const newHistologyCoords = await calculateHistologyImageCoords(
 			currentMriPlane,
 			newMriCoords!,
-			patientId,
-			baseAssetsUrl
+			patientId
 		);
 		console.log("histology image coords: ", newHistologyCoords);
 
@@ -143,13 +140,12 @@ const AtlasImages: FC<Props> = (props) => {
 				currentHistologyMouseY,
 				histologyImageCoords,
 				type,
-				patientId,
-				baseAssetsUrl
+				patientId
 			);
 
 			setCurrentLabel(currentLabel);
 		},
-		[setCurrentLabel, patientId, baseAssetsUrl]
+		[setCurrentLabel, patientId]
 	);
 
 	// initialize mri panels based on an arbitrary starting point
@@ -226,8 +222,7 @@ const AtlasImages: FC<Props> = (props) => {
 		const matrix = await getMatrix(
 			histologyImageCoords!.currentHistologyBlock,
 			histologyFolder,
-			patientId,
-			baseAssetsUrl
+			patientId
 		);
 
 		const singleMriCoord = matrixMultiplier(matrix, [
@@ -266,8 +261,7 @@ const AtlasImages: FC<Props> = (props) => {
 		const matrix = await getMatrix(
 			histologyImageCoords!.currentHistologyBlock,
 			"histology",
-			patientId,
-			baseAssetsUrl
+			patientId
 		);
 
 		const singleMriCoord = matrixMultiplier(matrix, [
@@ -311,7 +305,6 @@ const AtlasImages: FC<Props> = (props) => {
 			{isLoading && <LoadingSpinner asOverlay />}
 
 			<MriImages
-				baseAssetsUrl={baseAssetsUrl}
 				patientId={patientId}
 				mriImageCoords={mriImageCoords}
 				showHiRes={showHiRes}
@@ -320,7 +313,6 @@ const AtlasImages: FC<Props> = (props) => {
 			/>
 
 			<HistologyImage
-				baseAssetsUrl={baseAssetsUrl}
 				patientId={patientId}
 				histologyImageCoords={histologyImageCoords}
 				channel={channel}

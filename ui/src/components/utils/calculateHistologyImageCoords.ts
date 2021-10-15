@@ -5,14 +5,14 @@ import getMatrix from "./getMatrix";
 import matrixMultiplier from "./matrixMultiplier";
 import histologyCoordinatesKey from "./histologyCoordinatesKey";
 import mriCoordinatesKey from "./mriCoordinatesKey";
+import { ASSETS_URL } from "./ASSETS_URL";
 
 import { MriCoords } from "../../models/mriCoords.model";
 
 const calculateHistologyImageCoords = async (
 	currentMriPlane: string,
 	newMriCoords: MriCoords,
-	patientId: string,
-	baseAssetsUrl: string
+	patientId: string
 ) => {
 	const currentMriMouseX = newMriCoords[currentMriPlane]["mouseX"];
 	const currentMriMouseY = newMriCoords[currentMriPlane]["mouseY"];
@@ -23,26 +23,15 @@ const calculateHistologyImageCoords = async (
 		currentMriMouseX,
 		currentMriMouseY,
 		currentMriSlice,
-		patientId,
-		baseAssetsUrl
+		patientId
 	);
 
 	console.log("current block: " + currentBlock);
 
 	if (currentBlock === 0 || currentBlock === undefined) return "no block found";
 
-	const matrixLowRes = await getMatrix(
-		currentBlock,
-		"mri",
-		patientId,
-		baseAssetsUrl
-	);
-	const matrixHiRes = await getMatrix(
-		currentBlock,
-		"mri_hr",
-		patientId,
-		baseAssetsUrl
-	);
+	const matrixLowRes = await getMatrix(currentBlock, "mri", patientId);
+	const matrixHiRes = await getMatrix(currentBlock, "mri_hr", patientId);
 
 	if (matrixLowRes === undefined || matrixHiRes === undefined)
 		return "no matrix found";
@@ -118,8 +107,7 @@ const getCurrentBlock = async (
 	currentMriMouseX: number,
 	currentMriMouseY: number,
 	currentMriSlice: number,
-	patientId: string,
-	baseAssetsUrl: string
+	patientId: string
 ) => {
 	let currentBlock;
 	let n = new npyjs();
@@ -130,7 +118,7 @@ const getCurrentBlock = async (
 
 	let npyFile;
 	try {
-		npyFile = `${baseAssetsUrl}${patientId}/mri_rotated/indices_${currentMriPlane}/slice_${paddedSlice}.npy`;
+		npyFile = `${ASSETS_URL}${patientId}/mri_rotated/indices_${currentMriPlane}/slice_${paddedSlice}.npy`;
 	} catch (e: any) {
 		throw new Error(e);
 	}

@@ -5,13 +5,13 @@ import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
 import MousePointer from "../../shared/MousePointer";
 import getMouseCoords from "../../utils/getmouseCoords";
+import { ASSETS_URL } from "../../utils/ASSETS_URL";
 
 import { HistologyCoords } from "../../../models/histologyCoords.model";
 
 import "./HistologyImage.css";
 
 interface Props {
-	baseAssetsUrl: string;
 	patientId: string;
 	histologyImageCoords: HistologyCoords | null;
 	showHiRes: boolean;
@@ -34,7 +34,6 @@ const HistologyImage: FC<Props> = (props) => {
 	} | null>(null);
 
 	const {
-		baseAssetsUrl,
 		patientId,
 		histologyImageCoords,
 		showHiRes,
@@ -62,8 +61,8 @@ const HistologyImage: FC<Props> = (props) => {
 				try {
 					setIsLoading(true);
 
-					const histologyImage = `${baseAssetsUrl}${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.${histologyFileExtension}`;
-					const newLabelsImage = `${baseAssetsUrl}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.${labelsFileExtension}`;
+					const histologyImage = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.${histologyFileExtension}`;
+					const newLabelsImage = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.${labelsFileExtension}`;
 
 					setHistologyImage(histologyImage);
 					setLabelsImage(newLabelsImage);
@@ -84,14 +83,7 @@ const HistologyImage: FC<Props> = (props) => {
 		};
 
 		fetchHistologyImage();
-	}, [
-		histologyImageCoords,
-		showHiRes,
-		channel,
-		patientId,
-		baseAssetsUrl,
-		histologyImage,
-	]);
+	}, [histologyImageCoords, showHiRes, channel, patientId, histologyImage]);
 
 	// take the current histology coords and calculate scaled mouseX and mouseY
 	// this is to account for the fact that we scale the histology image with css using the max-height property

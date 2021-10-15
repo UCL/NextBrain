@@ -12,9 +12,6 @@ import { Centroid } from "../models/centroid.model";
 import "./Atlas.css";
 
 const Atlas: FC = () => {
-	const [baseAssetsUrl, setBaseAssetsUrl] = useState(
-		"https://raw.githubusercontent.com/jhughes982/brainAtlas-P57-16/main/"
-	);
 	const [patientId, setPatientId] = useState("P57-16_updated");
 	const [channel, setChannel] = useState("LFB");
 	const [showHiRes, setShowHiRes] = useState(false);
@@ -29,8 +26,7 @@ const Atlas: FC = () => {
 			const matrix = await getMatrix(
 				navCoords!.blockNumber,
 				"histology",
-				patientId,
-				baseAssetsUrl
+				patientId
 			);
 
 			// why is the order of params here different compared to the function that handles physical clicks?
@@ -52,7 +48,6 @@ const Atlas: FC = () => {
 	return (
 		<main className="atlas-container">
 			<AtlasImages
-				baseAssetsUrl={baseAssetsUrl}
 				patientId={patientId}
 				channel={channel}
 				showHiRes={showHiRes}
@@ -64,7 +59,6 @@ const Atlas: FC = () => {
 			/>
 
 			<AtlasOptions
-				baseAssetsUrl={baseAssetsUrl}
 				patientId={patientId}
 				setPatientId={setPatientId}
 				channel={channel}
