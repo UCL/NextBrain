@@ -56,13 +56,14 @@ const HistologyImage: FC<Props> = (props) => {
 				const paddedSlice = histologySlice.toString().padStart(2, "0");
 
 				const histologyFolder = showHiRes ? "histology_hr" : "histology";
-				const fileExtension = showHiRes ? "webp" : "jpg";
+				const histologyFileExtension = showHiRes ? "webp" : "jpg";
+				const labelsFileExtension = showHiRes ? "webp" : "png";
 
 				try {
 					setIsLoading(true);
 
-					const histologyImage = `${baseAssetsUrl}${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.${fileExtension}`;
-					const newLabelsImage = `${baseAssetsUrl}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.png`;
+					const histologyImage = `${baseAssetsUrl}${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.${histologyFileExtension}`;
+					const newLabelsImage = `${baseAssetsUrl}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.${labelsFileExtension}`;
 
 					setHistologyImage(histologyImage);
 					setLabelsImage(newLabelsImage);

@@ -38,6 +38,7 @@ const Atlas: FC = () => {
 						href="https://www.nature.com/articles/s41598-020-69163-z"
 						target="_blank"
 						rel="noopener noreferrer"
+						className="reference"
 					>
 						Mancini, Matteo, Adrià Casamitjana, Loic Peter, Eleanor Robinson,
 						Shauna Crampsie, David L. Thomas, Janice L. Holton, Zane
@@ -52,6 +53,7 @@ const Atlas: FC = () => {
 						href="https://cordis.europa.eu/project/id/677697"
 						target="_blank"
 						rel="noopener noreferrer"
+						className="reference"
 					>
 						(Starting Grant 677696, project "BUNGEE-TOOLS")
 					</a>

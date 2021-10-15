@@ -34,10 +34,8 @@ const MriImage: FC<Props> = (props) => {
 	useEffect(() => {
 		// determine the correct mri image based on computed coordinates
 
-		// is toString() necessary here?
 		const paddedSlice = mriImageCoords![plane]?.slice
 			.toFixed(0)
-			.toString()
 			.padStart(3, "0");
 
 		try {
