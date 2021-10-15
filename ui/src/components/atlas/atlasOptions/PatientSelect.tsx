@@ -22,7 +22,7 @@ const PatientSelect: FC<Props> = (props) => {
 					setPatientId(e.target.value);
 				}}
 			>
-				<option value="P57-16_updated">P57-16</option>
+				<option value="BrainAtlas-P57-16/main/P57-16_updated">P57-16</option>
 				<option disabled value="null">
 					More patients coming soon
 				</option>
