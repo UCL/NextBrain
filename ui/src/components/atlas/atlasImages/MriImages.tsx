@@ -72,7 +72,6 @@ const MriImages: FC<Props> = (props) => {
 		}
 
 		if (plane === "coronal") {
-			// account for coronal rescaling
 			if (
 				mouseX > +mriCoordinatesKey.coronal.width - 1 ||
 				mouseY > +mriCoordinatesKey.coronal.height - 1

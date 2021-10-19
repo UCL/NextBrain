@@ -285,7 +285,6 @@ const AtlasImages: FC<Props> = (props) => {
 		const newHistologyCoords = { ...histologyImageCoords };
 		newHistologyCoords.currentHistologySlice = +newSliceNumber.toFixed(0);
 
-		console.log(newHistologyCoords);
 		setHistologyImageCoords(newHistologyCoords as HistologyCoords);
 	};
 
