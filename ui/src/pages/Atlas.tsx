@@ -8,8 +8,8 @@ import matrixMultiplier from "../components/utils/matrixMultiplier";
 import { ASSETS_URL } from "../components/utils/ASSETS_URL";
 
 import { CurrentLabel } from "../models/label.model";
-import { Centroid } from "../models/centroid.model";
 import { AtlasImagesDimensionsKey } from "../models/atlasImagesDimensionsKey.model";
+import { NavPanelCoords } from "../models/navPanelCoords.model";
 
 import "./Atlas.css";
 
@@ -20,7 +20,9 @@ const Atlas: FC = () => {
 	const [showLabels, setShowLabels] = useState(false);
 	const [labelsTransparency, setLabelsTransparency] = useState("0.5");
 	const [currentLabel, setCurrentLabel] = useState<CurrentLabel | null>(null);
-	const [centroid, setCentroid] = useState<Centroid | null>(null);
+	const [navPanelCoords, setNavPanelCoords] = useState<NavPanelCoords | null>(
+		null
+	);
 	const [atlasImagesDimensionsKey, setAtlasImagesDimensionsKey] =
 		useState<AtlasImagesDimensionsKey | null>(null);
 
@@ -49,8 +51,6 @@ const Atlas: FC = () => {
 				histologyHiResDimensions: histologyHiResDimensionsKeyFile,
 			};
 
-			console.log(atlasImagesDimensionsKey);
-
 			setAtlasImagesDimensionsKey(atlasImagesDimensionsKey);
 		};
 
@@ -58,10 +58,12 @@ const Atlas: FC = () => {
 	}, [patientId]);
 
 	// useCallback prevents unnecessary re-render of child component (AtlasNavigation.tsx)
-	const getCentroid = useCallback(
-		async (navCoords: any) => {
+	const getNavPanelCoords = useCallback(
+		async (navPanelCoords: NavPanelCoords) => {
+			console.log(navPanelCoords);
+
 			const matrix = await getMatrix(
-				navCoords!.blockNumber,
+				navPanelCoords!.blockNumber,
 				"histology",
 				patientId
 			);
@@ -70,14 +72,14 @@ const Atlas: FC = () => {
 			// the x and y are swapped here compared to the histologyToMri function
 			// there must be some sort of flipping of axes somewhere
 			// regardless, the app seems to work with this configuration
-			const coords = matrixMultiplier(matrix, [
-				navCoords!.xh,
-				navCoords!.yh,
-				navCoords!.zh,
+			const singleMriCoord = matrixMultiplier(matrix, [
+				navPanelCoords!.xh,
+				navPanelCoords!.yh,
+				navPanelCoords!.zh,
 				1,
 			]);
 
-			setCentroid(coords);
+			setNavPanelCoords(singleMriCoord);
 		},
 		[patientId]
 	);
@@ -96,7 +98,7 @@ const Atlas: FC = () => {
 				showLabels={showLabels}
 				labelsTransparency={labelsTransparency}
 				setCurrentLabel={setCurrentLabel}
-				centroid={centroid}
+				navPanelCoords={navPanelCoords}
 				atlasImagesDimensionsKey={atlasImagesDimensionsKey}
 			/>
 
@@ -112,7 +114,7 @@ const Atlas: FC = () => {
 				labelsTransparency={labelsTransparency}
 				setLabelsTransparency={setLabelsTransparency}
 				currentLabel={currentLabel}
-				getCentroid={getCentroid}
+				getNavPanelCoords={getNavPanelCoords}
 			/>
 
 			{/* ideally, scrollbars should go here */}

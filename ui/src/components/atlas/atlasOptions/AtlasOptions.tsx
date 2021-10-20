@@ -9,6 +9,7 @@ import ImageChannels from "./ImageChannels";
 import HiResBtn from "./HiResBtn";
 
 import { CurrentLabel } from "../../../models/label.model";
+import { NavPanelCoords } from "../../../models/navPanelCoords.model";
 
 import "./AtlasOptions.css";
 
@@ -24,7 +25,7 @@ interface Props {
 	labelsTransparency: string;
 	setLabelsTransparency: (labelsTransparency: string) => void;
 	currentLabel: CurrentLabel | null;
-	getCentroid: (blockNumber: number) => void;
+	getNavPanelCoords: (navPanelCoords: NavPanelCoords) => void;
 }
 
 const AtlasOptions: FC<Props> = (props) => {
@@ -40,7 +41,7 @@ const AtlasOptions: FC<Props> = (props) => {
 		labelsTransparency,
 		setLabelsTransparency,
 		currentLabel,
-		getCentroid,
+		getNavPanelCoords,
 	} = props;
 
 	return (
@@ -49,7 +50,7 @@ const AtlasOptions: FC<Props> = (props) => {
 
 			<AtlasNavigation
 				patientId={patientId}
-				getCentroid={getCentroid}
+				getNavPanelCoords={getNavPanelCoords}
 				showHiRes={showHiRes}
 				setShowHiRes={setShowHiRes}
 			/>

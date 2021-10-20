@@ -3,12 +3,14 @@ import DropdownTreeSelect from "react-dropdown-tree-select";
 
 import { ASSETS_URL } from "../../utils/ASSETS_URL";
 
+import { NavPanelCoords } from "../../../models/navPanelCoords.model";
+
 import "react-dropdown-tree-select/dist/styles.css";
 import "./AtlasNavigation.css";
 
 interface Props {
 	patientId: string;
-	getCentroid: (blockNumber: number) => void;
+	getNavPanelCoords: (navPanelCoords: NavPanelCoords) => void;
 	showHiRes: boolean;
 	setShowHiRes: (showHiRes: boolean) => void;
 }
@@ -16,7 +18,7 @@ interface Props {
 const AtlasNavigation: FC<Props> = (props) => {
 	const [atlasNavigationData, setAtlasNavigationData] = useState<any>(null);
 
-	const { patientId, getCentroid, showHiRes, setShowHiRes } = props;
+	const { patientId, getNavPanelCoords, showHiRes, setShowHiRes } = props;
 
 	useEffect(() => {
 		const getAtlasNavigationData = async () => {
@@ -43,9 +45,9 @@ const AtlasNavigation: FC<Props> = (props) => {
 		}
 
 		try {
-			getCentroid(currentNodeData);
+			getNavPanelCoords(currentNodeData);
 		} catch {
-			console.log("error, no valid block returned");
+			console.log("error, no valid navigation coords returned");
 		}
 	};
 

@@ -16,7 +16,7 @@ import Scrollbars from "../scrollbars/Scrollbars";
 import { CurrentLabel } from "../../../models/label.model";
 import { MriCoords } from "../../../models/mriCoords.model";
 import { HistologyCoords } from "../../../models/histologyCoords.model";
-import { Centroid } from "../../../models/centroid.model";
+import { NavPanelCoords } from "../../../models/navPanelCoords.model";
 import { AtlasImagesDimensionsKey } from "../../../models/atlasImagesDimensionsKey.model";
 
 import "./AtlasImages.css";
@@ -29,7 +29,7 @@ interface Props {
 	showLabels: boolean;
 	labelsTransparency: string;
 	setCurrentLabel: (currentLabel: CurrentLabel | null) => void;
-	centroid: Centroid | null;
+	navPanelCoords: NavPanelCoords | null;
 	atlasImagesDimensionsKey: AtlasImagesDimensionsKey | null;
 }
 
@@ -48,7 +48,7 @@ const AtlasImages: FC<Props> = (props) => {
 		showLabels,
 		labelsTransparency,
 		setCurrentLabel,
-		centroid,
+		navPanelCoords,
 		atlasImagesDimensionsKey,
 	} = props;
 
@@ -210,10 +210,10 @@ const AtlasImages: FC<Props> = (props) => {
 
 	// sets the mri and histology coords when navigating from the drop-down list
 	useEffect(() => {
-		if (centroid != null) {
-			const resultX = centroid.resultX;
-			const resultY = centroid.resultY;
-			const resultZ = centroid.resultZ;
+		if (navPanelCoords != null) {
+			const resultX = navPanelCoords.resultX;
+			const resultY = navPanelCoords.resultY;
+			const resultZ = navPanelCoords.resultZ;
 
 			updateMriAndHistologyImages(
 				"axial",
@@ -225,7 +225,7 @@ const AtlasImages: FC<Props> = (props) => {
 				patientId
 			);
 		}
-	}, [centroid, patientId]);
+	}, [navPanelCoords, patientId, atlasImagesDimensionsKey]);
 
 	const histologyToMri = async (
 		currentHistologyMouseX: number,
