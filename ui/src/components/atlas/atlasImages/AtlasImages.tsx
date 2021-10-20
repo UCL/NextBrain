@@ -40,6 +40,8 @@ const AtlasImages: FC<Props> = (props) => {
 	const [histologyImageCoords, setHistologyImageCoords] =
 		useState<HistologyCoords | null>(null);
 
+	console.log(mriImageCoords);
+
 	const {
 		patientId,
 		channel,
