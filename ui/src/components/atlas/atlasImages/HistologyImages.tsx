@@ -1,15 +1,17 @@
 import React, { FC, useState, useEffect, SyntheticEvent } from "react";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
+import { ASSETS_URL } from "../../utils/ASSETS_URL";
 import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
 import MousePointer from "../../shared/MousePointer";
 import getMouseCoords from "../../utils/getmouseCoords";
-import { ASSETS_URL } from "../../utils/ASSETS_URL";
+import HistologyLowResImage from "./HistologyLowResImage";
+import HistologyLabelsImage from "./HistologyLabelsImage";
+import HistologyHiResImage from "./HistologyHiResImage";
 
 import { HistologyCoords } from "../../../models/histologyCoords.model";
 
-import "./HistologyImage.css";
+import "./HistologyImages.css";
 
 interface Props {
 	patientId: string;
@@ -21,7 +23,7 @@ interface Props {
 	histologyToMri: (mouseX: number, mouseY: number) => void;
 }
 
-const HistologyImage: FC<Props> = (props) => {
+const HistologyImages: FC<Props> = (props) => {
 	const [error, setError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [histologyImage, setHistologyImage] = useState("");
@@ -58,32 +60,41 @@ const HistologyImage: FC<Props> = (props) => {
 				const histologyFileExtension = showHiRes ? "webp" : "jpg";
 				const labelsFileExtension = showHiRes ? "webp" : "png";
 
-				try {
-					setIsLoading(true);
-
-					const histologyImage = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.${histologyFileExtension}`;
-					const newLabelsImage = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.${labelsFileExtension}`;
-
-					setHistologyImage(histologyImage);
-					setLabelsImage(newLabelsImage);
-				} catch (e) {
-					console.log(
-						`%cerror, could not load histology image`,
-						e,
-						"color: red"
-					);
-				}
-
 				// I do this because of a weird behaviour on the dev server causing the loading spinner to reappear
 				// I dont think this is an issue on the deployed site, so perhaps remove (or only run the logic on dev)
-				if (histologyImage !== null) {
-					setIsLoading(false);
+				// if (histologyImage !== null) {
+				// 	setIsLoading(false);
+				// }
+
+				try {
+					//setIsLoading(true);
+
+					const histologyImageUrl = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.${histologyFileExtension}`;
+					const labelsImageUrl = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.${labelsFileExtension}`;
+
+					const histologyImageResponse = await fetch(histologyImageUrl);
+					const histologyImageBlob = await histologyImageResponse.blob();
+					const histologyImageObjectURL =
+						URL.createObjectURL(histologyImageBlob);
+
+					const labelsImageResponse = await fetch(labelsImageUrl);
+					const labelsImageBlob = await labelsImageResponse.blob();
+					const labelsImageObjectURL = URL.createObjectURL(labelsImageBlob);
+
+					if (histologyImageResponse.ok && labelsImageResponse.ok) {
+						setHistologyImage(histologyImageObjectURL);
+						setLabelsImage(labelsImageObjectURL);
+					}
+				} catch (e) {
+					setError("Error, could not load histology image");
+					console.log(e);
 				}
+				//setIsLoading(false);
 			}
 		};
 
 		fetchHistologyImage();
-	}, [histologyImageCoords, showHiRes, channel, patientId, histologyImage]);
+	}, [histologyImageCoords, showHiRes, channel, patientId]);
 
 	// take the current histology coords and calculate scaled mouseX and mouseY
 	// this is to account for the fact that we scale the histology image with css using the max-height property
@@ -165,13 +176,6 @@ const HistologyImage: FC<Props> = (props) => {
 		histologyToMri(naturalCoordinateX, naturalCoordinateY);
 	};
 
-	const onPan = (ref: any, e: Event) => {
-		console.log("panning image");
-		console.log(ref);
-
-		updateHistologyCoordsHandler(e, "hiRes");
-	};
-
 	const getHistologyMousePos = (e: SyntheticEvent | Event, type: string) => {
 		const { mouseX, mouseY } = getMouseCoords(e, showHiRes);
 
@@ -232,8 +236,28 @@ const HistologyImage: FC<Props> = (props) => {
 		};
 	};
 
-	if (histologyImage === null || histologyImageCoords === null) {
-		return <div>Could not build histology image</div>;
+	if (histologyImageCoords == null) {
+		return <div>Could not find histology image coords</div>;
+	}
+
+	if (histologyImage == null) {
+		return (
+			<>
+				<ErrorModal error={error} onClear={() => setError(null)} />
+				{isLoading && <LoadingSpinner asOverlay={false} />}
+				{!isLoading && <div>Failed to load histology image</div>}
+			</>
+		);
+	}
+
+	if (labelsImage == null) {
+		return (
+			<>
+				<ErrorModal error={error} onClear={() => setError(null)} />
+				{isLoading && <LoadingSpinner asOverlay={false} />}
+				{!isLoading && <div>Failed to load labels</div>}
+			</>
+		);
 	}
 
 	return (
@@ -250,71 +274,32 @@ const HistologyImage: FC<Props> = (props) => {
 						/>
 					)}
 
-					{showLabels && !showHiRes && (
-						<img
-							className="histology-img-labels"
-							src={labelsImage}
-							alt="histology-labels"
-							//onLoad={(e) => onImageLoad(e, "lowRes")}
-							style={{ opacity: `${labelsTransparency}` }}
-						></img>
+					{!showHiRes && showLabels && (
+						<HistologyLabelsImage
+							labelsImage={labelsImage}
+							labelsTransparency={labelsTransparency}
+						/>
 					)}
 
 					{!showHiRes && (
-						<img
-							onClick={(e) => {
-								updateHistologyCoordsHandler(e, "lowRes");
-							}}
-							className="histology-img"
-							src={histologyImage}
-							alt="histology"
-							onLoad={(e) => onImageLoad(e, "onLoad")}
-						></img>
+						<HistologyLowResImage
+							histologyImage={histologyImage}
+							updateHistologyCoordsHandler={updateHistologyCoordsHandler}
+							onImageLoad={onImageLoad}
+						/>
 					)}
 
 					{showHiRes && (
-						<TransformWrapper
-							wheel={{ disabled: false }}
-							panning={{ velocityDisabled: true }}
-							limitToBounds={true}
-							onPanningStart={onPan}
-							maxScale={15}
-						>
-							{({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-								<>
-									<div className="tools">
-										<button onClick={() => zoomIn()}>+</button>
-										<button onClick={() => zoomOut()}>-</button>
-										<button onClick={() => resetTransform()}>x</button>
-									</div>
-
-									<TransformComponent>
-										{scaledHistologyMouseCoords && (
-											<MousePointer
-												mouseY={scaledHistologyMouseCoords.mouseY}
-												mouseX={scaledHistologyMouseCoords.mouseX}
-											/>
-										)}
-
-										{showLabels && (
-											<img
-												className="histology-img-labels"
-												src={labelsImage}
-												alt="histology-labels"
-												style={{ opacity: `${labelsTransparency}` }}
-											></img>
-										)}
-
-										<img
-											className={`histology-img ${showHiRes && "hi-res"}`}
-											src={histologyImage}
-											alt="histology"
-											onLoad={(e) => onImageLoad(e, "onLoad")}
-										></img>
-									</TransformComponent>
-								</>
-							)}
-						</TransformWrapper>
+						<HistologyHiResImage
+							histologyImage={histologyImage}
+							labelsImage={labelsImage}
+							labelsTransparency={labelsTransparency}
+							showHiRes={showHiRes}
+							showLabels={showLabels}
+							updateHistologyCoordsHandler={updateHistologyCoordsHandler}
+							onImageLoad={onImageLoad}
+							scaledHistologyMouseCoords={scaledHistologyMouseCoords}
+						/>
 					)}
 				</div>
 			</div>
@@ -322,4 +307,4 @@ const HistologyImage: FC<Props> = (props) => {
 	);
 };
 
-export default HistologyImage;
+export default HistologyImages;

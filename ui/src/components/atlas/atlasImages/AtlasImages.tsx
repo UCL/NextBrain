@@ -7,7 +7,7 @@ import logMriCoordsForDebugging from "../../utils/logMriCoordsForDebugging";
 import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
 import MriImages from "./MriImages";
-import HistologyImage from "./HistologyImage";
+import HistologyImageContainer from "./HistologyImages";
 import getMatrix from "../../utils/getMatrix";
 import matrixMultiplier from "../../utils/matrixMultiplier";
 import histologyLabelParser from "../../utils/histologyLabelParser";
@@ -335,7 +335,7 @@ const AtlasImages: FC<Props> = (props) => {
 				atlasImagesDimensionsKey={atlasImagesDimensionsKey}
 			/>
 
-			<HistologyImage
+			<HistologyImageContainer
 				patientId={patientId}
 				histologyImageCoords={histologyImageCoords}
 				channel={channel}

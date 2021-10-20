@@ -43,7 +43,6 @@ const MriImage: FC<Props> = (props) => {
 
 				const response = await fetch(mriImageUrl);
 				const imageBlob = await response.blob();
-
 				const imageObjectURL = URL.createObjectURL(imageBlob);
 
 				if (response.ok) {
