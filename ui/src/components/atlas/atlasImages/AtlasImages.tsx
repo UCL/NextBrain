@@ -189,6 +189,8 @@ const AtlasImages: FC<Props> = (props) => {
 		// I should just pass histologyImageCoords
 		if (histologyImageCoords !== null && mriImageCoords !== null) {
 			if (!showHiRes) {
+				console.log(histologyImageCoords);
+
 				setCurrentLabelHandler(
 					histologyImageCoords.coordsLowRes.mouseX,
 					histologyImageCoords.coordsLowRes.mouseY,
