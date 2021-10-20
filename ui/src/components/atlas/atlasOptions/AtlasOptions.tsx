@@ -71,11 +71,7 @@ const AtlasOptions: FC<Props> = (props) => {
 				setLabelsTransparency={setLabelsTransparency}
 			/>
 
-			<HiResBtn
-				showHiRes={showHiRes}
-				setShowHiRes={setShowHiRes}
-				channel={channel}
-			/>
+			<HiResBtn showHiRes={showHiRes} setShowHiRes={setShowHiRes} />
 		</div>
 	);
 };

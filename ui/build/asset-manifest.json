@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/css/main.bae0d7b5.chunk.css",
-    "main.js": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/main.20d9b2c6.chunk.js",
-    "main.js.map": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/main.20d9b2c6.chunk.js.map",
+    "main.css": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/css/main.5d85e26d.chunk.css",
+    "main.js": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/main.be323930.chunk.js",
+    "main.js.map": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/main.be323930.chunk.js.map",
     "runtime-main.js": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/runtime-main.6e53cbf0.js",
     "runtime-main.js.map": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/runtime-main.6e53cbf0.js.map",
     "static/css/2.3d22e40d.chunk.css": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/css/2.3d22e40d.chunk.css",
@@ -12,7 +12,7 @@
     "static/js/3.cec7f2e6.chunk.js.map": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/3.cec7f2e6.chunk.js.map",
     "index.html": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/index.html",
     "static/css/2.3d22e40d.chunk.css.map": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/css/2.3d22e40d.chunk.css.map",
-    "static/css/main.bae0d7b5.chunk.css.map": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/css/main.bae0d7b5.chunk.css.map",
+    "static/css/main.5d85e26d.chunk.css.map": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/css/main.5d85e26d.chunk.css.map",
     "static/js/2.367d1a92.chunk.js.LICENSE.txt": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/2.367d1a92.chunk.js.LICENSE.txt",
     "static/media/block_38_slice_04.npz": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/media/block_38_slice_04.56d18583.npz",
     "static/media/erc-logo.a80f7f04.png": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/media/erc-logo.a80f7f04.png",
@@ -23,7 +23,7 @@
     "static/js/runtime-main.6e53cbf0.js",
     "static/css/2.3d22e40d.chunk.css",
     "static/js/2.367d1a92.chunk.js",
-    "static/css/main.bae0d7b5.chunk.css",
-    "static/js/main.20d9b2c6.chunk.js"
+    "static/css/main.5d85e26d.chunk.css",
+    "static/js/main.be323930.chunk.js"
   ]
 }
