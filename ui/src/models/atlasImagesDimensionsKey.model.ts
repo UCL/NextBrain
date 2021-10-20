@@ -1,11 +1,11 @@
-interface mriPlaneMapping {
+interface MriPlaneMapping {
 	[key: string]: string;
 }
 
 export interface AtlasImagesDimensionsKey {
 	[key: string]: {
 		[key: string]: {
-			[key: string]: number | mriPlaneMapping;
+			[key: string]: number | MriPlaneMapping;
 		};
 	};
 }
