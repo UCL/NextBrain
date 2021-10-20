@@ -41,12 +41,13 @@ const MriImage: FC<Props> = (props) => {
 				setIsLoading(true);
 				const mriImageUrl = `${ASSETS_URL}${patientId}/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`;
 
-				// fetch the image from the server so we can utilise await and show a loading spinner
-				// in reality we don't use the fetched data, we use the raw url in mriImageUrl
 				const response = await fetch(mriImageUrl);
+				const imageBlob = await response.blob();
+
+				const imageObjectURL = URL.createObjectURL(imageBlob);
 
 				if (response.ok) {
-					setMriImage(mriImageUrl);
+					setMriImage(imageObjectURL);
 				}
 			} catch (e) {
 				setError("Error, could not load mri image");
@@ -62,7 +63,7 @@ const MriImage: FC<Props> = (props) => {
 		return (
 			<>
 				<ErrorModal error={error} onClear={() => setError(null)} />
-				{isLoading && <LoadingSpinner asOverlay />}
+				{isLoading && <LoadingSpinner asOverlay={false} />}
 				{!isLoading && <div>Failed to load mri image</div>}
 			</>
 		);
