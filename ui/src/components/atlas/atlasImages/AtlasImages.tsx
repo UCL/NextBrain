@@ -17,6 +17,7 @@ import { CurrentLabel } from "../../../models/label.model";
 import { MriCoords } from "../../../models/mriCoords.model";
 import { HistologyCoords } from "../../../models/histologyCoords.model";
 import { Centroid } from "../../../models/centroid.model";
+import { AtlasImagesDimensionsKey } from "../../../models/atlasImagesDimensionsKey.model";
 
 import "./AtlasImages.css";
 
@@ -29,7 +30,7 @@ interface Props {
 	labelsTransparency: string;
 	setCurrentLabel: (currentLabel: CurrentLabel | null) => void;
 	centroid: Centroid | null;
-	atlasImagesDimensionsKey: any;
+	atlasImagesDimensionsKey: AtlasImagesDimensionsKey | null;
 }
 
 const AtlasImages: FC<Props> = (props) => {
@@ -217,9 +218,9 @@ const AtlasImages: FC<Props> = (props) => {
 			updateMriAndHistologyImages(
 				"axial",
 				+resultZ.toFixed(0),
-				+atlasImagesDimensionsKey.mriDimensions.axial.width -
+				+atlasImagesDimensionsKey!.mriDimensions.axial.width -
 					+resultX.toFixed(0),
-				+atlasImagesDimensionsKey.mriDimensions.axial.height -
+				+atlasImagesDimensionsKey!.mriDimensions.axial.height -
 					+resultY.toFixed(0),
 				patientId
 			);
@@ -255,8 +256,10 @@ const AtlasImages: FC<Props> = (props) => {
 		updateMriImagesHandler(
 			"axial",
 			+resultZ.toFixed(0),
-			+atlasImagesDimensionsKey.mriDimensions.axial.width - +resultX.toFixed(0),
-			+atlasImagesDimensionsKey.mriDimensions.axial.height - +resultY.toFixed(0)
+			+atlasImagesDimensionsKey!.mriDimensions.axial.width -
+				+resultX.toFixed(0),
+			+atlasImagesDimensionsKey!.mriDimensions.axial.height -
+				+resultY.toFixed(0)
 		);
 
 		// calculate new histology coords
@@ -292,8 +295,10 @@ const AtlasImages: FC<Props> = (props) => {
 		updateMriImagesHandler(
 			"axial",
 			+resultZ.toFixed(0),
-			+atlasImagesDimensionsKey.mriDimensions.axial.width - +resultX.toFixed(0),
-			+atlasImagesDimensionsKey.mriDimensions.axial.height - +resultY.toFixed(0)
+			+atlasImagesDimensionsKey!.mriDimensions.axial.width -
+				+resultX.toFixed(0),
+			+atlasImagesDimensionsKey!.mriDimensions.axial.height -
+				+resultY.toFixed(0)
 		);
 
 		const newHistologyCoords = { ...histologyImageCoords };
@@ -341,6 +346,7 @@ const AtlasImages: FC<Props> = (props) => {
 				adjustHistologyCoordsFromScrollbar={adjustHistologyCoordsFromScrollbar}
 				showHiRes={showHiRes}
 				setShowHiRes={setShowHiRes}
+				atlasImagesDimensionsKey={atlasImagesDimensionsKey}
 			/>
 		</div>
 	);

@@ -4,6 +4,7 @@ import MriImage from "./MriImage";
 import getMouseCoords from "../../utils/getmouseCoords";
 
 import { MriCoords } from "../../../models/mriCoords.model";
+import { AtlasImagesDimensionsKey } from "../../../models/atlasImagesDimensionsKey.model";
 
 interface Props {
 	patientId: string;
@@ -17,7 +18,7 @@ interface Props {
 		mouseY: number,
 		patientId: string
 	) => void;
-	atlasImagesDimensionsKey: any;
+	atlasImagesDimensionsKey: AtlasImagesDimensionsKey | null;
 }
 
 const MriImages: FC<Props> = (props) => {
@@ -66,24 +67,24 @@ const MriImages: FC<Props> = (props) => {
 
 		if (plane === "sagittal") {
 			if (
-				mouseX > +atlasImagesDimensionsKey.mriDimensions.sagittal.width - 1 ||
-				mouseY > +atlasImagesDimensionsKey.mriDimensions.sagittal.height - 1
+				mouseX > +atlasImagesDimensionsKey!.mriDimensions.sagittal.width - 1 ||
+				mouseY > +atlasImagesDimensionsKey!.mriDimensions.sagittal.height - 1
 			)
 				return false;
 		}
 
 		if (plane === "coronal") {
 			if (
-				mouseX > +atlasImagesDimensionsKey.mriDimensions.coronal.width - 1 ||
-				mouseY > +atlasImagesDimensionsKey.mriDimensions.coronal.height - 1
+				mouseX > +atlasImagesDimensionsKey!.mriDimensions.coronal.width - 1 ||
+				mouseY > +atlasImagesDimensionsKey!.mriDimensions.coronal.height - 1
 			)
 				return false;
 		}
 
 		if (plane === "axial") {
 			if (
-				mouseX > +atlasImagesDimensionsKey.mriDimensions.axial.width - 1 ||
-				mouseY > +atlasImagesDimensionsKey.mriDimensions.axial.height - 1
+				mouseX > +atlasImagesDimensionsKey!.mriDimensions.axial.width - 1 ||
+				mouseY > +atlasImagesDimensionsKey!.mriDimensions.axial.height - 1
 			)
 				return false;
 		}

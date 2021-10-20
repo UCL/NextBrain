@@ -9,6 +9,7 @@ import { ASSETS_URL } from "../components/utils/ASSETS_URL";
 
 import { CurrentLabel } from "../models/label.model";
 import { Centroid } from "../models/centroid.model";
+import { AtlasImagesDimensionsKey } from "../models/atlasImagesDimensionsKey.model";
 
 import "./Atlas.css";
 
@@ -21,7 +22,40 @@ const Atlas: FC = () => {
 	const [currentLabel, setCurrentLabel] = useState<CurrentLabel | null>(null);
 	const [centroid, setCentroid] = useState<Centroid | null>(null);
 	const [atlasImagesDimensionsKey, setAtlasImagesDimensionsKey] =
-		useState<any>(null);
+		useState<AtlasImagesDimensionsKey | null>(null);
+
+	// loads in some helper files at app start-up
+	useEffect(() => {
+		const getAtlasImageDimensionsFiles = async () => {
+			const mriDimensionsKeyUrl = `${ASSETS_URL}${patientId}/mriDimensionsKey.json`;
+			const histologyLowResDimensionsKeyUrl = `${ASSETS_URL}${patientId}/histologyDimensionsKey.json`;
+			const histologyHiResDimensionsKeyUrl = `${ASSETS_URL}${patientId}/histologyHRDimensionsKey.json`;
+
+			const mriDimensionsKeyFile = await (
+				await fetch(mriDimensionsKeyUrl)
+			).json();
+
+			const histologyLowResDimensionsKeyFile = await (
+				await fetch(histologyLowResDimensionsKeyUrl)
+			).json();
+
+			const histologyHiResDimensionsKeyFile = await (
+				await fetch(histologyHiResDimensionsKeyUrl)
+			).json();
+
+			const atlasImagesDimensionsKey = {
+				mriDimensions: mriDimensionsKeyFile,
+				histologyLowResDimensions: histologyLowResDimensionsKeyFile,
+				histologyHiResDimensions: histologyHiResDimensionsKeyFile,
+			};
+
+			console.log(atlasImagesDimensionsKey);
+
+			setAtlasImagesDimensionsKey(atlasImagesDimensionsKey);
+		};
+
+		getAtlasImageDimensionsFiles();
+	}, [patientId]);
 
 	// useCallback prevents unnecessary re-render of child component (AtlasNavigation.tsx)
 	const getCentroid = useCallback(
@@ -47,40 +81,6 @@ const Atlas: FC = () => {
 		},
 		[patientId]
 	);
-
-	useEffect(() => {
-		const getAtlasImageDimensionsFiles = async () => {
-			const mriDimensionsKeyUrl = `${ASSETS_URL}${patientId}/mriDimensionsKey.json`;
-			const histologyLowResDimensionsKeyUrl = `${ASSETS_URL}${patientId}/histologyDimensionsKey.json`;
-			const histologyHiResDimensionsKeyUrl = `${ASSETS_URL}${patientId}/histologyHRDimensionsKey.json`;
-
-			const mriDimensionsKeyFile = await (
-				await fetch(mriDimensionsKeyUrl)
-			).json();
-
-			const histologyLowResDimensionsKeyFile = await (
-				await fetch(histologyLowResDimensionsKeyUrl)
-			).json();
-
-			const histologyHiResDimensionsKeyFile = await (
-				await fetch(histologyHiResDimensionsKeyUrl)
-			).json();
-
-			console.log(mriDimensionsKeyFile);
-			console.log(histologyLowResDimensionsKeyFile);
-			console.log(histologyHiResDimensionsKeyFile);
-
-			const atlasImagesDimensionsKey = {
-				mriDimensions: mriDimensionsKeyFile,
-				histologyLowResDimensions: histologyLowResDimensionsKeyFile,
-				histologyHiResDimensions: histologyHiResDimensionsKeyFile,
-			};
-
-			setAtlasImagesDimensionsKey(atlasImagesDimensionsKey);
-		};
-
-		getAtlasImageDimensionsFiles();
-	}, [patientId]);
 
 	if (atlasImagesDimensionsKey == null) {
 		return <div>Loading atlas assets, this might take a few seconds...</div>;

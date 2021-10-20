@@ -1,9 +1,11 @@
+import { AtlasImagesDimensionsKey } from "../../models/atlasImagesDimensionsKey.model";
+
 const calculateAdjustedMriCoords = (
 	currentMriPlane: string,
 	currentMriSlice: number,
 	currentMriMouseX: number,
 	currentMriMouseY: number,
-	atlasImagesDimensionsKey: any
+	atlasImagesDimensionsKey: AtlasImagesDimensionsKey | null
 ) => {
 	// adjusting coordinates to account for images not being in the correct orientations
 	// in other words, I have to account for orientation differences between the web application and ITKSnap
@@ -15,30 +17,33 @@ const calculateAdjustedMriCoords = (
 
 	if (currentMriPlane === "sagittal") {
 		adjustedMriSlice =
-			+atlasImagesDimensionsKey.mriDimensions.sagittal.slices - currentMriSlice;
+			+atlasImagesDimensionsKey!.mriDimensions.sagittal.slices -
+			currentMriSlice;
 		adjustedMriMouseX =
-			+atlasImagesDimensionsKey.mriDimensions.sagittal.width - currentMriMouseX;
+			+atlasImagesDimensionsKey!.mriDimensions.sagittal.width -
+			currentMriMouseX;
 		adjustedMriMouseY =
-			+atlasImagesDimensionsKey.mriDimensions.sagittal.height -
+			+atlasImagesDimensionsKey!.mriDimensions.sagittal.height -
 			currentMriMouseY;
 	}
 
 	if (currentMriPlane === "coronal") {
 		adjustedMriSlice =
-			+atlasImagesDimensionsKey.mriDimensions.coronal.slices - currentMriSlice;
+			+atlasImagesDimensionsKey!.mriDimensions.coronal.slices - currentMriSlice;
 		adjustedMriMouseX =
-			+atlasImagesDimensionsKey.mriDimensions.coronal.width - currentMriMouseX;
+			+atlasImagesDimensionsKey!.mriDimensions.coronal.width - currentMriMouseX;
 		adjustedMriMouseY =
-			+atlasImagesDimensionsKey.mriDimensions.coronal.height - currentMriMouseY;
+			+atlasImagesDimensionsKey!.mriDimensions.coronal.height -
+			currentMriMouseY;
 	}
 
 	if (currentMriPlane === "axial") {
 		adjustedMriSlice =
-			+atlasImagesDimensionsKey.mriDimensions.axial.slices - currentMriSlice;
+			+atlasImagesDimensionsKey!.mriDimensions.axial.slices - currentMriSlice;
 		adjustedMriMouseX =
-			+atlasImagesDimensionsKey.mriDimensions.axial.width - currentMriMouseX;
+			+atlasImagesDimensionsKey!.mriDimensions.axial.width - currentMriMouseX;
 		adjustedMriMouseY =
-			+atlasImagesDimensionsKey.mriDimensions.axial.height - currentMriMouseY;
+			+atlasImagesDimensionsKey!.mriDimensions.axial.height - currentMriMouseY;
 	}
 
 	return { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY };

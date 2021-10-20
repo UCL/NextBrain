@@ -3,16 +3,16 @@ import ndarray from "ndarray";
 
 import getMatrix from "./getMatrix";
 import matrixMultiplier from "./matrixMultiplier";
-import histologyCoordinatesKey from "./histologyCoordinatesKey";
 import { ASSETS_URL } from "./ASSETS_URL";
 
 import { MriCoords } from "../../models/mriCoords.model";
+import { AtlasImagesDimensionsKey } from "../../models/atlasImagesDimensionsKey.model";
 
 const calculateHistologyImageCoords = async (
 	currentMriPlane: string,
 	newMriCoords: MriCoords,
 	patientId: string,
-	atlasImagesDimensionsKey: any
+	atlasImagesDimensionsKey: AtlasImagesDimensionsKey | null
 ) => {
 	const currentMriMouseX = newMriCoords[currentMriPlane]["mouseX"];
 	const currentMriMouseY = newMriCoords[currentMriPlane]["mouseY"];
@@ -40,13 +40,15 @@ const calculateHistologyImageCoords = async (
 	const histologyImageCoordsLowRes = getHistologyImageCoords(
 		newMriCoords,
 		matrixLowRes,
-		currentBlock
+		currentBlock,
+		atlasImagesDimensionsKey
 	);
 
 	const histologyImageCoordsHiRes = getHistologyImageCoords(
 		newMriCoords,
 		matrixHiRes,
-		currentBlock
+		currentBlock,
+		atlasImagesDimensionsKey
 	);
 
 	return {
@@ -60,7 +62,8 @@ const calculateHistologyImageCoords = async (
 const getHistologyImageCoords = (
 	newMriCoords: MriCoords,
 	matrix: number[],
-	currentBlock: number
+	currentBlock: number,
+	atlasImagesDimensionsKey: AtlasImagesDimensionsKey | null
 ) => {
 	const coords = matrixMultiplier(matrix, [
 		newMriCoords.sagittal.slice,
@@ -69,7 +72,11 @@ const getHistologyImageCoords = (
 		1,
 	]);
 
-	let { resultX, resultY, resultZ } = validateCoords(coords, currentBlock);
+	let { resultX, resultY, resultZ } = validateCoords(
+		coords,
+		currentBlock,
+		atlasImagesDimensionsKey
+	);
 
 	const histologyImageCoords = {
 		mouseX: +resultY.toFixed(0),
@@ -83,7 +90,8 @@ const getHistologyImageCoords = (
 
 const validateCoords = (
 	coords: { resultX: number; resultY: number; resultZ: number },
-	currentBlock: number
+	currentBlock: number,
+	atlasImagesDimensionsKey: AtlasImagesDimensionsKey | null
 ) => {
 	// we need to convert negative numbers to zero to avoid errors and load the right slice
 	let resultX = coords.resultX < 0 ? 0 : coords.resultX;
@@ -94,10 +102,18 @@ const validateCoords = (
 	// we make an adjustment to account for the fact that slices start at 0 within a block
 	// if returned slice exceeds maximum number of slices +2 then its a calcultion bug
 	if (
-		resultZ > histologyCoordinatesKey[currentBlock].slices - 1 &&
-		resultZ < histologyCoordinatesKey[currentBlock].slices + 1
+		resultZ >
+			+atlasImagesDimensionsKey!.histologyLowResDimensions[currentBlock]
+				.slices -
+				1 &&
+		resultZ <
+			+atlasImagesDimensionsKey!.histologyLowResDimensions[currentBlock]
+				.slices +
+				1
 	) {
-		resultZ = histologyCoordinatesKey[currentBlock].slices - 1;
+		resultZ =
+			+atlasImagesDimensionsKey!.histologyLowResDimensions[currentBlock]
+				.slices - 1;
 	}
 
 	return { resultX, resultY, resultZ };
