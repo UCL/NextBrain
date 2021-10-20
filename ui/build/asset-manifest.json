@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/BrainAtlas/static/css/main.bae0d7b5.chunk.css",
-    "main.js": "/BrainAtlas/static/js/main.5a2d6d00.chunk.js",
-    "main.js.map": "/BrainAtlas/static/js/main.5a2d6d00.chunk.js.map",
-    "runtime-main.js": "/BrainAtlas/static/js/runtime-main.508ebe89.js",
-    "runtime-main.js.map": "/BrainAtlas/static/js/runtime-main.508ebe89.js.map",
-    "static/css/2.3d22e40d.chunk.css": "/BrainAtlas/static/css/2.3d22e40d.chunk.css",
-    "static/js/2.367d1a92.chunk.js": "/BrainAtlas/static/js/2.367d1a92.chunk.js",
-    "static/js/2.367d1a92.chunk.js.map": "/BrainAtlas/static/js/2.367d1a92.chunk.js.map",
-    "static/js/3.cec7f2e6.chunk.js": "/BrainAtlas/static/js/3.cec7f2e6.chunk.js",
-    "static/js/3.cec7f2e6.chunk.js.map": "/BrainAtlas/static/js/3.cec7f2e6.chunk.js.map",
-    "index.html": "/BrainAtlas/index.html",
-    "static/css/2.3d22e40d.chunk.css.map": "/BrainAtlas/static/css/2.3d22e40d.chunk.css.map",
-    "static/css/main.bae0d7b5.chunk.css.map": "/BrainAtlas/static/css/main.bae0d7b5.chunk.css.map",
-    "static/js/2.367d1a92.chunk.js.LICENSE.txt": "/BrainAtlas/static/js/2.367d1a92.chunk.js.LICENSE.txt",
-    "static/media/block_38_slice_04.npz": "/BrainAtlas/static/media/block_38_slice_04.56d18583.npz",
-    "static/media/erc-logo.a80f7f04.png": "/BrainAtlas/static/media/erc-logo.a80f7f04.png",
-    "static/media/eu-logo.1a7bc00a.png": "/BrainAtlas/static/media/eu-logo.1a7bc00a.png",
-    "static/media/homepage-banner.66523cf7.png": "/BrainAtlas/static/media/homepage-banner.66523cf7.png"
+    "main.css": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/css/main.bae0d7b5.chunk.css",
+    "main.js": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/main.20d9b2c6.chunk.js",
+    "main.js.map": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/main.20d9b2c6.chunk.js.map",
+    "runtime-main.js": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/runtime-main.6e53cbf0.js",
+    "runtime-main.js.map": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/runtime-main.6e53cbf0.js.map",
+    "static/css/2.3d22e40d.chunk.css": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/css/2.3d22e40d.chunk.css",
+    "static/js/2.367d1a92.chunk.js": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/2.367d1a92.chunk.js",
+    "static/js/2.367d1a92.chunk.js.map": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/2.367d1a92.chunk.js.map",
+    "static/js/3.cec7f2e6.chunk.js": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/3.cec7f2e6.chunk.js",
+    "static/js/3.cec7f2e6.chunk.js.map": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/3.cec7f2e6.chunk.js.map",
+    "index.html": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/index.html",
+    "static/css/2.3d22e40d.chunk.css.map": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/css/2.3d22e40d.chunk.css.map",
+    "static/css/main.bae0d7b5.chunk.css.map": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/css/main.bae0d7b5.chunk.css.map",
+    "static/js/2.367d1a92.chunk.js.LICENSE.txt": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/js/2.367d1a92.chunk.js.LICENSE.txt",
+    "static/media/block_38_slice_04.npz": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/media/block_38_slice_04.56d18583.npz",
+    "static/media/erc-logo.a80f7f04.png": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/media/erc-logo.a80f7f04.png",
+    "static/media/eu-logo.1a7bc00a.png": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/media/eu-logo.1a7bc00a.png",
+    "static/media/homepage-banner.66523cf7.png": "https://github-pages.ucl.ac.uk/BrainAtlas-staging/static/media/homepage-banner.66523cf7.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.508ebe89.js",
+    "static/js/runtime-main.6e53cbf0.js",
     "static/css/2.3d22e40d.chunk.css",
     "static/js/2.367d1a92.chunk.js",
     "static/css/main.bae0d7b5.chunk.css",
-    "static/js/main.5a2d6d00.chunk.js"
+    "static/js/main.20d9b2c6.chunk.js"
   ]
 }
