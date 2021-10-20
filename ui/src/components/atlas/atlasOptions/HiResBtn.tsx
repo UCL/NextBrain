@@ -1,6 +1,4 @@
-import { FC, useState } from "react";
-
-import ErrorModal from "../../shared/ErrorModal";
+import { FC } from "react";
 
 import "./HiResBtn.css";
 
@@ -10,19 +8,14 @@ interface Props {
 }
 
 const HiResBtn: FC<Props> = (props) => {
-	const [error, setError] = useState<string | null>(null);
-
 	const { showHiRes, setShowHiRes } = props;
 
 	return (
-		<>
-			<ErrorModal error={error} onClear={() => setError(null)} />
-			<div className="hi-res-btn-container">
-				<button className="hi-res btn" onClick={() => setShowHiRes(!showHiRes)}>
-					{showHiRes ? "Hide" : "Show"} hi-res histology
-				</button>
-			</div>
-		</>
+		<div className="hi-res-btn-container">
+			<button className="hi-res btn" onClick={() => setShowHiRes(!showHiRes)}>
+				{showHiRes ? "Hide" : "Show"} hi-res histology
+			</button>
+		</div>
 	);
 };
 
