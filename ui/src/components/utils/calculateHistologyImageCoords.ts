@@ -4,7 +4,6 @@ import ndarray from "ndarray";
 import getMatrix from "./getMatrix";
 import matrixMultiplier from "./matrixMultiplier";
 import histologyCoordinatesKey from "./histologyCoordinatesKey";
-import mriCoordinatesKey from "./mriCoordinatesKey";
 import { ASSETS_URL } from "./ASSETS_URL";
 
 import { MriCoords } from "../../models/mriCoords.model";
@@ -12,7 +11,8 @@ import { MriCoords } from "../../models/mriCoords.model";
 const calculateHistologyImageCoords = async (
 	currentMriPlane: string,
 	newMriCoords: MriCoords,
-	patientId: string
+	patientId: string,
+	atlasImagesDimensionsKey: any
 ) => {
 	const currentMriMouseX = newMriCoords[currentMriPlane]["mouseX"];
 	const currentMriMouseY = newMriCoords[currentMriPlane]["mouseY"];
@@ -23,7 +23,8 @@ const calculateHistologyImageCoords = async (
 		currentMriMouseX,
 		currentMriMouseY,
 		currentMriSlice,
-		patientId
+		patientId,
+		atlasImagesDimensionsKey
 	);
 
 	console.log("current block: " + currentBlock);
@@ -107,7 +108,8 @@ const getCurrentBlock = async (
 	currentMriMouseX: number,
 	currentMriMouseY: number,
 	currentMriSlice: number,
-	patientId: string
+	patientId: string,
+	atlasImagesDimensionsKey: any
 ) => {
 	let currentBlock;
 	let n = new npyjs();
@@ -148,7 +150,9 @@ const getCurrentBlock = async (
 		// since its been flipped, we dont need to take the adjustedMriMouseX... we just take the normal currentMriMouseX
 		currentBlock = ndArray.get(
 			currentMriMouseX,
-			ndArray.shape[1] - (+mriCoordinatesKey.sagittal.height - currentMriMouseY)
+			ndArray.shape[1] -
+				(+atlasImagesDimensionsKey.mriDimensions.sagittal.height -
+					currentMriMouseY)
 		);
 	}
 

@@ -4,7 +4,6 @@ import calculateMriImageCoords from "../../utils/calculateMriImageCoords";
 import calculateHistologyImageCoords from "../../utils/calculateHistologyImageCoords";
 import calculateAdjustedMriCoords from "../../utils/calculateAdjustedMriCoords";
 import logMriCoordsForDebugging from "../../utils/logMriCoordsForDebugging";
-import mriCoordinatesKey from "../../utils/mriCoordinatesKey";
 import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
 import MriImages from "./MriImages";
@@ -30,6 +29,7 @@ interface Props {
 	labelsTransparency: string;
 	setCurrentLabel: (currentLabel: CurrentLabel | null) => void;
 	centroid: Centroid | null;
+	atlasImagesDimensionsKey: any;
 }
 
 const AtlasImages: FC<Props> = (props) => {
@@ -48,6 +48,7 @@ const AtlasImages: FC<Props> = (props) => {
 		labelsTransparency,
 		setCurrentLabel,
 		centroid,
+		atlasImagesDimensionsKey,
 	} = props;
 
 	const updateMriAndHistologyImages = async (
@@ -78,7 +79,8 @@ const AtlasImages: FC<Props> = (props) => {
 		const newHistologyCoords = await calculateHistologyImageCoords(
 			currentMriPlane,
 			newMriCoords!,
-			patientId
+			patientId,
+			atlasImagesDimensionsKey
 		);
 		console.log("histology image coords: ", newHistologyCoords);
 
@@ -108,7 +110,8 @@ const AtlasImages: FC<Props> = (props) => {
 				currentMriPlane,
 				currentMriSlice,
 				currentMriMouseX,
-				currentMriMouseY
+				currentMriMouseY,
+				atlasImagesDimensionsKey
 			);
 
 		logMriCoordsForDebugging(
@@ -214,8 +217,10 @@ const AtlasImages: FC<Props> = (props) => {
 			updateMriAndHistologyImages(
 				"axial",
 				+resultZ.toFixed(0),
-				+mriCoordinatesKey.axial.width - +resultX.toFixed(0),
-				+mriCoordinatesKey.axial.height - +resultY.toFixed(0),
+				+atlasImagesDimensionsKey.mriDimensions.axial.width -
+					+resultX.toFixed(0),
+				+atlasImagesDimensionsKey.mriDimensions.axial.height -
+					+resultY.toFixed(0),
 				patientId
 			);
 		}
@@ -250,8 +255,8 @@ const AtlasImages: FC<Props> = (props) => {
 		updateMriImagesHandler(
 			"axial",
 			+resultZ.toFixed(0),
-			+mriCoordinatesKey.axial.width - +resultX.toFixed(0),
-			+mriCoordinatesKey.axial.height - +resultY.toFixed(0)
+			+atlasImagesDimensionsKey.mriDimensions.axial.width - +resultX.toFixed(0),
+			+atlasImagesDimensionsKey.mriDimensions.axial.height - +resultY.toFixed(0)
 		);
 
 		// calculate new histology coords
@@ -287,8 +292,8 @@ const AtlasImages: FC<Props> = (props) => {
 		updateMriImagesHandler(
 			"axial",
 			+resultZ.toFixed(0),
-			+(+mriCoordinatesKey.axial.width - +resultX).toFixed(0),
-			+(+mriCoordinatesKey.axial.height - +resultY).toFixed(0)
+			+atlasImagesDimensionsKey.mriDimensions.axial.width - +resultX.toFixed(0),
+			+atlasImagesDimensionsKey.mriDimensions.axial.height - +resultY.toFixed(0)
 		);
 
 		const newHistologyCoords = { ...histologyImageCoords };
@@ -318,6 +323,7 @@ const AtlasImages: FC<Props> = (props) => {
 				showHiRes={showHiRes}
 				setShowHiRes={setShowHiRes}
 				updateMriAndHistologyImages={updateMriAndHistologyImages}
+				atlasImagesDimensionsKey={atlasImagesDimensionsKey}
 			/>
 
 			<HistologyImage

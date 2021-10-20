@@ -1,10 +1,11 @@
-import { FC, useState, useCallback } from "react";
+import { FC, useState, useCallback, useEffect } from "react";
 
 import AtlasImages from "../components/atlas/atlasImages/AtlasImages";
 import AtlasOptions from "../components/atlas/atlasOptions/AtlasOptions";
 //import Scrollbars from "../components/atlas/scrollbars/Scrollbars";
 import getMatrix from "../components/utils/getMatrix";
 import matrixMultiplier from "../components/utils/matrixMultiplier";
+import { ASSETS_URL } from "../components/utils/ASSETS_URL";
 
 import { CurrentLabel } from "../models/label.model";
 import { Centroid } from "../models/centroid.model";
@@ -19,6 +20,8 @@ const Atlas: FC = () => {
 	const [labelsTransparency, setLabelsTransparency] = useState("0.5");
 	const [currentLabel, setCurrentLabel] = useState<CurrentLabel | null>(null);
 	const [centroid, setCentroid] = useState<Centroid | null>(null);
+	const [atlasImagesDimensionsKey, setAtlasImagesDimensionsKey] =
+		useState<any>(null);
 
 	// useCallback prevents unnecessary re-render of child component (AtlasNavigation.tsx)
 	const getCentroid = useCallback(
@@ -45,6 +48,49 @@ const Atlas: FC = () => {
 		[patientId]
 	);
 
+	useEffect(() => {
+		const getAtlasImageDimensionsFiles = async () => {
+			const mriDimensionsKeyUrl = `${ASSETS_URL}${patientId}/mriDimensionsKey.json`;
+			const histologyLowResDimensionsKeyUrl = `${ASSETS_URL}${patientId}/histologyDimensionsKey.json`;
+			const histologyHiResDimensionsKeyUrl = `${ASSETS_URL}${patientId}/histologyHRDimensionsKey.json`;
+
+			const mriDimensionsKeyFile = await (
+				await fetch(mriDimensionsKeyUrl)
+			).json();
+
+			const histologyLowResDimensionsKeyFile = await (
+				await fetch(histologyLowResDimensionsKeyUrl)
+			).json();
+
+			const histologyHiResDimensionsKeyFile = await (
+				await fetch(histologyHiResDimensionsKeyUrl)
+			).json();
+
+			console.log(mriDimensionsKeyFile);
+			console.log(histologyLowResDimensionsKeyFile);
+			console.log(histologyHiResDimensionsKeyFile);
+
+			const atlasImagesDimensionsKey = {
+				mriDimensions: mriDimensionsKeyFile,
+				histologyLowResDimensions: histologyLowResDimensionsKeyFile,
+				histologyHiResDimensions: histologyHiResDimensionsKeyFile,
+			};
+
+			setAtlasImagesDimensionsKey(atlasImagesDimensionsKey);
+		};
+
+		getAtlasImageDimensionsFiles();
+	}, [patientId]);
+
+	if (atlasImagesDimensionsKey == null) {
+		return (
+			<div>
+				Trying to load in atlas image dimensions keys, this should only take a
+				few seconds.
+			</div>
+		);
+	}
+
 	return (
 		<main className="atlas-container">
 			<AtlasImages
@@ -56,6 +102,7 @@ const Atlas: FC = () => {
 				labelsTransparency={labelsTransparency}
 				setCurrentLabel={setCurrentLabel}
 				centroid={centroid}
+				atlasImagesDimensionsKey={atlasImagesDimensionsKey}
 			/>
 
 			<AtlasOptions
