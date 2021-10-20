@@ -83,12 +83,7 @@ const Atlas: FC = () => {
 	}, [patientId]);
 
 	if (atlasImagesDimensionsKey == null) {
-		return (
-			<div>
-				Trying to load in atlas image dimensions keys, this should only take a
-				few seconds.
-			</div>
-		);
+		return <div>Loading atlas assets, this might take a few seconds...</div>;
 	}
 
 	return (
