@@ -50,13 +50,16 @@ const AtlasImages: FC<Props> = (props) => {
 		centroid,
 	} = props;
 
-	const updateAtlasImages = async (
+	const updateMriAndHistologyImages = async (
 		currentMriPlane: string,
 		currentMriSlice: number,
 		currentMriMouseX: number,
 		currentMriMouseY: number,
 		patientId: string
 	) => {
+		// user is navigating within an mri image
+		// function updates mri image coords and then calculates new histology coords
+
 		const newMriCoords = updateMriImagesHandler(
 			currentMriPlane,
 			currentMriSlice,
@@ -64,8 +67,14 @@ const AtlasImages: FC<Props> = (props) => {
 			currentMriMouseY
 		);
 
-		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
+		updateHistologyImagesHandler(currentMriPlane, newMriCoords!, patientId);
+	};
 
+	const updateHistologyImagesHandler = async (
+		currentMriPlane: string,
+		newMriCoords: MriCoords,
+		patientId: string
+	) => {
 		const newHistologyCoords = await calculateHistologyImageCoords(
 			currentMriPlane,
 			newMriCoords!,
@@ -122,6 +131,8 @@ const AtlasImages: FC<Props> = (props) => {
 			adjustedMriMouseY!
 		);
 
+		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
+
 		return newMriCoords;
 	};
 
@@ -155,7 +166,7 @@ const AtlasImages: FC<Props> = (props) => {
 			try {
 				// args: plane, slice, currentMriMouseX, currentMriMouseY
 				// I should pass the argument as an object to make it more clear
-				await updateAtlasImages("axial", 124, 149, 357, patientId);
+				await updateMriAndHistologyImages("axial", 124, 149, 357, patientId);
 			} catch {
 				setError("error building atlas");
 			}
@@ -200,11 +211,11 @@ const AtlasImages: FC<Props> = (props) => {
 			const resultY = centroid.resultY;
 			const resultZ = centroid.resultZ;
 
-			updateAtlasImages(
+			updateMriAndHistologyImages(
 				"axial",
-				Number(resultZ.toFixed(0)),
-				Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
-				Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0)),
+				+resultZ.toFixed(0),
+				+mriCoordinatesKey.axial.width - +resultX.toFixed(0),
+				+mriCoordinatesKey.axial.height - +resultY.toFixed(0),
 				patientId
 			);
 		}
@@ -234,14 +245,14 @@ const AtlasImages: FC<Props> = (props) => {
 
 		const { resultX, resultY, resultZ } = singleMriCoord;
 
-		const newMriCoords = updateMriImagesHandler(
+		console.log(resultX, resultY, resultZ);
+
+		updateMriImagesHandler(
 			"axial",
 			+resultZ.toFixed(0),
 			+mriCoordinatesKey.axial.width - +resultX.toFixed(0),
 			+mriCoordinatesKey.axial.height - +resultY.toFixed(0)
 		);
-
-		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
 
 		// calculate new histology coords
 		const newHistologyCoords = { ...histologyImageCoords };
@@ -273,14 +284,12 @@ const AtlasImages: FC<Props> = (props) => {
 
 		const { resultX, resultY, resultZ } = singleMriCoord;
 
-		const newMriCoords = updateMriImagesHandler(
+		updateMriImagesHandler(
 			"axial",
-			Number(resultZ.toFixed(0)),
-			Number((+mriCoordinatesKey.axial.width - resultX).toFixed(0)),
-			Number((+mriCoordinatesKey.axial.height - resultY).toFixed(0))
+			+resultZ.toFixed(0),
+			+(+mriCoordinatesKey.axial.width - +resultX).toFixed(0),
+			+(+mriCoordinatesKey.axial.height - +resultY).toFixed(0)
 		);
-
-		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
 
 		const newHistologyCoords = { ...histologyImageCoords };
 		newHistologyCoords.currentHistologySlice = +newSliceNumber.toFixed(0);
@@ -308,7 +317,7 @@ const AtlasImages: FC<Props> = (props) => {
 				mriImageCoords={mriImageCoords}
 				showHiRes={showHiRes}
 				setShowHiRes={setShowHiRes}
-				updateAtlasImages={updateAtlasImages}
+				updateMriAndHistologyImages={updateMriAndHistologyImages}
 			/>
 
 			<HistologyImage

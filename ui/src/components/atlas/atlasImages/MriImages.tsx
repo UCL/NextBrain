@@ -11,7 +11,7 @@ interface Props {
 	mriImageCoords: MriCoords | null;
 	showHiRes: boolean;
 	setShowHiRes: (showHiRes: boolean) => void;
-	updateAtlasImages: (
+	updateMriAndHistologyImages: (
 		plane: string,
 		currentSlice: number,
 		mouseX: number,
@@ -26,7 +26,7 @@ const MriImages: FC<Props> = (props) => {
 		mriImageCoords,
 		showHiRes,
 		setShowHiRes,
-		updateAtlasImages,
+		updateMriAndHistologyImages,
 	} = props;
 
 	const computeMriImagesHandler = (
@@ -47,7 +47,7 @@ const MriImages: FC<Props> = (props) => {
 
 		if (!mouseIsWithinBounds) return;
 
-		updateAtlasImages(
+		updateMriAndHistologyImages(
 			plane,
 			+mriImageCoords![plane]["slice"],
 			mouseX,
