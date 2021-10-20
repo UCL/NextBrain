@@ -76,10 +76,6 @@ The URL for the hosted application is [https://github-pages.ucl.ac.uk/BrainAtlas
 
 ```shell script
 npm run deployStaging
-
-or
-
-npm run deployStagingSh
 ```
 
 Builds a staging version of the app to the `build` folder.<br />
@@ -88,7 +84,9 @@ The build is minified and the filenames include the hashes.<br />
 
 The build is then published to a separate GitHub repository that is setup simply to host the staging version of the app. No development code is maintained in the staging repo, it only hosts the current build.
 
-Once the staging app is deployed, the build folder is deleted. This allows us to push a brand new staging build each time.
+The URL for the staging application is [https://github-pages.ucl.ac.uk/BrainAtlas-staging/#/atlas](https://github-pages.ucl.ac.uk/BrainAtlas-staging/#/atlas)
+
+Once the staging app is deployed, the build folder is deleted next time you run the above command. This allows us to push a brand new staging build each time.
 
 For more guidance see: [https://blog.bloomca.me/2017/12/15/how-to-push-folder-to-github-pages.html](https://blog.bloomca.me/2017/12/15/how-to-push-folder-to-github-pages.html)
 
