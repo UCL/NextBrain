@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, SyntheticEvent } from "react";
+import { FC, useState, useEffect, SyntheticEvent } from "react";
 
 import { ASSETS_URL } from "../../utils/ASSETS_URL";
 import LoadingSpinner from "../../shared/LoadingSpinner";

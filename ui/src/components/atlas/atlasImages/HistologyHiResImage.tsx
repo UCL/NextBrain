@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import MousePointer from "../../shared/MousePointer";
