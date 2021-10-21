@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import MriImage from "./MriImage";
-import getMouseCoords from "../../utils/getmouseCoords";
+import getMouseCoords from "../../utils/getMouseCoords";
 
 import { MriCoords } from "../../../models/mriCoords.model";
 import { AtlasImagesDimensionsKey } from "../../../models/atlasImagesDimensionsKey.model";

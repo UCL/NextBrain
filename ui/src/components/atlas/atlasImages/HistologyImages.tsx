@@ -4,7 +4,7 @@ import { ASSETS_URL } from "../../utils/ASSETS_URL";
 import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
 import MousePointer from "../../shared/MousePointer";
-import getMouseCoords from "../../utils/getmouseCoords";
+import getMouseCoords from "../../utils/getMouseCoords";
 import HistologyLowResImage from "./HistologyLowResImage";
 import HistologyLabelsImage from "./HistologyLabelsImage";
 import HistologyHiResImage from "./HistologyHiResImage";

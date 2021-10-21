@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 
 import ErrorModal from "../../shared/ErrorModal";
-import getMouseCoords from "../../utils/getmouseCoords";
+import getMouseCoords from "../../utils/getMouseCoords";
 
 import { HistologyCoords } from "../../../models/histologyCoords.model";
 import { AtlasImagesDimensionsKey } from "../../../models/atlasImagesDimensionsKey.model";

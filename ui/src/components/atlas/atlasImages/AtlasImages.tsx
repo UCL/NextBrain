@@ -7,7 +7,7 @@ import logMriCoordsForDebugging from "../../utils/logMriCoordsForDebugging";
 import LoadingSpinner from "../../shared/LoadingSpinner";
 import ErrorModal from "../../shared/ErrorModal";
 import MriImages from "./MriImages";
-import HistologyImageContainer from "./HistologyImages";
+import HistologyImages from "./HistologyImages";
 import getMatrix from "../../utils/getMatrix";
 import matrixMultiplier from "../../utils/matrixMultiplier";
 import histologyLabelParser from "../../utils/histologyLabelParser";
@@ -39,8 +39,6 @@ const AtlasImages: FC<Props> = (props) => {
 	const [mriImageCoords, setMriImageCoords] = useState<MriCoords | null>(null);
 	const [histologyImageCoords, setHistologyImageCoords] =
 		useState<HistologyCoords | null>(null);
-
-	console.log(mriImageCoords);
 
 	const {
 		patientId,
@@ -255,8 +253,6 @@ const AtlasImages: FC<Props> = (props) => {
 
 		const { resultX, resultY, resultZ } = singleMriCoord;
 
-		console.log(resultX, resultY, resultZ);
-
 		updateMriImagesHandler(
 			"axial",
 			+resultZ.toFixed(0),
@@ -269,12 +265,74 @@ const AtlasImages: FC<Props> = (props) => {
 		// calculate new histology coords
 		const newHistologyCoords = { ...histologyImageCoords };
 
+		const currentHistologyBlock = histologyImageCoords!.currentHistologySlice;
+
+		// initialise variables to avoid typescript errors
+		// is there a more correct way of doing this?
+		let lowResMouseX = 0;
+		let lowResMouseY = 0;
+		let hiResMouseX = 0;
+		let hiResMouseY = 0;
+
+		// we need to calculate the coords for both hi and low res
+		// when scaling between hi and low res, the result seems to be always about 10px off
+		// look into why this might be
+
+		// calculate low-res mouse position from current hi-res mouse coord
+		if (showHiRes) {
+			lowResMouseX =
+				(+atlasImagesDimensionsKey!.histologyLowResDimensions[
+					currentHistologyBlock
+				].width /
+					+atlasImagesDimensionsKey!.histologyHiResDimensions[
+						currentHistologyBlock
+					].width) *
+				currentHistologyMouseX;
+
+			lowResMouseY =
+				(+atlasImagesDimensionsKey!.histologyLowResDimensions[
+					currentHistologyBlock
+				].height /
+					+atlasImagesDimensionsKey!.histologyHiResDimensions[
+						currentHistologyBlock
+					].height) *
+				currentHistologyMouseY;
+		}
+
+		// calculate hi-res mouse position from current low-res mouse coord
+		if (!showHiRes) {
+			hiResMouseX =
+				(+atlasImagesDimensionsKey!.histologyHiResDimensions[
+					currentHistologyBlock
+				].width /
+					+atlasImagesDimensionsKey!.histologyLowResDimensions[
+						currentHistologyBlock
+					].width) *
+				currentHistologyMouseX;
+
+			hiResMouseY =
+				(+atlasImagesDimensionsKey!.histologyHiResDimensions[
+					currentHistologyBlock
+				].height /
+					+atlasImagesDimensionsKey!.histologyLowResDimensions[
+						currentHistologyBlock
+					].height) *
+				currentHistologyMouseY;
+		}
+
+		// assign new mouse coords for both low and hi res
 		if (showHiRes) {
 			newHistologyCoords.coordsHiRes!.mouseX = currentHistologyMouseX;
 			newHistologyCoords.coordsHiRes!.mouseY = currentHistologyMouseY;
+
+			newHistologyCoords.coordsLowRes!.mouseX = +lowResMouseX;
+			newHistologyCoords.coordsLowRes!.mouseY = +lowResMouseY;
 		} else {
 			newHistologyCoords.coordsLowRes!.mouseX = currentHistologyMouseX;
 			newHistologyCoords.coordsLowRes!.mouseY = currentHistologyMouseY;
+
+			newHistologyCoords.coordsHiRes!.mouseX = +hiResMouseX;
+			newHistologyCoords.coordsHiRes!.mouseY = +hiResMouseY;
 		}
 
 		setHistologyImageCoords(newHistologyCoords as HistologyCoords);
@@ -335,7 +393,7 @@ const AtlasImages: FC<Props> = (props) => {
 				atlasImagesDimensionsKey={atlasImagesDimensionsKey}
 			/>
 
-			<HistologyImageContainer
+			<HistologyImages
 				patientId={patientId}
 				histologyImageCoords={histologyImageCoords}
 				channel={channel}
