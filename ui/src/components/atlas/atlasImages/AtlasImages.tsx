@@ -277,6 +277,7 @@ const AtlasImages: FC<Props> = (props) => {
 		// we need to calculate the coords for both hi and low res
 		// when scaling between hi and low res, the result seems to be always about 10px off
 		// look into why this might be
+		// possibly outsource this into a standalone module for reuse
 
 		// calculate low-res mouse position from current hi-res mouse coord
 		if (showHiRes) {
