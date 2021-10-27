@@ -1,7 +1,7 @@
 import JSZip from "jszip";
 
-export default class npzAsArrayBuffer {
-	async readFileAsync(file) {
+export default class npzParser {
+	async readFileAsync(file: Blob) {
 		return new Promise((resolve, reject) => {
 			let reader = new FileReader();
 
@@ -15,7 +15,7 @@ export default class npzAsArrayBuffer {
 		});
 	}
 
-	async parseNpz(arrayBuffer) {
+	async parseNpz(arrayBuffer: ArrayBuffer) {
 		let zip = new JSZip();
 
 		const npzUint8Array = new Uint8Array(arrayBuffer); // parse the arrayBuffer as a uint8Array
@@ -26,7 +26,7 @@ export default class npzAsArrayBuffer {
 
 		// parse the loaded zip as an arrayBuffer
 		const unzippedArrayBuffer = await loadedZip
-			.file(fileName)
+			.file(fileName)!
 			.async("arraybuffer");
 
 		// we need to parse both the uint8array data and the uint16 array data from the zip
@@ -56,19 +56,17 @@ export default class npzAsArrayBuffer {
 		return npyData;
 	}
 
-	async load(filename) {
+	async load(filename: RequestInfo) {
 		// Loads an array from a stream of bytes.
 		const self = this;
 		return fetch(filename)
-			.then((fh) => {
-				if (fh.ok) {
-					return fh
+			.then((fetchedFile) => {
+				if (fetchedFile.ok) {
+					return fetchedFile
 						.blob()
-						.then((i) => {
-							const content = i;
-
-							return self.readFileAsync(content).then((res) => {
-								return self.parseNpz(res);
+						.then((blobData) => {
+							return self.readFileAsync(blobData).then((arrayBuffer) => {
+								return self.parseNpz(arrayBuffer as ArrayBuffer);
 							});
 						})
 						.catch((err) => console.error(err));
