@@ -1,11 +1,9 @@
-import { FC, useState, useCallback, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 
+import { ASSETS_URL } from "../components/utils/ASSETS_URL";
 import AtlasImages from "../components/atlas/atlasImages/AtlasImages";
 import AtlasOptions from "../components/atlas/atlasOptions/AtlasOptions";
 //import Scrollbars from "../components/atlas/scrollbars/Scrollbars";
-import getMatrix from "../components/utils/getMatrix";
-import matrixMultiplier from "../components/utils/matrixMultiplier";
-import { ASSETS_URL } from "../components/utils/ASSETS_URL";
 
 import { CurrentLabel } from "../models/label.model";
 import { AtlasImagesDimensionsKey } from "../models/atlasImagesDimensionsKey.model";
@@ -26,7 +24,7 @@ const Atlas: FC = () => {
 	const [atlasImagesDimensionsKey, setAtlasImagesDimensionsKey] =
 		useState<AtlasImagesDimensionsKey | null>(null);
 
-	// loads in some helper files at app start-up
+	// load in some helper files at app start-up
 	useEffect(() => {
 		const getAtlasImageDimensionsFiles = async () => {
 			const mriDimensionsKeyUrl = `${ASSETS_URL}${patientId}/mriDimensionsKey.json`;
@@ -59,33 +57,6 @@ const Atlas: FC = () => {
 		getAtlasImageDimensionsFiles();
 	}, [patientId]);
 
-	// useCallback prevents unnecessary re-render of child component (AtlasNavigation.tsx)
-	const getNavPanelCoords = useCallback(
-		async (navPanelCoords: NavPanelCoords) => {
-			console.log(navPanelCoords);
-
-			const matrix = await getMatrix(
-				navPanelCoords!.blockNumber,
-				"histology",
-				patientId
-			);
-
-			// why is the order of params here different compared to the function that handles physical clicks?
-			// the x and y are swapped here compared to the histologyToMri function
-			// there must be some sort of flipping of axes somewhere
-			// regardless, the app seems to work with this configuration
-			const singleMriCoord = matrixMultiplier(matrix, [
-				navPanelCoords!.xh,
-				navPanelCoords!.yh,
-				navPanelCoords!.zh,
-				1,
-			]);
-
-			setNavPanelCoords(singleMriCoord);
-		},
-		[patientId]
-	);
-
 	if (atlasImagesDimensionsKey == null) {
 		return <div>Loading atlas assets, this might take a few seconds...</div>;
 	}
@@ -116,7 +87,7 @@ const Atlas: FC = () => {
 				labelsTransparency={labelsTransparency}
 				setLabelsTransparency={setLabelsTransparency}
 				currentLabel={currentLabel}
-				getNavPanelCoords={getNavPanelCoords}
+				setNavPanelCoords={setNavPanelCoords}
 			/>
 
 			{/* ideally, scrollbars should go here */}

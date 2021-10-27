@@ -7,8 +7,10 @@
 	background-color: rgb(119, 119, 119);
 } */
 
+/* instead of using display: none, I should reset the navigation tree state whenever the label changes */
 .atlas-navigation .tag-item .tag {
 	color: black;
+	display: none;
 }
 
 .atlas-navigation .dropdown .dropdown-trigger.arrow.bottom:after,

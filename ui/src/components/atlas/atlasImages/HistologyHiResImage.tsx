@@ -28,8 +28,6 @@ const HistologyHiResImage: FC<Props> = (props) => {
 	} = props;
 
 	const onPan = (ref: any, e: Event) => {
-		// console.log(ref);
-
 		updateHistologyCoordsHandler(e, "hiRes");
 	};
 

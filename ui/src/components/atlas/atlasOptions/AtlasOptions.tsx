@@ -25,7 +25,7 @@ interface Props {
 	labelsTransparency: string;
 	setLabelsTransparency: (labelsTransparency: string) => void;
 	currentLabel: CurrentLabel | null;
-	getNavPanelCoords: (navPanelCoords: NavPanelCoords) => void;
+	setNavPanelCoords: (navPanelCoords: NavPanelCoords) => void;
 }
 
 const AtlasOptions: FC<Props> = (props) => {
@@ -41,7 +41,7 @@ const AtlasOptions: FC<Props> = (props) => {
 		labelsTransparency,
 		setLabelsTransparency,
 		currentLabel,
-		getNavPanelCoords,
+		setNavPanelCoords,
 	} = props;
 
 	return (
@@ -50,7 +50,7 @@ const AtlasOptions: FC<Props> = (props) => {
 
 			<AtlasNavigation
 				patientId={patientId}
-				getNavPanelCoords={getNavPanelCoords}
+				setNavPanelCoords={setNavPanelCoords}
 				showHiRes={showHiRes}
 				setShowHiRes={setShowHiRes}
 			/>

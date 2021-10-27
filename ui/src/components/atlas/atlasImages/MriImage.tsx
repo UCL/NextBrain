@@ -82,7 +82,6 @@ const MriImage: FC<Props> = (props) => {
 
 					<img
 						onClick={(e) => computeMriImagesHandler(e, plane)}
-						// onWheel={(e) => console.log(e)}
 						className={`${plane}-img`}
 						src={mriImage}
 						alt={`${plane}-slice${currentSlice}`}
