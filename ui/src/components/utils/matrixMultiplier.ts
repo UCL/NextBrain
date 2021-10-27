@@ -2,7 +2,6 @@
 // for a worked example of matrix multiplication see https://matrix.reshish.com/multCalculation.php
 
 const multiplyMatrixAndPoint = (matrix: number[], point: number[]) => {
-	console.log(point);
 	// Give a variable name to each part of the matrix, a column and row number
 	let c0r0 = matrix[0],
 		c1r0 = matrix[1],

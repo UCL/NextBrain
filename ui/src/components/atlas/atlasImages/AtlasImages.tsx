@@ -83,7 +83,6 @@ const AtlasImages: FC<Props> = (props) => {
 			patientId,
 			atlasImagesDimensionsKey
 		);
-		console.log("histology image coords: ", newHistologyCoords);
 
 		if (newHistologyCoords === "no block found") {
 			setError("No block found for this coordinate");
@@ -265,9 +264,9 @@ const AtlasImages: FC<Props> = (props) => {
 		// calculate new histology coords
 		const newHistologyCoords = { ...histologyImageCoords };
 
-		const currentHistologyBlock = histologyImageCoords!.currentHistologySlice;
+		const currentHistologyBlock = histologyImageCoords!.currentHistologyBlock;
 
-		// initialise variables to avoid typescript errors
+		// initialize variables to avoid typescript errors
 		// is there a more correct way of doing this?
 		let lowResMouseX = 0;
 		let lowResMouseY = 0;

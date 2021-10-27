@@ -67,7 +67,7 @@ const HistologyImages: FC<Props> = (props) => {
 				// }
 
 				try {
-					// setIsLoading(true);
+					setIsLoading(true);
 
 					const histologyImageUrl = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.${histologyFileExtension}`;
 					const labelsImageUrl = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.${labelsFileExtension}`;
@@ -89,7 +89,7 @@ const HistologyImages: FC<Props> = (props) => {
 					setError("Error, could not load histology image");
 					console.log(e);
 				}
-				// setIsLoading(false);
+				setIsLoading(false);
 			}
 		};
 
@@ -240,7 +240,7 @@ const HistologyImages: FC<Props> = (props) => {
 		return <div>Could not find histology image coords</div>;
 	}
 
-	if (histologyImage == null) {
+	if (histologyImage == null || histologyImage === "") {
 		return (
 			<>
 				<ErrorModal error={error} onClear={() => setError(null)} />
