@@ -1,13 +1,13 @@
 import { FC } from "react";
 
-import "./LabelsBtn.css";
+import "./ShowLabelsBtn.css";
 
 interface Props {
 	showLabels: boolean;
 	setShowLabels: (showLabels: boolean) => void;
 }
 
-const LabelsBtn: FC<Props> = (props) => {
+const ShowLabelsBtn: FC<Props> = (props) => {
 	const { showLabels, setShowLabels } = props;
 
 	return (
@@ -20,4 +20,4 @@ const LabelsBtn: FC<Props> = (props) => {
 	);
 };
 
-export default LabelsBtn;
+export default ShowLabelsBtn;

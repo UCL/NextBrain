@@ -28,8 +28,9 @@ const Label: FC<Props> = (props) => {
 	if (currentLabel === null) {
 		return (
 			<div>
-				{isLoading && <LoadingSpinner asOverlay={false} />}
-				Fetching label
+				{isLoading && (
+					<LoadingSpinner asOverlay={false} message={"Fetching label..."} />
+				)}
 			</div>
 		);
 	}
@@ -38,7 +39,6 @@ const Label: FC<Props> = (props) => {
 		return <div>no label found</div>;
 	}
 
-	// make the label an object so it is more clear what its contents are
 	return (
 		<div className="label-container">
 			{currentLabel != null && (

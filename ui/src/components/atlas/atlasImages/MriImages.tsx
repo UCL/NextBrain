@@ -92,6 +92,10 @@ const MriImages: FC<Props> = (props) => {
 		return true;
 	};
 
+	if (mriImageCoords == null) {
+		return <div> Could not find mri image coordinates</div>;
+	}
+
 	return (
 		<>
 			{/* too much repetition here, use map to loop through components? */}

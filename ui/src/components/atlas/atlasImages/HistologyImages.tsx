@@ -67,7 +67,7 @@ const HistologyImages: FC<Props> = (props) => {
 				// }
 
 				try {
-					//setIsLoading(true);
+					// setIsLoading(true);
 
 					const histologyImageUrl = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_${channel}/slice_${paddedSlice}.${histologyFileExtension}`;
 					const labelsImageUrl = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.${labelsFileExtension}`;
@@ -89,7 +89,7 @@ const HistologyImages: FC<Props> = (props) => {
 					setError("Error, could not load histology image");
 					console.log(e);
 				}
-				//setIsLoading(false);
+				// setIsLoading(false);
 			}
 		};
 
@@ -244,7 +244,9 @@ const HistologyImages: FC<Props> = (props) => {
 		return (
 			<>
 				<ErrorModal error={error} onClear={() => setError(null)} />
-				{isLoading && <LoadingSpinner asOverlay={false} />}
+				{isLoading && (
+					<LoadingSpinner asOverlay={false} message={"Loading..."} />
+				)}
 				{!isLoading && <div>Failed to load histology image</div>}
 			</>
 		);
@@ -254,7 +256,9 @@ const HistologyImages: FC<Props> = (props) => {
 		return (
 			<>
 				<ErrorModal error={error} onClear={() => setError(null)} />
-				{isLoading && <LoadingSpinner asOverlay={false} />}
+				{isLoading && (
+					<LoadingSpinner asOverlay={false} message={"Loading..."} />
+				)}
 				{!isLoading && <div>Failed to load labels</div>}
 			</>
 		);
@@ -265,7 +269,7 @@ const HistologyImages: FC<Props> = (props) => {
 			<div className="histology-container">
 				<div className={`histology-img-container`}>
 					<ErrorModal error={error} onClear={() => setError(null)} />
-					{isLoading && <LoadingSpinner asOverlay />}
+					{isLoading && <LoadingSpinner asOverlay message={"Loading..."} />}
 
 					{!showHiRes && scaledHistologyMouseCoords && (
 						<MousePointer

@@ -1,9 +1,7 @@
-// import npyjs from "npyjs";
 import ndarray from "ndarray";
-import JSZip from "jszip";
 
+import npzParser from "./npzParser";
 import { ASSETS_URL } from "./ASSETS_URL";
-import npzAsArrayBuffer from "./npzAsArrayBuffer";
 
 import { HistologyCoords } from "../../models/histologyCoords.model";
 
@@ -40,8 +38,7 @@ const getCurrentLabelNumber = async (
 	// the numpy array takes in x and y mouse coordinates to point to an index
 	// the index returns the label number
 
-	let n = new npzAsArrayBuffer();
-	let zip = new JSZip();
+	const n = new npzParser(); // uncompresses and parses an npz file
 
 	const paddedBlock = histologyImageCoords.currentHistologyBlock
 		.toString()
@@ -55,52 +52,13 @@ const getCurrentLabelNumber = async (
 
 	const npzFile = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels_npz/slice_${paddedSlice}.npz`;
 
-	console.log(npzFile);
+	const npyData = await n.load(npzFile); // returns uncompressed raw contents of an npz file
 
-	const npzArrayBuffer = await n.load(npzFile); // returns raw contents as an unparsed array buffer
-
-	const npzUint8Array = new Uint8Array(npzArrayBuffer); // parse the arrayBuffer as a uint8Array
-
-	const loadedZip = await zip.loadAsync(npzUint8Array!); // get all files in the zip
-
-	const filesData = Object.entries(loadedZip.files)[0][0]; // the name of the file insise the zip file
-
-	// parse the loaded zip as an arrayBuffer
-	const unzippedArrayBuffer = await loadedZip
-		.file(filesData)!
-		.async("arraybuffer");
-
-	// we need to parse both the uint8array data and the uint16 array data from the zip
-	// we get the header info from the unit8 data
-	// and we get the actual npy array data from the uint16 data
-
-	// create the header data from the uint8Array data
-	let headerData = new Uint8Array(unzippedArrayBuffer);
-	let hcontents = new TextDecoder("utf-8").decode(
-		new Uint8Array(headerData.slice(10, 10 + 118))
-	);
-	var header = JSON.parse(
-		hcontents
-			.toLowerCase() // True -> true
-			.replace(/'/g, '"')
-			.replace("(", "[")
-			.replace(/,*\),*/g, "]")
-	);
-	console.log(header);
-
-	// get the npy array data from the uint16array
-	let npyData = new Uint16Array(unzippedArrayBuffer.slice(128));
-
-	// process the array data accordingly
-	let ndArray = ndarray(npyData, header.shape);
+	let ndArray = ndarray(npyData!.data, npyData!.header.shape);
 
 	ndArray = await ndArray.transpose(1, 0);
 
-	console.log(mouseX, mouseY);
-
 	const currentLabelNumber = ndArray.get(mouseX.toFixed(0), mouseY.toFixed(0));
-
-	console.log(currentLabelNumber);
 
 	return currentLabelNumber;
 };

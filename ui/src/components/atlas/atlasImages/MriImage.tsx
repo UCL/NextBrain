@@ -30,8 +30,8 @@ const MriImage: FC<Props> = (props) => {
 	useEffect(() => {
 		// determine the correct mri image based on computed coordinates
 
-		const paddedSlice = mriImageCoords![plane]?.slice
-			.toFixed(0)
+		const paddedSlice = mriImageCoords!
+			[plane]!.slice.toFixed(0)
 			.padStart(3, "0");
 
 		setCurrentSlice(paddedSlice);
@@ -62,7 +62,9 @@ const MriImage: FC<Props> = (props) => {
 		return (
 			<>
 				<ErrorModal error={error} onClear={() => setError(null)} />
-				{isLoading && <LoadingSpinner asOverlay={false} />}
+				{isLoading && (
+					<LoadingSpinner asOverlay={false} message={"Loading..."} />
+				)}
 				{!isLoading && <div>Failed to load mri image</div>}
 			</>
 		);

@@ -374,7 +374,7 @@ const AtlasImages: FC<Props> = (props) => {
 		return (
 			<>
 				<ErrorModal error={error} onClear={() => setError(null)} />
-				{isLoading && <LoadingSpinner asOverlay />}
+				{isLoading && <LoadingSpinner asOverlay message={"Loading..."} />}
 				<div>Builing atlas, please wait...</div>
 			</>
 		);
@@ -383,7 +383,7 @@ const AtlasImages: FC<Props> = (props) => {
 	return (
 		<div className="atlas-imgs-container">
 			<ErrorModal error={error} onClear={() => setError(null)} />
-			{isLoading && <LoadingSpinner asOverlay />}
+			{isLoading && <LoadingSpinner asOverlay message={"Loading..."} />}
 
 			<MriImages
 				patientId={patientId}

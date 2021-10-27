@@ -1,13 +1,13 @@
 import { FC } from "react";
 
-import "./HiResBtn.css";
+import "./ShowHiResBtn.css";
 
 interface Props {
 	showHiRes: boolean;
 	setShowHiRes: (showHiRes: boolean) => void;
 }
 
-const HiResBtn: FC<Props> = (props) => {
+const ShowHiResBtn: FC<Props> = (props) => {
 	const { showHiRes, setShowHiRes } = props;
 
 	return (
@@ -19,4 +19,4 @@ const HiResBtn: FC<Props> = (props) => {
 	);
 };
 
-export default HiResBtn;
+export default ShowHiResBtn;
