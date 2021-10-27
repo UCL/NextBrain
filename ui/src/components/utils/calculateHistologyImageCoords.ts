@@ -88,6 +88,55 @@ const getHistologyImageCoords = (
 	return { coords: histologyImageCoords, slice: histologySlice };
 };
 
+const getCurrentBlock = async (
+	currentMriPlane: string,
+	currentMriMouseX: number,
+	currentMriMouseY: number,
+	currentMriSlice: number,
+	patientId: string,
+	atlasImagesDimensionsKey: any
+) => {
+	let currentBlock;
+	let n = new npyjs();
+
+	console.log("current slice: " + currentMriSlice);
+
+	const paddedSlice = currentMriSlice.toFixed(0).padStart(3, "0");
+
+	let npyFile;
+	try {
+		npyFile = `${ASSETS_URL}${patientId}/mri_rotated/indices_${currentMriPlane}/slice_${paddedSlice}.npy`;
+	} catch (e: any) {
+		throw new Error(e);
+	}
+
+	const npyArray = await n.load(npyFile);
+
+	let ndArray = ndarray(npyArray.data, npyArray.shape);
+
+	// the numpy arrays in the data are the opposite of the image dimensions, so a transposition is needed
+	ndArray = await ndArray.transpose(1, 0);
+
+	console.log("npy shape (after transpose): " + ndArray.shape);
+
+	if (currentMriPlane === "sagittal") {
+		// sagittal has an additional horizontal flip, so we need to account for that here
+		// since its been flipped, we dont need to take the adjustedMriMouseX... we just take the normal currentMriMouseX
+		currentBlock = ndArray.get(
+			currentMriMouseX,
+			ndArray.shape[1] -
+				(+atlasImagesDimensionsKey.mriDimensions.sagittal.height -
+					currentMriMouseY)
+		);
+	}
+
+	if (currentMriPlane === "coronal" || currentMriPlane === "axial") {
+		currentBlock = ndArray.get(currentMriMouseX, currentMriMouseY);
+	}
+
+	return currentBlock;
+};
+
 const validateCoords = (
 	coords: { resultX: number; resultY: number; resultZ: number },
 	currentBlock: number,
@@ -118,88 +167,5 @@ const validateCoords = (
 
 	return { resultX, resultY, resultZ };
 };
-
-const getCurrentBlock = async (
-	currentMriPlane: string,
-	currentMriMouseX: number,
-	currentMriMouseY: number,
-	currentMriSlice: number,
-	patientId: string,
-	atlasImagesDimensionsKey: any
-) => {
-	let currentBlock;
-	let n = new npyjs();
-
-	console.log("current slice: " + currentMriSlice);
-
-	const paddedSlice = currentMriSlice.toFixed(0).padStart(3, "0");
-
-	let npyFile;
-	try {
-		npyFile = `${ASSETS_URL}${patientId}/mri_rotated/indices_${currentMriPlane}/slice_${paddedSlice}.npy`;
-	} catch (e: any) {
-		throw new Error(e);
-	}
-
-	const npyArray = await n.load(npyFile);
-
-	let ndArray = ndarray(npyArray.data, npyArray.shape);
-
-	// the numpy arrays in the data are the opposite of the image dimensions, so a transposition is needed
-	// you can alternatively take the dimensions from rotateCoords() below and get the numpy block from xRotated and yRotated
-	ndArray = await ndArray.transpose(1, 0);
-
-	console.log("npy shape (after transpose): " + ndArray.shape);
-
-	// const { xRotated, yRotated } = rotateCoords(
-	// 	ndArray,
-	// 	currentMriMouseX,
-	// 	currentMriMouseY,
-	// 	currentMriPlane,
-	// 	adjustedMriSlice,
-	// 	adjustedMriMouseX,
-	// 	adjustedMriMouseY
-	// );
-
-	if (currentMriPlane === "sagittal") {
-		// sagittal has an additional horizontal flip, so we need to account for that here
-		// since its been flipped, we dont need to take the adjustedMriMouseX... we just take the normal currentMriMouseX
-		currentBlock = ndArray.get(
-			currentMriMouseX,
-			ndArray.shape[1] -
-				(+atlasImagesDimensionsKey.mriDimensions.sagittal.height -
-					currentMriMouseY)
-		);
-	}
-
-	if (currentMriPlane === "coronal" || currentMriPlane === "axial") {
-		currentBlock = ndArray.get(currentMriMouseX, currentMriMouseY);
-	}
-
-	return currentBlock;
-};
-
-// const rotateCoords = (
-// 	ndArray,
-// 	currentMriMouseX,
-// 	currentMriMouseY,
-// 	currentMriPlane,
-// 	adjustedMriSlice,
-// 	adjustedMriMouseX,
-// 	adjustedMriMouseY
-// ) => {
-// 	const ndArray0Modified = (ndArray.shape[0] - 1) / 2;
-// 	const ndArray1Modified = (ndArray.shape[1] - 1) / 2;
-// 	// console.log(ndArray0Modified, ndArray1Modified);
-
-// 	// the x and y have been swapped here compared to Peters python file
-// 	const xRotated = -adjustedMriMouseX + 2 * ndArray1Modified;
-// 	const yRotated = 2 * ndArray0Modified - adjustedMriMouseY;
-
-// 	console.log("rotated mouse x: " + xRotated);
-// 	console.log("rotated mouse y: " + yRotated);
-
-// 	return { xRotated, yRotated };
-// };
 
 export default calculateHistologyImageCoords;

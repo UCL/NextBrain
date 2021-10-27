@@ -23,16 +23,17 @@ const MousePointer: FC<Props> = (props) => {
 		);
 	}
 
-	// shows default coords if none can be found
-	// show an error instead?
 	return (
 		<div
-			className="mouse-pointer"
 			style={{
-				top: 100,
-				left: 100,
+				position: "relative",
+				top: 50,
+				left: 50,
+				zIndex: 1,
 			}}
-		></div>
+		>
+			error: no mouse coords found
+		</div>
 	);
 };
 

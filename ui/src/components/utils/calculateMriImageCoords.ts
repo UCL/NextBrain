@@ -1,5 +1,6 @@
 // coordinates are calculated specifically for each plane
 // refer to the top level readme for guidance on how the coordinates are calculated
+// adjusted coords are used to account for coordinate space differences between the web app and ITKSnap
 
 const calculateMriImageCoords = (
 	currentMriPlane: string,
