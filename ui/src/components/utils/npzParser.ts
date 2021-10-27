@@ -15,6 +15,7 @@ export default class npzParser {
 		});
 	}
 
+	// uncompresses and parses a raw .npz file
 	async parseNpz(arrayBuffer: ArrayBuffer) {
 		let zip = new JSZip();
 
