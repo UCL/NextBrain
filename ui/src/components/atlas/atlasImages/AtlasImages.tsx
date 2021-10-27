@@ -36,6 +36,8 @@ interface Props {
 const AtlasImages: FC<Props> = (props) => {
 	const [error, setError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
+
+	const [initializingAtlas, setInitializingAtlas] = useState(true);
 	const [mriImageCoords, setMriImageCoords] = useState<MriCoords | null>(null);
 	const [histologyImageCoords, setHistologyImageCoords] =
 		useState<HistologyCoords | null>(null);
@@ -159,24 +161,42 @@ const AtlasImages: FC<Props> = (props) => {
 
 			setCurrentLabel(currentLabel);
 		},
-		[setCurrentLabel, patientId]
+		[setCurrentLabel]
 	);
 
-	// initialize mri panels based on an arbitrary starting point
+	// initialize atlas images based on an arbitrary starting point
 	useEffect(() => {
-		const buildAtlas = async () => {
+		const initializeAtlas = async () => {
 			setIsLoading(true);
+
+			console.log(patientId);
 			try {
 				// args: plane, slice, currentMriMouseX, currentMriMouseY
 				// I should pass the argument as an object to make it more clear
-				await updateMriAndHistologyImages("axial", 124, 149, 357, patientId);
+
+				switch (patientId) {
+					case "BrainAtlas-P57-16/main/P57-16":
+						await updateMriAndHistologyImages(
+							"axial",
+							124,
+							149,
+							357,
+							patientId
+						);
+						break;
+					case "BrainAtlas-P41-16/main/P41-16":
+						await updateMriAndHistologyImages("axial", 81, 153, 342, patientId);
+						break;
+					default:
+						await updateMriAndHistologyImages("axial", 50, 100, 100, patientId);
+				}
 			} catch {
 				setError("error building atlas");
 			}
 			setIsLoading(false);
 		};
 
-		buildAtlas();
+		initializeAtlas();
 	}, [patientId]);
 
 	// sets the current label every time new coords are detected
@@ -226,7 +246,7 @@ const AtlasImages: FC<Props> = (props) => {
 				patientId
 			);
 		}
-	}, [navPanelCoords, patientId, atlasImagesDimensionsKey]);
+	}, [navPanelCoords, atlasImagesDimensionsKey]);
 
 	const histologyToMri = async (
 		currentHistologyMouseX: number,

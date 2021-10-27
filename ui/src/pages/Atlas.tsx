@@ -53,7 +53,7 @@ const Atlas: FC = () => {
 
 			setAtlasImagesDimensionsKey(atlasImagesDimensionsKey);
 		};
-
+		setAtlasImagesDimensionsKey(null);
 		getAtlasImageDimensionsFiles();
 	}, [patientId]);
 

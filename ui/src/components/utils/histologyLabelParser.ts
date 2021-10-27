@@ -54,6 +54,8 @@ const getCurrentLabelNumber = async (
 
 	const npyData = await n.load(npzFile); // returns uncompressed raw contents of an npz file
 
+	console.log(npyData);
+
 	let ndArray = ndarray(npyData!.data, npyData!.header.shape);
 
 	ndArray = await ndArray.transpose(1, 0);
