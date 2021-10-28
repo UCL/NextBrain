@@ -1,3 +1,5 @@
+// converts between hi-res and low-res versions of histology mouse coords
+
 const convertHistologyMouseCoords = (
 	atlasImagesDimensionsKey: any,
 	currentHistologyMouseX: number,
@@ -6,7 +8,7 @@ const convertHistologyMouseCoords = (
 	showHiRes: boolean
 ) => {
 	if (showHiRes) {
-		// returns low res versions of mouseX and mouseY
+		// returns low res versions of mouseX and mouseY given hi-res versions
 		const lowResMouseX =
 			(+atlasImagesDimensionsKey!.histologyLowResDimensions[
 				currentHistologyBlock
@@ -29,7 +31,7 @@ const convertHistologyMouseCoords = (
 	}
 
 	if (!showHiRes) {
-		// returns hi res versions of mouseX and mouseY
+		// returns hi res versions of mouseX and mouseY given low-res versions
 		const hiResMouseX =
 			(+atlasImagesDimensionsKey!.histologyHiResDimensions[
 				currentHistologyBlock

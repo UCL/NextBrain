@@ -1,18 +1,19 @@
 import { FC, useState, useEffect } from "react";
 
+import LoadingSpinner from "../../shared/LoadingSpinner";
+import ErrorModal from "../../shared/ErrorModal";
 import calculateMriImageCoords from "../../utils/calculateMriImageCoords";
 import calculateHistologyImageCoords from "../../utils/calculateHistologyImageCoords";
 import calculateAdjustedMriCoords from "../../utils/calculateAdjustedMriCoords";
 import logMriCoordsForDebugging from "../../utils/logMriCoordsForDebugging";
-import LoadingSpinner from "../../shared/LoadingSpinner";
-import ErrorModal from "../../shared/ErrorModal";
-import MriImages from "./MriImages";
-import HistologyImages from "./HistologyImages";
-import getMatrix from "../../utils/getMatrix";
 import matrixMultiplier from "../../utils/matrixMultiplier";
 import histologyLabelParser from "../../utils/histologyLabelParser";
-import Scrollbars from "../scrollbars/Scrollbars";
+import getMatrix from "../../utils/getMatrix";
 import convertHistologyMouseCoords from "../../utils/convertHistologyMouseCoords";
+
+import MriImages from "./MriImages";
+import HistologyImages from "./HistologyImages";
+import Scrollbars from "../scrollbars/Scrollbars";
 
 import { CurrentLabel } from "../../../models/label.model";
 import { MriCoords } from "../../../models/mriCoords.model";
@@ -71,93 +72,6 @@ const AtlasImages: FC<Props> = (props) => {
 		updateAtlas();
 	}, [patientId]);
 
-	const updateMriAndHistologyImages = async (
-		currentMriPlane: string,
-		currentMriSlice: number,
-		currentMriMouseX: number,
-		currentMriMouseY: number,
-		patientId: string
-	) => {
-		// user is navigating within an mri image
-		// function updates mri image coords and then calculates new histology coords
-
-		const currentMriCoords = updateMriImagesHandler(
-			currentMriPlane,
-			currentMriSlice,
-			currentMriMouseX,
-			currentMriMouseY
-		);
-
-		updateHistologyImagesHandler(currentMriPlane, currentMriCoords!, patientId);
-	};
-
-	const updateHistologyImagesHandler = async (
-		currentMriPlane: string,
-		currentMriCoords: MriCoords,
-		patientId: string
-	) => {
-		const newHistologyCoords = await calculateHistologyImageCoords(
-			currentMriPlane,
-			currentMriCoords!,
-			patientId,
-			atlasImagesDimensionsKey
-		);
-
-		if (newHistologyCoords === "no block found") {
-			setError("No block found for this coordinate");
-			return;
-		}
-
-		if (newHistologyCoords === "no matrix found") {
-			setError("No matrix found for this coordinate");
-			return;
-		}
-
-		setHistologyImageCoords(newHistologyCoords);
-	};
-
-	const updateMriImagesHandler = (
-		currentMriPlane: string,
-		currentMriSlice: number,
-		currentMriMouseX: number,
-		currentMriMouseY: number
-	) => {
-		console.log("BUILDING MRI IMAGES");
-
-		const { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY } =
-			calculateAdjustedMriCoords(
-				currentMriPlane,
-				currentMriSlice,
-				currentMriMouseX,
-				currentMriMouseY,
-				atlasImagesDimensionsKey
-			);
-
-		logMriCoordsForDebugging(
-			currentMriPlane,
-			currentMriSlice,
-			currentMriMouseX,
-			currentMriMouseY,
-			adjustedMriSlice!,
-			adjustedMriMouseX!,
-			adjustedMriMouseY!
-		);
-
-		const newMriCoords = calculateMriImageCoords(
-			currentMriPlane,
-			currentMriSlice,
-			currentMriMouseX,
-			currentMriMouseY,
-			adjustedMriSlice!,
-			adjustedMriMouseX!,
-			adjustedMriMouseY!
-		);
-
-		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
-
-		return newMriCoords;
-	};
-
 	// sets the current label every time new coords are detected
 	useEffect(() => {
 		const setCurrentLabelHandler = async () => {
@@ -197,6 +111,26 @@ const AtlasImages: FC<Props> = (props) => {
 			);
 		}
 	}, [navPanelCoords, atlasImagesDimensionsKey]);
+
+	const updateMriAndHistologyImages = async (
+		currentMriPlane: string,
+		currentMriSlice: number,
+		currentMriMouseX: number,
+		currentMriMouseY: number,
+		patientId: string
+	) => {
+		// user is navigating within an mri image
+		// function updates mri image coords and then calculates new histology coords
+
+		const currentMriCoords = updateMriImagesHandler(
+			currentMriPlane,
+			currentMriSlice,
+			currentMriMouseX,
+			currentMriMouseY
+		);
+
+		updateHistologyImagesHandler(currentMriPlane, currentMriCoords!, patientId);
+	};
 
 	const histologyToMri = async (
 		currentHistologyMouseX: number,
@@ -313,6 +247,73 @@ const AtlasImages: FC<Props> = (props) => {
 		newHistologyCoords.currentHistologySlice = +newSliceNumber.toFixed(0);
 
 		setHistologyImageCoords(newHistologyCoords as HistologyCoords);
+	};
+
+	const updateMriImagesHandler = (
+		currentMriPlane: string,
+		currentMriSlice: number,
+		currentMriMouseX: number,
+		currentMriMouseY: number
+	) => {
+		console.log("BUILDING MRI IMAGES");
+
+		const { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY } =
+			calculateAdjustedMriCoords(
+				currentMriPlane,
+				currentMriSlice,
+				currentMriMouseX,
+				currentMriMouseY,
+				atlasImagesDimensionsKey
+			);
+
+		logMriCoordsForDebugging(
+			currentMriPlane,
+			currentMriSlice,
+			currentMriMouseX,
+			currentMriMouseY,
+			adjustedMriSlice!,
+			adjustedMriMouseX!,
+			adjustedMriMouseY!
+		);
+
+		const newMriCoords = calculateMriImageCoords(
+			currentMriPlane,
+			currentMriSlice,
+			currentMriMouseX,
+			currentMriMouseY,
+			adjustedMriSlice!,
+			adjustedMriMouseX!,
+			adjustedMriMouseY!
+		);
+
+		setMriImageCoords(newMriCoords!); // refactor this to check that the mriImage is valid
+
+		return newMriCoords;
+	};
+
+	const updateHistologyImagesHandler = async (
+		currentMriPlane: string,
+		currentMriCoords: MriCoords,
+		patientId: string
+	) => {
+		const newHistologyCoords = await calculateHistologyImageCoords(
+			currentMriPlane,
+			currentMriCoords!,
+			patientId,
+			atlasImagesDimensionsKey
+		);
+
+		if (newHistologyCoords === "no block found") {
+			setError("No block found for this coordinate");
+			return;
+		}
+
+		if (newHistologyCoords === "no matrix found") {
+			setError("No matrix found for this coordinate");
+			return;
+		}
+
+		setHistologyImageCoords(newHistologyCoords);
 	};
 
 	if (mriImageCoords == null || histologyImageCoords == null) {
