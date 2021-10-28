@@ -1,6 +1,5 @@
 import { FC, useEffect, useState, useRef } from "react";
 
-import ErrorModal from "../../shared/ErrorModal";
 import getMouseCoords from "../../utils/getMouseCoords";
 
 import { HistologyCoords } from "../../../models/histologyCoords.model";
