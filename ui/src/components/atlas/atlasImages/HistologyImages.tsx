@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, SyntheticEvent } from "react";
+import { FC, useState, useEffect, SyntheticEvent, useRef } from "react";
 
 import { ASSETS_URL } from "../../utils/ASSETS_URL";
 import LoadingSpinner from "../../shared/LoadingSpinner";
@@ -59,12 +59,6 @@ const HistologyImages: FC<Props> = (props) => {
 				const histologyFolder = showHiRes ? "histology_hr" : "histology";
 				const histologyFileExtension = showHiRes ? "webp" : "jpg";
 				const labelsFileExtension = showHiRes ? "webp" : "png";
-
-				// I do this because of a weird behaviour on the dev server causing the loading spinner to reappear
-				// I dont think this is an issue on the deployed site, so perhaps remove (or only run the logic on dev)
-				// if (histologyImage !== null) {
-				// 	setIsLoading(false);
-				// }
 
 				try {
 					setIsLoading(true);
@@ -148,11 +142,11 @@ const HistologyImages: FC<Props> = (props) => {
 
 	// we need to store the image dimensions so that we can correctly calculate the mouse coordinates for scaled images
 	// we store the image dimensions every time a new image gets loaded
-	const onImageLoad = (e: SyntheticEvent, type: string) => {
+	const onImageLoad = (e: SyntheticEvent) => {
 		setIsLoading(false);
 
 		const { naturalHeight, naturalWidth, scaledHeight, scaledWidth } =
-			getImageDimensions(e, type);
+			getImageDimensions(e);
 
 		setImageDimensions({
 			naturalHeight,
@@ -163,20 +157,14 @@ const HistologyImages: FC<Props> = (props) => {
 	};
 
 	// called when user clicks on a lowRes or hiRes histology image
-	const updateHistologyCoordsHandler = (
-		e: SyntheticEvent | Event,
-		type: string
-	) => {
-		const { naturalCoordinateX, naturalCoordinateY } = getHistologyMousePos(
-			e,
-			type
-		);
+	const updateHistologyCoordsHandler = (e: SyntheticEvent | Event) => {
+		const { naturalCoordinateX, naturalCoordinateY } = getHistologyMousePos(e);
 
 		// update the atlas based on new histology coords
 		histologyToMri(naturalCoordinateX, naturalCoordinateY);
 	};
 
-	const getHistologyMousePos = (e: SyntheticEvent | Event, type: string) => {
+	const getHistologyMousePos = (e: SyntheticEvent | Event) => {
 		const { mouseX, mouseY } = getMouseCoords(e, showHiRes);
 
 		console.log("offsetX: " + mouseX, "offsetY: " + mouseY);
@@ -187,23 +175,11 @@ const HistologyImages: FC<Props> = (props) => {
 		return { naturalCoordinateX, naturalCoordinateY };
 	};
 
-	const getImageDimensions = (e: any, type: string) => {
-		let naturalWidth; // the original size of the image
-		let naturalHeight; // the original size of the image
-		let scaledWidth; // the scaled size of the image
-		let scaledHeight; // the scaled size of the image
-
-		if (type === "onLoad" || type === "lowRes") {
-			naturalWidth = e.target.naturalWidth;
-			naturalHeight = e.target.naturalHeight;
-			scaledWidth = e.target.width;
-			scaledHeight = e.target.height;
-		}
-
-		console.log("naturalWidth: " + naturalWidth);
-		console.log("naturalHeight: " + naturalHeight);
-		console.log("scaledWidth: " + scaledWidth);
-		console.log("scaledHeight: " + scaledHeight);
+	const getImageDimensions = (e: any) => {
+		const naturalWidth = e.target.naturalWidth; // the original size of the image
+		const naturalHeight = e.target.naturalHeight;
+		const scaledWidth = e.target.width; // the scaled size of the image
+		const scaledHeight = e.target.height;
 
 		return {
 			naturalHeight,

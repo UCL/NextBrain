@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useCallback } from "react";
+import { FC, useState, useEffect } from "react";
 
 import calculateMriImageCoords from "../../utils/calculateMriImageCoords";
 import calculateHistologyImageCoords from "../../utils/calculateHistologyImageCoords";

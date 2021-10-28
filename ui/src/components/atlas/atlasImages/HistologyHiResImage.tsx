@@ -28,7 +28,7 @@ const HistologyHiResImage: FC<Props> = (props) => {
 	} = props;
 
 	const onPan = (ref: any, e: Event) => {
-		updateHistologyCoordsHandler(e, "hiRes");
+		updateHistologyCoordsHandler(e);
 	};
 
 	return (
@@ -68,7 +68,7 @@ const HistologyHiResImage: FC<Props> = (props) => {
 							className={`histology-img ${showHiRes && "hi-res"}`}
 							src={histologyImage}
 							alt="histology"
-							onLoad={(e) => onImageLoad(e, "onLoad")}
+							onLoad={(e) => onImageLoad(e)}
 						></img>
 					</TransformComponent>
 				</>

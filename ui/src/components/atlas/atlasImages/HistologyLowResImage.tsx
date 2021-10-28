@@ -12,12 +12,12 @@ const HistologyLowResImage: FC<Props> = (props) => {
 	return (
 		<img
 			onClick={(e) => {
-				updateHistologyCoordsHandler(e, "lowRes");
+				updateHistologyCoordsHandler(e);
 			}}
 			className="histology-img"
 			src={histologyImage}
 			alt="histology"
-			onLoad={(e) => onImageLoad(e, "onLoad")}
+			onLoad={(e) => onImageLoad(e)}
 		></img>
 	);
 };
