@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useRef } from "react";
 
 import ErrorModal from "../../shared/ErrorModal";
 import getMouseCoords from "../../utils/getMouseCoords";
@@ -17,6 +17,8 @@ interface Props {
 }
 
 const HistologyScrollbar: FC<Props> = (props) => {
+	const scrollbarRef: any = useRef();
+
 	const [error, setError] = useState<string | null>(null);
 	const [scrollbarPos, setScrollbarPos] = useState(0);
 
@@ -28,17 +30,20 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		atlasImagesDimensionsKey,
 	} = props;
 
-	useEffect(() => {
-		// determine the scrollbar position for the current histology slice
+	const currentBlock = histologyImageCoords!.currentHistologyBlock;
 
-		const scrollbarLength = 824;
-		const currentHistologySliceNumber =
-			histologyImageCoords!.currentHistologySlice;
-		const currentBlock = histologyImageCoords!.currentHistologyBlock;
-		const slicesInBlock =
-			+atlasImagesDimensionsKey!.histologyLowResDimensions[currentBlock][
-				"slices"
-			] - 1; // -1 because slices start at 0
+	const currentHistologySliceNumber =
+		histologyImageCoords!.currentHistologySlice;
+
+	const slicesInBlock =
+		+atlasImagesDimensionsKey!.histologyLowResDimensions[currentBlock][
+			"slices"
+		] - 1; // -1 because slices start at 0
+
+	// determine the scrollbar position for the current histology slice
+	useEffect(() => {
+		const scrollbarLength = scrollbarRef.current.clientHeight;
+
 		const currentSliceAsProportion =
 			currentHistologySliceNumber / slicesInBlock;
 
@@ -47,32 +52,28 @@ const HistologyScrollbar: FC<Props> = (props) => {
 		).toFixed(0);
 
 		setScrollbarPos(newHistologyScrollbarPos);
-	}, [histologyImageCoords, atlasImagesDimensionsKey]);
+	}, [
+		histologyImageCoords,
+		atlasImagesDimensionsKey,
+		currentHistologySliceNumber,
+		slicesInBlock,
+	]);
 
 	const updateHistologyScrollbarPos = (e: React.MouseEvent) => {
 		setShowHiRes(false);
 
 		const { mouseY } = getMouseCoords(e, showHiRes);
 
-		const currentBlock = histologyImageCoords!.currentHistologyBlock;
-
-		// -1 to account for the fact that slices start at 0
-		const slicesInBlock =
-			+atlasImagesDimensionsKey!.histologyLowResDimensions[currentBlock][
-				"slices"
-			] - 1;
-
-		// look into improving this, is it necessary to hard code this value? Same for the mri scrollbars
-		const scrollbarLength = 824;
+		const scrollbarLength = scrollbarRef.current.clientHeight;
 
 		// method for positioning the scrollbar based on the max number of slices in a histology block
 		const newHistologySliceNumber = (mouseY / scrollbarLength) * slicesInBlock;
 
-		// need to reduce this repetition across the other function
-		if (
-			newHistologySliceNumber < 0 ||
-			newHistologySliceNumber > slicesInBlock
-		) {
+		const scrollbarIsWithinBounds = checkScrollbarBoundaries(
+			newHistologySliceNumber
+		);
+
+		if (!scrollbarIsWithinBounds) {
 			console.log("cannot increment histology slice");
 			return;
 		}
@@ -87,25 +88,29 @@ const HistologyScrollbar: FC<Props> = (props) => {
 	const incrementHistologyScrollbarPos = (increment: number) => {
 		setShowHiRes(false);
 
-		const currentBlock = histologyImageCoords!.currentHistologyBlock;
-		const slicesInBlock =
-			+atlasImagesDimensionsKey!.histologyLowResDimensions[currentBlock][
-				"slices"
-			] - 1;
-
-		const currentHistologySliceNumber =
-			histologyImageCoords!.currentHistologySlice;
 		const newHistologySliceNumber = currentHistologySliceNumber + increment;
 
-		if (
-			newHistologySliceNumber < 0 ||
-			newHistologySliceNumber > slicesInBlock
-		) {
+		const scrollbarIsWithinBounds = checkScrollbarBoundaries(
+			newHistologySliceNumber
+		);
+
+		if (!scrollbarIsWithinBounds) {
 			console.log("cannot increment histology slice");
 			return;
 		}
 
 		adjustHistologyCoordsFromScrollbar(newHistologySliceNumber);
+	};
+
+	const checkScrollbarBoundaries = (newHistologySliceNumber: number) => {
+		if (
+			newHistologySliceNumber < 0 ||
+			newHistologySliceNumber > slicesInBlock
+		) {
+			return false;
+		}
+
+		return true;
 	};
 
 	return (
@@ -120,6 +125,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 				<div
 					className="scrollbar histology-scrollbar"
 					onClick={(e) => updateHistologyScrollbarPos(e)}
+					ref={scrollbarRef}
 				>
 					<svg
 						className="histology-scrollbar-widget"
