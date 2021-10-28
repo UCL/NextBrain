@@ -10,13 +10,13 @@ const histologyLabelParser = async (
 	showHiRes: boolean,
 	patientId: string
 ) => {
+	const labelsFile = await require(`../../assets/WholeHemisphereFS.json`);
+
 	const currentLabelNumber = await getCurrentLabelNumber(
 		histologyImageCoords,
 		showHiRes,
 		patientId
 	);
-
-	const labelsFile = await require(`../../assets/WholeHemisphereFS.json`);
 
 	const currentLabel = labelsFile[currentLabelNumber];
 
@@ -34,7 +34,7 @@ const getCurrentLabelNumber = async (
 
 	const n = new npzParser(); // uncompresses and parses an npz file
 	const coordsProp = showHiRes ? "coordsHiRes" : "coordsLowRes";
-	const histologyFolder = !showHiRes ? "histology" : "histology_hr";
+	const histologyFolder = showHiRes ? "histology_hr" : "histology";
 
 	const paddedBlock = histologyImageCoords.currentHistologyBlock
 		.toString()
@@ -46,6 +46,7 @@ const getCurrentLabelNumber = async (
 
 	const npzFile = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels_npz/slice_${paddedSlice}.npz`;
 
+	// add error catching here?
 	const npyData = await n.load(npzFile); // returns uncompressed raw contents of an npz file
 
 	let ndArray = ndarray(npyData!.data, npyData!.header.shape);

@@ -17,7 +17,6 @@ export default class npzParser {
 
 	// uncompresses and parses a raw .npz file
 	async parseNpz(arrayBuffer: ArrayBuffer) {
-		console.log(arrayBuffer);
 		let zip = new JSZip();
 
 		const npzUint8Array = new Uint8Array(arrayBuffer); // parse the arrayBuffer as a uint8Array
@@ -25,8 +24,6 @@ export default class npzParser {
 		const loadedZip = await zip.loadAsync(npzUint8Array); // get all files in the zip
 
 		const fileName = Object.entries(loadedZip.files)[0][0]; // the name of the file inside the zip file
-
-		console.log(fileName);
 
 		// parse the loaded zip as an arrayBuffer
 		const unzippedArrayBuffer = await loadedZip

@@ -10,13 +10,13 @@ import { AtlasImagesDimensionsKey } from "../../models/atlasImagesDimensionsKey.
 
 const calculateHistologyImageCoords = async (
 	currentMriPlane: string,
-	newMriCoords: MriCoords,
+	currentMriCoords: MriCoords,
 	patientId: string,
 	atlasImagesDimensionsKey: AtlasImagesDimensionsKey | null
 ) => {
-	const currentMriMouseX = newMriCoords[currentMriPlane]["mouseX"];
-	const currentMriMouseY = newMriCoords[currentMriPlane]["mouseY"];
-	const currentMriSlice = newMriCoords[currentMriPlane]["slice"];
+	const currentMriMouseX = currentMriCoords[currentMriPlane]["mouseX"];
+	const currentMriMouseY = currentMriCoords[currentMriPlane]["mouseY"];
+	const currentMriSlice = currentMriCoords[currentMriPlane]["slice"];
 
 	const currentBlock = await getCurrentBlock(
 		currentMriPlane,
@@ -38,14 +38,14 @@ const calculateHistologyImageCoords = async (
 		return "no matrix found";
 
 	const histologyImageCoordsLowRes = getHistologyImageCoords(
-		newMriCoords,
+		currentMriCoords,
 		matrixLowRes,
 		currentBlock,
 		atlasImagesDimensionsKey
 	);
 
 	const histologyImageCoordsHiRes = getHistologyImageCoords(
-		newMriCoords,
+		currentMriCoords,
 		matrixHiRes,
 		currentBlock,
 		atlasImagesDimensionsKey
@@ -55,20 +55,20 @@ const calculateHistologyImageCoords = async (
 		coordsLowRes: histologyImageCoordsLowRes.coords,
 		coordsHiRes: histologyImageCoordsHiRes.coords,
 		currentHistologySlice: histologyImageCoordsLowRes.slice, // slice is the same for both hi and low res
-		currentHistologyBlock: currentBlock,
+		currentHistologyBlock: currentBlock, // block is the same for both hi and low res
 	};
 };
 
 const getHistologyImageCoords = (
-	newMriCoords: MriCoords,
+	currentMriCoords: MriCoords,
 	matrix: number[],
 	currentBlock: number,
 	atlasImagesDimensionsKey: AtlasImagesDimensionsKey | null
 ) => {
 	const coords = matrixMultiplier(matrix, [
-		newMriCoords.sagittal.slice,
-		newMriCoords.coronal.slice,
-		newMriCoords.axial.slice,
+		currentMriCoords.sagittal.slice,
+		currentMriCoords.coronal.slice,
+		currentMriCoords.axial.slice,
 		1,
 	]);
 
@@ -110,14 +110,13 @@ const getCurrentBlock = async (
 		throw new Error(e);
 	}
 
+	// parse the raw npy file as a readable npy array
 	const npyArray = await n.load(npyFile);
 
 	let ndArray = ndarray(npyArray.data, npyArray.shape);
 
 	// the numpy arrays in the data are the opposite of the image dimensions, so a transposition is needed
 	ndArray = await ndArray.transpose(1, 0);
-
-	console.log("npy shape (after transpose): " + ndArray.shape);
 
 	if (currentMriPlane === "sagittal") {
 		// sagittal has an additional horizontal flip, so we need to account for that here

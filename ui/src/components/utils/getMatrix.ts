@@ -8,8 +8,6 @@ const getMatrix = async (
 	type: string,
 	patientId: string
 ) => {
-	let readTxt = new txtToArray();
-
 	const paddedBlock = currentBlock.toString().padStart(2, "0");
 
 	let fileUrl = "";
@@ -36,37 +34,24 @@ const getMatrix = async (
 
 	txtFile = await file.text();
 
-	const matrix = await readTxt.parse(txtFile);
+	const matrix = await parseMatrixTxt(txtFile);
 
 	return matrix;
 };
 
-// custom parser to extract matrix txt data into an array
-class txtToArray {
-	async parse(file: string) {
-		let removedLineBreaks = file.replace(/\n/g, " ");
+// custom parser to transform matrix txt data into an array
+const parseMatrixTxt = async (file: string) => {
+	let removedLineBreaks = file.replace(/\n/g, " ");
 
-		var txtToArray = removedLineBreaks.split(" ");
-		txtToArray.pop();
+	var txtToArray = removedLineBreaks.split(" ");
+	txtToArray.pop();
 
-		// convert the array of strings to numbers
-		const arrayAsNumbers = txtToArray.map((element) => {
-			return Number(element);
-		});
+	// convert the array of strings to numbers
+	const arrayAsNumbers = txtToArray.map((element) => {
+		return Number(element);
+	});
 
-		return arrayAsNumbers;
-	}
-
-	// async load(filename: RequestInfo) {
-	// 	return fetch(filename)
-	// 		.then((response) => {
-	// 			return response.text();
-	// 		})
-	// 		.then((text) => {
-	// 			const parsedTxt = this.parse(text);
-	// 			return parsedTxt;
-	// 		});
-	// }
-}
+	return arrayAsNumbers;
+};
 
 export default getMatrix;

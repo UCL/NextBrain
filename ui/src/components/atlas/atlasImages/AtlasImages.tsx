@@ -80,24 +80,24 @@ const AtlasImages: FC<Props> = (props) => {
 		// user is navigating within an mri image
 		// function updates mri image coords and then calculates new histology coords
 
-		const newMriCoords = updateMriImagesHandler(
+		const currentMriCoords = updateMriImagesHandler(
 			currentMriPlane,
 			currentMriSlice,
 			currentMriMouseX,
 			currentMriMouseY
 		);
 
-		updateHistologyImagesHandler(currentMriPlane, newMriCoords!, patientId);
+		updateHistologyImagesHandler(currentMriPlane, currentMriCoords!, patientId);
 	};
 
 	const updateHistologyImagesHandler = async (
 		currentMriPlane: string,
-		newMriCoords: MriCoords,
+		currentMriCoords: MriCoords,
 		patientId: string
 	) => {
 		const newHistologyCoords = await calculateHistologyImageCoords(
 			currentMriPlane,
-			newMriCoords!,
+			currentMriCoords!,
 			patientId,
 			atlasImagesDimensionsKey
 		);
