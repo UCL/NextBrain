@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useCallback } from "react";
 
 import { ASSETS_URL } from "../components/utils/ASSETS_URL";
 import AtlasImages from "../components/atlas/atlasImages/AtlasImages";
@@ -26,18 +26,7 @@ const Atlas: FC = () => {
 		useState<AtlasImagesDimensionsKey | null>(null);
 
 	// load in some helper files at app start-up
-	useEffect(() => {
-		const initializeAtlas = async () => {
-			setInitializeAtlas(true);
-			await getAtlasImageDimensionsFiles();
-			setInitializeAtlas(false);
-		};
-
-		initializeAtlas();
-	}, [patientId]);
-
-	// load in some helper files at app start-up
-	const getAtlasImageDimensionsFiles = async () => {
+	const getAtlasImageDimensionsFiles = useCallback(async () => {
 		const mriDimensionsKeyUrl = `${ASSETS_URL}${patientId}/mriDimensionsKey.json`;
 		const histologyLowResDimensionsKeyUrl = `${ASSETS_URL}${patientId}/histologyDimensionsKey.json`;
 		const histologyHiResDimensionsKeyUrl = `${ASSETS_URL}${patientId}/histologyHRDimensionsKey.json`;
@@ -63,7 +52,17 @@ const Atlas: FC = () => {
 		console.log(atlasImagesDimensionsKey);
 
 		setAtlasImagesDimensionsKey(atlasImagesDimensionsKey);
-	};
+	}, [patientId]);
+
+	useEffect(() => {
+		const initializeAtlas = async () => {
+			setInitializeAtlas(true);
+			await getAtlasImageDimensionsFiles();
+			setInitializeAtlas(false);
+		};
+
+		initializeAtlas();
+	}, [patientId, getAtlasImageDimensionsFiles]);
 
 	if (initializeAtlas === true) {
 		return (
