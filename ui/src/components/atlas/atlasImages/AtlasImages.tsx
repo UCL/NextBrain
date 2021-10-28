@@ -36,8 +36,6 @@ interface Props {
 const AtlasImages: FC<Props> = (props) => {
 	const [error, setError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
-
-	const [initializingAtlas, setInitializingAtlas] = useState(true);
 	const [mriImageCoords, setMriImageCoords] = useState<MriCoords | null>(null);
 	const [histologyImageCoords, setHistologyImageCoords] =
 		useState<HistologyCoords | null>(null);
@@ -53,6 +51,24 @@ const AtlasImages: FC<Props> = (props) => {
 		navPanelCoords,
 		atlasImagesDimensionsKey,
 	} = props;
+
+	// initialize atlas images based on an arbitrary starting point
+	useEffect(() => {
+		const updateAtlas = async () => {
+			setIsLoading(true);
+
+			try {
+				// args: plane, slice, currentMriMouseX, currentMriMouseY
+				// I should pass the argument as an object to make it more clear
+				updateMriAndHistologyImages("axial", 124, 149, 357, patientId);
+			} catch {
+				setError("error building atlas");
+			}
+			setIsLoading(false);
+		};
+
+		updateAtlas();
+	}, [patientId]);
 
 	const updateMriAndHistologyImages = async (
 		currentMriPlane: string,
@@ -141,77 +157,26 @@ const AtlasImages: FC<Props> = (props) => {
 		return newMriCoords;
 	};
 
-	const setCurrentLabelHandler = useCallback(
-		async (
-			currentHistologyMouseX: number,
-			currentHistologyMouseY: number,
-			histologyImageCoords: HistologyCoords,
-			type: string
-		) => {
+	// sets the current label every time new coords are detected
+	useEffect(() => {
+		const setCurrentLabelHandler = async () => {
 			// loading spinner shows while the label is loading
 			setCurrentLabel(null);
 
 			const currentLabel = await histologyLabelParser(
-				currentHistologyMouseX,
-				currentHistologyMouseY,
-				histologyImageCoords,
-				type,
+				histologyImageCoords!,
+				showHiRes,
 				patientId
 			);
 
 			setCurrentLabel(currentLabel);
-		},
-		[setCurrentLabel]
-	);
-
-	// initialize atlas images based on an arbitrary starting point
-	useEffect(() => {
-		const initializeAtlas = async () => {
-			setIsLoading(true);
-
-			console.log(patientId);
-			try {
-				// args: plane, slice, currentMriMouseX, currentMriMouseY
-				// I should pass the argument as an object to make it more clear
-				updateMriAndHistologyImages("axial", 124, 149, 357, patientId);
-			} catch {
-				setError("error building atlas");
-			}
-			setIsLoading(false);
 		};
 
-		initializeAtlas();
-	}, [patientId]);
-
-	// sets the current label every time new coords are detected
-	// needs refactoring
-	useEffect(() => {
-		const type = showHiRes ? "hiRes" : "lowRes";
-
-		// why am I passing both histologyImageCoords and the embedded mouseX and mouseY?
-		// I should just pass histologyImageCoords
-		if (histologyImageCoords !== null && mriImageCoords !== null) {
-			if (!showHiRes) {
-				console.log(histologyImageCoords);
-
-				setCurrentLabelHandler(
-					histologyImageCoords.coordsLowRes.mouseX,
-					histologyImageCoords.coordsLowRes.mouseY,
-					histologyImageCoords,
-					type
-				);
-			}
-
-			if (showHiRes) {
-				setCurrentLabelHandler(
-					histologyImageCoords.coordsHiRes.mouseX,
-					histologyImageCoords.coordsHiRes.mouseY,
-					histologyImageCoords,
-					type
-				);
-			}
+		if (histologyImageCoords != null && mriImageCoords != null) {
+			console.log(histologyImageCoords);
+			setCurrentLabelHandler();
 		}
-	}, [histologyImageCoords, mriImageCoords, setCurrentLabelHandler, showHiRes]);
+	}, [histologyImageCoords, mriImageCoords, showHiRes, setCurrentLabel]);
 
 	// sets the mri and histology coords when navigating from the drop-down list
 	useEffect(() => {

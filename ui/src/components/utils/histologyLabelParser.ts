@@ -6,17 +6,13 @@ import { ASSETS_URL } from "./ASSETS_URL";
 import { HistologyCoords } from "../../models/histologyCoords.model";
 
 const histologyLabelParser = async (
-	mouseX: number,
-	mouseY: number,
 	histologyImageCoords: HistologyCoords,
-	type: string,
+	showHiRes: boolean,
 	patientId: string
 ) => {
 	const currentLabelNumber = await getCurrentLabelNumber(
-		mouseX,
-		mouseY,
 		histologyImageCoords,
-		type,
+		showHiRes,
 		patientId
 	);
 
@@ -28,10 +24,8 @@ const histologyLabelParser = async (
 };
 
 const getCurrentLabelNumber = async (
-	mouseX: number,
-	mouseY: number,
 	histologyImageCoords: HistologyCoords,
-	type: string,
+	showHiRes: boolean,
 	patientId: string
 ) => {
 	// label numbers are extracted from multi dimensional numpy arrays (extracted from compressed npz files)
@@ -39,6 +33,8 @@ const getCurrentLabelNumber = async (
 	// the index returns the label number
 
 	const n = new npzParser(); // uncompresses and parses an npz file
+	const coordsProp = showHiRes ? "coordsHiRes" : "coordsLowRes";
+	const histologyFolder = !showHiRes ? "histology" : "histology_hr";
 
 	const paddedBlock = histologyImageCoords.currentHistologyBlock
 		.toString()
@@ -48,19 +44,18 @@ const getCurrentLabelNumber = async (
 		.toString()
 		.padStart(2, "0");
 
-	const histologyFolder = type === "lowRes" ? "histology" : "histology_hr";
-
 	const npzFile = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels_npz/slice_${paddedSlice}.npz`;
 
 	const npyData = await n.load(npzFile); // returns uncompressed raw contents of an npz file
-
-	console.log(npyData);
 
 	let ndArray = ndarray(npyData!.data, npyData!.header.shape);
 
 	ndArray = await ndArray.transpose(1, 0);
 
-	const currentLabelNumber = ndArray.get(mouseX.toFixed(0), mouseY.toFixed(0));
+	const currentLabelNumber = ndArray.get(
+		histologyImageCoords[coordsProp].mouseX.toFixed(0),
+		histologyImageCoords[coordsProp].mouseY.toFixed(0)
+	);
 
 	return currentLabelNumber;
 };
