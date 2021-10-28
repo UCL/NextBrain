@@ -7,8 +7,8 @@
 // type MouseCoords = React.MouseEvent | MouseEvent;
 
 const getMouseCoords = (e: any, showHiRes: boolean) => {
-	let mouseX = !showHiRes ? e.nativeEvent.offsetX : e.offsetX;
-	let mouseY = !showHiRes ? e.nativeEvent.offsetY : e.offsetY;
+	const mouseX = !showHiRes ? e.nativeEvent.offsetX : e.offsetX;
+	const mouseY = !showHiRes ? e.nativeEvent.offsetY : e.offsetY;
 
 	return { mouseX, mouseY };
 };

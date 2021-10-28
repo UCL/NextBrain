@@ -12,6 +12,7 @@ import getMatrix from "../../utils/getMatrix";
 import matrixMultiplier from "../../utils/matrixMultiplier";
 import histologyLabelParser from "../../utils/histologyLabelParser";
 import Scrollbars from "../scrollbars/Scrollbars";
+import convertHistologyMouseCoords from "../../utils/convertHistologyMouseCoords";
 
 import { CurrentLabel } from "../../../models/label.model";
 import { MriCoords } from "../../../models/mriCoords.model";
@@ -203,6 +204,7 @@ const AtlasImages: FC<Props> = (props) => {
 	) => {
 		// first we calculate new mri coords based on the current histology coords
 		// then below we set the current histology coords based on the mouseX and mouseY positions
+		// currentHistologyMouseX and Y represent the natural mouse x and y
 
 		const histologyFolder = showHiRes ? "histology_hr" : "histology";
 
@@ -235,73 +237,48 @@ const AtlasImages: FC<Props> = (props) => {
 
 		const currentHistologyBlock = histologyImageCoords!.currentHistologyBlock;
 
-		// initialize variables to avoid typescript errors
-		// is there a more correct way of doing this?
-		let lowResMouseX = 0;
-		let lowResMouseY = 0;
-		let hiResMouseX = 0;
-		let hiResMouseY = 0;
-
 		// we need to calculate the coords for both hi and low res
-		// when scaling between hi and low res, the result seems to be always about 10px off
-		// look into why this might be
-		// possibly outsource this into a standalone module for reuse
-
-		// calculate low-res mouse position from current hi-res mouse coord
+		// when scaling between hi and low res, the result seems to be always about 10px off, why?
 		if (showHiRes) {
-			lowResMouseX =
-				(+atlasImagesDimensionsKey!.histologyLowResDimensions[
-					currentHistologyBlock
-				].width /
-					+atlasImagesDimensionsKey!.histologyHiResDimensions[
-						currentHistologyBlock
-					].width) *
-				currentHistologyMouseX;
+			// calculate low-res mouse position from current hi-res mouse coord
+			const { lowResMouseX, lowResMouseY } = convertHistologyMouseCoords(
+				atlasImagesDimensionsKey,
+				currentHistologyMouseX,
+				currentHistologyMouseY,
+				currentHistologyBlock,
+				showHiRes
+			);
 
-			lowResMouseY =
-				(+atlasImagesDimensionsKey!.histologyLowResDimensions[
-					currentHistologyBlock
-				].height /
-					+atlasImagesDimensionsKey!.histologyHiResDimensions[
-						currentHistologyBlock
-					].height) *
-				currentHistologyMouseY;
-		}
+			if (lowResMouseX === -1 && lowResMouseY === -1)
+				setError(
+					"something went wrong, histology mouse coordinates returned -1"
+				);
 
-		// calculate hi-res mouse position from current low-res mouse coord
-		if (!showHiRes) {
-			hiResMouseX =
-				(+atlasImagesDimensionsKey!.histologyHiResDimensions[
-					currentHistologyBlock
-				].width /
-					+atlasImagesDimensionsKey!.histologyLowResDimensions[
-						currentHistologyBlock
-					].width) *
-				currentHistologyMouseX;
-
-			hiResMouseY =
-				(+atlasImagesDimensionsKey!.histologyHiResDimensions[
-					currentHistologyBlock
-				].height /
-					+atlasImagesDimensionsKey!.histologyLowResDimensions[
-						currentHistologyBlock
-					].height) *
-				currentHistologyMouseY;
-		}
-
-		// assign new mouse coords for both low and hi res
-		if (showHiRes) {
 			newHistologyCoords.coordsHiRes!.mouseX = currentHistologyMouseX;
 			newHistologyCoords.coordsHiRes!.mouseY = currentHistologyMouseY;
 
-			newHistologyCoords.coordsLowRes!.mouseX = +lowResMouseX;
-			newHistologyCoords.coordsLowRes!.mouseY = +lowResMouseY;
+			newHistologyCoords.coordsLowRes!.mouseX = +lowResMouseX!;
+			newHistologyCoords.coordsLowRes!.mouseY = +lowResMouseY!;
 		} else {
+			// calculate hi-res mouse position from current low-res mouse coord
+			const { hiResMouseX, hiResMouseY } = convertHistologyMouseCoords(
+				atlasImagesDimensionsKey,
+				currentHistologyMouseX,
+				currentHistologyMouseY,
+				currentHistologyBlock,
+				showHiRes
+			);
+
+			if (hiResMouseX === -1 && hiResMouseY === -1)
+				setError(
+					"something went wrong, histology mouse coordinates returned -1"
+				);
+
+			newHistologyCoords.coordsHiRes!.mouseX = +hiResMouseX!;
+			newHistologyCoords.coordsHiRes!.mouseY = +hiResMouseY!;
+
 			newHistologyCoords.coordsLowRes!.mouseX = currentHistologyMouseX;
 			newHistologyCoords.coordsLowRes!.mouseY = currentHistologyMouseY;
-
-			newHistologyCoords.coordsHiRes!.mouseX = +hiResMouseX;
-			newHistologyCoords.coordsHiRes!.mouseY = +hiResMouseY;
 		}
 
 		setHistologyImageCoords(newHistologyCoords as HistologyCoords);

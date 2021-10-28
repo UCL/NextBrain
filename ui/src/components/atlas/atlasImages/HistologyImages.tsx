@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, SyntheticEvent, useRef } from "react";
+import { FC, useState, useEffect, SyntheticEvent } from "react";
 
 import { ASSETS_URL } from "../../utils/ASSETS_URL";
 import LoadingSpinner from "../../shared/LoadingSpinner";
@@ -172,6 +172,11 @@ const HistologyImages: FC<Props> = (props) => {
 		const { naturalCoordinateX, naturalCoordinateY } =
 			calculateNaturalMouseCoordinates(mouseX, mouseY);
 
+		console.log(
+			"naturalX: " + naturalCoordinateX,
+			"naturalY: " + naturalCoordinateY
+		);
+
 		return { naturalCoordinateX, naturalCoordinateY };
 	};
 
@@ -201,10 +206,6 @@ const HistologyImages: FC<Props> = (props) => {
 		const naturalCoordinateY =
 			(imageDimensions!.naturalHeight / imageDimensions!.scaledHeight) *
 			offsetY;
-
-		console.log(
-			`natural coord x: ${naturalCoordinateX}, natural coord y: ${naturalCoordinateY}`
-		);
 
 		return {
 			naturalCoordinateX: naturalCoordinateX,
