@@ -17,9 +17,7 @@ interface Props {
 }
 
 const HistologyScrollbar: FC<Props> = (props) => {
-	const scrollbarRef: any = useRef();
-
-	const [error, setError] = useState<string | null>(null);
+	const scrollbarRef = useRef<HTMLDivElement>(null);
 	const [scrollbarPos, setScrollbarPos] = useState(0);
 
 	const {
@@ -42,7 +40,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 
 	// determine the scrollbar position for the current histology slice
 	useEffect(() => {
-		const scrollbarLength = scrollbarRef.current.clientHeight;
+		const scrollbarLength = scrollbarRef.current!.clientHeight;
 
 		const currentSliceAsProportion =
 			currentHistologySliceNumber / slicesInBlock;
@@ -64,7 +62,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 
 		const { mouseY } = getMouseCoords(e, showHiRes);
 
-		const scrollbarLength = scrollbarRef.current.clientHeight;
+		const scrollbarLength = scrollbarRef.current!.clientHeight;
 
 		// method for positioning the scrollbar based on the max number of slices in a histology block
 		const newHistologySliceNumber = (mouseY / scrollbarLength) * slicesInBlock;
@@ -114,31 +112,28 @@ const HistologyScrollbar: FC<Props> = (props) => {
 	};
 
 	return (
-		<>
-			<ErrorModal error={error} onClear={() => setError(null)} />
-			<div className="histology-scrollbar-container">
-				<div
-					className="histology-scrollbar-increment-btn up"
-					onClick={() => incrementHistologyScrollbarPos(-1)}
-				></div>
+		<div className="histology-scrollbar-container">
+			<div
+				className="histology-scrollbar-increment-btn up"
+				onClick={() => incrementHistologyScrollbarPos(-1)}
+			></div>
 
-				<div
-					className="scrollbar histology-scrollbar"
-					onClick={(e) => updateHistologyScrollbarPos(e)}
-					ref={scrollbarRef}
-				>
-					<svg
-						className="histology-scrollbar-widget"
-						style={{ top: `${scrollbarPos}px` }}
-					></svg>
-				</div>
-
-				<div
-					className="histology-scrollbar-increment-btn down"
-					onClick={() => incrementHistologyScrollbarPos(1)}
-				></div>
+			<div
+				className="scrollbar histology-scrollbar"
+				onClick={(e) => updateHistologyScrollbarPos(e)}
+				ref={scrollbarRef}
+			>
+				<svg
+					className="histology-scrollbar-widget"
+					style={{ top: `${scrollbarPos}px` }}
+				></svg>
 			</div>
-		</>
+
+			<div
+				className="histology-scrollbar-increment-btn down"
+				onClick={() => incrementHistologyScrollbarPos(1)}
+			></div>
+		</div>
 	);
 };
 
