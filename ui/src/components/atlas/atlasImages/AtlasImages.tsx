@@ -173,23 +173,7 @@ const AtlasImages: FC<Props> = (props) => {
 			try {
 				// args: plane, slice, currentMriMouseX, currentMriMouseY
 				// I should pass the argument as an object to make it more clear
-
-				switch (patientId) {
-					case "BrainAtlas-P57-16/main/P57-16":
-						await updateMriAndHistologyImages(
-							"axial",
-							124,
-							149,
-							357,
-							patientId
-						);
-						break;
-					case "BrainAtlas-P41-16/main/P41-16":
-						await updateMriAndHistologyImages("axial", 81, 153, 342, patientId);
-						break;
-					default:
-						await updateMriAndHistologyImages("axial", 50, 100, 100, patientId);
-				}
+				updateMriAndHistologyImages("axial", 124, 149, 357, patientId);
 			} catch {
 				setError("error building atlas");
 			}

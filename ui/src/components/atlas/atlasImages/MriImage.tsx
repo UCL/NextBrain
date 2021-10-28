@@ -42,10 +42,12 @@ const MriImage: FC<Props> = (props) => {
 				const mriImageUrl = `${ASSETS_URL}${patientId}/mri_rotated/slices_${plane}/slice_${paddedSlice}.png`;
 
 				const response = await fetch(mriImageUrl);
-				const imageBlob = await response.blob();
-				const imageObjectURL = URL.createObjectURL(imageBlob);
 
 				if (response.ok) {
+					const imageBlob = await response.blob();
+
+					const imageObjectURL = URL.createObjectURL(imageBlob);
+
 					setMriImage(imageObjectURL);
 				}
 			} catch (e) {
@@ -61,7 +63,7 @@ const MriImage: FC<Props> = (props) => {
 	if (mriImage == null || mriImage === "" || currentSlice == null) {
 		return (
 			<>
-				<ErrorModal error={error} onClear={() => setError(null)} />
+				{/* <ErrorModal error={error} onClear={() => setError(null)} /> */}
 				{isLoading && (
 					<LoadingSpinner asOverlay={false} message={"Loading..."} />
 				)}

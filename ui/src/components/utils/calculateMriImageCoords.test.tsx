@@ -1,5 +1,4 @@
 import calculateMriImageCoords from "./calculateMriImageCoords";
-import calculateAdjustedMriCoords from "./calculateAdjustedMriCoords";
 
 describe("unit tests for calculating correct mri image coords", () => {
 	test("image coords return correctly with sagittal as props", () => {
@@ -8,8 +7,9 @@ describe("unit tests for calculating correct mri image coords", () => {
 		const mouseX = 313;
 		const mouseY = 173;
 
-		const { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY } =
-			calculateAdjustedMriCoords(currentPlane, currentSlice, mouseX, mouseY);
+		const adjustedMriSlice = 143;
+		const adjustedMriMouseX = 137;
+		const adjustedMriMouseY = 189;
 
 		expect(
 			calculateMriImageCoords(
@@ -46,8 +46,9 @@ describe("unit tests for calculating correct mri image coords", () => {
 		const mouseX = 98;
 		const mouseY = 167;
 
-		const { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY } =
-			calculateAdjustedMriCoords(currentPlane, currentSlice, mouseX, mouseY);
+		const adjustedMriSlice = 131;
+		const adjustedMriMouseX = 128;
+		const adjustedMriMouseY = 195;
 
 		expect(
 			calculateMriImageCoords(
@@ -84,8 +85,9 @@ describe("unit tests for calculating correct mri image coords", () => {
 		const mouseX = 158;
 		const mouseY = 144;
 
-		const { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY } =
-			calculateAdjustedMriCoords(currentPlane, currentSlice, mouseX, mouseY);
+		const adjustedMriSlice = 238;
+		const adjustedMriMouseX = 77;
+		const adjustedMriMouseY = 93;
 
 		expect(
 			calculateMriImageCoords(

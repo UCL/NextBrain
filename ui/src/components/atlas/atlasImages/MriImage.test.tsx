@@ -1,9 +1,17 @@
-import { render, screen } from "@testing-library/react";
-
 import MriImage from "./MriImage";
 
+import {
+	render,
+	screen,
+	waitFor,
+	waitForElementToBeRemoved,
+	configure,
+} from "@testing-library/react";
+
+//configure({ asyncUtilTimeout: 5000 });
+
 describe("MriImage component", () => {
-	test("mri image exists in the document with correct attributes passed down via props", () => {
+	test("mri image exists in the document with correct attributes passed down via props", async () => {
 		// Arrange
 		// set up the test data, test conditions, and test environment
 		const mriImageCoords = {
@@ -28,20 +36,26 @@ describe("MriImage component", () => {
 			<MriImage
 				plane="axial"
 				mriImageCoords={mriImageCoords}
-				showHiRes={false}
 				computeMriImagesHandler={() => {}}
+				patientId="BrainAtlas-P57-16/main/P57-16"
 			/>
 		);
 
 		// Act
 		// run logic that should be tested (e.g. fire action or execute function)
 
+		//await waitForElementToBeRemoved(await screen.findByText("Loading..."));
+
 		// Assert
 		// compare execution results with expected results
-		const mriImage: any = screen.getByRole("img");
+		const mriImage: any = await screen.findByRole("img");
 		screen.getByAltText(/axial/); // an alternative approach to getting the element using regex
 		expect(mriImage).toBeInTheDocument();
 		expect(mriImage.alt).toContain("slice234");
+
+		// await waitFor(async () => {
+		// 	expect(screen.getByRole("img")).toBeInTheDocument();
+		// });
 	});
 
 	test("mouse pointer has correct coordinates based on props", () => {
@@ -67,8 +81,8 @@ describe("MriImage component", () => {
 			<MriImage
 				plane="axial"
 				mriImageCoords={mriImageCoords}
-				showHiRes={false}
 				computeMriImagesHandler={() => {}}
+				patientId="BrainAtlas-P57-16/main/P57-16"
 			/>
 		);
 

@@ -10,8 +10,6 @@ interface Props {
 const MousePointer: FC<Props> = (props) => {
 	const { mouseY, mouseX } = props;
 
-	console.log(mouseX, mouseY);
-
 	// coordinates recieved by MousePointer are rounded in order to calcuate mri and histology, find a way around this?
 	if (mouseX != null && mouseY != null) {
 		return (
