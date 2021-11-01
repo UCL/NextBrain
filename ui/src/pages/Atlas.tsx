@@ -1,5 +1,6 @@
 import { FC, useState, useEffect, useCallback } from "react";
 
+import LoadingSpinner from "../components/shared/LoadingSpinner";
 import { ASSETS_URL } from "../components/utils/ASSETS_URL";
 import AtlasImages from "../components/atlas/atlasImages/AtlasImages";
 import AtlasOptions from "../components/atlas/atlasOptions/AtlasOptions";
@@ -12,6 +13,7 @@ import { NavPanelCoords } from "../models/navPanelCoords.model";
 import "./Atlas.css";
 
 const Atlas: FC = () => {
+	const [isLoading, setIsLoading] = useState(false);
 	const [initializeAtlas, setInitializeAtlas] = useState(true);
 	const [patientId, setPatientId] = useState("BrainAtlas-P57-16/main/P57-16");
 	const [channel, setChannel] = useState("LFB");
@@ -49,16 +51,16 @@ const Atlas: FC = () => {
 			histologyHiResDimensions: histologyHiResDimensionsKeyFile,
 		};
 
-		console.log(atlasImagesDimensionsKey);
-
 		setAtlasImagesDimensionsKey(atlasImagesDimensionsKey);
 	}, [patientId]);
 
 	useEffect(() => {
 		const initializeAtlas = async () => {
+			setIsLoading(true);
 			setInitializeAtlas(true);
 			await getAtlasImageDimensionsFiles();
 			setInitializeAtlas(false);
+			setIsLoading(false);
 		};
 
 		initializeAtlas();
@@ -66,10 +68,16 @@ const Atlas: FC = () => {
 
 	if (initializeAtlas === true) {
 		return (
-			<div>
-				Initializing atlas and loading assets, this might take a few seconds
-				depending on your internet connection...
-			</div>
+			<>
+				{isLoading && (
+					<LoadingSpinner
+						asOverlay
+						message={
+							"Initializing atlas and loading assets, this might take a few seconds depending on your internet connection..."
+						}
+					/>
+				)}
+			</>
 		);
 	}
 
