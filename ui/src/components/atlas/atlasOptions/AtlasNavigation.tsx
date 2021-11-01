@@ -3,10 +3,11 @@ import DropdownTreeSelect from "react-dropdown-tree-select";
 
 import { ASSETS_URL } from "../../utils/ASSETS_URL";
 
-import { NavPanelCoords } from "../../../models/navPanelCoords.model";
-
 import getMatrix from "../../utils/getMatrix";
 import matrixMultiplier from "../../utils/matrixMultiplier";
+
+import { NavPanelCoords } from "../../../models/navPanelCoords.model";
+import { AtlasNavigationData } from "../../../models/atlasNavigationData.model";
 
 import "react-dropdown-tree-select/dist/styles.css";
 import "./AtlasNavigation.css";
@@ -19,7 +20,8 @@ interface Props {
 }
 
 const AtlasNavigation: FC<Props> = (props) => {
-	const [atlasNavigationData, setAtlasNavigationData] = useState<any>(null);
+	const [atlasNavigationData, setAtlasNavigationData] =
+		useState<AtlasNavigationData | null>(null);
 
 	const { patientId, setNavPanelCoords, showHiRes, setShowHiRes } = props;
 
