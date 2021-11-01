@@ -3,7 +3,7 @@
 import { AtlasImagesDimensionsKey } from "../../models/atlasImagesDimensionsKey.model";
 
 const convertHistologyMouseCoords = (
-	atlasImagesDimensionsKey: AtlasImagesDimensionsKey,
+	atlasImagesDimensionsKey: AtlasImagesDimensionsKey | null,
 	currentHistologyMouseX: number,
 	currentHistologyMouseY: number,
 	currentHistologyBlock: number,
