@@ -91,7 +91,7 @@ const AtlasImages: FC<Props> = (props) => {
 			console.log(histologyImageCoords);
 			setCurrentLabelHandler();
 		}
-	}, [histologyImageCoords, mriImageCoords, showHiRes, setCurrentLabel]);
+	}, [histologyImageCoords, mriImageCoords, showHiRes, setCurrentLabel, patientId]);
 
 	// sets the mri and histology coords when navigating from the drop-down list
 	useEffect(() => {
@@ -110,7 +110,7 @@ const AtlasImages: FC<Props> = (props) => {
 				patientId
 			);
 		}
-	}, [navPanelCoords, atlasImagesDimensionsKey]);
+	}, [navPanelCoords, atlasImagesDimensionsKey, patientId]);
 
 	const updateMriAndHistologyImages = async (
 		currentMriPlane: string,

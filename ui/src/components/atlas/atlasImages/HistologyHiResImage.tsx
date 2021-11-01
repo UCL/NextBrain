@@ -1,17 +1,19 @@
-import { FC } from "react";
+import { FC, SyntheticEvent } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import MousePointer from "../../shared/MousePointer";
 
 interface Props {
-	histologyImage: any;
-	labelsImage: any;
-	labelsTransparency: any;
+	histologyImage: string;
+	labelsImage: string;
+	labelsTransparency: string;
 	showHiRes: boolean;
 	showLabels: boolean;
-	updateHistologyCoordsHandler: any;
-	onImageLoad: any;
-	scaledHistologyMouseCoords: any;
+	updateHistologyCoordsHandler: (e: SyntheticEvent | Event) => void;
+	onImageLoad: (e: SyntheticEvent) => void;
+	scaledHistologyMouseCoords: {
+		[key: string]: number;
+	} | null;
 }
 
 // to allow the zooming feature, the hi-res image needs access to both the mouse pointer and labels image

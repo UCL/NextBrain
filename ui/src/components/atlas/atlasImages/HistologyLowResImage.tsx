@@ -1,9 +1,9 @@
-import { FC } from "react";
+import { FC, SyntheticEvent } from "react";
 
 interface Props {
-	histologyImage: any;
-	updateHistologyCoordsHandler: any;
-	onImageLoad: any;
+	histologyImage: string;
+	updateHistologyCoordsHandler: (e: SyntheticEvent | Event) => void;
+	onImageLoad: (e: SyntheticEvent) => void;
 }
 
 const HistologyLowResImage: FC<Props> = (props) => {

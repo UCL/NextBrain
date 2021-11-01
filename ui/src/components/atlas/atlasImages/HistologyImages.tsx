@@ -67,16 +67,19 @@ const HistologyImages: FC<Props> = (props) => {
 					const labelsImageUrl = `${ASSETS_URL}${patientId}/${histologyFolder}/${paddedBlock}/slices_labels/slice_${paddedSlice}.${labelsFileExtension}`;
 
 					const histologyImageResponse = await fetch(histologyImageUrl);
-					const histologyImageBlob = await histologyImageResponse.blob();
-					const histologyImageObjectURL =
-						URL.createObjectURL(histologyImageBlob);
+					if (histologyImageResponse.ok) {
+						const histologyImageBlob = await histologyImageResponse.blob();
+						const histologyImageObjectURL =
+							URL.createObjectURL(histologyImageBlob);
+
+						setHistologyImage(histologyImageObjectURL);
+					}
 
 					const labelsImageResponse = await fetch(labelsImageUrl);
-					const labelsImageBlob = await labelsImageResponse.blob();
-					const labelsImageObjectURL = URL.createObjectURL(labelsImageBlob);
+					if (labelsImageResponse.ok) {
+						const labelsImageBlob = await labelsImageResponse.blob();
+						const labelsImageObjectURL = URL.createObjectURL(labelsImageBlob);
 
-					if (histologyImageResponse.ok && labelsImageResponse.ok) {
-						setHistologyImage(histologyImageObjectURL);
 						setLabelsImage(labelsImageObjectURL);
 					}
 				} catch (e) {

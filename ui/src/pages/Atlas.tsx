@@ -77,6 +77,7 @@ const Atlas: FC = () => {
 		return <div>Error: could not load assets from remote storage</div>;
 	}
 
+	// add a loading spinner here
 	return (
 		<main className="atlas-container">
 			<AtlasImages
@@ -104,6 +105,7 @@ const Atlas: FC = () => {
 				setLabelsTransparency={setLabelsTransparency}
 				currentLabel={currentLabel}
 				setNavPanelCoords={setNavPanelCoords}
+				setInitializeAtlas={setInitializeAtlas}
 			/>
 
 			{/* ideally, scrollbars should go here */}

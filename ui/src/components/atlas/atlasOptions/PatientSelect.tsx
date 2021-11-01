@@ -5,10 +5,17 @@ import "./PatientSelect.css";
 interface Props {
 	patientId: string;
 	setPatientId: (patientId: string) => void;
+	setInitializeAtlas: (initializeAtlas: boolean) => void;
 }
 
 const PatientSelect: FC<Props> = (props) => {
-	const { patientId, setPatientId } = props;
+	const { patientId, setPatientId, setInitializeAtlas } = props;
+
+	const setPatientIdHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		setInitializeAtlas(true); // causes entire application to re-render, prevents memory leaks in unmounted components
+
+		setPatientId(e.target.value);
+	};
 
 	return (
 		<div className="patient-select-container">
@@ -18,9 +25,7 @@ const PatientSelect: FC<Props> = (props) => {
 				id="patient-select"
 				className="patient-select-picker"
 				value={patientId}
-				onChange={(e) => {
-					setPatientId(e.target.value);
-				}}
+				onChange={(e) => setPatientIdHandler(e)}
 			>
 				<option value="BrainAtlas-P57-16/main/P57-16">P57-16</option>
 				<option value="BrainAtlas-P41-16/main/P41-16">P41-16</option>

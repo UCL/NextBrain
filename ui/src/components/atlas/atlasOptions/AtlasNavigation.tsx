@@ -31,6 +31,8 @@ const AtlasNavigation: FC<Props> = (props) => {
 
 			const parsedFile = await file.json();
 
+			console.log(parsedFile);
+
 			setAtlasNavigationData(parsedFile);
 		};
 

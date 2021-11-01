@@ -1,8 +1,8 @@
 import { FC } from "react";
 
 interface Props {
-	labelsImage: any;
-	labelsTransparency: any;
+	labelsImage: string;
+	labelsTransparency: string;
 }
 
 const HistologyLabelsImage: FC<Props> = (props) => {
