@@ -94,7 +94,7 @@ const getCurrentBlock = async (
 	currentMriMouseY: number,
 	currentMriSlice: number,
 	patientId: string,
-	atlasImagesDimensionsKey: any
+	atlasImagesDimensionsKey: AtlasImagesDimensionsKey | null
 ) => {
 	let currentBlock;
 	let n = new npyjs();
@@ -106,8 +106,8 @@ const getCurrentBlock = async (
 	let npyFile;
 	try {
 		npyFile = `${ASSETS_URL}${patientId}/mri_rotated/indices_${currentMriPlane}/slice_${paddedSlice}.npy`;
-	} catch (e: any) {
-		throw new Error(e);
+	} catch (e) {
+		console.log(e);
 	}
 
 	// parse the raw npy file as a readable npy array
@@ -124,7 +124,7 @@ const getCurrentBlock = async (
 		currentBlock = ndArray.get(
 			currentMriMouseX,
 			ndArray.shape[1] -
-				(+atlasImagesDimensionsKey.mriDimensions.sagittal.height -
+				(+atlasImagesDimensionsKey!.mriDimensions.sagittal.height -
 					currentMriMouseY)
 		);
 	}

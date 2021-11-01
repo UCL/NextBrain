@@ -1,7 +1,9 @@
 // converts between hi-res and low-res versions of histology mouse coords
 
+import { AtlasImagesDimensionsKey } from "../../models/atlasImagesDimensionsKey.model";
+
 const convertHistologyMouseCoords = (
-	atlasImagesDimensionsKey: any,
+	atlasImagesDimensionsKey: AtlasImagesDimensionsKey,
 	currentHistologyMouseX: number,
 	currentHistologyMouseY: number,
 	currentHistologyBlock: number,
