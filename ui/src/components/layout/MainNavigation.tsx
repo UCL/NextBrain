@@ -19,14 +19,6 @@ const MainNavigation = () => {
 							Atlas
 						</NavLink>
 					</li>
-
-					{process.env.NODE_ENV === "development" && (
-						<li>
-							<NavLink to="/test" activeClassName="active">
-								Test
-							</NavLink>
-						</li>
-					)}
 				</ul>
 			</nav>
 		</header>

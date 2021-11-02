@@ -4,7 +4,6 @@ import Layout from "./components/layout/Layout";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import Atlas from "./pages/Atlas";
-import Test from "./pages/Test";
 
 function App() {
 	return (
@@ -20,10 +19,6 @@ function App() {
 
 				<Route path="/atlas" exact>
 					<Atlas />
-				</Route>
-
-				<Route path="/test" exact>
-					<Test />
 				</Route>
 
 				<Route path="*">
