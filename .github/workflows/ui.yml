@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      working-directory: ./react-ui
+      working-directory: ./ui
     strategy:
       matrix:
         node: ["12"] # keep this at v12 for now, can add more node versions later if needed

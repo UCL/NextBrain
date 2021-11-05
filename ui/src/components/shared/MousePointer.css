@@ -1,0 +1,19 @@
+.mouse-pointer {
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	transform: translate(0, -1000px);
+	z-index: 2;
+	pointer-events: none;
+}
+.mouse-pointer:before,
+.mouse-pointer:after {
+	position: absolute;
+	content: " ";
+	height: 2000px;
+	width: 2px;
+	background-color: white;
+}
+.mouse-pointer:after {
+	transform: rotate(-90deg);
+}

@@ -1,0 +1,18 @@
+.atlas-container {
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+@media (min-width: 1400px) {
+	.atlas-container {
+		transform: scale(0.8);
+	}
+}
+
+@media (min-width: 1800px) {
+	.atlas-container {
+		transform: scale(1);
+	}
+}
