@@ -27,7 +27,8 @@ const calculateHistologyImageCoords = async (
 		atlasImagesDimensionsKey
 	);
 
-	console.log("current block: " + currentBlock);
+	process.env.NODE_ENV === "development" &&
+		console.log("current block: " + currentBlock);
 
 	if (currentBlock === 0 || currentBlock === undefined) return "no block found";
 
@@ -99,7 +100,8 @@ const getCurrentBlock = async (
 	let currentBlock;
 	let n = new npyjs();
 
-	console.log("current slice: " + currentMriSlice);
+	process.env.NODE_ENV === "development" &&
+		console.log("current slice: " + currentMriSlice);
 
 	const paddedSlice = currentMriSlice.toFixed(0).padStart(3, "0");
 

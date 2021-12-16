@@ -136,9 +136,10 @@ const HistologyImages: FC<Props> = (props) => {
 		const scaledHistologyMouseY =
 			(scaledHeight / naturalHeight) * naturalCoordinateY;
 
-		console.log(
-			`scaled coord x: ${scaledHistologyMouseX}, scaled coord y: ${scaledHistologyMouseY}`
-		);
+		process.env.NODE_ENV === "development" &&
+			console.log(
+				`scaled coord x: ${scaledHistologyMouseX}, scaled coord y: ${scaledHistologyMouseY}`
+			);
 
 		return { scaledHistologyMouseX, scaledHistologyMouseY };
 	};
@@ -170,15 +171,17 @@ const HistologyImages: FC<Props> = (props) => {
 	const getHistologyMousePos = (e: SyntheticEvent | Event) => {
 		const { mouseX, mouseY } = getMouseCoords(e, showHiRes);
 
-		console.log("offsetX: " + mouseX, "offsetY: " + mouseY);
+		process.env.NODE_ENV === "development" &&
+			console.log("offsetX: " + mouseX, "offsetY: " + mouseY);
 
 		const { naturalCoordinateX, naturalCoordinateY } =
 			calculateNaturalMouseCoordinates(mouseX, mouseY);
 
-		console.log(
-			"naturalX: " + naturalCoordinateX,
-			"naturalY: " + naturalCoordinateY
-		);
+		process.env.NODE_ENV === "development" &&
+			console.log(
+				"naturalX: " + naturalCoordinateX,
+				"naturalY: " + naturalCoordinateY
+			);
 
 		return { naturalCoordinateX, naturalCoordinateY };
 	};

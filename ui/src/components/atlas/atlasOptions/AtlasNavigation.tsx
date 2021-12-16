@@ -33,7 +33,7 @@ const AtlasNavigation: FC<Props> = (props) => {
 
 			const parsedFile = await file.json();
 
-			console.log(parsedFile);
+			process.env.NODE_ENV === "development" && console.log(parsedFile);
 
 			setAtlasNavigationData(parsedFile);
 		};

@@ -88,10 +88,17 @@ const AtlasImages: FC<Props> = (props) => {
 		};
 
 		if (histologyImageCoords != null && mriImageCoords != null) {
-			console.log(histologyImageCoords);
+			process.env.NODE_ENV === "development" &&
+				console.log(histologyImageCoords);
 			setCurrentLabelHandler();
 		}
-	}, [histologyImageCoords, mriImageCoords, showHiRes, setCurrentLabel, patientId]);
+	}, [
+		histologyImageCoords,
+		mriImageCoords,
+		showHiRes,
+		setCurrentLabel,
+		patientId,
+	]);
 
 	// sets the mri and histology coords when navigating from the drop-down list
 	useEffect(() => {
@@ -255,7 +262,8 @@ const AtlasImages: FC<Props> = (props) => {
 		currentMriMouseX: number,
 		currentMriMouseY: number
 	) => {
-		console.log("BUILDING MRI IMAGES");
+		process.env.NODE_ENV === "development" &&
+			console.log("BUILDING MRI IMAGES");
 
 		const { adjustedMriSlice, adjustedMriMouseX, adjustedMriMouseY } =
 			calculateAdjustedMriCoords(
@@ -266,15 +274,16 @@ const AtlasImages: FC<Props> = (props) => {
 				atlasImagesDimensionsKey
 			);
 
-		logMriCoordsForDebugging(
-			currentMriPlane,
-			currentMriSlice,
-			currentMriMouseX,
-			currentMriMouseY,
-			adjustedMriSlice!,
-			adjustedMriMouseX!,
-			adjustedMriMouseY!
-		);
+		process.env.NODE_ENV === "development" &&
+			logMriCoordsForDebugging(
+				currentMriPlane,
+				currentMriSlice,
+				currentMriMouseX,
+				currentMriMouseY,
+				adjustedMriSlice!,
+				adjustedMriMouseX!,
+				adjustedMriMouseY!
+			);
 
 		const newMriCoords = calculateMriImageCoords(
 			currentMriPlane,
