@@ -54,6 +54,7 @@ const HistologyHiResImage: FC<Props> = (props) => {
 							<MousePointer
 								mouseY={scaledHistologyMouseCoords.mouseY}
 								mouseX={scaledHistologyMouseCoords.mouseX}
+								showHiRes={true}
 							/>
 						)}
 

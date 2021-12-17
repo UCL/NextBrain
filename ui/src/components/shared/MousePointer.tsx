@@ -5,16 +5,16 @@ import "./MousePointer.css";
 interface Props {
 	mouseY: number;
 	mouseX: number;
+	showHiRes?: boolean;
 }
 
 const MousePointer: FC<Props> = (props) => {
-	const { mouseY, mouseX } = props;
+	const { mouseY, mouseX, showHiRes } = props;
 
-	// coordinates recieved by MousePointer are rounded in order to calcuate mri and histology, find a way around this?
 	if (mouseX != null && mouseY != null) {
 		return (
 			<div
-				className="mouse-pointer"
+				className={`mouse-pointer ${showHiRes && "mouse-hi-res"}`}
 				style={{
 					top: mouseY,
 					left: mouseX,

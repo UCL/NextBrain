@@ -1,8 +1,12 @@
 .mouse-pointer {
 	position: absolute;
-	width: 32px;
-	height: 32px;
-	transform: translate(0, -1000px);
+
+	/* 
+	the -0.5px offset here is just for aesthetic purposes, 
+	to make the pointer position more consistent with the mouse cursor position,
+	this is mainly important when zooming all the way in
+	*/
+	transform: translate(-0.5px, -1000px);
 	z-index: 2;
 	pointer-events: none;
 }
@@ -16,4 +20,9 @@
 }
 .mouse-pointer:after {
 	transform: rotate(-90deg);
+}
+
+.mouse-pointer.mouse-hi-res:before,
+.mouse-pointer.mouse-hi-res:after {
+	width: 1px;
 }
