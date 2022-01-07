@@ -9,15 +9,12 @@
 
 .histology-img-container .histology-img {
 	-webkit-user-drag: none;
-	/* max-height: 100%;
-	max-width: 100%; */
+	max-height: 800px;
 
 	/* this is a workaround to stop the browser downscaling images */
 	/* https://stackoverflow.com/questions/37906602/blurry-downscaled-images-in-chrome */
 	transform: translateZ(0);
 
-	/* max-height: 800px; */
-	/* max-width: 800px; */
 	border: 1px solid white;
 }
 
@@ -25,12 +22,7 @@
 	position: absolute;
 	z-index: 1;
 	pointer-events: none;
-	/* max-height: 824px;
-	max-height: 500px; */
-
-	/* max-height: 100%;
-	max-width: 100%; */
-
+	max-height: 800px;
 	border: 1px solid blue;
 }
 

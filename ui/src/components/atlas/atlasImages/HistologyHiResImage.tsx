@@ -39,7 +39,7 @@ const HistologyHiResImage: FC<Props> = (props) => {
 			panning={{ velocityDisabled: true }}
 			limitToBounds={true}
 			onPanningStart={onPan}
-			maxScale={15}
+			maxScale={12}
 		>
 			{({ zoomIn, zoomOut, resetTransform, ...rest }) => (
 				<>

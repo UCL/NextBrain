@@ -2,7 +2,7 @@
 	display: grid;
 	grid-template-columns: 1fr 2.5fr 25px;
 	grid-template-rows: 1fr 1fr 1fr;
-	row-gap: 5px;
+	row-gap: 20px;
 	column-gap: 5px;
 	grid-template-areas:
 		"mri-img-sagittal histology-container histology-scrollbar"
@@ -19,8 +19,8 @@
 }
 
 .atlas-imgs-container .mri-img {
-	width: 270px;
-	height: 270px;
+	width: 275px;
+	height: 275px;
 	background-color: black;
 	overflow: hidden;
 	margin-right: 25px;
@@ -71,7 +71,7 @@
 		display: grid;
 		grid-template-columns: 1fr 950px 25px;
 		grid-template-rows: 1fr 1fr 1fr;
-		row-gap: 5px;
+		row-gap: 20px;
 		column-gap: 5px;
 	}
 }
