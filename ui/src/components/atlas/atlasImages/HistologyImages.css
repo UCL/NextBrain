@@ -2,9 +2,6 @@
 	display: flex;
 	position: relative;
 	overflow: hidden;
-
-	/* temporary restriction until I figure out whats causing it to stretch the boundaries */
-	max-height: 824px;
 }
 
 .histology-img-container .histology-img {
