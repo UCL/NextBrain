@@ -23,6 +23,7 @@
 	height: 270px;
 	background-color: black;
 	overflow: hidden;
+	margin-right: 25px;
 }
 
 .atlas-imgs-container .mri-img.sagittal {
@@ -39,7 +40,6 @@
 
 .atlas-imgs-container .histology-container {
 	grid-area: histology-container;
-	margin-left: 25px;
 	background-color: black;
 }
 
