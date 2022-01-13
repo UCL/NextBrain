@@ -13,7 +13,7 @@ const ShowLabelsBtn: FC<Props> = (props) => {
 	return (
 		<button
 			onClick={() => setShowLabels(!showLabels)}
-			className="show-labels-btn"
+			className={`show-labels-btn ${showLabels && "hi-res-active"}`}
 		>
 			{showLabels ? "Hide" : "Show"} labels
 		</button>

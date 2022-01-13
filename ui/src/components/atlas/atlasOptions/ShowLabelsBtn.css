@@ -8,6 +8,10 @@
 	border: none;
 }
 
+.show-labels-btn.hi-res-active {
+	border: 1px solid rgb(206, 206, 206);
+}
+
 .show-labels-btn:hover {
 	color: #000000;
 	background-color: rgb(146, 146, 146);

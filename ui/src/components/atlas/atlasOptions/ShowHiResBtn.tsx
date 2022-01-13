@@ -12,7 +12,10 @@ const ShowHiResBtn: FC<Props> = (props) => {
 
 	return (
 		<div className="hi-res-btn-container">
-			<button className="hi-res btn" onClick={() => setShowHiRes(!showHiRes)}>
+			<button
+				className={`hi-res btn ${showHiRes && "hi-res-active"}`}
+				onClick={() => setShowHiRes(!showHiRes)}
+			>
 				{showHiRes ? "Hide" : "Show"} hi-res histology
 			</button>
 		</div>
