@@ -57,9 +57,7 @@ const HistologyScrollbar: FC<Props> = (props) => {
 	]);
 
 	const updateHistologyScrollbarPos = (e: React.MouseEvent) => {
-		setShowHiRes(false);
-
-		const { mouseY } = getMouseCoords(e, showHiRes);
+		const mouseY = e.nativeEvent.offsetY;
 
 		const scrollbarLength = scrollbarRef.current!.clientHeight;
 
@@ -83,8 +81,6 @@ const HistologyScrollbar: FC<Props> = (props) => {
 	};
 
 	const incrementHistologyScrollbarPos = (increment: number) => {
-		setShowHiRes(false);
-
 		const newHistologySliceNumber = currentHistologySliceNumber + increment;
 
 		const scrollbarIsWithinBounds = checkScrollbarBoundaries(
