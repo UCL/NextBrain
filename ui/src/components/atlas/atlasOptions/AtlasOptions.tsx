@@ -48,8 +48,14 @@ const AtlasOptions: FC<Props> = (props) => {
 
 	return (
 		<div className="options-container">
-			<PatientSelect patientId={patientId} setPatientId={setPatientId}
-				setInitializeAtlas={setInitializeAtlas} />
+			<PatientSelect
+				patientId={patientId}
+				setPatientId={setPatientId}
+				setInitializeAtlas={setInitializeAtlas}
+				setShowHiRes={setShowHiRes}
+				setShowLabels={setShowLabels}
+				setChannel={setChannel}
+			/>
 
 			<AtlasNavigation
 				patientId={patientId}

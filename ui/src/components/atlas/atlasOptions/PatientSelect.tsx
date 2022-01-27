@@ -6,12 +6,25 @@ interface Props {
 	patientId: string;
 	setPatientId: (patientId: string) => void;
 	setInitializeAtlas: (initializeAtlas: boolean) => void;
+	setShowHiRes: (showHiRes: boolean) => void;
+	setShowLabels: (showLabels: boolean) => void;
+	setChannel: (channel: string) => void;
 }
 
 const PatientSelect: FC<Props> = (props) => {
-	const { patientId, setPatientId, setInitializeAtlas } = props;
+	const {
+		patientId,
+		setPatientId,
+		setInitializeAtlas,
+		setShowHiRes,
+		setShowLabels,
+		setChannel,
+	} = props;
 
 	const setPatientIdHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		setShowHiRes(false);
+		setShowLabels(false);
+		setChannel("LFB");
 		setInitializeAtlas(true); // causes entire application to re-render, prevents memory leaks in unmounted components
 
 		setPatientId(e.target.value);
