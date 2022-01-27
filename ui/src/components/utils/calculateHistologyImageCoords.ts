@@ -52,11 +52,17 @@ const calculateHistologyImageCoords = async (
 		atlasImagesDimensionsKey
 	);
 
+	const currentHistologyOrientation =
+		atlasImagesDimensionsKey!.histologyLowResDimensions[
+			currentBlock
+		].orientation.toString();
+
 	return {
 		coordsLowRes: histologyImageCoordsLowRes.coords,
 		coordsHiRes: histologyImageCoordsHiRes.coords,
 		currentHistologySlice: histologyImageCoordsLowRes.slice, // slice is the same for both hi and low res
 		currentHistologyBlock: currentBlock, // block is the same for both hi and low res
+		currentHistologyOrientation: currentHistologyOrientation, // orientation is the same for both hi and low res
 	};
 };
 

@@ -9,4 +9,5 @@ export interface HistologyCoords {
 	};
 	currentHistologySlice: number;
 	currentHistologyBlock: number;
+	currentHistologyOrientation: string;
 }

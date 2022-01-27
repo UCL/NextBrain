@@ -51,6 +51,8 @@ const Atlas: FC = () => {
 			histologyHiResDimensions: histologyHiResDimensionsKeyFile,
 		};
 
+		console.log(atlasImagesDimensionsKey);
+
 		setAtlasImagesDimensionsKey(atlasImagesDimensionsKey);
 	}, [patientId]);
 
