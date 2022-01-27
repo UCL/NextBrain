@@ -1,3 +1,16 @@
+.histology-container {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.histology-orientation-text {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px;
+}
+
 .histology-img-container {
 	display: flex;
 	position: relative;

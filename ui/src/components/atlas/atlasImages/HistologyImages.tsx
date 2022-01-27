@@ -250,6 +250,10 @@ const HistologyImages: FC<Props> = (props) => {
 	return (
 		<>
 			<div className="histology-container">
+				<div className="histology-orientation-text">
+					Orientation: {histologyImageCoords.currentHistologyOrientation}
+				</div>
+
 				<div className={`histology-img-container`}>
 					<ErrorModal error={error} onClear={() => setError(null)} />
 					{isLoading && <LoadingSpinner asOverlay message={"Loading..."} />}
