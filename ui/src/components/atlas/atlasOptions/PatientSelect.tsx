@@ -42,15 +42,9 @@ const PatientSelect: FC<Props> = (props) => {
 			>
 				<option value="BrainAtlas-P57-16/main/P57-16">P57-16</option>
 				<option value="BrainAtlas-P41-16/main/P41-16">P41-16</option>
-				<option disabled value="BrainAtlas-P58-16/main/P58-16">
-					P58-16
-				</option>
-				<option disabled value="BrainAtlas-P85-18/main/P85-18">
-					P85-18
-				</option>
-				<option disabled value="BrainAtlas-EX-19/main/EX-19">
-					EX-19
-				</option>
+				<option value="BrainAtlas-P58-16/main/P58-16">P58-16</option>
+				<option value="BrainAtlas-P85-18/main/P85-18">P85-18</option>
+				<option value="BrainAtlas-EX-19/main/EX-19">EX-19</option>
 			</select>
 		</div>
 	);

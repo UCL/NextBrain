@@ -33,25 +33,29 @@ const Atlas: FC = () => {
 		const histologyLowResDimensionsKeyUrl = `${ASSETS_URL}${patientId}/histologyDimensionsKey.json`;
 		const histologyHiResDimensionsKeyUrl = `${ASSETS_URL}${patientId}/histologyHRDimensionsKey.json`;
 
-		const mriDimensionsKeyFile = await (
-			await fetch(mriDimensionsKeyUrl)
-		).json();
+		let mriDimensionsKeyFile;
+		let histologyLowResDimensionsKeyFile;
+		let histologyHiResDimensionsKeyFile;
 
-		const histologyLowResDimensionsKeyFile = await (
-			await fetch(histologyLowResDimensionsKeyUrl)
-		).json();
+		try {
+			mriDimensionsKeyFile = await (await fetch(mriDimensionsKeyUrl)).json();
 
-		const histologyHiResDimensionsKeyFile = await (
-			await fetch(histologyHiResDimensionsKeyUrl)
-		).json();
+			histologyLowResDimensionsKeyFile = await (
+				await fetch(histologyLowResDimensionsKeyUrl)
+			).json();
+
+			histologyHiResDimensionsKeyFile = await (
+				await fetch(histologyHiResDimensionsKeyUrl)
+			).json();
+		} catch (error) {
+			console.error(error);
+		}
 
 		const atlasImagesDimensionsKey = {
 			mriDimensions: mriDimensionsKeyFile,
 			histologyLowResDimensions: histologyLowResDimensionsKeyFile,
 			histologyHiResDimensions: histologyHiResDimensionsKeyFile,
 		};
-
-		console.log(atlasImagesDimensionsKey);
 
 		setAtlasImagesDimensionsKey(atlasImagesDimensionsKey);
 	}, [patientId]);
