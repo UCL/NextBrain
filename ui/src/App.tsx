@@ -1,4 +1,4 @@
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 import Layout from "./components/layout/Layout";
 import NotFound from "./pages/NotFound";
@@ -8,23 +8,15 @@ import Atlas from "./pages/Atlas";
 function App() {
 	return (
 		<Layout>
-			<Switch>
-				<Route path="/" exact>
-					<Redirect to="/atlas" />
-				</Route>
+			<Routes>
+				<Route path="/" element={<Navigate replace to="/atlas" />} />
 
-				<Route path="/home" exact>
-					<Home />
-				</Route>
+				<Route path="/home" element={<Home />} />
 
-				<Route path="/atlas" exact>
-					<Atlas />
-				</Route>
+				<Route path="/atlas" element={<Atlas />} />
 
-				<Route path="*">
-					<NotFound />
-				</Route>
-			</Switch>
+				<Route path="*" element={<NotFound />} />
+			</Routes>
 		</Layout>
 	);
 }
