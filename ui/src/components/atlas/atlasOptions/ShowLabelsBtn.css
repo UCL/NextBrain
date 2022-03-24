@@ -1,0 +1,18 @@
+.show-labels-btn {
+	color: #ffffff;
+	width: 175px;
+	height: 50px;
+	border-radius: 3px;
+	background-color: #545454;
+	cursor: pointer;
+	border: none;
+}
+
+.show-labels-btn.hi-res-active {
+	border: 1px solid rgb(219, 219, 219);
+}
+
+.show-labels-btn:hover {
+	color: #000000;
+	background-color: rgb(146, 146, 146);
+}

@@ -1,0 +1,70 @@
+.options-container {
+	width: 300px;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	row-gap: 5px;
+	column-gap: 20px;
+	margin-left: 75px;
+	grid-template-areas:
+		"patient-select"
+		"atlas-navigation"
+		"channel"
+		"hi-res"
+		"show-labels"
+		"current-label"
+		"label-transparency";
+	/* border: 1px solid grey; */
+}
+
+.options-container > div {
+	display: flex;
+	justify-content: flex-start;
+	align-items: baseline;
+	/* border: 1px solid grey; */
+}
+
+.options-container .histology-scrollbar-container {
+	grid-area: scroll-bar;
+	border: 1px solid black;
+}
+
+.options-container .patient-select {
+	grid-area: patient-select;
+}
+
+.options-container .atlas-navigation {
+	grid-area: atlas-navigation;
+}
+
+.options-container .show-labels-container {
+	grid-area: show-labels;
+}
+
+.options-container .label-transparency {
+	grid-area: label-transparency;
+}
+
+.options-container .channel {
+	grid-area: channel;
+}
+
+.options-container .current-label-container {
+	grid-area: current-label;
+}
+
+.options-container .hi-res-btn-container {
+	grid-area: hi-res;
+}
+
+@media (min-width: 1400px) {
+	.options-container {
+		width: 250px;
+	}
+}
+
+@media (min-width: 1800px) {
+	.options-container {
+		width: 300px;
+	}
+}
