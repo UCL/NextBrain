@@ -708,9 +708,9 @@
     },
     "101": {
         "labelName": "core_of_nucleus_accumbens",
-        "r": 145,
-        "g": 160,
-        "b": 110,
+        "r": 252,
+        "g": 173,
+        "b": 3,
         "a": 0
     },
     "102": {
@@ -2885,9 +2885,9 @@
     },
     "412": {
         "labelName": "fasciculus_retroflexus_(habenuno-interpeduncular_tract)",
-        "r": 242,
-        "g": 241,
-        "b": 240,
+        "r": 245,
+        "g": 181,
+        "b": 232,
         "a": 0
     },
     "413": {
@@ -2906,9 +2906,9 @@
     },
     "415": {
         "labelName": "pontocerebellar_tract",
-        "r": 242,
-        "g": 241,
-        "b": 240,
+        "r": 255,
+        "g": 170,
+        "b": 127,
         "a": 0
     },
     "416": {
@@ -3299,15 +3299,15 @@
     "471": {
         "labelName": "decussation_of_superior_cerebellar_peduncle",
         "r": 242,
-        "g": 241,
-        "b": 240,
+        "g": 224,
+        "b": 157,
         "a": 0
     },
     "472": {
         "labelName": "posterior_commissure",
         "r": 242,
-        "g": 241,
-        "b": 240,
+        "g": 210,
+        "b": 157,
         "a": 0
     },
     "473": {
@@ -3494,9 +3494,9 @@
     },
     "499": {
         "labelName": "medial_lemniscus",
-        "r": 242,
-        "g": 241,
-        "b": 240,
+        "r": 190,
+        "g": 237,
+        "b": 175,
         "a": 0
     },
     "500": {
@@ -3606,9 +3606,9 @@
     },
     "515": {
         "labelName": "lateral_lemniscus",
-        "r": 242,
-        "g": 241,
-        "b": 240,
+        "r": 219,
+        "g": 175,
+        "b": 237,
         "a": 0
     },
     "516": {
@@ -3683,9 +3683,9 @@
     },
     "526": {
         "labelName": "brachium_of_superior_colliculus",
-        "r": 242,
-        "g": 241,
-        "b": 240,
+        "r": 240,
+        "g": 180,
+        "b": 137,
         "a": 0
     },
     "527": {
@@ -3698,8 +3698,8 @@
     "528": {
         "labelName": "medial_longitudinal_fasciculus",
         "r": 242,
-        "g": 241,
-        "b": 240,
+        "g": 167,
+        "b": 167,
         "a": 0
     },
     "529": {
@@ -3802,9 +3802,9 @@
     },
     "543": {
         "labelName": "middle_cerebellar_peduncle",
-        "r": 242,
-        "g": 241,
-        "b": 240,
+        "r": 255,
+        "g": 170,
+        "b": 255,
         "a": 0
     },
     "544": {
@@ -4138,16 +4138,16 @@
     },
     "591": {
         "labelName": "central_tegmental_tract",
-        "r": 242,
-        "g": 241,
-        "b": 240,
+        "r": 167,
+        "g": 181,
+        "b": 242,
         "a": 0
     },
     "592": {
         "labelName": "spinal_lemniscus_in_hindbrain",
-        "r": 242,
-        "g": 241,
-        "b": 240,
+        "r": 188,
+        "g": 195,
+        "b": 227,
         "a": 0
     },
     "593": {
@@ -4194,9 +4194,9 @@
     },
     "599": {
         "labelName": "ventral_nucleus_of_lateral_lemniscus",
-        "r": 76,
-        "g": 114,
-        "b": 168,
+        "r": 85,
+        "g": 170,
+        "b": 127,
         "a": 0
     },
     "600": {
@@ -5905,6 +5905,272 @@
         "r": 1,
         "g": 138,
         "b": 65,
+        "a": 0
+    },
+    "844": {
+        "labelName": "reticular_formation_/_cuneiform_area",
+        "r": 242,
+        "g": 148,
+        "b": 223,
+        "a": 0
+    },
+    "845": {
+        "labelName": "dorsal_longittudinal_fasiculus",
+        "r": 228,
+        "g": 126,
+        "b": 230,
+        "a": 0
+    },
+    "2000": {
+        "labelName": "ctx-rh-unknown",
+        "r": 25,
+        "g": 5,
+        "b": 25,
+        "a": 0
+    },
+    "2001": {
+        "labelName": "ctx-rh-bankssts",
+        "r": 25,
+        "g": 100,
+        "b": 40,
+        "a": 0
+    },
+    "2002": {
+        "labelName": "ctx-rh-caudalanteriorcingulate",
+        "r": 125,
+        "g": 100,
+        "b": 160,
+        "a": 0
+    },
+    "2003": {
+        "labelName": "ctx-rh-caudalmiddlefrontal",
+        "r": 100,
+        "g": 25,
+        "b": 0,
+        "a": 0
+    },
+    "2004": {
+        "labelName": "ctx-rh-corpuscallosum",
+        "r": 120,
+        "g": 70,
+        "b": 50,
+        "a": 0
+    },
+    "2005": {
+        "labelName": "ctx-rh-cuneus",
+        "r": 220,
+        "g": 20,
+        "b": 100,
+        "a": 0
+    },
+    "2006": {
+        "labelName": "ctx-rh-entorhinal",
+        "r": 220,
+        "g": 20,
+        "b": 10,
+        "a": 0
+    },
+    "2007": {
+        "labelName": "ctx-rh-fusiform",
+        "r": 180,
+        "g": 220,
+        "b": 140,
+        "a": 0
+    },
+    "2008": {
+        "labelName": "ctx-rh-inferiorparietal",
+        "r": 220,
+        "g": 60,
+        "b": 220,
+        "a": 0
+    },
+    "2009": {
+        "labelName": "ctx-rh-inferiortemporal",
+        "r": 180,
+        "g": 40,
+        "b": 120,
+        "a": 0
+    },
+    "2010": {
+        "labelName": "ctx-rh-isthmuscingulate",
+        "r": 140,
+        "g": 20,
+        "b": 140,
+        "a": 0
+    },
+    "2011": {
+        "labelName": "ctx-rh-lateraloccipital",
+        "r": 20,
+        "g": 30,
+        "b": 140,
+        "a": 0
+    },
+    "2012": {
+        "labelName": "ctx-rh-lateralorbitofrontal",
+        "r": 35,
+        "g": 75,
+        "b": 50,
+        "a": 0
+    },
+    "2013": {
+        "labelName": "ctx-rh-lingual",
+        "r": 225,
+        "g": 140,
+        "b": 140,
+        "a": 0
+    },
+    "2014": {
+        "labelName": "ctx-rh-medialorbitofrontal",
+        "r": 200,
+        "g": 35,
+        "b": 75,
+        "a": 0
+    },
+    "2015": {
+        "labelName": "ctx-rh-middletemporal",
+        "r": 160,
+        "g": 100,
+        "b": 50,
+        "a": 0
+    },
+    "2016": {
+        "labelName": "ctx-rh-parahippocampal",
+        "r": 20,
+        "g": 220,
+        "b": 60,
+        "a": 0
+    },
+    "2017": {
+        "labelName": "ctx-rh-paracentral",
+        "r": 60,
+        "g": 220,
+        "b": 60,
+        "a": 0
+    },
+    "2018": {
+        "labelName": "ctx-rh-parsopercularis",
+        "r": 220,
+        "g": 180,
+        "b": 140,
+        "a": 0
+    },
+    "2019": {
+        "labelName": "ctx-rh-parsorbitalis",
+        "r": 20,
+        "g": 100,
+        "b": 50,
+        "a": 0
+    },
+    "2020": {
+        "labelName": "ctx-rh-parstriangularis",
+        "r": 220,
+        "g": 60,
+        "b": 20,
+        "a": 0
+    },
+    "2021": {
+        "labelName": "ctx-rh-pericalcarine",
+        "r": 120,
+        "g": 100,
+        "b": 60,
+        "a": 0
+    },
+    "2022": {
+        "labelName": "ctx-rh-postcentral",
+        "r": 220,
+        "g": 20,
+        "b": 20,
+        "a": 0
+    },
+    "2023": {
+        "labelName": "ctx-rh-posteriorcingulate",
+        "r": 220,
+        "g": 180,
+        "b": 220,
+        "a": 0
+    },
+    "2024": {
+        "labelName": "ctx-rh-precentral",
+        "r": 60,
+        "g": 20,
+        "b": 220,
+        "a": 0
+    },
+    "2025": {
+        "labelName": "ctx-rh-precuneus",
+        "r": 160,
+        "g": 140,
+        "b": 180,
+        "a": 0
+    },
+    "2026": {
+        "labelName": "ctx-rh-rostralanteriorcingulate",
+        "r": 80,
+        "g": 20,
+        "b": 140,
+        "a": 0
+    },
+    "2027": {
+        "labelName": "ctx-rh-rostralmiddlefrontal",
+        "r": 75,
+        "g": 50,
+        "b": 125,
+        "a": 0
+    },
+    "2028": {
+        "labelName": "ctx-rh-superiorfrontal",
+        "r": 20,
+        "g": 220,
+        "b": 160,
+        "a": 0
+    },
+    "2029": {
+        "labelName": "ctx-rh-superiorparietal",
+        "r": 20,
+        "g": 180,
+        "b": 140,
+        "a": 0
+    },
+    "2030": {
+        "labelName": "ctx-rh-superiortemporal",
+        "r": 140,
+        "g": 220,
+        "b": 220,
+        "a": 0
+    },
+    "2031": {
+        "labelName": "ctx-rh-supramarginal",
+        "r": 80,
+        "g": 160,
+        "b": 20,
+        "a": 0
+    },
+    "2032": {
+        "labelName": "ctx-rh-frontalpole",
+        "r": 100,
+        "g": 0,
+        "b": 100,
+        "a": 0
+    },
+    "2033": {
+        "labelName": "ctx-rh-temporalpole",
+        "r": 7,
+        "g": 70,
+        "b": 70,
+        "a": 0
+    },
+    "2034": {
+        "labelName": "ctx-rh-transversetemporal",
+        "r": 150,
+        "g": 150,
+        "b": 200,
+        "a": 0
+    },
+    "2035": {
+        "labelName": "ctx-rh-insula",
+        "r": 255,
+        "g": 192,
+        "b": 32,
         "a": 0
     }
 }
