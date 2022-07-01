@@ -344,9 +344,9 @@
     },
     "49": {
         "labelName": "peri-caudate_ependymal_and_subependymal_zone",
-        "r": 245,
-        "g": 129,
-        "b": 66,
+        "r": 153,
+        "g": 166,
+        "b": 119,
         "a": 0
     },
     "50": {
@@ -554,9 +554,9 @@
     },
     "79": {
         "labelName": "putamen",
-        "r": 58,
-        "g": 148,
-        "b": 42,
+        "r": 168,
+        "g": 180,
+        "b": 133,
         "a": 0
     },
     "80": {
@@ -708,9 +708,9 @@
     },
     "101": {
         "labelName": "core_of_nucleus_accumbens",
-        "r": 252,
-        "g": 173,
-        "b": 3,
+        "r": 145,
+        "g": 160,
+        "b": 110,
         "a": 0
     },
     "102": {
@@ -834,9 +834,9 @@
     },
     "119": {
         "labelName": "external_segment_of_globus_pallidus",
-        "r": 104,
-        "g": 173,
-        "b": 88,
+        "r": 215,
+        "g": 224,
+        "b": 191,
         "a": 0
     },
     "120": {
@@ -897,9 +897,9 @@
     },
     "128": {
         "labelName": "substantia_innominata",
-        "r": 175,
-        "g": 325,
-        "b": 115,
+        "r": 202,
+        "g": 202,
+        "b": 146,
         "a": 0
     },
     "129": {
@@ -1023,16 +1023,16 @@
     },
     "146": {
         "labelName": "lightly-stained_parvocellular_islands_of_si",
-        "r": 131,
-        "g": 151,
-        "b": 144,
+        "r": 196,
+        "g": 194,
+        "b": 136,
         "a": 0
     },
     "147": {
         "labelName": "preoptic_region_of_hth",
-        "r": 252,
-        "g": 223,
-        "b": 3,
+        "r": 219,
+        "g": 171,
+        "b": 200,
         "a": 0
     },
     "148": {
@@ -1107,9 +1107,9 @@
     },
     "158": {
         "labelName": "nucleus_subputaminalis",
-        "r": 141,
-        "g": 151,
-        "b": 131,
+        "r": 188,
+        "g": 186,
+        "b": 128,
         "a": 0
     },
     "159": {
@@ -1240,9 +1240,9 @@
     },
     "177": {
         "labelName": "hypothalamus",
-        "r": 255,
-        "g": 149,
-        "b": 0,
+        "r": 228,
+        "g": 201,
+        "b": 217,
         "a": 0
     },
     "178": {
@@ -1268,9 +1268,9 @@
     },
     "181": {
         "labelName": "supraoptic_region_of_hth",
-        "r": 252,
-        "g": 3,
-        "b": 3,
+        "r": 207,
+        "g": 151,
+        "b": 185,
         "a": 0
     },
     "182": {
@@ -1289,9 +1289,9 @@
     },
     "184": {
         "labelName": "stria_terminalis",
-        "r": 143,
-        "g": 143,
-        "b": 143,
+        "r": 199,
+        "g": 199,
+        "b": 199,
         "a": 0
     },
     "185": {
@@ -1359,9 +1359,9 @@
     },
     "194": {
         "labelName": "paraventricular_nucleus_of_hypothalamus",
-        "r": 101,
-        "g": 181,
-        "b": 149,
+        "r": 166,
+        "g": 107,
+        "b": 142,
         "a": 0
     },
     "195": {
@@ -1373,9 +1373,9 @@
     },
     "196": {
         "labelName": "supraoptic_nucleus",
-        "r": 255,
-        "g": 125,
-        "b": 127,
+        "r": 125,
+        "g": 82,
+        "b": 111,
         "a": 0
     },
     "197": {
@@ -1443,9 +1443,9 @@
     },
     "206": {
         "labelName": "internal_segment_of_globus_pallidus",
-        "r": 140,
-        "g": 180,
-        "b": 130,
+        "r": 208,
+        "g": 217,
+        "b": 178,
         "a": 0
     },
     "207": {
@@ -1457,9 +1457,9 @@
     },
     "208": {
         "labelName": "optic_tract",
-        "r": 174,
-        "g": 174,
-        "b": 174,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "209": {
@@ -1506,23 +1506,23 @@
     },
     "215": {
         "labelName": "anterior_amygdaloid_area",
-        "r": 112,
-        "g": 165,
-        "b": 245,
+        "r": 192,
+        "g": 221,
+        "b": 157,
         "a": 0
     },
     "216": {
         "labelName": "basolateral_nucleus_(basal_nucleus)",
-        "r": 255,
-        "g": 69,
-        "b": 69,
+        "r": 137,
+        "g": 186,
+        "b": 70,
         "a": 0
     },
     "217": {
         "labelName": "ventral_division_of_basomedial_nucleus",
-        "r": 85,
-        "g": 201,
-        "b": 112,
+        "r": 137,
+        "g": 186,
+        "b": 70,
         "a": 0
     },
     "218": {
@@ -1534,58 +1534,58 @@
     },
     "219": {
         "labelName": "anterodorsal_nucleus_of_thalamus",
-        "r": 255,
-        "g": 0,
-        "b": 0,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "220": {
         "labelName": "anteroventral_nucleus_of_thalamus",
-        "r": 0,
-        "g": 0,
-        "b": 255,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "221": {
         "labelName": "parataenial_nucleus_of_thalamus",
-        "r": 102,
-        "g": 205,
-        "b": 170,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "222": {
         "labelName": "parvocellular_division_of_va",
-        "r": 221,
-        "g": 160,
-        "b": 221,
+        "r": 165,
+        "g": 84,
+        "b": 160,
         "a": 0
     },
     "223": {
         "labelName": "fasciculosus_nucleus_of_thalamus",
-        "r": 248,
-        "g": 248,
-        "b": 255,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "224": {
         "labelName": "rhomboid_(central)_nucleus_of_thalamus",
-        "r": 245,
-        "g": 255,
-        "b": 250,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "225": {
         "labelName": "paraventricular_nucleus",
-        "r": 255,
-        "g": 99,
-        "b": 71,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "226": {
         "labelName": "zona_incerta",
-        "r": 50,
-        "g": 205,
-        "b": 50,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "227": {
@@ -1597,23 +1597,23 @@
     },
     "228": {
         "labelName": "juxtaparaventricular_lateral_hypothalamic_area",
-        "r": 75,
-        "g": 130,
-        "b": 70,
+        "r": 207,
+        "g": 151,
+        "b": 185,
         "a": 0
     },
     "229": {
         "labelName": "dorsomedial_hypothalamic_nucleus",
-        "r": 198,
-        "g": 142,
-        "b": 237,
+        "r": 207,
+        "g": 151,
+        "b": 185,
         "a": 0
     },
     "230": {
         "labelName": "lateral_hypothalamic_area__tuberal_part",
-        "r": 48,
-        "g": 179,
-        "b": 70,
+        "r": 219,
+        "g": 171,
+        "b": 200,
         "a": 0
     },
     "231": {
@@ -1667,9 +1667,9 @@
     },
     "238": {
         "labelName": "ventral_subdivision_of_coa",
-        "r": 69,
-        "g": 72,
-        "b": 255,
+        "r": 137,
+        "g": 186,
+        "b": 70,
         "a": 0
     },
     "239": {
@@ -1702,23 +1702,23 @@
     },
     "243": {
         "labelName": "dorsal_part_of_ventromedial_hypothalamic_nucleus",
-        "r": 125,
-        "g": 238,
-        "b": 255,
+        "r": 193,
+        "g": 120,
+        "b": 162,
         "a": 0
     },
     "244": {
         "labelName": "ventral_part_of_ventromedial_hypothalamic_nucleus",
-        "r": 66,
-        "g": 177,
-        "b": 194,
+        "r": 166,
+        "g": 107,
+        "b": 142,
         "a": 0
     },
     "245": {
         "labelName": "arcuate_nucleus_of_hypothalamus",
-        "r": 14,
-        "g": 15,
-        "b": 99,
+        "r": 196,
+        "g": 132,
+        "b": 169,
         "a": 0
     },
     "246": {
@@ -1744,9 +1744,9 @@
     },
     "249": {
         "labelName": "dorsal_subdivision_of_coa",
-        "r": 166,
-        "g": 167,
-        "b": 255,
+        "r": 146,
+        "g": 200,
+        "b": 81,
         "a": 0
     },
     "250": {
@@ -1765,9 +1765,9 @@
     },
     "252": {
         "labelName": "anteromedial_nucleus_of_thalamus",
-        "r": 0,
-        "g": 255,
-        "b": 0,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "253": {
@@ -1779,23 +1779,23 @@
     },
     "254": {
         "labelName": "reticular_nucleus_of_thalamus",
-        "r": 255,
-        "g": 255,
-        "b": 240,
+        "r": 165,
+        "g": 84,
+        "b": 160,
         "a": 0
     },
     "255": {
         "labelName": "central_part_of_ventromedial_hypothalamic_nucleus",
-        "r": 170,
-        "g": 233,
-        "b": 242,
+        "r": 181,
+        "g": 113,
+        "b": 151,
         "a": 0
     },
     "256": {
         "labelName": "tuberomammillary_nucleus",
-        "r": 255,
-        "g": 140,
-        "b": 33,
+        "r": 181,
+        "g": 113,
+        "b": 151,
         "a": 0
     },
     "257": {
@@ -1877,9 +1877,9 @@
     },
     "268": {
         "labelName": "lateral_tuberal_nuclei",
-        "r": 22,
-        "g": 62,
-        "b": 128,
+        "r": 145,
+        "g": 94,
+        "b": 126,
         "a": 0
     },
     "269": {
@@ -1919,44 +1919,44 @@
     },
     "274": {
         "labelName": "ventral_medial_nucleus_of_thalamus",
-        "r": 0,
-        "g": 128,
-        "b": 128,
+        "r": 158,
+        "g": 76,
+        "b": 148,
         "a": 0
     },
     "275": {
         "labelName": "posterior_hypothalamic_nucleus",
-        "r": 64,
-        "g": 230,
-        "b": 213,
+        "r": 214,
+        "g": 146,
+        "b": 186,
         "a": 0
     },
     "276": {
         "labelName": "mammillothalamic_tract",
-        "r": 242,
-        "g": 241,
-        "b": 240,
+        "r": 190,
+        "g": 190,
+        "b": 190,
         "a": 0
     },
     "277": {
         "labelName": "medial_subdivision_of_central_nucleus",
-        "r": 255,
-        "g": 245,
-        "b": 107,
+        "r": 175,
+        "g": 213,
+        "b": 138,
         "a": 0
     },
     "278": {
         "labelName": "lateral_subdivision_of_central_nucleus",
-        "r": 255,
-        "g": 148,
-        "b": 223,
+        "r": 175,
+        "g": 213,
+        "b": 138,
         "a": 0
     },
     "279": {
         "labelName": "rostral_subdivision_of_medial_nucleus",
-        "r": 255,
-        "g": 155,
-        "b": 48,
+        "r": 156,
+        "g": 204,
+        "b": 102,
         "a": 0
     },
     "280": {
@@ -1982,30 +1982,30 @@
     },
     "283": {
         "labelName": "magnocellular_division_of_va",
-        "r": 233,
-        "g": 150,
-        "b": 122,
+        "r": 158,
+        "g": 76,
+        "b": 148,
         "a": 0
     },
     "284": {
         "labelName": "central_medial_nucleus_of_thalamus",
-        "r": 245,
-        "g": 222,
-        "b": 179,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "285": {
         "labelName": "paracentral_nucleus_of_thalamus",
-        "r": 184,
-        "g": 134,
-        "b": 11,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "286": {
         "labelName": "intermediodorsal__nucleus_of_thalamus",
-        "r": 144,
-        "g": 238,
-        "b": 144,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "287": {
@@ -2045,9 +2045,9 @@
     },
     "292": {
         "labelName": "dorsal_subdivision_of_cop",
-        "r": 7,
-        "g": 0,
-        "b": 201,
+        "r": 156,
+        "g": 204,
+        "b": 102,
         "a": 0
     },
     "293": {
@@ -2073,23 +2073,23 @@
     },
     "296": {
         "labelName": "anteromedial_large-celled_island_of_md_",
-        "r": 255,
-        "g": 239,
-        "b": 213,
+        "r": 165,
+        "g": 84,
+        "b": 160,
         "a": 0
     },
     "297": {
         "labelName": "lateral__hypothalamic_area__posterior_part",
-        "r": 66,
-        "g": 86,
-        "b": 237,
+        "r": 196,
+        "g": 132,
+        "b": 169,
         "a": 0
     },
     "298": {
         "labelName": "mammillary_peduncle",
-        "r": 156,
-        "g": 156,
-        "b": 156,
+        "r": 110,
+        "g": 110,
+        "b": 110,
         "a": 0
     },
     "299": {
@@ -2101,9 +2101,9 @@
     },
     "300": {
         "labelName": "venrtral_subdivision_of_cop",
-        "r": 125,
+        "r": 146,
         "g": 200,
-        "b": 240,
+        "b": 81,
         "a": 0
     },
     "301": {
@@ -2122,51 +2122,51 @@
     },
     "303": {
         "labelName": "central_dorsal_nucleus_of_thalamus",
-        "r": 32,
-        "g": 178,
-        "b": 170,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "304": {
         "labelName": "supramammillary_nucleus",
-        "r": 79,
-        "g": 15,
-        "b": 163,
+        "r": 166,
+        "g": 107,
+        "b": 142,
         "a": 0
     },
     "305": {
         "labelName": "lateral_part_of_medial_mammillary_nucleus",
-        "r": 255,
-        "g": 163,
-        "b": 249,
+        "r": 156,
+        "g": 106,
+        "b": 134,
         "a": 0
     },
     "306": {
         "labelName": "medial_part_of_medial_mammillary_nucleus",
-        "r": 239,
-        "g": 56,
-        "b": 245,
+        "r": 181,
+        "g": 113,
+        "b": 151,
         "a": 0
     },
     "307": {
         "labelName": "basal_division_of_medial_mammillary_nucleus",
-        "r": 173,
-        "g": 2,
-        "b": 162,
+        "r": 160,
+        "g": 90,
+        "b": 130,
         "a": 0
     },
     "308": {
         "labelName": "lateral_mammillary_nucleus",
-        "r": 199,
-        "g": 0,
-        "b": 73,
+        "r": 157,
+        "g": 101,
+        "b": 133,
         "a": 0
     },
     "309": {
         "labelName": "lenticular_fasciculus",
-        "r": 227,
-        "g": 166,
-        "b": 255,
+        "r": 135,
+        "g": 135,
+        "b": 135,
         "a": 0
     },
     "310": {
@@ -2192,30 +2192,30 @@
     },
     "313": {
         "labelName": "parvocellular_(central)_division_of_md",
-        "r": 205,
-        "g": 133,
-        "b": 63,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "314": {
         "labelName": "rostral_division_of_vl",
-        "r": 165,
-        "g": 42,
-        "b": 42,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "315": {
         "labelName": "medial_portion_of_sth",
-        "r": 60,
-        "g": 163,
-        "b": 34,
+        "r": 167,
+        "g": 141,
+        "b": 180,
         "a": 0
     },
     "316": {
         "labelName": "laterodorsal_portion_of_sth",
-        "r": 219,
-        "g": 57,
-        "b": 57,
+        "r": 152,
+        "g": 129,
+        "b": 165,
         "a": 0
     },
     "317": {
@@ -2234,30 +2234,30 @@
     },
     "319": {
         "labelName": "caudal_subdivision_of_medial_nucleus",
-        "r": 255,
-        "g": 128,
-        "b": 0,
+        "r": 156,
+        "g": 204,
+        "b": 102,
         "a": 0
     },
     "320": {
         "labelName": "amygdalohippocampal_transition_area",
-        "r": 128,
-        "g": 300,
-        "b": 231,
+        "r": 231,
+        "g": 176,
+        "b": 128,
         "a": 0
     },
     "321": {
         "labelName": "lateroventral_portion_of_sth",
-        "r": 255,
-        "g": 131,
-        "b": 59,
+        "r": 138,
+        "g": 117,
+        "b": 149,
         "a": 0
     },
     "322": {
         "labelName": "thalamic_fasciculus",
-        "r": 242,
-        "g": 241,
-        "b": 240,
+        "r": 170,
+        "g": 170,
+        "b": 170,
         "a": 0
     },
     "323": {
@@ -2276,16 +2276,16 @@
     },
     "325": {
         "labelName": "mammillotegmental_tract",
-        "r": 216,
-        "g": 208,
-        "b": 219,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "326": {
         "labelName": "uncal_subiculum",
-        "r": 117,
-        "g": 191,
-        "b": 113,
+        "r": 153,
+        "g": 136,
+        "b": 187,
         "a": 0
     },
     "327": {
@@ -2332,9 +2332,9 @@
     },
     "333": {
         "labelName": "medial_mammillary_nucleus",
-        "r": 237,
-        "g": 66,
-        "b": 226,
+        "r": 181,
+        "g": 113,
+        "b": 151,
         "a": 0
     },
     "334": {
@@ -2374,28 +2374,28 @@
     },
     "339": {
         "labelName": "stratum_lacunosum-moleculare_of_uncal_ca1",
-        "r": 226,
+        "r": 209,
         "g": 206,
-        "b": 220,
+        "b": 226,
         "a": 0
     },
     "340": {
         "labelName": "stratum_radiatum_of_uncal_ca1",
-        "r": 235,
-        "g": 209,
-        "b": 224,
+        "r": 230,
+        "g": 230,
+        "b": 236,
         "a": 0
     },
     "341": {
         "labelName": "stratum_pyramidale_of_uncal_ca1",
-        "r": 140,
+        "r": 105,
         "g": 79,
-        "b": 135,
+        "b": 140,
         "a": 0
     },
     "342": {
         "labelName": "stratum_oriens_of_uncal_ca1",
-        "r": 176,
+        "r": 138,
         "g": 122,
         "b": 177,
         "a": 0
@@ -2444,16 +2444,16 @@
     },
     "349": {
         "labelName": "posteroventral_putamen",
-        "r": 95,
-        "g": 189,
-        "b": 74,
+        "r": 168,
+        "g": 180,
+        "b": 133,
         "a": 0
     },
     "350": {
         "labelName": "dorsal_subdivision_of_vlc",
-        "r": 255,
-        "g": 250,
-        "b": 250,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "351": {
@@ -2479,9 +2479,9 @@
     },
     "354": {
         "labelName": "alveus",
-        "r": 242,
-        "g": 209,
-        "b": 255,
+        "r": 207,
+        "g": 207,
+        "b": 207,
         "a": 0
     },
     "355": {
@@ -2549,30 +2549,30 @@
     },
     "364": {
         "labelName": "molecular_layer_of_uncal_dentate_gyrus",
-        "r": 242,
-        "g": 220,
-        "b": 191,
+        "r": 230,
+        "g": 230,
+        "b": 236,
         "a": 0
     },
     "365": {
         "labelName": "granular_layer_of_uncal_dentate_gyrus",
-        "r": 212,
-        "g": 133,
-        "b": 55,
+        "r": 84,
+        "g": 62,
+        "b": 116,
         "a": 0
     },
     "366": {
         "labelName": "subgranular_zone_of_uncal_dentate_gyrus",
-        "r": 152,
-        "g": 113,
-        "b": 83,
+        "r": 114,
+        "g": 83,
+        "b": 152,
         "a": 0
     },
     "367": {
         "labelName": "polyform_layer_of_uncal_dentate_gyrus",
-        "r": 242,
-        "g": 183,
-        "b": 111,
+        "r": 170,
+        "g": 157,
+        "b": 198,
         "a": 0
     },
     "368": {
@@ -2605,22 +2605,22 @@
     },
     "372": {
         "labelName": "stratum_lacunosum-moleculare_of_uncal_ca3",
-        "r": 138,
-        "g": 138,
-        "b": 238,
+        "r": 209,
+        "g": 206,
+        "b": 226,
         "a": 0
     },
     "373": {
         "labelName": "stratum_lucidum__of_uncal_ca3",
-        "r": 182,
-        "g": 182,
-        "b": 209,
+        "r": 230,
+        "g": 230,
+        "b": 236,
         "a": 0
     },
     "374": {
         "labelName": "stratum_pyramidale_of_uncal_ca3",
-        "r": 72,
-        "g": 88,
+        "r": 97,
+        "g": 72,
         "b": 132,
         "a": 0
     },
@@ -2633,51 +2633,51 @@
     },
     "376": {
         "labelName": "central_nuclear_group",
-        "r": 206,
-        "g": 122,
-        "b": 255,
+        "r": 175,
+        "g": 213,
+        "b": 138,
         "a": 0
     },
     "377": {
         "labelName": "lateral_nucleus",
-        "r": 61,
-        "g": 212,
-        "b": 207,
+        "r": 166,
+        "g": 209,
+        "b": 122,
         "a": 0
     },
     "378": {
         "labelName": "lateral_dorsal_nucleus_of_thalamus",
-        "r": 255,
-        "g": 255,
-        "b": 0,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "379": {
         "labelName": "densocelllular_(paralamellar)_division_of_md",
-        "r": 0,
-        "g": 255,
-        "b": 255,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "380": {
         "labelName": "multiform_(lateral)_division_of_md",
-        "r": 0,
-        "g": 0,
-        "b": 205,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "381": {
         "labelName": "ventral_subdivision_of_vlc",
-        "r": 147,
-        "g": 112,
-        "b": 219,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "382": {
         "labelName": "medial_subdivision_of_vlc_(area_x)",
-        "r": 218,
-        "g": 112,
-        "b": 214,
+        "r": 191,
+        "g": 137,
+        "b": 188,
         "a": 0
     },
     "383": {
@@ -2759,58 +2759,58 @@
     },
     "394": {
         "labelName": "rostral_division_of_ventral_posterior_lateral_nucleus",
-        "r": 75,
-        "g": 0,
-        "b": 130,
+        "r": 158,
+        "g": 76,
+        "b": 148,
         "a": 0
     },
     "395": {
         "labelName": "parvocellular_division_of_vpm",
-        "r": 255,
-        "g": 235,
-        "b": 205,
+        "r": 140,
+        "g": 70,
+        "b": 133,
         "a": 0
     },
     "396": {
         "labelName": "lateral_division_of_centromedian_nucleus_of_thalamus",
-        "r": 255,
-        "g": 20,
-        "b": 147,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "397": {
         "labelName": "medial_division_of_centromedian_nucleus_of_thalamus",
-        "r": 25,
-        "g": 25,
-        "b": 112,
+        "r": 191,
+        "g": 137,
+        "b": 188,
         "a": 0
     },
     "398": {
         "labelName": "parafascicular_nucleus_of_thalamus",
-        "r": 112,
-        "g": 128,
-        "b": 144,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "399": {
         "labelName": "periventricular_area_of_thalamus",
-        "r": 255,
-        "g": 160,
-        "b": 122,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "400": {
         "labelName": "nucleus_of_the_field_of_forel",
-        "r": 128,
-        "g": 0,
-        "b": 0,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "401": {
         "labelName": "parabrachial_pigmented_nucleus",
-        "r": 247,
-        "g": 176,
-        "b": 176,
+        "r": 86,
+        "g": 161,
+        "b": 187,
         "a": 0
     },
     "402": {
@@ -2822,16 +2822,16 @@
     },
     "403": {
         "labelName": "cerebellothalamic_tract",
-        "r": 252,
-        "g": 152,
-        "b": 3,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "404": {
         "labelName": "molecular_layer_of_rostral_dentate_gyrus",
-        "r": 146,
-        "g": 155,
-        "b": 168,
+        "r": 230,
+        "g": 230,
+        "b": 236,
         "a": 0
     },
     "405": {
@@ -2857,37 +2857,37 @@
     },
     "408": {
         "labelName": "stratum_lacunosum-moleculare_of_rostral_ca2",
-        "r": 217,
+        "r": 209,
         "g": 206,
         "b": 226,
         "a": 0
     },
     "409": {
         "labelName": "stratum_radiatum_of_rostral_ca2",
-        "r": 235,
-        "g": 236,
-        "b": 230,
+        "r": 230,
+        "g": 230,
+        "b": 236,
         "a": 0
     },
     "410": {
         "labelName": "stratum_pyramidale_of_rostral_ca2",
-        "r": 110,
-        "g": 127,
-        "b": 69,
+        "r": 93,
+        "g": 69,
+        "b": 127,
         "a": 0
     },
     "411": {
         "labelName": "stratum_oriens_of_rostral_ca2",
-        "r": 159,
-        "g": 177,
-        "b": 122,
+        "r": 138,
+        "g": 122,
+        "b": 177,
         "a": 0
     },
     "412": {
         "labelName": "fasciculus_retroflexus_(habenuno-interpeduncular_tract)",
-        "r": 245,
-        "g": 181,
-        "b": 232,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "413": {
@@ -2906,9 +2906,9 @@
     },
     "415": {
         "labelName": "pontocerebellar_tract",
-        "r": 255,
-        "g": 170,
-        "b": 127,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "416": {
@@ -2962,30 +2962,30 @@
     },
     "423": {
         "labelName": "ventral_posterior_medial_nucleus",
-        "r": 60,
-        "g": 179,
-        "b": 113,
+        "r": 158,
+        "g": 76,
+        "b": 148,
         "a": 0
     },
     "424": {
         "labelName": "ventral_posterior_inferior_nucleus",
-        "r": 255,
-        "g": 228,
-        "b": 196,
+        "r": 158,
+        "g": 76,
+        "b": 148,
         "a": 0
     },
     "425": {
         "labelName": "lateral_division_of_central_lateral_nucleus",
-        "r": 238,
-        "g": 130,
-        "b": 238,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "426": {
         "labelName": "subparafascicular_nucleus_of_thalamus",
-        "r": 34,
-        "g": 139,
-        "b": 34,
+        "r": 191,
+        "g": 137,
+        "b": 188,
         "a": 0
     },
     "427": {
@@ -3011,9 +3011,9 @@
     },
     "430": {
         "labelName": "lateral_habenular_nucleus",
-        "r": 173,
-        "g": 255,
-        "b": 47,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "431": {
@@ -3088,30 +3088,30 @@
     },
     "441": {
         "labelName": "lateral_posterior_nucleus_of_thalamus",
-        "r": 0,
-        "g": 0,
-        "b": 128,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "442": {
         "labelName": "basal_ventral_medial_nucleus",
-        "r": 218,
-        "g": 165,
-        "b": 32,
+        "r": 158,
+        "g": 76,
+        "b": 148,
         "a": 0
     },
     "443": {
         "labelName": "dorsal_division_of_central_lateral_nucleus",
-        "r": 238,
-        "g": 232,
-        "b": 170,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "444": {
         "labelName": "medial_habenular_nucleus",
-        "r": 65,
-        "g": 105,
-        "b": 225,
+        "r": 158,
+        "g": 76,
+        "b": 148,
         "a": 0
     },
     "445": {
@@ -3179,9 +3179,9 @@
     },
     "454": {
         "labelName": "anterior_nucleus_of_pulvinar",
-        "r": 46,
-        "g": 139,
-        "b": 87,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "455": {
@@ -3207,9 +3207,9 @@
     },
     "458": {
         "labelName": "caudal_division_of_ventral_posterior_lateral_nucleus",
-        "r": 225,
-        "g": 182,
-        "b": 193,
+        "r": 158,
+        "g": 76,
+        "b": 148,
         "a": 0
     },
     "459": {
@@ -3228,9 +3228,9 @@
     },
     "461": {
         "labelName": "fimbria",
-        "r": 207,
-        "g": 190,
-        "b": 205,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "462": {
@@ -3299,15 +3299,15 @@
     "471": {
         "labelName": "decussation_of_superior_cerebellar_peduncle",
         "r": 242,
-        "g": 224,
-        "b": 157,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "472": {
         "labelName": "posterior_commissure",
         "r": 242,
-        "g": 210,
-        "b": 157,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "473": {
@@ -3340,23 +3340,23 @@
     },
     "477": {
         "labelName": "pregeniculate_nucleus",
-        "r": 255,
-        "g": 105,
-        "b": 180,
+        "r": 165,
+        "g": 84,
+        "b": 160,
         "a": 0
     },
     "478": {
         "labelName": "posterior_nucleus_of_thalamus",
-        "r": 124,
-        "g": 252,
-        "b": 0,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "479": {
         "labelName": "centromedian_nucleus_of_thalamus",
-        "r": 255,
-        "g": 20,
-        "b": 147,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "480": {
@@ -3389,9 +3389,9 @@
     },
     "484": {
         "labelName": "dorsal_lateral_geniculate_nucleus",
-        "r": 188,
-        "g": 143,
-        "b": 143,
+        "r": 140,
+        "g": 70,
+        "b": 133,
         "a": 0
     },
     "485": {
@@ -3445,9 +3445,9 @@
     },
     "492": {
         "labelName": "limitans_nucleus",
-        "r": 255,
-        "g": 255,
-        "b": 224,
+        "r": 149,
+        "g": 73,
+        "b": 138,
         "a": 0
     },
     "493": {
@@ -3494,9 +3494,9 @@
     },
     "499": {
         "labelName": "medial_lemniscus",
-        "r": 190,
-        "g": 237,
-        "b": 175,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "500": {
@@ -3529,16 +3529,16 @@
     },
     "504": {
         "labelName": "dorsal_medial_geniculate_nucleus",
-        "r": 255,
-        "g": 218,
-        "b": 185,
+        "r": 182,
+        "g": 123,
+        "b": 180,
         "a": 0
     },
     "505": {
         "labelName": "ventral_medial_geniculate_nucleus",
-        "r": 222,
-        "g": 184,
-        "b": 135,
+        "r": 191,
+        "g": 137,
+        "b": 188,
         "a": 0
     },
     "506": {
@@ -3571,44 +3571,44 @@
     },
     "510": {
         "labelName": "magnocellular_(medial)_nucleus",
-        "r": 127,
-        "g": 255,
-        "b": 0,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "511": {
         "labelName": "limitans_part_of_medial_geniculate_nucleus",
-        "r": 139,
-        "g": 69,
-        "b": 19,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "512": {
         "labelName": "suprageniculate_nucleus_of_thalamus",
-        "r": 70,
-        "g": 130,
-        "b": 180,
+        "r": 149,
+        "g": 73,
+        "b": 138,
         "a": 0
     },
     "513": {
         "labelName": "hippocampal_commissure",
-        "r": 214,
-        "g": 199,
-        "b": 212,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "514": {
         "labelName": "crus_of_the_fornix",
-        "r": 153,
-        "g": 153,
-        "b": 153,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "515": {
         "labelName": "lateral_lemniscus",
-        "r": 219,
-        "g": 175,
-        "b": 237,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "516": {
@@ -3620,9 +3620,9 @@
     },
     "517": {
         "labelName": "lateral_nucleus_of_pulvinar",
-        "r": 255,
-        "g": 228,
-        "b": 225,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "518": {
@@ -3634,9 +3634,9 @@
     },
     "519": {
         "labelName": "inferior_nucleus_of_pulvinar",
-        "r": 106,
-        "g": 90,
-        "b": 205,
+        "r": 176,
+        "g": 103,
+        "b": 169,
         "a": 0
     },
     "520": {
@@ -3683,9 +3683,9 @@
     },
     "526": {
         "labelName": "brachium_of_superior_colliculus",
-        "r": 240,
-        "g": 180,
-        "b": 137,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "527": {
@@ -3698,8 +3698,8 @@
     "528": {
         "labelName": "medial_longitudinal_fasciculus",
         "r": 242,
-        "g": 167,
-        "b": 167,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "529": {
@@ -3802,9 +3802,9 @@
     },
     "543": {
         "labelName": "middle_cerebellar_peduncle",
-        "r": 255,
-        "g": 170,
-        "b": 255,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "544": {
@@ -3907,9 +3907,9 @@
     },
     "558": {
         "labelName": "molecular_layer_of_caudal_dentate_gyrus",
-        "r": 146,
-        "g": 155,
-        "b": 168,
+        "r": 230,
+        "g": 230,
+        "b": 236,
         "a": 0
     },
     "559": {
@@ -3963,30 +3963,30 @@
     },
     "566": {
         "labelName": "stratum_lacunosum-moleculare_of_caudal_ca2",
-        "r": 217,
+        "r": 209,
         "g": 206,
         "b": 226,
         "a": 0
     },
     "567": {
         "labelName": "stratum_radiatum_of_caudal_ca2",
-        "r": 235,
-        "g": 236,
-        "b": 230,
+        "r": 230,
+        "g": 230,
+        "b": 236,
         "a": 0
     },
     "568": {
         "labelName": "stratum_pyramidale_of_caudal_ca2",
-        "r": 110,
-        "g": 127,
-        "b": 69,
+        "r": 97,
+        "g": 72,
+        "b": 132,
         "a": 0
     },
     "569": {
         "labelName": "stratum_oriens_of_caudal_ca2",
-        "r": 159,
-        "g": 177,
-        "b": 122,
+        "r": 138,
+        "g": 122,
+        "b": 177,
         "a": 0
     },
     "570": {
@@ -4138,16 +4138,16 @@
     },
     "591": {
         "labelName": "central_tegmental_tract",
-        "r": 167,
-        "g": 181,
-        "b": 242,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "592": {
         "labelName": "spinal_lemniscus_in_hindbrain",
-        "r": 188,
-        "g": 195,
-        "b": 227,
+        "r": 242,
+        "g": 241,
+        "b": 240,
         "a": 0
     },
     "593": {
@@ -4194,9 +4194,9 @@
     },
     "599": {
         "labelName": "ventral_nucleus_of_lateral_lemniscus",
-        "r": 85,
-        "g": 170,
-        "b": 127,
+        "r": 76,
+        "g": 114,
+        "b": 168,
         "a": 0
     },
     "600": {
@@ -5656,7 +5656,7 @@
         "a": 0
     },
     "808": {
-        "labelName": "commissural_nucleus",
+        "labelName": "infundibular_stalk/commissural_nucleus",
         "r": 1,
         "g": 138,
         "b": 65,
@@ -5732,193 +5732,256 @@
         "b": 180,
         "a": 0
     },
-    "819": {
-        "labelName": "superior_portion_of_inferior_olivary_nucleus",
-        "r": 204,
-        "g": 153,
-        "b": 255,
+    "1000": {
+        "labelName": "ctx-lh-unknown",
+        "r": 25,
+        "g": 5,
+        "b": 25,
         "a": 0
     },
-    "820": {
-        "labelName": "medial_thalamus",
-        "r": 225,
+    "1001": {
+        "labelName": "ctx-lh-bankssts",
+        "r": 25,
         "g": 100,
-        "b": 200,
+        "b": 40,
         "a": 0
     },
-    "821": {
-        "labelName": "anterior_thalamus",
-        "r": 188,
-        "g": 188,
-        "b": 188,
+    "1002": {
+        "labelName": "ctx-lh-caudalanteriorcingulate",
+        "r": 125,
+        "g": 100,
+        "b": 160,
         "a": 0
     },
-    "822": {
-        "labelName": "medial_geniculate_nucleus",
+    "1003": {
+        "labelName": "ctx-lh-caudalmiddlefrontal",
         "r": 100,
-        "g": 100,
-        "b": 100,
-        "a": 0
-    },
-    "823": {
-        "labelName": "lateral_geniculate_nucleus",
-        "r": 225,
-        "g": 255,
-        "b": 255,
-        "a": 0
-    },
-    "824": {
-        "labelName": "dorsal_thalamus",
-        "r": 150,
-        "g": 150,
-        "b": 170,
-        "a": 0
-    },
-    "825": {
-        "labelName": "intralaminar_of_thalamus",
-        "r": 249,
-        "g": 239,
-        "b": 150,
-        "a": 0
-    },
-    "826": {
-        "labelName": "dorsal_trigeminothalamic_tract",
-        "r": 255,
-        "g": 102,
-        "b": 255,
-        "a": 0
-    },
-    "827": {
-        "labelName": "parietotemporopontine_tract",
-        "r": 255,
-        "g": 153,
-        "b": 153,
-        "a": 0
-    },
-    "828": {
-        "labelName": "corticonuclear_tract",
-        "r": 255,
-        "g": 255,
-        "b": 153,
-        "a": 0
-    },
-    "829": {
-        "labelName": "frontopontine_tract",
-        "r": 153,
-        "g": 255,
-        "b": 153,
-        "a": 0
-    },
-    "830": {
-        "labelName": "principle_oculomotor_nucleus",
-        "r": 255,
-        "g": 255,
-        "b": 153,
-        "a": 0
-    },
-    "831": {
-        "labelName": "nucleus_reticularis_pedunculopontinus",
-        "r": 255,
-        "g": 0,
-        "b": 255,
-        "a": 0
-    },
-    "832": {
-        "labelName": "nucleus_reticularis_centralis_superior",
-        "r": 0,
-        "g": 255,
+        "g": 25,
         "b": 0,
         "a": 0
     },
-    "833": {
-        "labelName": "nucleus_reticularis_pontis_oralis",
-        "r": 112,
-        "g": 212,
-        "b": 139,
+    "1004": {
+        "labelName": "ctx-lh-corpuscallosum",
+        "r": 120,
+        "g": 70,
+        "b": 50,
         "a": 0
     },
-    "834": {
-        "labelName": "oculomotor_nerve",
-        "r": 31,
-        "g": 212,
-        "b": 164,
+    "1005": {
+        "labelName": "ctx-lh-cuneus",
+        "r": 220,
+        "g": 20,
+        "b": 100,
         "a": 0
     },
-    "835": {
-        "labelName": "dorsolateral_pontine_nucleus",
-        "r": 40,
-        "g": 320,
+    "1006": {
+        "labelName": "ctx-lh-entorhinal",
+        "r": 220,
+        "g": 20,
+        "b": 10,
+        "a": 0
+    },
+    "1007": {
+        "labelName": "ctx-lh-fusiform",
+        "r": 180,
+        "g": 220,
+        "b": 140,
+        "a": 0
+    },
+    "1008": {
+        "labelName": "ctx-lh-inferiorparietal",
+        "r": 220,
+        "g": 60,
+        "b": 220,
+        "a": 0
+    },
+    "1009": {
+        "labelName": "ctx-lh-inferiortemporal",
+        "r": 180,
+        "g": 40,
+        "b": 120,
+        "a": 0
+    },
+    "1010": {
+        "labelName": "ctx-lh-isthmuscingulate",
+        "r": 140,
+        "g": 20,
+        "b": 140,
+        "a": 0
+    },
+    "1011": {
+        "labelName": "ctx-lh-lateraloccipital",
+        "r": 20,
+        "g": 30,
+        "b": 140,
+        "a": 0
+    },
+    "1012": {
+        "labelName": "ctx-lh-lateralorbitofrontal",
+        "r": 35,
+        "g": 75,
+        "b": 50,
+        "a": 0
+    },
+    "1013": {
+        "labelName": "ctx-lh-lingual",
+        "r": 225,
+        "g": 140,
+        "b": 140,
+        "a": 0
+    },
+    "1014": {
+        "labelName": "ctx-lh-medialorbitofrontal",
+        "r": 200,
+        "g": 35,
+        "b": 75,
+        "a": 0
+    },
+    "1015": {
+        "labelName": "ctx-lh-middletemporal",
+        "r": 160,
+        "g": 100,
+        "b": 50,
+        "a": 0
+    },
+    "1016": {
+        "labelName": "ctx-lh-parahippocampal",
+        "r": 20,
+        "g": 220,
+        "b": 60,
+        "a": 0
+    },
+    "1017": {
+        "labelName": "ctx-lh-paracentral",
+        "r": 60,
+        "g": 220,
+        "b": 60,
+        "a": 0
+    },
+    "1018": {
+        "labelName": "ctx-lh-parsopercularis",
+        "r": 220,
+        "g": 180,
+        "b": 140,
+        "a": 0
+    },
+    "1019": {
+        "labelName": "ctx-lh-parsorbitalis",
+        "r": 20,
+        "g": 100,
+        "b": 50,
+        "a": 0
+    },
+    "1020": {
+        "labelName": "ctx-lh-parstriangularis",
+        "r": 220,
+        "g": 60,
+        "b": 20,
+        "a": 0
+    },
+    "1021": {
+        "labelName": "ctx-lh-pericalcarine",
+        "r": 120,
+        "g": 100,
+        "b": 60,
+        "a": 0
+    },
+    "1022": {
+        "labelName": "ctx-lh-postcentral",
+        "r": 220,
+        "g": 20,
+        "b": 20,
+        "a": 0
+    },
+    "1023": {
+        "labelName": "ctx-lh-posteriorcingulate",
+        "r": 220,
+        "g": 180,
+        "b": 220,
+        "a": 0
+    },
+    "1024": {
+        "labelName": "ctx-lh-precentral",
+        "r": 60,
+        "g": 20,
+        "b": 220,
+        "a": 0
+    },
+    "1025": {
+        "labelName": "ctx-lh-precuneus",
+        "r": 160,
+        "g": 140,
         "b": 180,
         "a": 0
     },
-    "836": {
-        "labelName": "ventral_trigeminothalamic_tract",
-        "r": 70,
-        "g": 490,
-        "b": 366,
-        "a": 0
-    },
-    "837": {
-        "labelName": "rubro_olivary_tract",
+    "1026": {
+        "labelName": "ctx-lh-rostralanteriorcingulate",
         "r": 80,
-        "g": 200,
-        "b": 177,
+        "g": 20,
+        "b": 140,
         "a": 0
     },
-    "838": {
-        "labelName": "medial_superior_olivary_nucleus",
+    "1027": {
+        "labelName": "ctx-lh-rostralmiddlefrontal",
         "r": 75,
-        "g": 177,
+        "g": 50,
+        "b": 125,
+        "a": 0
+    },
+    "1028": {
+        "labelName": "ctx-lh-superiorfrontal",
+        "r": 20,
+        "g": 220,
+        "b": 160,
+        "a": 0
+    },
+    "1029": {
+        "labelName": "ctx-lh-superiorparietal",
+        "r": 20,
+        "g": 180,
+        "b": 140,
+        "a": 0
+    },
+    "1030": {
+        "labelName": "ctx-lh-superiortemporal",
+        "r": 140,
+        "g": 220,
+        "b": 220,
+        "a": 0
+    },
+    "1031": {
+        "labelName": "ctx-lh-supramarginal",
+        "r": 80,
+        "g": 160,
+        "b": 20,
+        "a": 0
+    },
+    "1032": {
+        "labelName": "ctx-lh-frontalpole",
+        "r": 100,
+        "g": 0,
+        "b": 100,
+        "a": 0
+    },
+    "1033": {
+        "labelName": "ctx-lh-temporalpole",
+        "r": 70,
+        "g": 70,
+        "b": 70,
+        "a": 0
+    },
+    "1034": {
+        "labelName": "ctx-lh-transversetemporal",
+        "r": 150,
+        "g": 150,
         "b": 200,
         "a": 0
     },
-    "839": {
-        "labelName": "dorsal_accessory_olivary_nucleus",
-        "r": 90,
-        "g": 119,
-        "b": 107,
-        "a": 0
-    },
-    "840": {
-        "labelName": "medial_accessory_olivary_nucleus",
-        "r": 90,
-        "g": 119,
-        "b": 107,
-        "a": 0
-    },
-    "841": {
-        "labelName": "spinocerebellar_tract",
-        "r": 242,
-        "g": 241,
-        "b": 240,
-        "a": 0
-    },
-    "842": {
-        "labelName": "decussation_of_trochlear_nerve_fibres",
-        "r": 218,
-        "g": 165,
+    "1035": {
+        "labelName": "ctx-lh-insula",
+        "r": 255,
+        "g": 192,
         "b": 32,
-        "a": 0
-    },
-    "843": {
-        "labelName": "infundibular_stalk",
-        "r": 1,
-        "g": 138,
-        "b": 65,
-        "a": 0
-    },
-    "844": {
-        "labelName": "reticular_formation_/_cuneiform_area",
-        "r": 242,
-        "g": 148,
-        "b": 223,
-        "a": 0
-    },
-    "845": {
-        "labelName": "dorsal_longittudinal_fasiculus",
-        "r": 228,
-        "g": 126,
-        "b": 230,
         "a": 0
     },
     "2000": {
