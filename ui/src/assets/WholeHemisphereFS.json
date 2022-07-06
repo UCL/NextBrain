@@ -5732,505 +5732,253 @@
         "b": 180,
         "a": 0
     },
-    "1000": {
-        "labelName": "ctx-lh-unknown",
-        "r": 25,
-        "g": 5,
-        "b": 25,
-        "a": 0
-    },
-    "1001": {
-        "labelName": "ctx-lh-bankssts",
-        "r": 25,
-        "g": 100,
-        "b": 40,
-        "a": 0
-    },
-    "1002": {
-        "labelName": "ctx-lh-caudalanteriorcingulate",
-        "r": 125,
-        "g": 100,
-        "b": 160,
-        "a": 0
-    },
-    "1003": {
-        "labelName": "ctx-lh-caudalmiddlefrontal",
-        "r": 100,
-        "g": 25,
-        "b": 0,
-        "a": 0
-    },
-    "1004": {
-        "labelName": "ctx-lh-corpuscallosum",
-        "r": 120,
-        "g": 70,
-        "b": 50,
-        "a": 0
-    },
-    "1005": {
-        "labelName": "ctx-lh-cuneus",
-        "r": 220,
-        "g": 20,
-        "b": 100,
-        "a": 0
-    },
-    "1006": {
-        "labelName": "ctx-lh-entorhinal",
-        "r": 220,
-        "g": 20,
-        "b": 10,
-        "a": 0
-    },
-    "1007": {
-        "labelName": "ctx-lh-fusiform",
-        "r": 180,
-        "g": 220,
-        "b": 140,
-        "a": 0
-    },
-    "1008": {
-        "labelName": "ctx-lh-inferiorparietal",
-        "r": 220,
-        "g": 60,
-        "b": 220,
-        "a": 0
-    },
-    "1009": {
-        "labelName": "ctx-lh-inferiortemporal",
-        "r": 180,
-        "g": 40,
-        "b": 120,
-        "a": 0
-    },
-    "1010": {
-        "labelName": "ctx-lh-isthmuscingulate",
-        "r": 140,
-        "g": 20,
-        "b": 140,
-        "a": 0
-    },
-    "1011": {
-        "labelName": "ctx-lh-lateraloccipital",
-        "r": 20,
-        "g": 30,
-        "b": 140,
-        "a": 0
-    },
-    "1012": {
-        "labelName": "ctx-lh-lateralorbitofrontal",
-        "r": 35,
-        "g": 75,
-        "b": 50,
-        "a": 0
-    },
-    "1013": {
-        "labelName": "ctx-lh-lingual",
-        "r": 225,
-        "g": 140,
-        "b": 140,
-        "a": 0
-    },
-    "1014": {
-        "labelName": "ctx-lh-medialorbitofrontal",
-        "r": 200,
-        "g": 35,
-        "b": 75,
-        "a": 0
-    },
-    "1015": {
-        "labelName": "ctx-lh-middletemporal",
-        "r": 160,
-        "g": 100,
-        "b": 50,
-        "a": 0
-    },
-    "1016": {
-        "labelName": "ctx-lh-parahippocampal",
-        "r": 20,
-        "g": 220,
-        "b": 60,
-        "a": 0
-    },
-    "1017": {
-        "labelName": "ctx-lh-paracentral",
-        "r": 60,
-        "g": 220,
-        "b": 60,
-        "a": 0
-    },
-    "1018": {
-        "labelName": "ctx-lh-parsopercularis",
-        "r": 220,
-        "g": 180,
-        "b": 140,
-        "a": 0
-    },
-    "1019": {
-        "labelName": "ctx-lh-parsorbitalis",
-        "r": 20,
-        "g": 100,
-        "b": 50,
-        "a": 0
-    },
-    "1020": {
-        "labelName": "ctx-lh-parstriangularis",
-        "r": 220,
-        "g": 60,
-        "b": 20,
-        "a": 0
-    },
-    "1021": {
-        "labelName": "ctx-lh-pericalcarine",
-        "r": 120,
-        "g": 100,
-        "b": 60,
-        "a": 0
-    },
-    "1022": {
-        "labelName": "ctx-lh-postcentral",
-        "r": 220,
-        "g": 20,
-        "b": 20,
-        "a": 0
-    },
-    "1023": {
-        "labelName": "ctx-lh-posteriorcingulate",
-        "r": 220,
-        "g": 180,
-        "b": 220,
-        "a": 0
-    },
-    "1024": {
-        "labelName": "ctx-lh-precentral",
-        "r": 60,
-        "g": 20,
-        "b": 220,
-        "a": 0
-    },
-    "1025": {
-        "labelName": "ctx-lh-precuneus",
-        "r": 160,
-        "g": 140,
-        "b": 180,
-        "a": 0
-    },
-    "1026": {
-        "labelName": "ctx-lh-rostralanteriorcingulate",
-        "r": 80,
-        "g": 20,
-        "b": 140,
-        "a": 0
-    },
-    "1027": {
-        "labelName": "ctx-lh-rostralmiddlefrontal",
-        "r": 75,
-        "g": 50,
-        "b": 125,
-        "a": 0
-    },
-    "1028": {
-        "labelName": "ctx-lh-superiorfrontal",
-        "r": 20,
-        "g": 220,
-        "b": 160,
-        "a": 0
-    },
-    "1029": {
-        "labelName": "ctx-lh-superiorparietal",
-        "r": 20,
-        "g": 180,
-        "b": 140,
-        "a": 0
-    },
-    "1030": {
-        "labelName": "ctx-lh-superiortemporal",
-        "r": 140,
-        "g": 220,
-        "b": 220,
-        "a": 0
-    },
-    "1031": {
-        "labelName": "ctx-lh-supramarginal",
-        "r": 80,
-        "g": 160,
-        "b": 20,
-        "a": 0
-    },
-    "1032": {
-        "labelName": "ctx-lh-frontalpole",
-        "r": 100,
-        "g": 0,
-        "b": 100,
-        "a": 0
-    },
-    "1033": {
-        "labelName": "ctx-lh-temporalpole",
-        "r": 70,
-        "g": 70,
-        "b": 70,
-        "a": 0
-    },
-    "1034": {
-        "labelName": "ctx-lh-transversetemporal",
-        "r": 150,
-        "g": 150,
-        "b": 200,
-        "a": 0
-    },
-    "1035": {
-        "labelName": "ctx-lh-insula",
-        "r": 255,
-        "g": 192,
-        "b": 32,
-        "a": 0
-    },
     "2000": {
-        "labelName": "ctx-rh-unknown",
+        "labelName": "unknown_cortical",
         "r": 25,
         "g": 5,
         "b": 25,
         "a": 0
     },
     "2001": {
-        "labelName": "ctx-rh-bankssts",
+        "labelName": "bankssts",
         "r": 25,
         "g": 100,
         "b": 40,
         "a": 0
     },
     "2002": {
-        "labelName": "ctx-rh-caudalanteriorcingulate",
+        "labelName": "caudalanteriorcingulate",
         "r": 125,
         "g": 100,
         "b": 160,
         "a": 0
     },
     "2003": {
-        "labelName": "ctx-rh-caudalmiddlefrontal",
+        "labelName": "caudalmiddlefrontal",
         "r": 100,
         "g": 25,
         "b": 0,
         "a": 0
     },
     "2004": {
-        "labelName": "ctx-rh-corpuscallosum",
+        "labelName": "corpuscallosum",
         "r": 120,
         "g": 70,
         "b": 50,
         "a": 0
     },
     "2005": {
-        "labelName": "ctx-rh-cuneus",
+        "labelName": "cuneus",
         "r": 220,
         "g": 20,
         "b": 100,
         "a": 0
     },
     "2006": {
-        "labelName": "ctx-rh-entorhinal",
+        "labelName": "entorhinal",
         "r": 220,
         "g": 20,
         "b": 10,
         "a": 0
     },
     "2007": {
-        "labelName": "ctx-rh-fusiform",
+        "labelName": "fusiform",
         "r": 180,
         "g": 220,
         "b": 140,
         "a": 0
     },
     "2008": {
-        "labelName": "ctx-rh-inferiorparietal",
+        "labelName": "inferiorparietal",
         "r": 220,
         "g": 60,
         "b": 220,
         "a": 0
     },
     "2009": {
-        "labelName": "ctx-rh-inferiortemporal",
+        "labelName": "inferiortemporal",
         "r": 180,
         "g": 40,
         "b": 120,
         "a": 0
     },
     "2010": {
-        "labelName": "ctx-rh-isthmuscingulate",
+        "labelName": "isthmuscingulate",
         "r": 140,
         "g": 20,
         "b": 140,
         "a": 0
     },
     "2011": {
-        "labelName": "ctx-rh-lateraloccipital",
+        "labelName": "lateraloccipital",
         "r": 20,
         "g": 30,
         "b": 140,
         "a": 0
     },
     "2012": {
-        "labelName": "ctx-rh-lateralorbitofrontal",
+        "labelName": "lateralorbitofrontal",
         "r": 35,
         "g": 75,
         "b": 50,
         "a": 0
     },
     "2013": {
-        "labelName": "ctx-rh-lingual",
+        "labelName": "lingual",
         "r": 225,
         "g": 140,
         "b": 140,
         "a": 0
     },
     "2014": {
-        "labelName": "ctx-rh-medialorbitofrontal",
+        "labelName": "medialorbitofrontal",
         "r": 200,
         "g": 35,
         "b": 75,
         "a": 0
     },
     "2015": {
-        "labelName": "ctx-rh-middletemporal",
+        "labelName": "middletemporal",
         "r": 160,
         "g": 100,
         "b": 50,
         "a": 0
     },
     "2016": {
-        "labelName": "ctx-rh-parahippocampal",
+        "labelName": "parahippocampal",
         "r": 20,
         "g": 220,
         "b": 60,
         "a": 0
     },
     "2017": {
-        "labelName": "ctx-rh-paracentral",
+        "labelName": "paracentral",
         "r": 60,
         "g": 220,
         "b": 60,
         "a": 0
     },
     "2018": {
-        "labelName": "ctx-rh-parsopercularis",
+        "labelName": "parsopercularis",
         "r": 220,
         "g": 180,
         "b": 140,
         "a": 0
     },
     "2019": {
-        "labelName": "ctx-rh-parsorbitalis",
+        "labelName": "parsorbitalis",
         "r": 20,
         "g": 100,
         "b": 50,
         "a": 0
     },
     "2020": {
-        "labelName": "ctx-rh-parstriangularis",
+        "labelName": "parstriangularis",
         "r": 220,
         "g": 60,
         "b": 20,
         "a": 0
     },
     "2021": {
-        "labelName": "ctx-rh-pericalcarine",
+        "labelName": "pericalcarine",
         "r": 120,
         "g": 100,
         "b": 60,
         "a": 0
     },
     "2022": {
-        "labelName": "ctx-rh-postcentral",
+        "labelName": "postcentral",
         "r": 220,
         "g": 20,
         "b": 20,
         "a": 0
     },
     "2023": {
-        "labelName": "ctx-rh-posteriorcingulate",
+        "labelName": "posteriorcingulate",
         "r": 220,
         "g": 180,
         "b": 220,
         "a": 0
     },
     "2024": {
-        "labelName": "ctx-rh-precentral",
+        "labelName": "precentral",
         "r": 60,
         "g": 20,
         "b": 220,
         "a": 0
     },
     "2025": {
-        "labelName": "ctx-rh-precuneus",
+        "labelName": "precuneus",
         "r": 160,
         "g": 140,
         "b": 180,
         "a": 0
     },
     "2026": {
-        "labelName": "ctx-rh-rostralanteriorcingulate",
+        "labelName": "rostralanteriorcingulate",
         "r": 80,
         "g": 20,
         "b": 140,
         "a": 0
     },
     "2027": {
-        "labelName": "ctx-rh-rostralmiddlefrontal",
+        "labelName": "rostralmiddlefrontal",
         "r": 75,
         "g": 50,
         "b": 125,
         "a": 0
     },
     "2028": {
-        "labelName": "ctx-rh-superiorfrontal",
+        "labelName": "superiorfrontal",
         "r": 20,
         "g": 220,
         "b": 160,
         "a": 0
     },
     "2029": {
-        "labelName": "ctx-rh-superiorparietal",
+        "labelName": "superiorparietal",
         "r": 20,
         "g": 180,
         "b": 140,
         "a": 0
     },
     "2030": {
-        "labelName": "ctx-rh-superiortemporal",
+        "labelName": "superiortemporal",
         "r": 140,
         "g": 220,
         "b": 220,
         "a": 0
     },
     "2031": {
-        "labelName": "ctx-rh-supramarginal",
+        "labelName": "supramarginal",
         "r": 80,
         "g": 160,
         "b": 20,
         "a": 0
     },
     "2032": {
-        "labelName": "ctx-rh-frontalpole",
+        "labelName": "frontalpole",
         "r": 100,
         "g": 0,
         "b": 100,
         "a": 0
     },
     "2033": {
-        "labelName": "ctx-rh-temporalpole",
+        "labelName": "temporalpole",
         "r": 7,
         "g": 70,
         "b": 70,
         "a": 0
     },
     "2034": {
-        "labelName": "ctx-rh-transversetemporal",
+        "labelName": "transversetemporal",
         "r": 150,
         "g": 150,
         "b": 200,
         "a": 0
     },
     "2035": {
-        "labelName": "ctx-rh-insula",
+        "labelName": "insula",
         "r": 255,
         "g": 192,
         "b": 32,
