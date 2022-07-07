@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/BrainAtlas/static/css/main.3806cbc7.chunk.css",
-    "main.js": "/BrainAtlas/static/js/main.bdeb50b4.chunk.js",
-    "main.js.map": "/BrainAtlas/static/js/main.bdeb50b4.chunk.js.map",
+    "main.js": "/BrainAtlas/static/js/main.4e466ba9.chunk.js",
+    "main.js.map": "/BrainAtlas/static/js/main.4e466ba9.chunk.js.map",
     "runtime-main.js": "/BrainAtlas/static/js/runtime-main.961e791d.js",
     "runtime-main.js.map": "/BrainAtlas/static/js/runtime-main.961e791d.js.map",
     "static/css/2.3d22e40d.chunk.css": "/BrainAtlas/static/css/2.3d22e40d.chunk.css",
@@ -21,6 +21,6 @@
     "static/css/2.3d22e40d.chunk.css",
     "static/js/2.0b585e73.chunk.js",
     "static/css/main.3806cbc7.chunk.css",
-    "static/js/main.bdeb50b4.chunk.js"
+    "static/js/main.4e466ba9.chunk.js"
   ]
 }
