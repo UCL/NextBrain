@@ -20,6 +20,13 @@
 	width: 800px;
 }
 
+.pipeline-banner {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
 .footer-logo {
 	width: 200px;
 	margin: 20px;
@@ -32,3 +39,5 @@
 .reference {
 	color: white;
 }
+
+a, a:hover, a:active, a:visited { color: white; }
