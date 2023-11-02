@@ -69,6 +69,7 @@ const Atlas: FC = () => {
 				
 				<cite>
 					<a
+						href="https://www.sciencedirect.com/science/article/pii/S1361841521003108"
 						target="_blank"
 						rel="noopener noreferrer"
 						className="reference"
