@@ -9,7 +9,7 @@ function App() {
 	return (
 		<Layout>
 			<Routes>
-				<Route path="/" element={<Navigate replace to="/atlas" />} />
+				<Route path="/" element={<Navigate replace to="/home" />} />
 
 				<Route path="/home" element={<Home />} />
 
