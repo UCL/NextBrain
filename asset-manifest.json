@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/BrainAtlas/static/css/main.a697b8dd.chunk.css",
-    "main.js": "/BrainAtlas/static/js/main.c0424c41.chunk.js",
-    "main.js.map": "/BrainAtlas/static/js/main.c0424c41.chunk.js.map",
+    "main.js": "/BrainAtlas/static/js/main.0a7ffe4d.chunk.js",
+    "main.js.map": "/BrainAtlas/static/js/main.0a7ffe4d.chunk.js.map",
     "runtime-main.js": "/BrainAtlas/static/js/runtime-main.96c83a6d.js",
     "runtime-main.js.map": "/BrainAtlas/static/js/runtime-main.96c83a6d.js.map",
     "static/css/2.3d22e40d.chunk.css": "/BrainAtlas/static/css/2.3d22e40d.chunk.css",
@@ -15,13 +15,13 @@
     "static/media/erc-logo.a80f7f04.png": "/BrainAtlas/static/media/erc-logo.a80f7f04.png",
     "static/media/eu-logo.1a7bc00a.png": "/BrainAtlas/static/media/eu-logo.1a7bc00a.png",
     "static/media/homepage-banner.66523cf7.png": "/BrainAtlas/static/media/homepage-banner.66523cf7.png",
-    "static/media/pipeline-image.7310f65e.png": "/BrainAtlas/static/media/pipeline-image.7310f65e.png"
+    "static/media/pipeline-image.7310f65e.d3dc7784.png": "/BrainAtlas/static/media/pipeline-image.7310f65e.d3dc7784.png"
   },
   "entrypoints": [
     "static/js/runtime-main.96c83a6d.js",
     "static/css/2.3d22e40d.chunk.css",
     "static/js/2.ea4563c2.chunk.js",
     "static/css/main.a697b8dd.chunk.css",
-    "static/js/main.c0424c41.chunk.js"
+    "static/js/main.0a7ffe4d.chunk.js"
   ]
 }
