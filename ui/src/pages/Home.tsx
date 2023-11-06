@@ -4,7 +4,7 @@ import banner from "../assets/homepage-banner.png";
 import uclLogo from "../assets/ucl-logo.png";
 import ercLogo from "../assets/erc-logo.png";
 import euLogo from "../assets/eu-logo.png";
-import pipelineImage from "../assets/pipeline-image.png";
+import pipelineImage from "../assets/pipeline-image.7310f65e.png";
 
 import "./Home.css";
 
