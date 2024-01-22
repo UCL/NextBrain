@@ -104,13 +104,13 @@ const Atlas: FC = () => {
                     <ul>
                         <li>
                             Showcasing the 3D reconstruction of the brain hemisphere from case 5.
-                            <a href="https://www.youtube.com/watch?v=WLFebndFggw" Video> </a>
+                            <a href="https://www.youtube.com/watch?v=WLFebndFggw"> Video </a>
                         </li>
 
                         <li>
                             Description of the probabilistic atlas building procedure from all five cases and its
                             application to <i> in vivo </i> brain MRI segmentation.
-                            <a href="https://www.youtube.com/watch?v=He4eeEAnW3Q" Video> </a>
+                            <a href="https://www.youtube.com/watch?v=He4eeEAnW3Q"> Video </a>
 
                         </li>
                     </ul>
