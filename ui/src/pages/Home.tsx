@@ -35,9 +35,8 @@ const Atlas: FC = () => {
 
 				<cite>
 					<a>
-						<b> [In preparation] "NextBrain: a next generation probabilistic atlas
-						of human brain anatomy built from 3D histology and companion 
-						Bayesian segmentation tool"</b>
+						<b> [In preparation] "A next-generation, histological atlas of the human brain
+						and its application to automated brain MRI segmentation"</b>
 					</a>
 				</cite>
 
