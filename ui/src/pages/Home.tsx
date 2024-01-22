@@ -124,6 +124,8 @@ const Atlas: FC = () => {
                         >
                             Showcasing the 3D reconstruction of the brain hemisphere from case 5.
                         </a>
+                    </cite>
+                    <cite>
                         <a
 
                             href="https://www.youtube.com/watch?v=He4eeEAnW3Q"
