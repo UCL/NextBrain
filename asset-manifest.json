@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/NextBrain/static/css/main.9bc414a9.chunk.css",
-    "main.js": "/NextBrain/static/js/main.0a7ffe4d.chunk.js",
-    "main.js.map": "/NextBrain/static/js/main.0a7ffe4d.chunk.js.map",
-    "runtime-main.js": "/NextBrain/static/js/runtime-main.96c83a6d.js",
-    "runtime-main.js.map": "/NextBrain/static/js/runtime-main.96c83a6d.js.map",
-    "static/css/2.3d22e40d.chunk.css": "/NextBrain/static/css/2.3d22e40d.chunk.css",
-    "static/js/2.ea4563c2.chunk.js": "/NextBrain/static/js/2.ea4563c2.chunk.js",
-    "static/js/2.ea4563c2.chunk.js.map": "/NextBrain/static/js/2.ea4563c2.chunk.js.map",
-    "index.html": "/NextBrain/index.html",
-    "static/css/2.3d22e40d.chunk.css.map": "/NextBrain/static/css/2.3d22e40d.chunk.css.map",
-    "static/css/main.9bc414a9.chunk.css.map": "/NextBrain/static/css/main.9bc414a9.chunk.css.map",
-    "static/js/2.ea4563c2.chunk.js.LICENSE.txt": "/NextBrain/static/js/2.ea4563c2.chunk.js.LICENSE.txt",
-    "static/media/erc-logo.a80f7f04.png": "/NextBrain/static/media/erc-logo.a80f7f04.png",
-    "static/media/eu-logo.1a7bc00a.png": "/NextBrain/static/media/eu-logo.1a7bc00a.png",
-    "static/media/homepage-banner.66523cf7.png": "/NextBrain/static/media/homepage-banner.66523cf7.png",
-    "static/media/pipeline-image.7310f65e.d3dc7784.png": "/NextBrain/static/media/pipeline-image.7310f65e.d3dc7784.png"
+    "main.css": "/BrainAtlas/static/css/main.7a53a01e.chunk.css",
+    "main.js": "/BrainAtlas/static/js/main.edc1198e.chunk.js",
+    "main.js.map": "/BrainAtlas/static/js/main.edc1198e.chunk.js.map",
+    "runtime-main.js": "/BrainAtlas/static/js/runtime-main.96c83a6d.js",
+    "runtime-main.js.map": "/BrainAtlas/static/js/runtime-main.96c83a6d.js.map",
+    "static/css/2.3d22e40d.chunk.css": "/BrainAtlas/static/css/2.3d22e40d.chunk.css",
+    "static/js/2.ea4563c2.chunk.js": "/BrainAtlas/static/js/2.ea4563c2.chunk.js",
+    "static/js/2.ea4563c2.chunk.js.map": "/BrainAtlas/static/js/2.ea4563c2.chunk.js.map",
+    "index.html": "/BrainAtlas/index.html",
+    "static/css/2.3d22e40d.chunk.css.map": "/BrainAtlas/static/css/2.3d22e40d.chunk.css.map",
+    "static/css/main.7a53a01e.chunk.css.map": "/BrainAtlas/static/css/main.7a53a01e.chunk.css.map",
+    "static/js/2.ea4563c2.chunk.js.LICENSE.txt": "/BrainAtlas/static/js/2.ea4563c2.chunk.js.LICENSE.txt",
+    "static/media/erc-logo.a80f7f04.png": "/BrainAtlas/static/media/erc-logo.a80f7f04.png",
+    "static/media/eu-logo.1a7bc00a.png": "/BrainAtlas/static/media/eu-logo.1a7bc00a.png",
+    "static/media/homepage-banner.66523cf7.png": "/BrainAtlas/static/media/homepage-banner.66523cf7.png",
+    "static/media/pipeline-image.7310f65e.d3dc7784.png": "/BrainAtlas/static/media/pipeline-image.7310f65e.d3dc7784.png"
   },
   "entrypoints": [
     "static/js/runtime-main.96c83a6d.js",
     "static/css/2.3d22e40d.chunk.css",
     "static/js/2.ea4563c2.chunk.js",
-    "static/css/main.9bc414a9.chunk.css",
-    "static/js/main.0a7ffe4d.chunk.js"
+    "static/css/main.7a53a01e.chunk.css",
+    "static/js/main.edc1198e.chunk.js"
   ]
 }
