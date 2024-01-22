@@ -96,17 +96,17 @@ const Atlas: FC = () => {
                         ex vivo MRI using the pipeline described in the following publication:
                     </p>
 
-                    <cite>
-                            <b>Robust joint registration of multiple
-                            stains and MRI for multimodal 3D histology reconstruction: Application
-                            to the Allen human brain atlas.** </b> <br />
-                            A. Casamitjana, M. Lorenzi, S. Ferraris, L. Peter, M. Modat, A. Stevens, B. Fischl,
-                            T. Vercauteren, J.E. Iglesias <br />
-                            Medical image analysis 75 (2022) <br />
+                        <b>Robust joint registration of multiple
+                        stains and MRI for multimodal 3D histology reconstruction: Application
+                        to the Allen human brain atlas.** </b> <br />
+                        A. Casamitjana, M. Lorenzi, S. Ferraris, L. Peter, M. Modat, A. Stevens, B. Fischl,
+                        T. Vercauteren, J.E. Iglesias <br />
+                        Medical image analysis 75 (2022) <br />
+                        <cite>
                             <a href="https://www.sciencedirect.com/science/article/pii/S1361841521003108"> [article] </a>
                             <a href="https://arxiv.org/pdf/2104.14873.pdf"> [arxiv] </a>
                             <a href="../../assets/bibtex.bib"> [article] </a>
-                    </cite>
+                        </cite>
                   </li>
                   <li>
                     <p>
