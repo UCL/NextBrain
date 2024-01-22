@@ -5,6 +5,7 @@
 	font-size: 1rem;
 }
 
+
 .homepage-header {
 	text-align: center;
 }
@@ -34,6 +35,8 @@
 
 .homepage-title {
 	text-align: center;
+	width: 1000px;
+
 }
 
 .reference {
@@ -41,3 +44,5 @@
 }
 
 a, a:hover, a:active, a:visited { color: white; }
+
+.tab { margin-left: 0px; }

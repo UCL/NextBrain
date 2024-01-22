@@ -32,21 +32,39 @@ const Atlas: FC = () => {
 					A comprehensive description of the 3D probabilistic atlas and its application
 					to brain Bayesian segmentation can be found in the following publication:
 				</p>
+				<br />
+                    <p className="tab">
+                        <b>A next-generation, histological atlas of the human brain
+                        and its application to automated brain MRI segmentation </b> <br />
 
-				<cite>
-					<a>
-						<b> [In preparation] "A next-generation, histological atlas of the human brain
-						and its application to automated brain MRI segmentation"</b>
-					</a>
-				</cite>
+                        A. Casamitjana, M. Mancini, E. Robinson, L. Peter,  Ro. Annunziata, J. Althonayan,
+                        S. Crampsie, E. Blackburn,  <br />
+                        B. Billot, A. Atzeni, O. Puonti, Y.Balbastre,  P. Schmidt,
+                        J. Hughes, J.C. Augustinack, B.L. Edlow, L. Zöllei,  <br />
+                        D.L. Thomas, D. Kliemann, M. Bocchetta, C. Strand, J.L. Holton, Z. Jaunmuktane, J.E. Iglesias <br />
+                        In preparation (2024) <br />
+                    </p>
+{/*                         <cite> */}
+{/*                             <a href="https://www.sciencedirect.com/science/article/pii/S1361841521003108">[article]</a> &nbsp;&nbsp; */}
+{/*                         </cite> */}
 
-                <br />
+{/*                         <cite> */}
+{/*                             <a href="https://arxiv.org/pdf/2104.14873.pdf">[arxiv]</a> &nbsp;&nbsp; */}
+{/*                         </cite> */}
+
+{/*                         <cite> */}
+{/*                             <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib">[citation]</a> */}
+{/*                         </cite> */}
+
+
                 <br />
                 <br />
 				<img className="pipeline-banner" src={pipelineImage} alt="3D reconstruction pipeline"></img>
 
 
 
+				<br />
+				<br />
 				<section>
                 <h3>Other publications</h3>
                  <ul>

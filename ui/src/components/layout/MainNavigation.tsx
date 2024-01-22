@@ -5,7 +5,7 @@ import "./MainNavigation.css";
 const MainNavigation = () => {
 	return (
 		<header className="header">
-			<div className="logo">Brain Atlas</div>
+			<div className="logo">NextBrain</div>
 			<nav className="nav">
 				<ul>
 					<li>
