@@ -21,7 +21,7 @@ Throughout this section, the following notations will be used:
 - *axial, sagittal, coronal* : these denote image projections from MRI scans. Note: the assignment of these projections to image sequences mentioned below is for illustrative purposes only. The actual name of the projection may be different (e.g. sagittal instead of axial). However, this is only a labelling issue and does not impact the way co-ordinates are computed and/or transformed.
 
 ## Transformation between MRI image projections and histology images
-The BrainAtlas project allows to move between images taken from MRI scans and histology images (including stained histology images). These set of images are generated in different ways. 
+The NextBrain project allows to move between images taken from MRI scans and histology images (including stained histology images). These set of images are generated in different ways. 
 In order to be able to switch between these different brain section representations co-ordinate transformations need to be performed. This section describes this process in more detail. In particular:
 
 - synchronising between MRI projections (axial, sagittal, coronal), i.e. for each given point in an image, find the corresponding points in the other projections
