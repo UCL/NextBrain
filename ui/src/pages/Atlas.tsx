@@ -15,7 +15,7 @@ import "./Atlas.css";
 const Atlas: FC = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [initializeAtlas, setInitializeAtlas] = useState(true);
-	const [patientId, setPatientId] = useState("NextBrain-Case-1/main/Case-1");
+	const [patientId, setPatientId] = useState("NextBrain-Case-1/main/P57-16");
 	const [channel, setChannel] = useState("LFB");
 	const [showHiRes, setShowHiRes] = useState(false);
 	const [showLabels, setShowLabels] = useState(false);

@@ -68,7 +68,7 @@ This will run the predeploy process first which builds the app and then deploys 
 
 The application is hosted on GitHub pages in the same project as where the source code is published.
 
-The URL for the hosted application is [https://github-pages.ucl.ac.uk/BrainAtlas/#/atlas](https://github-pages.ucl.ac.uk/BrainAtlas/#/atlas)
+The URL for the hosted application is [https://github-pages.ucl.ac.uk/NextBrain/#/atlas](https://github-pages.ucl.ac.uk/NextBrain/#/atlas)
 
 ---
 
