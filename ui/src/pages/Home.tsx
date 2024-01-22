@@ -59,10 +59,10 @@ const Atlas: FC = () => {
                         J.E Iglesias Gonzalez, A. Casamitjana, A. Atzeni, B. Billot, D. Thomas, E. Blackburn, J. Hughes,
                         J. Althonayan, L. Peter, M. Mancini, N. Robinson, P. Schmidt, S. Crampsie <br />
                         <cite>
-                            <a href="https://doi.org/10.5522/04/24243835.v1"> [data repository] </a> &nbsp;&nbsp;
+                            <a href="https://doi.org/10.5522/04/24243835.v1">[data repository]</a> &nbsp;&nbsp;
                         </cite>
                         <cite>
-                            <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib"> [citation] </a>
+                            <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib">[citation]</a>
                         </cite>
                   </li>
                   <li>
@@ -117,14 +117,16 @@ const Atlas: FC = () => {
                     </p>
                     <ul>
                         <li>
-                            Showcasing the 3D reconstruction of the brain hemisphere from case 5.
-                            <a href="https://www.youtube.com/watch?v=WLFebndFggw">Video </a>
+                            <a href="https://www.youtube.com/watch?v=WLFebndFggw">Video 1:</a>&nbsp;
+                            showcasing the 3D reconstruction of the brain hemisphere from case 5.
+
                         </li>
 
                         <li>
-                            Description of the probabilistic atlas building procedure from all five cases and its
+                            <a href="https://www.youtube.com/watch?v=He4eeEAnW3Q">Video 2:</a>&nbsp;
+                            description of the probabilistic atlas building procedure from all five cases and its
                             application to <i> in vivo </i> brain MRI segmentation.
-                            <a href="https://www.youtube.com/watch?v=He4eeEAnW3Q">Video </a>
+
 
                         </li>
                     </ul>
