@@ -97,15 +97,16 @@ const Atlas: FC = () => {
                     </p>
 
                     <cite>
+                            Casamitjana, Adrià, et al. "Robust joint registration of multiple
+                            stains and MRI for multimodal 3D histology reconstruction: Application
+                            to the Allen human brain atlas." Medical image analysis 75 (2022): 102265.
                         <a
                             href="https://www.sciencedirect.com/science/article/pii/S1361841521003108"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="reference"
                         >
-                            Casamitjana, Adrià, et al. "Robust joint registration of multiple
-                            stains and MRI for multimodal 3D histology reconstruction: Application
-                            to the Allen human brain atlas." Medical image analysis 75 (2022): 102265.
+                            Link
                         </a>
                     </cite>
                   </li>
