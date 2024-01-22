@@ -54,42 +54,32 @@ const Atlas: FC = () => {
                     <p>
                         The raw data of the project can be found here:
                     </p>
-                    <cite>
-                        <a
-                            href="https://doi.org/10.5522/04/24243835.v1"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="reference"
-                        >
-                           Iglesias Gonzalez, Eugenio; Casamitjana, Adria; Atzeni, Alessia; Billot, Benjamin;
-                           Thomas, David; Blackburn, Emily; et al. (2023). Registered histology, MRI, and manual
-                           annotations of over 300 brain regions in 5 human hemispheres (data from ERC Starting Grant
-                           677697 "BUNGEE-TOOLS"). University College London.
-                           Dataset. https://doi.org/10.5522/04/24243835.v1
-                        </a>
-                    </cite>
-
+                    <b>Registered histology, MRI, and manual annotations of over 300 brain regions in 5 human
+                    hemispheres (data from ERC Starting Grant 677697 "BUNGEE-TOOLS") </b> <br />
+                        M. Mancini, A. Casamitjana, L. Peter, E. Robinson,
+                        S. Crampsie, D.L. Thomas, J.L. Holton, Z. Jaunmuktane, J.E. Iglesias <br />
+                        Medical image analysis 75 (2022) <br />
+                        <cite>
+                            <a href="https://doi.org/10.5522/04/24243835.v1"> [data repository] </a>
+                            <a href="../../assets/bibtex.bib"> [citation] </a>
+                        </cite>
                   </li>
                   <li>
                     <p>
                         The data acquisition and tissue processing pipeline are described in the
                         following publication:
                     </p>
-
-                    <cite>
-                        <a
-                            href="https://www.nature.com/articles/s41598-020-69163-z"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="reference"
-                        >
-                            Mancini, Matteo, Adrià Casamitjana, Loic Peter, Eleanor Robinson,
-                            Shauna Crampsie, David L. Thomas, Janice L. Holton, Zane
-                            Jaunmuktane, and Juan Eugenio Iglesias. "A multimodal computational
-                            pipeline for 3D histology of the human brain." Scientific reports.
-                        </a>
-                    </cite>
+                        <b>A multimodal computational  pipeline for 3D histology of the human brain. </b> <br />
+                        M. Mancini, A. Casamitjana, L. Peter, E. Robinson,
+                        S. Crampsie, D.L. Thomas, J.L. Holton, Z. Jaunmuktane, J.E. Iglesias <br />
+                        Medical image analysis 75 (2022) <br />
+                        <cite>
+                            <a href="https://www.nature.com/articles/s41598-020-69163-z"> [article] </a>
+                            <a href="https://www.biorxiv.org/content/10.1101/2020.02.10.941948.abstract"> [arxiv] </a>
+                            <a href="../../assets/bibtex.bib"> [citation] </a>
+                        </cite>
                   </li>
+
                   <li>
                     <p>
                         The histological sections are registered to the coordinate space of the
@@ -98,14 +88,14 @@ const Atlas: FC = () => {
 
                         <b>Robust joint registration of multiple
                         stains and MRI for multimodal 3D histology reconstruction: Application
-                        to the Allen human brain atlas.** </b> <br />
+                        to the Allen human brain atlas. </b> <br />
                         A. Casamitjana, M. Lorenzi, S. Ferraris, L. Peter, M. Modat, A. Stevens, B. Fischl,
                         T. Vercauteren, J.E. Iglesias <br />
                         Medical image analysis 75 (2022) <br />
                         <cite>
                             <a href="https://www.sciencedirect.com/science/article/pii/S1361841521003108"> [article] </a>
                             <a href="https://arxiv.org/pdf/2104.14873.pdf"> [arxiv] </a>
-                            <a href="../../assets/bibtex.bib"> [article] </a>
+                            <a href="../../assets/bibtex.bib"> [citation] </a>
                         </cite>
                   </li>
                   <li>
@@ -114,27 +104,15 @@ const Atlas: FC = () => {
                     </p>
                     <ul>
                         <li>
-                        <a
-                            href="https://www.youtube.com/watch?v=WLFebndFggw"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="reference"
-                        >
                             Showcasing the 3D reconstruction of the brain hemisphere from case 5.
-                        </a>
+                            <a href="https://www.youtube.com/watch?v=WLFebndFggw" Video> </a>
                         </li>
 
                         <li>
-                        <a
-
-                            href="https://www.youtube.com/watch?v=He4eeEAnW3Q"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="reference"
-                        >
                             Description of the probabilistic atlas building procedure from all five cases and its
                             application to <i> in vivo </i> brain MRI segmentation.
-                        </a>
+                            <a href="https://www.youtube.com/watch?v=He4eeEAnW3Q" Video> </a>
+                       
                         </li>
                     </ul>
                   </li>
