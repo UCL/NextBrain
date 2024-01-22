@@ -15,8 +15,7 @@ const Atlas: FC = () => {
 				<img className="header-banner" src={banner} alt="logo"></img>
 
 				<h1 className="homepage-title">
-					BLUE-Brain: a 3D histological atlas of the human brain for high-resolution
-					neuroimaging studies
+					NextBrain: a next-generation, histological atlas of the human brain for high-resolution neuroimaging studies.
 				</h1>
 			</div>
 
@@ -36,7 +35,7 @@ const Atlas: FC = () => {
 
 				<cite>
 					<a>
-						<b> [In preparation] "BLUE-Brain: a next generation probabilistic atlas
+						<b> [In preparation] "NextBrain: a next generation probabilistic atlas
 						of human brain anatomy built from 3D histology and companion 
 						Bayesian segmentation tool"</b>
 					</a>
@@ -58,15 +57,16 @@ const Atlas: FC = () => {
                     </p>
                     <cite>
                         <a
-                            href="doi.org/10.5522/04/24243835"
+                            href="https://doi.org/10.5522/04/24243835.v1"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="reference"
                         >
-                            Mancini, Matteo, Adrià Casamitjana, Loic Peter, Eleanor Robinson,
-                            Shauna Crampsie, David L. Thomas, Janice L. Holton, Zane
-                            Jaunmuktane, and Juan Eugenio Iglesias. "A multimodal computational
-                            pipeline for 3D histology of the human brain." Scientific reports.
+                           Iglesias Gonzalez, Eugenio; Casamitjana, Adria; Atzeni, Alessia; Billot, Benjamin;
+                           Thomas, David; Blackburn, Emily; et al. (2023). Registered histology, MRI, and manual
+                           annotations of over 300 brain regions in 5 human hemispheres (data from ERC Starting Grant
+                           677697 "BUNGEE-TOOLS"). University College London.
+                           Dataset. https://doi.org/10.5522/04/24243835.v1
                         </a>
                     </cite>
 
@@ -94,7 +94,7 @@ const Atlas: FC = () => {
                   <li>
                     <p>
                         The histological sections are registered to the coordinate space of the
-                        ex vivo MRI using a pipeline described in the following publications:
+                        ex vivo MRI using the pipeline described in the following publication:
                     </p>
 
                     <cite>
@@ -107,6 +107,32 @@ const Atlas: FC = () => {
                             Casamitjana, Adrià, et al. "Robust joint registration of multiple
                             stains and MRI for multimodal 3D histology reconstruction: Application
                             to the Allen human brain atlas." Medical image analysis 75 (2022): 102265.
+                        </a>
+                    </cite>
+                  </li>
+                  <li>
+                    <p>
+                        Some visualization material can be found here:
+                    </p>
+
+                    <cite>
+                        <a
+                            href="https://www.youtube.com/watch?v=WLFebndFggw"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="reference"
+                        >
+                            Showcasing the 3D reconstruction of the brain hemisphere from case 5.
+                        </a>
+                        <a
+
+                            href="https://www.youtube.com/watch?v=He4eeEAnW3Q"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="reference"
+                        >
+                            Description of the probabilistic atlas building procedure from all five cases and its
+                            application to _in vivo_ brain MRI segmentation.
                         </a>
                     </cite>
                   </li>

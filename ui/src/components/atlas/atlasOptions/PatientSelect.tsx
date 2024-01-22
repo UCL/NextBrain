@@ -40,11 +40,11 @@ const PatientSelect: FC<Props> = (props) => {
 				value={patientId}
 				onChange={(e) => setPatientIdHandler(e)}
 			>
-				<option value="BrainAtlas-P57-16/main/P57-16">P57-16</option>
-				<option value="BrainAtlas-P41-16/main/P41-16">P41-16</option>
-				<option value="BrainAtlas-P58-16/main/P58-16">P58-16</option>
-				<option value="BrainAtlas-P85-18/main/P85-18">P85-18</option>
-				<option value="BrainAtlas-EX9-19/main/EX9-19">EX9-19</option>
+				<option value="NextBrain-Case-1/main/Case-1">P57-16</option>
+				<option value="NextBrain-Case-2/main/Case-2">P41-16</option>
+				<option value="NextBrain-Case-3/main/Case-3">P58-16</option>
+				<option value="NextBrain-Case-4/main/Case-4">P85-18</option>
+				<option value="NextBrain-Case-5/main/Case-5">EX9-19</option>
 			</select>
 		</div>
 	);
