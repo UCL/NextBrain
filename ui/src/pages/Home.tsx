@@ -97,12 +97,12 @@ const Atlas: FC = () => {
                     </p>
 
                     <cite>
-                            **Robust joint registration of multiple
+                            <b>Robust joint registration of multiple
                             stains and MRI for multimodal 3D histology reconstruction: Application
-                            to the Allen human brain atlas.** \
-                            A. Casamitjanaa, M. Lorenzi, S. Ferraris, L. Peter, M. Modat, A. Stevens, B. Fischl,
-                            T. Vercauteren, J.E. Iglesias \
-                            Medical image analysis 75 (2022) \
+                            to the Allen human brain atlas.** </b> <br />
+                            A. Casamitjana, M. Lorenzi, S. Ferraris, L. Peter, M. Modat, A. Stevens, B. Fischl,
+                            T. Vercauteren, J.E. Iglesias <br />
+                            Medical image analysis 75 (2022) <br />
                             [ [article](https://www.sciencedirect.com/science/article/pii/S1361841521003108) | [arxiv](https://arxiv.org/pdf/2104.14873.pdf) | [bibtex](../../assets/bibtex.bib) ]
                     </cite>
                   </li>
