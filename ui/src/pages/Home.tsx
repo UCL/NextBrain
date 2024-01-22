@@ -56,12 +56,11 @@ const Atlas: FC = () => {
                     </p>
                     <b>Registered histology, MRI, and manual annotations of over 300 brain regions in 5 human
                     hemispheres (data from ERC Starting Grant 677697 "BUNGEE-TOOLS") </b> <br />
-                        M. Mancini, A. Casamitjana, L. Peter, E. Robinson,
-                        S. Crampsie, D.L. Thomas, J.L. Holton, Z. Jaunmuktane, J.E. Iglesias <br />
-                        Medical image analysis 75 (2022) <br />
+                        J.E Iglesias Gonzalez, A. Casamitjana, A. Atzeni, B. Billot, D. Thomas, E. Blackburn, J. Hughes,
+                        J. Althonayan, L. Peter, M. Mancini, N. Robinson, P. Schmidt, S. Crampsie <br />
                         <cite>
                             <a href="https://doi.org/10.5522/04/24243835.v1"> [data repository] </a>
-                            <a href="../../assets/bibtex.bib"> [citation] </a>
+                            <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib"> [citation] </a>
                         </cite>
                   </li>
                   <li>
@@ -76,7 +75,7 @@ const Atlas: FC = () => {
                         <cite>
                             <a href="https://www.nature.com/articles/s41598-020-69163-z"> [article] </a>
                             <a href="https://www.biorxiv.org/content/10.1101/2020.02.10.941948.abstract"> [arxiv] </a>
-                            <a href="../../assets/bibtex.bib"> [citation] </a>
+                            <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib"> [citation] </a>
                         </cite>
                   </li>
 
@@ -95,7 +94,7 @@ const Atlas: FC = () => {
                         <cite>
                             <a href="https://www.sciencedirect.com/science/article/pii/S1361841521003108"> [article] </a>
                             <a href="https://arxiv.org/pdf/2104.14873.pdf"> [arxiv] </a>
-                            <a href="../../assets/bibtex.bib"> [citation] </a>
+                            <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib"> [citation] </a>
                         </cite>
                   </li>
                   <li>
@@ -112,7 +111,7 @@ const Atlas: FC = () => {
                             Description of the probabilistic atlas building procedure from all five cases and its
                             application to <i> in vivo </i> brain MRI segmentation.
                             <a href="https://www.youtube.com/watch?v=He4eeEAnW3Q" Video> </a>
-                       
+
                         </li>
                     </ul>
                   </li>
