@@ -1,5 +1,4 @@
-# BrainAtlas
-A brain Atlas (Project No 370)
+# NextBrain: A next-generation, histological atlas of the human brain for high-resolution neuroimaging studies
 The purpose of this project is to provide a visual and interactive tool correlating histology images with MRI scans taken from a set of patients.
 Users will be able to "browse" the brain anatomy, using stained and labelled histology images and MRI scans as orientation aid.
 
