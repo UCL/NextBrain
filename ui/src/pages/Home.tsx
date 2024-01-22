@@ -134,7 +134,7 @@ const Atlas: FC = () => {
                             className="reference"
                         >
                             Description of the probabilistic atlas building procedure from all five cases and its
-                            application to _in vivo_ brain MRI segmentation.
+                            application to <i> in vivo </i> brain MRI segmentation.
                         </a>
                         </li>
                     </ul>
