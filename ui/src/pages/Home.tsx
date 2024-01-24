@@ -32,7 +32,6 @@ const Atlas: FC = () => {
 					A comprehensive description of the 3D probabilistic atlas and its application
 					to brain Bayesian segmentation can be found in the following publication:
 				</p>
-				<br />
                     <p className="tab">
                         <b>A next-generation, histological atlas of the human brain
                         and its application to automated brain MRI segmentation </b> <br />
@@ -44,6 +43,21 @@ const Atlas: FC = () => {
                         D.L. Thomas, D. Kliemann, M. Bocchetta, C. Strand, J.L. Holton, Z. Jaunmuktane, J.E. Iglesias <br />
                         In preparation (2024) <br />
                     </p>
+
+                    <br />
+                    <section>
+                    <h2>Videos</h2>
+                    <p>
+                    Some visualization material showing the 3D histology reconstruction of LFB, H&E and high resolution labels
+                    as well as its alignment to brain ex vivo MRI of case 5 (left) and the probabilistic atlas construction
+                    using all 5 cases.
+                    </p>
+
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/WLFebndFggw"
+                    title="YouTube video player"> AA </iframe> &nbsp;&nbsp;
+                    <iframe  width="560" height="315" src="https://www.youtube.com/embed/He4eeEAnW3Q"
+                    title="YouTube video player"> AA </iframe>
+                    </section>
 {/*                         <cite> */}
 {/*                             <a href="https://www.sciencedirect.com/science/article/pii/S1361841521003108">[article]</a> &nbsp;&nbsp; */}
 {/*                         </cite> */}
@@ -59,128 +73,184 @@ const Atlas: FC = () => {
 
                 <br />
                 <br />
-				<img className="pipeline-banner" src={pipelineImage} alt="3D reconstruction pipeline"></img>
-
-
+                <br />
+                <br />
+                <section>
+                    <h2>Pipeline</h2>
+                    <p>
+                    The different steps of the pipeline from the fresh tissue donation to the joint multimodal 3D registration
+                    of LFB and HE stains, labels and MRI are summarized in the following figure:
+                    </p>
+				    <img className="pipeline-banner" src={pipelineImage} alt="3D reconstruction pipeline"></img>
+                </section>
 
 				<br />
 				<br />
 				<section>
-                <h3>Other publications</h3>
-                 <ul>
-                  <li>
-                    <p>
-                        The raw data of the project can be found here:
-                    </p>
-                    <b>Registered histology, MRI, and manual annotations of over 300 brain regions in 5 human
-                    hemispheres (data from ERC Starting Grant 677697 "BUNGEE-TOOLS") </b> <br />
-                        J.E Iglesias Gonzalez, A. Casamitjana, A. Atzeni, B. Billot, D. Thomas, E. Blackburn, J. Hughes,
-                        J. Althonayan, L. Peter, M. Mancini, N. Robinson, P. Schmidt, S. Crampsie <br />
-                        <cite>
-                            <a href="https://doi.org/10.5522/04/24243835.v1">[data repository]</a> &nbsp;&nbsp;
-                        </cite>
-                        <cite>
-                            <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib">[citation]</a>
-                        </cite>
-                  </li>
-                  <li>
-                    <p>
-                        The data acquisition and tissue processing pipeline are described in the
-                        following publication:
-                    </p>
-                        <b>A multimodal computational  pipeline for 3D histology of the human brain. </b> <br />
-                        M. Mancini, A. Casamitjana, L. Peter, E. Robinson,
-                        S. Crampsie, D.L. Thomas, J.L. Holton, Z. Jaunmuktane, J.E. Iglesias <br />
-                        Medical image analysis 75 (2022) <br />
-                        <cite>
-                            <a href="https://www.nature.com/articles/s41598-020-69163-z">[article]</a> &nbsp;&nbsp;
-                        </cite>
-
-                        <cite>
-                            <a href="https://www.biorxiv.org/content/10.1101/2020.02.10.941948.abstract">[arxiv]</a> &nbsp;&nbsp;
-                        </cite>
-
-                        <cite>
-                            <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib">[citation]</a>
-                        </cite>
-                  </li>
-
-                  <li>
-                    <p>
-                        The histological sections are registered to the coordinate space of the
-                        ex vivo MRI using the pipeline described in the following publication:
-                    </p>
-
-                        <b>Robust joint registration of multiple
-                        stains and MRI for multimodal 3D histology reconstruction: Application
-                        to the Allen human brain atlas. </b> <br />
-                        A. Casamitjana, M. Lorenzi, S. Ferraris, L. Peter, M. Modat, A. Stevens, B. Fischl,
-                        T. Vercauteren, J.E. Iglesias <br />
-                        Medical image analysis 75 (2022) <br />
-                        <cite>
-                            <a href="https://www.sciencedirect.com/science/article/pii/S1361841521003108">[article]</a> &nbsp;&nbsp;
-                        </cite>
-
-                        <cite>
-                            <a href="https://arxiv.org/pdf/2104.14873.pdf">[arxiv]</a> &nbsp;&nbsp;
-                        </cite>
-
-                        <cite>
-                            <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib">[citation]</a>
-                        </cite>
-                  </li>
-                  <li>
-                    <p>
-                        Some visualization material can be found here:
-                    </p>
+                    <h2>Other publications</h2>
                     <ul>
                         <li>
-                            <a href="https://www.youtube.com/watch?v=WLFebndFggw">Video 1:</a>&nbsp;
-                            showcasing the 3D reconstruction of the brain hemisphere from case 5.
+                            <p>
+                                The data acquisition and tissue processing pipeline are described in the
+                                following publication:
+                            </p>
+                                <b>A multimodal computational  pipeline for 3D histology of the human brain. </b> <br />
+                                M. Mancini, A. Casamitjana, L. Peter, E. Robinson,
+                                S. Crampsie, D.L. Thomas, J.L. Holton, Z. Jaunmuktane, J.E. Iglesias <br />
+                                Scientific Reports 10, 13839 (2020) <br />
+                                <cite>
+                                    <a href="https://www.nature.com/articles/s41598-020-69163-z">[article]</a> &nbsp;&nbsp;
+                                </cite>
 
+                                <cite>
+                                    <a href="https://www.biorxiv.org/content/10.1101/2020.02.10.941948.abstract">[arxiv]</a> &nbsp;&nbsp;
+                                </cite>
+
+                                <cite>
+                                    <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib">[citation]</a>
+                                </cite>
                         </li>
 
                         <li>
-                            <a href="https://www.youtube.com/watch?v=He4eeEAnW3Q">Video 2:</a>&nbsp;
-                            description of the probabilistic atlas building procedure from all five cases and its
-                            application to <i> in vivo </i> brain MRI segmentation.
+                            <p>
+                                The histological sections are registered to the coordinate space of the
+                                ex vivo MRI using the pipeline described in the following publication:
+                            </p>
+
+                                <b>Robust joint registration of multiple
+                                stains and MRI for multimodal 3D histology reconstruction: Application
+                                to the Allen human brain atlas. </b> <br />
+                                A. Casamitjana, M. Lorenzi, S. Ferraris, L. Peter, M. Modat, A. Stevens, B. Fischl,
+                                T. Vercauteren, J.E. Iglesias <br />
+                                Medical image analysis 75 (2022) <br />
+                                <cite>
+                                    <a href="https://www.sciencedirect.com/science/article/pii/S1361841521003108">[article]</a> &nbsp;&nbsp;
+                                </cite>
+
+                                <cite>
+                                    <a href="https://arxiv.org/pdf/2104.14873.pdf">[arxiv]</a> &nbsp;&nbsp;
+                                </cite>
+
+                                <cite>
+                                    <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib">[citation]</a> &nbsp;&nbsp;
+                                </cite>
+
+                                <cite>
+                                    <a href="https://github.com/acasamitjana/3dhirest">[code]</a>
+                                </cite>
+                        </li>
+                        <li>
+                            <p>
+                                The histological sections are registered to the coordinate space of the
+                                ex vivo MRI using the pipeline described in the following publication:
+                            </p>
+
+                                <b> Synth-by-Reg (SbR): Contrastive learning for synthesis-based registration of paired
+                                images </b> <br />
+                                A. Casamitjana, M. Mancini, J.E. Iglesias <br />
+                                Simulation and Synthesis in Medical Imaging Workshop (SASHIMI, 2021) <br />
+                                <cite>
+                                    <a href="https://link.springer.com/chapter/10.1007/978-3-030-87592-3_5">[article]</a> &nbsp;&nbsp;
+                                </cite>
+
+                                <cite>
+                                    <a href="https://arxiv.org/pdf/2107.14449.pdf">[arxiv]</a> &nbsp;&nbsp;
+                                </cite>
+
+                                <cite>
+                                    <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib">[citation]</a> &nbsp;&nbsp;
+                                </cite>
+
+                                <cite>
+                                    <a href="https://github.com/acasamitjana/SynthByReg">[code]</a>
+                                </cite>
+                        </li>
+
+                    </ul>
+                </section>
+
+				<br />
+				<br />
+				<section>
+                    <h2>Code and data</h2>
+                    <ul>
+                        <li>
+                            <p>
+                                The raw data of the project can be found here:
+                            </p>
+                            <b>Registered histology, MRI, and manual annotations of over 300 brain regions in 5 human
+                            hemispheres (data from ERC Starting Grant 677697 "BUNGEE-TOOLS") </b> <br />
+                                J.E Iglesias Gonzalez, A. Casamitjana, A. Atzeni, B. Billot, D. Thomas, E. Blackburn, J. Hughes,
+                                J. Althonayan, L. Peter, M. Mancini, N. Robinson, P. Schmidt, S. Crampsie <br />
+                                <cite>
+                                    <a href="https://doi.org/10.5522/04/24243835.v1">[data repository]</a> &nbsp;&nbsp;
+                                </cite>
+                                <cite>
+                                    <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib">[citation]</a>
+                                </cite>
+                        </li>
+                        <li>
+                            <p>
+                                Code used for the 3D histology reconstruction
+                            </p>
+                            <cite>
+                                <a href="https://github.com/acasamitjana/ERC_reconstruction">[github]</a> &nbsp;&nbsp;
+                            </cite>
+                        </li>
+                        <li>
+                            <p>
+                                Bayesian segmentation using NextBrain probabilistic atlas
+                            </p>
+                            <cite>
+                                <a href="surfer.nmr.mgh.harvard.edu/fswiki/HistoAtlasSegmentation">[tool]</a> &nbsp;&nbsp;
+                            </cite>
+                            <cite>
+                                <a href="github.com/freesurfer/freesurfer/tree/dev/mri_histo_util ">[github]</a> &nbsp;&nbsp;
+                            </cite>
+                        </li>
 
 
+
+                    </ul>
+                </section>
+
+
+                <br />
+				<br />
+                <section>
+                    <h2>Authors</h2>
+                    <ul>
+                        <li><p><b>James Hughes</b><br />
+                        [<a title="" href="https://github.com/jhughes982" target="_blank" rel="noopener">Github</a>]</p>
+                        </li>
+
+                        <li><p><b> Peter Schmidt</b><br />
+                        [<a title="" href="https://github.com/pweschmidt" target="_blank" rel="noopener">Github</a>]</p>
+                        </li>
+
+                        <li><p><b>Adria Casamitjana</b><br />
+                        a.casamitjana [at] ub.edu<br />
+                        [<a title="" href="https://twitter.com/JuanEugenioIgl1" target="_blank" rel="noopener">Twitter</a>  |  
+                        <a title="" href="https://scholar.google.com/citations?user=phHLLH0AAAAJ&hl=ca&oi=ao" target="_blank" rel="noopener">Scholar</a>]</p>
+                        </li>
+
+                        <li><p><b>Juan Eugenio Iglesias</b><br />
+                        jiglesiasgonzalez [at] mgh.harvard.edu<br />
+                        [<a title="" href="https://twitter.com/therelaxationt1" target="_blank" rel="noopener">Twitter</a>  |  
+                        <a title="" href="https://www.linkedin.com/in/juan-eugenio-iglesias-820565127/" target="_blank" rel="noopener">Linkedin</a>  |  
+                        <a title="" href="https://scholar.google.com/citations?user=_f2iSSQAAAAJ" target="_blank" rel="noopener">Scholar</a>]</p>
                         </li>
                     </ul>
-                  </li>
-                </ul>
-
                 </section>
 
-                 <section>
-                <h3>Authors</h3>
-                <ul>
-                    <li><p><b>James Hughes</b><br />
-                    [<a title="" href="https://github.com/jhughes982" target="_blank" rel="noopener">Github</a>]</p>
-                    </li>
+				                <br />
+				<br />
+				<h2>Credits</h2>
+                    <p>
+                    This research is primarily funded by the European Research Council{" "}
+                    </p>
 
-                    <li><p><b> Peter Schmidt</b><br />
-                    [<a title="" href="https://github.com/pweschmidt" target="_blank" rel="noopener">Github</a>]</p>
-                    </li>
 
-                    <li><p><b>Adria Casamitjana</b><br />
-                    a.casamitjana [at] ub.edu<br />
-                    [<a title="" href="https://twitter.com/JuanEugenioIgl1" target="_blank" rel="noopener">Twitter</a>  |  
-                    <a title="" href="https://scholar.google.com/citations?user=phHLLH0AAAAJ&hl=ca&oi=ao" target="_blank" rel="noopener">Scholar</a>]</p>
-                    </li>
-
-                    <li><p><b>Juan Eugenio Iglesias</b><br />
-                    jiglesiasgonzalez [at] mgh.harvard.edu<br />
-                    [<a title="" href="https://twitter.com/therelaxationt1" target="_blank" rel="noopener">Twitter</a>  |  
-                    <a title="" href="https://www.linkedin.com/in/juan-eugenio-iglesias-820565127/" target="_blank" rel="noopener">Linkedin</a>  |  
-                    <a title="" href="https://scholar.google.com/citations?user=_f2iSSQAAAAJ" target="_blank" rel="noopener">Scholar</a>]</p>
-                    </li>
-                </ul>
-                </section>
-
-				<p>
-					This research is primarily funded by the European Research Council{" "}
 					<a
 						href="https://cordis.europa.eu/project/id/677697"
 						target="_blank"
@@ -190,7 +260,7 @@ const Atlas: FC = () => {
 						(Starting Grant 677696, project "BUNGEE-TOOLS")
 					</a>
 					.
-				</p>
+
 			</div>
 
 			<div className="homepage-footer">

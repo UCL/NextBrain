@@ -22,7 +22,7 @@ const MainNavigation = () => {
 							to="/atlas"
 							className={(navData) => (navData.isActive ? " active" : "")}
 						>
-							Atlas
+							Data explorer
 						</NavLink>
 					</li>
 				</ul>
