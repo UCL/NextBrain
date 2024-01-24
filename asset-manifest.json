@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/NextBrain/static/css/main.7a53a01e.chunk.css",
-    "main.js": "/NextBrain/static/js/main.7e386599.chunk.js",
-    "main.js.map": "/NextBrain/static/js/main.7e386599.chunk.js.map",
+    "main.css": "/NextBrain/static/css/main.21d97a77.chunk.css",
+    "main.js": "/NextBrain/static/js/main.685c574c.chunk.js",
+    "main.js.map": "/NextBrain/static/js/main.685c574c.chunk.js.map",
     "runtime-main.js": "/NextBrain/static/js/runtime-main.1bd0857a.js",
     "runtime-main.js.map": "/NextBrain/static/js/runtime-main.1bd0857a.js.map",
     "static/css/2.3d22e40d.chunk.css": "/NextBrain/static/css/2.3d22e40d.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.82f0b28b.chunk.js.map": "/NextBrain/static/js/2.82f0b28b.chunk.js.map",
     "index.html": "/NextBrain/index.html",
     "static/css/2.3d22e40d.chunk.css.map": "/NextBrain/static/css/2.3d22e40d.chunk.css.map",
-    "static/css/main.7a53a01e.chunk.css.map": "/NextBrain/static/css/main.7a53a01e.chunk.css.map",
+    "static/css/main.21d97a77.chunk.css.map": "/NextBrain/static/css/main.21d97a77.chunk.css.map",
     "static/js/2.82f0b28b.chunk.js.LICENSE.txt": "/NextBrain/static/js/2.82f0b28b.chunk.js.LICENSE.txt",
     "static/media/erc-logo.a80f7f04.png": "/NextBrain/static/media/erc-logo.a80f7f04.png",
     "static/media/eu-logo.1a7bc00a.png": "/NextBrain/static/media/eu-logo.1a7bc00a.png",
@@ -21,7 +21,7 @@
     "static/js/runtime-main.1bd0857a.js",
     "static/css/2.3d22e40d.chunk.css",
     "static/js/2.82f0b28b.chunk.js",
-    "static/css/main.7a53a01e.chunk.css",
-    "static/js/main.7e386599.chunk.js"
+    "static/css/main.21d97a77.chunk.css",
+    "static/js/main.685c574c.chunk.js"
   ]
 }
