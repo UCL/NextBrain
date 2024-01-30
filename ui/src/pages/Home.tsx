@@ -62,9 +62,9 @@ const Atlas: FC = () => {
                     using all 5 cases.
                     </p>
 
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/WLFebndFggw"
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/uRbUyC-KChk"
                     title="YouTube video player"> AA </iframe> &nbsp;&nbsp;
-                    <iframe  width="560" height="315" src="https://www.youtube.com/embed/He4eeEAnW3Q"
+                    <iframe  width="560" height="315" src="https://www.youtube.com/embed/bgpbX_2Hm74"
                     title="YouTube video player"> AA </iframe>
                     </section>
 
