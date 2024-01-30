@@ -1,0 +1,42 @@
+.hheader {
+	width:48vw;
+	height: 5rem;
+	display: flex;
+	 padding: 0 5px;
+	/*justify-content: space-between;*/
+	align-items: center;
+	border-bottom: 1px solid rgb(172, 172, 172);
+	position: fixed;
+	top: 0rem;
+	background-color: #333;
+	left: 300px
+}
+
+.hnav {
+	padding-right: 5%;
+}
+
+.hnav ul {
+	list-style: none;
+	display: flex;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+
+}
+
+.hnav li {
+	margin-left: 1.5rem;
+	font-size: 1.25rem;
+}
+
+.hnav a {
+	text-decoration: none;
+	color: #e6fcfc;
+}
+
+.hnav a:hover,
+.hnav a:active,
+.hnav a.active {
+	color: #b674cc;
+}

@@ -6,16 +6,23 @@
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 1px solid rgb(172, 172, 172);
+	position: fixed;
+	top: 0;
+	background-color: #333;
 }
 
 .logo {
 	font-size: 2rem;
 	color: white;
 	padding-left: 5%;
+	/*position: fixed; !* Set the navbar to fixed position *!*/
 }
 
 .nav {
 	padding-right: 5%;
+	/*position: fixed; !* Set the navbar to fixed position *!*/
+	/*top: 0; !* Position the navbar at the top of the page *!*/
+	/*width: 100%; !* Full width *!*/
 }
 
 .nav ul {
@@ -23,6 +30,7 @@
 	display: flex;
 	margin: 0;
 	padding: 0;
+
 }
 
 .nav li {
@@ -32,11 +40,11 @@
 
 .nav a {
 	text-decoration: none;
-	color: #88dfdf;
+	color: #e6fcfc;
 }
 
 .nav a:hover,
 .nav a:active,
 .nav a.active {
-	color: #e6fcfc;
+	color: #74a9cc;
 }

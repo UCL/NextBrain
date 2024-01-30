@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { NavLink } from "react-router-dom";
 
 import banner from "../assets/homepage-banner.png";
 import uclLogo from "../assets/ucl-logo.png";
@@ -6,12 +7,16 @@ import ercLogo from "../assets/erc-logo.png";
 import euLogo from "../assets/eu-logo.png";
 import pipelineImage from "../assets/pipeline-image.7310f65e.png";
 
+import HomeNavigation from "../components/layout/HomeNavigation"
 import "./Home.css";
+
 
 const Atlas: FC = () => {
 	return (
-		<main className="homepage-container">
-			<div className="homepage-header">
+        <>
+		    <HomeNavigation />
+            <main className="homepage-container">
+			<div className="homepage-header" id="nextbrain">
 				<img className="header-banner" src={banner} alt="logo"></img>
 
 				<h1 className="homepage-title">
@@ -21,11 +26,15 @@ const Atlas: FC = () => {
 
 			<div className="homepage-body">
 				<p>
-					We are presenting a next-generation probabilistic atlas of the human 
-					brain using histological sections of five full human hemispheres 
-					with manual annotations for ~300 structures. This website enables the
-					interactive inspection of these five cases using a 3D navigation 
-					interface and search functionality.
+
+				    We present a next-generation probabilistic atlas   of the human brain using
+				    histological sections of five full human hemispheres with manual annotations
+				    for 333 regions of interest. This website enables the interactive inspection
+				    of these five cases using a &nbsp;
+				    <NavLink to="/atlas" className={(navData) => (navData.isActive ? " active" : "")}>
+				        3D navigation interface
+					</NavLink>
+				    &nbsp; and search functionality.
 				</p>
 
 				<p>
@@ -45,7 +54,7 @@ const Atlas: FC = () => {
                     </p>
 
                     <br />
-                    <section>
+                    <section id="videos">
                     <h2>Videos</h2>
                     <p>
                     Some visualization material showing the 3D histology reconstruction of LFB, H&E and high resolution labels
@@ -58,24 +67,12 @@ const Atlas: FC = () => {
                     <iframe  width="560" height="315" src="https://www.youtube.com/embed/He4eeEAnW3Q"
                     title="YouTube video player"> AA </iframe>
                     </section>
-{/*                         <cite> */}
-{/*                             <a href="https://www.sciencedirect.com/science/article/pii/S1361841521003108">[article]</a> &nbsp;&nbsp; */}
-{/*                         </cite> */}
-
-{/*                         <cite> */}
-{/*                             <a href="https://arxiv.org/pdf/2104.14873.pdf">[arxiv]</a> &nbsp;&nbsp; */}
-{/*                         </cite> */}
-
-{/*                         <cite> */}
-{/*                             <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib">[citation]</a> */}
-{/*                         </cite> */}
-
 
                 <br />
                 <br />
                 <br />
                 <br />
-                <section>
+                <section id="pipeline">
                     <h2>Pipeline</h2>
                     <p>
                     The different steps of the pipeline from the fresh tissue donation to the joint multimodal 3D registration
@@ -86,7 +83,7 @@ const Atlas: FC = () => {
 
 				<br />
 				<br />
-				<section>
+				<section  id="publications">
                     <h2>Other publications</h2>
                     <ul>
                         <li>
@@ -171,7 +168,7 @@ const Atlas: FC = () => {
 
 				<br />
 				<br />
-				<section>
+				<section id="data">
                     <h2>Code and data</h2>
                     <ul>
                         <li>
@@ -217,7 +214,7 @@ const Atlas: FC = () => {
 
                 <br />
 				<br />
-                <section>
+                <section  id="authors">
                     <h2>Authors</h2>
                     <ul>
                         <li><p><b>James Hughes</b><br />
@@ -243,9 +240,9 @@ const Atlas: FC = () => {
                     </ul>
                 </section>
 
-				                <br />
 				<br />
-				<h2>Credits</h2>
+				<br />
+				<h2  id="credits">Credits</h2>
                     <p>
                     This research is primarily funded by the European Research Council{" "}
                     </p>
@@ -268,7 +265,12 @@ const Atlas: FC = () => {
 				<img className="footer-logo" src={ercLogo} alt="logo"></img>
 				<img className="footer-logo" src={euLogo} alt="logo"></img>
 			</div>
+
+
+
+
 		</main>
+        </>
 	);
 };
 
