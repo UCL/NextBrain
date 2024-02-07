@@ -62,6 +62,8 @@ const Atlas: FC = () => {
                     using all 5 cases.
                     </p>
 
+
+
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/uRbUyC-KChk"
                     title="YouTube video player"> AA </iframe> &nbsp;&nbsp;
                     <iframe  width="560" height="315" src="https://www.youtube.com/embed/bgpbX_2Hm74"
@@ -199,7 +201,7 @@ const Atlas: FC = () => {
                                 Bayesian segmentation using NextBrain probabilistic atlas
                             </p>
                             <cite>
-                                <a href="surfer.nmr.mgh.harvard.edu/fswiki/HistoAtlasSegmentation">[tool]</a> &nbsp;&nbsp;
+                                <a href="surfer.nmr.mgh.harvard.edu/fswiki/HistoAtlasSegmentation">[ready-to-use tool in FreeSurfer]</a> &nbsp;&nbsp;
                             </cite>
                             <cite>
                                 <a href="github.com/freesurfer/freesurfer/tree/dev/mri_histo_util ">[github]</a> &nbsp;&nbsp;
