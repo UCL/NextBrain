@@ -201,10 +201,10 @@ const Atlas: FC = () => {
                                 Bayesian segmentation using NextBrain probabilistic atlas
                             </p>
                             <cite>
-                                <a href="surfer.nmr.mgh.harvard.edu/fswiki/HistoAtlasSegmentation">[ready-to-use tool in FreeSurfer]</a> &nbsp;&nbsp;
+                                <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/HistoAtlasSegmentation">[ready-to-use tool in FreeSurfer]</a> &nbsp;&nbsp;
                             </cite>
                             <cite>
-                                <a href="github.com/freesurfer/freesurfer/tree/dev/mri_histo_util ">[github]</a> &nbsp;&nbsp;
+                                <a href="https://github.com/freesurfer/freesurfer/tree/dev/mri_histo_util">[github]</a> &nbsp;&nbsp;
                             </cite>
                         </li>
 
