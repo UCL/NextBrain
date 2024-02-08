@@ -50,7 +50,12 @@ const Atlas: FC = () => {
                         B. Billot, A. Atzeni, O. Puonti, Y.Balbastre,  P. Schmidt,
                         J. Hughes, J.C. Augustinack, B.L. Edlow, L. Zöllei,  <br />
                         D.L. Thomas, D. Kliemann, M. Bocchetta, C. Strand, J.L. Holton, Z. Jaunmuktane, J.E. Iglesias <br />
-                        In preparation (2024) <br />
+                        Submitted (2024) <br />
+
+                        <cite>
+                            <a href="https://www.biorxiv.org/content/10.1101/2024.02.05.579016v1">[pre-print]</a> &nbsp;&nbsp;
+                        </cite>
+
                     </p>
 
                     <br />
