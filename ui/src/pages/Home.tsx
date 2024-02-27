@@ -64,14 +64,16 @@ const Atlas: FC = () => {
                     <p>
                     Some visualization material showing the 3D histology reconstruction of LFB, H&E and high resolution labels
                     as well as its alignment to brain ex vivo MRI of case 5 (left) and the probabilistic atlas construction
-                    using all 5 cases.
+                    using all 5 cases (center) and a tutorial for the Data Explorer functionality (right)
                     </p>
 
 
 
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/uRbUyC-KChk"
+                    <iframe width="500" height="315" src="https://www.youtube.com/embed/uRbUyC-KChk"
                     title="YouTube video player"> AA </iframe> &nbsp;&nbsp;
-                    <iframe  width="560" height="315" src="https://www.youtube.com/embed/bgpbX_2Hm74"
+                    <iframe  width="500" height="315" src="https://www.youtube.com/embed/bgpbX_2Hm74"
+                    title="YouTube video player"> AA </iframe>  &nbsp;&nbsp;
+                    <iframe  width="500" height="315" src="https://www.youtube.com/embed/pVOfximndPE"
                     title="YouTube video player"> AA </iframe>
                     </section>
 
