@@ -6,7 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Requirements
 
-You need to have Node.js installed on your local development machine, this is required to handle npm packages.
+You need to have Node.js installed on your local development machine, this is required to handle npm packages. 
+Version 10.24.1 seems to work.
 
 https://nodejs.org/en/download/
 
