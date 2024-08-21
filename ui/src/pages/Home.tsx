@@ -140,7 +140,7 @@ const Atlas: FC = () => {
                                 </cite>
 
                                 <cite>
-                                    <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib" target="_blank">[citation]</a>
+                                    <a href="https://drive.google.com/uc?export=download&id=1QW3ouXj6y_oZ8Buu7FGSsrU9_DJQ3rIU" target="_blank">[citation]</a>
                                 </cite>
                         </li>
 
@@ -165,7 +165,7 @@ const Atlas: FC = () => {
                                 </cite>
 
                                 <cite>
-                                    <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib" target="_blank">[citation]</a> &nbsp;&nbsp;
+                                    <a href="https://drive.google.com/uc?export=download&id=1QW3ouXj6y_oZ8Buu7FGSsrU9_DJQ3rIU" target="_blank">[citation]</a> &nbsp;&nbsp;
                                 </cite>
 
                                 <cite>
@@ -191,7 +191,7 @@ const Atlas: FC = () => {
                                 </cite>
 
                                 <cite>
-                                    <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib" target="_blank">[citation]</a> &nbsp;&nbsp;
+                                    <a href="https://drive.google.com/uc?export=download&id=1QW3ouXj6y_oZ8Buu7FGSsrU9_DJQ3rIU" target="_blank">[citation]</a> &nbsp;&nbsp;
                                 </cite>
 
                                 <cite>
@@ -220,7 +220,7 @@ const Atlas: FC = () => {
                                 <a href="https://doi.org/10.5522/04/24243835.v1" target="_blank">[data repository]</a> &nbsp;&nbsp;
                             </cite>
                             <cite>
-                                <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib" target="_blank">[citation]</a>
+                                <a href="https://drive.google.com/uc?export=download&id=1QW3ouXj6y_oZ8Buu7FGSsrU9_DJQ3rIU" target="_blank">[citation]</a>
                             </cite>
                         </li>
                         <li>
@@ -252,13 +252,13 @@ const Atlas: FC = () => {
 
                             </p>
                             <cite>
-                                <a href="https://github.com/UCL/NextBrain/raw/development/data/Edlow.200um.nii.gz?download=">[200um scan]</a> &nbsp;&nbsp;
+                                <a href="https://drive.google.com/uc?export=download&id=15p4auwEDbRpmWuKXUSvwxhic-16HSBHy" target="_blank">[200um scan]</a> &nbsp;&nbsp;
                             </cite>
                             <cite>
-                                <a href="https://github.com/UCL/NextBrain/raw/development/data/Edlow.200um.nii.gz?download=">[200um labels]</a> &nbsp;&nbsp;
+                                <a href="https://drive.google.com/uc?export=download&id=1HYaWFExlFJupUTKiL0sTzVzSC672MxcF" target="_blank">[200um labels]</a> &nbsp;&nbsp;
                             </cite>
                             <cite>
-                                <a href="https://github.com/UCL/NextBrain/blob/development/data/Edlow.200um.lut.txt" target="_blank">[Lookup table of labels in Freeview format]</a> &nbsp;&nbsp;
+                                <a href="https://drive.google.com/uc?export=download&id=1ey2OW1ftOrsx8gyQ91R7vcmyMssUBVS_" target="_blank">[Lookup table of labels in Freeview format]</a> &nbsp;&nbsp;
                             </cite>
 
                             <p>
