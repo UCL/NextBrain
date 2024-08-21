@@ -59,40 +59,74 @@ const Atlas: FC = () => {
                     </p>
 
                     <br />
-                    <section id="videos">
+                <section id="videos">
                     <h2>Videos</h2>
                     <p>
-                    Some visualization material showing the 3D histology reconstruction of LFB, H&E and high resolution labels
-                    as well as its alignment to brain ex vivo MRI of case 5 (left) and the probabilistic atlas construction
-                    using all 5 cases (center) and a tutorial for the Data Explorer functionality (right)
+                        Some visualization material showing the 3D histology reconstruction of LFB, H&E and high
+                        resolution labels
+                        as well as its alignment to brain ex vivo MRI of case 5 (left) and the probabilistic atlas
+                        construction
+                        using all 5 cases (center) and a tutorial for the Data Explorer functionality (right)
                     </p>
 
+                    <center>
+
+                        <iframe width="500" height="315" src="https://www.youtube.com/embed/uRbUyC-KChk"
+                                title="YouTube video player"> AA
+                        </iframe>
+                        &nbsp;&nbsp;
+                        <iframe width="500" height="315" src="https://www.youtube.com/embed/bgpbX_2Hm74"
+                                title="YouTube video player"> AA
+                        </iframe>
+                        &nbsp;&nbsp;
+                        <iframe width="500" height="315" src="https://www.youtube.com/embed/pVOfximndPE"
+                                title="YouTube video player"> AA
+                        </iframe>
+                    </center>
+
+                    <br/><br/><br/><br/>
+
+                    <p>
+                        The NextBrain data release includes a 200um isotropic labeling of the right hemisphere of the
+                        ex vivo scan publicly released by Edlow et al. in <em>“7 Tesla MRI of the ex vivo human brain at
+                        100 micron resolution”</em>, Scientific data 6, 244 (2019). The following two videos fly over the
+                        coronal and axial slices of the dataset (download links for the imaging volumes can be found
+                        under “Code and Data” below):
+
+                    </p>
+
+                    <center>
+
+                        <iframe width="500" height="315" src="https://www.youtube.com/embed/bH09BVNjLek"
+                                title="YouTube video player"> AA
+                        </iframe>
+                        &nbsp;&nbsp;
+                        <iframe width="500" height="315" src="https://www.youtube.com/embed/SkX0GRm3p4c"
+                                title="YouTube video player"> AA
+                        </iframe>
+                    </center>
+                </section>
 
 
-                    <iframe width="500" height="315" src="https://www.youtube.com/embed/uRbUyC-KChk"
-                    title="YouTube video player"> AA </iframe> &nbsp;&nbsp;
-                    <iframe  width="500" height="315" src="https://www.youtube.com/embed/bgpbX_2Hm74"
-                    title="YouTube video player"> AA </iframe>  &nbsp;&nbsp;
-                    <iframe  width="500" height="315" src="https://www.youtube.com/embed/pVOfximndPE"
-                    title="YouTube video player"> AA </iframe>
-                    </section>
-
-                <br />
-                <br />
-                <br />
-                <br />
+                <br/>
+                <br/>
+                <br/>
+                <br/>
                 <section id="pipeline">
                     <h2>Pipeline</h2>
                     <p>
-                    The different steps of the pipeline from the fresh tissue donation to the joint multimodal 3D registration
-                    of LFB and HE stains, labels and MRI are summarized in the following figure:
+                        The different steps of the pipeline from the fresh tissue donation to the joint multimodal 3D
+                        registration
+                        of LFB and HE stains, labels and MRI are summarized in the following figure:
                     </p>
-				    <img className="pipeline-banner" src={pipelineImage} alt="3D reconstruction pipeline"></img>
+                    <center>
+                        <img className="pipeline-banner" src={pipelineImage} alt="3D reconstruction pipeline"></img>
+                    </center>
                 </section>
 
-				<br />
-				<br />
-				<section  id="publications">
+                <br/>
+                <br/>
+                <section id="publications">
                     <h2>Other publications</h2>
                     <ul>
                         <li>
@@ -185,15 +219,16 @@ const Atlas: FC = () => {
                                 The raw data of the project can be found here:
                             </p>
                             <b>Registered histology, MRI, and manual annotations of over 300 brain regions in 5 human
-                            hemispheres (data from ERC Starting Grant 677697 "BUNGEE-TOOLS") </b> <br />
-                                J.E Iglesias Gonzalez, A. Casamitjana, A. Atzeni, B. Billot, D. Thomas, E. Blackburn, J. Hughes,
-                                J. Althonayan, L. Peter, M. Mancini, N. Robinson, P. Schmidt, S. Crampsie <br />
-                                <cite>
-                                    <a href="https://doi.org/10.5522/04/24243835.v1">[data repository]</a> &nbsp;&nbsp;
-                                </cite>
-                                <cite>
-                                    <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib">[citation]</a>
-                                </cite>
+                                hemispheres (data from ERC Starting Grant 677697 "BUNGEE-TOOLS") </b> <br/>
+                            J.E Iglesias Gonzalez, A. Casamitjana, A. Atzeni, B. Billot, D. Thomas, E. Blackburn, J.
+                            Hughes,
+                            J. Althonayan, L. Peter, M. Mancini, N. Robinson, P. Schmidt, S. Crampsie <br/>
+                            <cite>
+                                <a href="https://doi.org/10.5522/04/24243835.v1">[data repository]</a> &nbsp;&nbsp;
+                            </cite>
+                            <cite>
+                                <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/ui/src/assets/bibtext.bib">[citation]</a>
+                            </cite>
                         </li>
                         <li>
                             <p>
@@ -208,41 +243,66 @@ const Atlas: FC = () => {
                                 Bayesian segmentation using NextBrain probabilistic atlas
                             </p>
                             <cite>
-                                <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/HistoAtlasSegmentation">[ready-to-use tool in FreeSurfer]</a> &nbsp;&nbsp;
+                                <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/HistoAtlasSegmentation">[ready-to-use
+                                    tool in FreeSurfer]</a> &nbsp;&nbsp;
                             </cite>
                             <cite>
                                 <a href="https://github.com/freesurfer/freesurfer/tree/dev/mri_histo_util">[github]</a> &nbsp;&nbsp;
                             </cite>
                         </li>
 
+                        <li>
+                            <p>
+                                200um isotropic labeling of the right hemisphere of the ex vivo scan publicly released
+                                by Edlow et al., (2019):
+
+
+                            </p>
+                            <cite>
+                                <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/data/Edlow.200um.nii.gz">[200um scan]</a> &nbsp;&nbsp;
+                            </cite>
+                            <cite>
+                                <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/data/Edlow.200um.labels.nii.gz">[200um labels]</a> &nbsp;&nbsp;
+                            </cite>
+                            <cite>
+                                <a href="https://github.com/UCL/NextBrain/blob/6563100e1ae9ca23676fd50ad6e95801a73d8fd3/data/Edlow.200um.lut.txt">[Lookup table of labels in Freeview format]</a> &nbsp;&nbsp;
+                            </cite>
+
+                            <p>
+                                You can open these files in Freeview with the command: freeview Edlow.200um.nii.gz
+                                Edlow.200um.labels.nii.gz:colormap=lut:lut=Edlow.200um.lut.txt
+                            </p>
+                        </li>
 
 
                     </ul>
                 </section>
 
 
-                <br />
-				<br />
-                <section  id="authors">
+                <br/>
+                <br/>
+                <section id="authors">
                     <h2>Authors</h2>
                     <ul>
-                        <li><p><b>James Hughes</b><br />
-                        [<a title="" href="https://github.com/jhughes982" target="_blank" rel="noopener">Github</a>]</p>
+                        <li><p><b>James Hughes</b><br/>
+                            [<a title="" href="https://github.com/jhughes982" target="_blank" rel="noopener">Github</a>]
+                        </p>
                         </li>
 
-                        <li><p><b> Peter Schmidt</b><br />
-                        [<a title="" href="https://github.com/pweschmidt" target="_blank" rel="noopener">Github</a>]</p>
+                        <li><p><b> Peter Schmidt</b><br/>
+                            [<a title="" href="https://github.com/pweschmidt" target="_blank" rel="noopener">Github</a>]
+                        </p>
                         </li>
 
                         <li><p><b>Adria Casamitjana</b><br />
                         a.casamitjana [at] ub.edu<br />
-                        [<a title="" href="https://twitter.com/JuanEugenioIgl1" target="_blank" rel="noopener">Twitter</a>  |  
+                        [<a title="" href="https://twitter.com/therelaxationt1" target="_blank" rel="noopener">Twitter</a>  |  
                         <a title="" href="https://scholar.google.com/citations?user=phHLLH0AAAAJ&hl=ca&oi=ao" target="_blank" rel="noopener">Scholar</a>]</p>
                         </li>
 
                         <li><p><b>Juan Eugenio Iglesias</b><br />
                         jiglesiasgonzalez [at] mgh.harvard.edu<br />
-                        [<a title="" href="https://twitter.com/therelaxationt1" target="_blank" rel="noopener">Twitter</a>  |  
+                        [<a title="" href="https://twitter.com/JuanEugenioIgl1" target="_blank" rel="noopener">Twitter</a>  |  
                         <a title="" href="https://www.linkedin.com/in/juan-eugenio-iglesias-820565127/" target="_blank" rel="noopener">Linkedin</a>  |  
                         <a title="" href="https://scholar.google.com/citations?user=_f2iSSQAAAAJ" target="_blank" rel="noopener">Scholar</a>]</p>
                         </li>
