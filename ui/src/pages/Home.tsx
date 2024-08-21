@@ -69,8 +69,6 @@ const Atlas: FC = () => {
                         using all 5 cases (center) and a tutorial for the Data Explorer functionality (right)
                     </p>
 
-                    <center>
-
                         <iframe width="500" height="315" src="https://www.youtube.com/embed/uRbUyC-KChk"
                                 title="YouTube video player"> AA
                         </iframe>
@@ -82,7 +80,6 @@ const Atlas: FC = () => {
                         <iframe width="500" height="315" src="https://www.youtube.com/embed/pVOfximndPE"
                                 title="YouTube video player"> AA
                         </iframe>
-                    </center>
 
                     <br/><br/><br/><br/>
 
@@ -95,7 +92,6 @@ const Atlas: FC = () => {
 
                     </p>
 
-                    <center>
 
                         <iframe width="500" height="315" src="https://www.youtube.com/embed/bH09BVNjLek"
                                 title="YouTube video player"> AA
@@ -104,7 +100,6 @@ const Atlas: FC = () => {
                         <iframe width="500" height="315" src="https://www.youtube.com/embed/SkX0GRm3p4c"
                                 title="YouTube video player"> AA
                         </iframe>
-                    </center>
                 </section>
 
 
@@ -119,9 +114,7 @@ const Atlas: FC = () => {
                         registration
                         of LFB and HE stains, labels and MRI are summarized in the following figure:
                     </p>
-                    <center>
                         <img className="pipeline-banner" src={pipelineImage} alt="3D reconstruction pipeline"></img>
-                    </center>
                 </section>
 
                 <br/>
