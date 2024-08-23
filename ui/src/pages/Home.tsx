@@ -247,24 +247,36 @@ const Atlas: FC = () => {
                         <li>
                             <p>
                                 200um isotropic labeling of the right hemisphere of the ex vivo scan publicly released
-                                by Edlow et al., (2019):
-
-
+                                by Edlow et al., (2019).
+                                <br/>
+                                We include the original scan, the manual segmentation and the look-up-table (LUT) in
+                                freeview format for label visualization.
                             </p>
                             <cite>
-                                <a href="https://drive.google.com/uc?export=download&id=15p4auwEDbRpmWuKXUSvwxhic-16HSBHy" target="_blank">[200um scan]</a> &nbsp;&nbsp;
+                                    <a href="https://openneuro.org/datasets/ds005422"
+                                       target="_blank">[data repository]</a> &nbsp;&nbsp;
+                                </cite>
+                            <cite>
+                            <a href="https://openneuro.org/crn/datasets/ds005422/objects/SHA256E-s195417272--d479f4211cbb52b4502218982c8843b7b4ec1c454a1e6be0771db876c3091c4c.nii.gz"
+                               target="_blank">[original scan]</a> &nbsp;&nbsp;
                             </cite>
                             <cite>
-                                <a href="https://drive.google.com/uc?export=download&id=1HYaWFExlFJupUTKiL0sTzVzSC672MxcF" target="_blank">[200um labels]</a> &nbsp;&nbsp;
+                                <a href="https://s3.amazonaws.com/openneuro.org/ds005422/derivatives/manual_segmentation/sub-001/ses-01/sub-001_ses-01_desc-manual_dseg.nii.gz?versionId=e7CE6oiQd6TBJN6OigKfMoGD_X7CWSh_"
+                                   target="_blank">[manual segmentation]</a> &nbsp;&nbsp;
                             </cite>
                             <cite>
-                                <a href="https://drive.google.com/uc?export=download&id=1ey2OW1ftOrsx8gyQ91R7vcmyMssUBVS_" target="_blank">[Lookup table of labels in Freeview format]</a> &nbsp;&nbsp;
+                                <a href="https://s3.amazonaws.com/openneuro.org/ds005422/derivatives/manual_segmentation/sub-001/sub-001_lut.txt?versionId=iADFvJfPmw6edi7LnmtK3hHRM8N5wz3M"
+                                   target="_blank">[LUT]</a> &nbsp;&nbsp;
                             </cite>
 
                             <p>
-                                You can open these files in Freeview with the command: freeview Edlow.200um.nii.gz
-                                Edlow.200um.labels.nii.gz:colormap=lut:lut=Edlow.200um.lut.txt
+                                You can open these files in Freeview with the command:
                             </p>
+                            <p>
+                                <em> freeview -v sub-001_ses-01_T2w.nii.gz
+                                    sub-001_ses-01_desc-manual_dseg.nii.gz:colormap=lut:lut=sub-001_lut.txt </em>
+                            </p>
+
                         </li>
 
 
