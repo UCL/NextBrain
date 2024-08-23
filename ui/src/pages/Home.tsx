@@ -257,15 +257,15 @@ const Atlas: FC = () => {
                                        target="_blank">[data repository]</a> &nbsp;&nbsp;
                                 </cite>
                             <cite>
-                            <a href="https://openneuro.org/crn/datasets/ds005422/objects/SHA256E-s195417272--d479f4211cbb52b4502218982c8843b7b4ec1c454a1e6be0771db876c3091c4c.nii.gz"
+                            <a href="https://openneuro.org/crn/datasets/ds005422/files/sub-001:ses-01:anat:sub-001_ses-01_T2w.nii.gz"
                                target="_blank">[original scan]</a> &nbsp;&nbsp;
                             </cite>
                             <cite>
-                                <a href="https://s3.amazonaws.com/openneuro.org/ds005422/derivatives/manual_segmentation/sub-001/ses-01/sub-001_ses-01_desc-manual_dseg.nii.gz?versionId=e7CE6oiQd6TBJN6OigKfMoGD_X7CWSh_"
+                                <a href="https://openneuro.org/crn/datasets/ds005422/files/derivatives:manual_segmentation:sub-001:ses-01:sub-001_ses-01_desc-manual_dseg.nii.gz"
                                    target="_blank">[manual segmentation]</a> &nbsp;&nbsp;
                             </cite>
                             <cite>
-                                <a href="https://s3.amazonaws.com/openneuro.org/ds005422/derivatives/manual_segmentation/sub-001/sub-001_lut.txt?versionId=iADFvJfPmw6edi7LnmtK3hHRM8N5wz3M"
+                                <a href="https://openneuro.org/crn/datasets/ds005422/files/derivatives:manual_segmentation:sub-001:sub-001_lut.txt"
                                    target="_blank">[LUT]</a> &nbsp;&nbsp;
                             </cite>
 
