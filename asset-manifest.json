@@ -1,27 +1,27 @@
 {
   "files": {
     "main.css": "/NextBrain/static/css/main.de4c4204.chunk.css",
-    "main.js": "/NextBrain/static/js/main.3d5aa772.chunk.js",
-    "main.js.map": "/NextBrain/static/js/main.3d5aa772.chunk.js.map",
-    "runtime-main.js": "/NextBrain/static/js/runtime-main.aaeecaff.js",
-    "runtime-main.js.map": "/NextBrain/static/js/runtime-main.aaeecaff.js.map",
-    "static/css/2.ba59a86a.chunk.css": "/NextBrain/static/css/2.ba59a86a.chunk.css",
-    "static/js/2.24720554.chunk.js": "/NextBrain/static/js/2.24720554.chunk.js",
-    "static/js/2.24720554.chunk.js.map": "/NextBrain/static/js/2.24720554.chunk.js.map",
+    "main.js": "/NextBrain/static/js/main.a3c47ffb.chunk.js",
+    "main.js.map": "/NextBrain/static/js/main.a3c47ffb.chunk.js.map",
+    "runtime-main.js": "/NextBrain/static/js/runtime-main.1bd0857a.js",
+    "runtime-main.js.map": "/NextBrain/static/js/runtime-main.1bd0857a.js.map",
+    "static/css/2.3d22e40d.chunk.css": "/NextBrain/static/css/2.3d22e40d.chunk.css",
+    "static/js/2.baf1da05.chunk.js": "/NextBrain/static/js/2.baf1da05.chunk.js",
+    "static/js/2.baf1da05.chunk.js.map": "/NextBrain/static/js/2.baf1da05.chunk.js.map",
     "index.html": "/NextBrain/index.html",
-    "static/css/2.ba59a86a.chunk.css.map": "/NextBrain/static/css/2.ba59a86a.chunk.css.map",
+    "static/css/2.3d22e40d.chunk.css.map": "/NextBrain/static/css/2.3d22e40d.chunk.css.map",
     "static/css/main.de4c4204.chunk.css.map": "/NextBrain/static/css/main.de4c4204.chunk.css.map",
-    "static/js/2.24720554.chunk.js.LICENSE.txt": "/NextBrain/static/js/2.24720554.chunk.js.LICENSE.txt",
+    "static/js/2.baf1da05.chunk.js.LICENSE.txt": "/NextBrain/static/js/2.baf1da05.chunk.js.LICENSE.txt",
     "static/media/erc-logo.a80f7f04.png": "/NextBrain/static/media/erc-logo.a80f7f04.png",
     "static/media/eu-logo.1a7bc00a.png": "/NextBrain/static/media/eu-logo.1a7bc00a.png",
     "static/media/homepage-banner.66523cf7.png": "/NextBrain/static/media/homepage-banner.66523cf7.png",
     "static/media/pipeline-image.7310f65e.d3dc7784.png": "/NextBrain/static/media/pipeline-image.7310f65e.d3dc7784.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.aaeecaff.js",
-    "static/css/2.ba59a86a.chunk.css",
-    "static/js/2.24720554.chunk.js",
+    "static/js/runtime-main.1bd0857a.js",
+    "static/css/2.3d22e40d.chunk.css",
+    "static/js/2.baf1da05.chunk.js",
     "static/css/main.de4c4204.chunk.css",
-    "static/js/main.3d5aa772.chunk.js"
+    "static/js/main.a3c47ffb.chunk.js"
   ]
 }
