@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/NextBrain/static/css/main.de4c4204.chunk.css",
-    "main.js": "/NextBrain/static/js/main.a3c47ffb.chunk.js",
-    "main.js.map": "/NextBrain/static/js/main.a3c47ffb.chunk.js.map",
+    "main.js": "/NextBrain/static/js/main.1eecc29f.chunk.js",
+    "main.js.map": "/NextBrain/static/js/main.1eecc29f.chunk.js.map",
     "runtime-main.js": "/NextBrain/static/js/runtime-main.1bd0857a.js",
     "runtime-main.js.map": "/NextBrain/static/js/runtime-main.1bd0857a.js.map",
     "static/css/2.3d22e40d.chunk.css": "/NextBrain/static/css/2.3d22e40d.chunk.css",
@@ -22,6 +22,6 @@
     "static/css/2.3d22e40d.chunk.css",
     "static/js/2.baf1da05.chunk.js",
     "static/css/main.de4c4204.chunk.css",
-    "static/js/main.a3c47ffb.chunk.js"
+    "static/js/main.1eecc29f.chunk.js"
   ]
 }
