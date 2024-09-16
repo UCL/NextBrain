@@ -53,7 +53,7 @@ const Atlas: FC = () => {
                         Submitted (2024) <br />
 
                         <cite>
-                            <a href="https://www.biorxiv.org/content/10.1101/2024.02.05.579016v1">[pre-print]</a> &nbsp;&nbsp;
+                            <a href="https://www.biorxiv.org/content/10.1101/2024.02.05.579016v2">[pre-print]</a> &nbsp;&nbsp;
                         </cite>
 
                     </p>
