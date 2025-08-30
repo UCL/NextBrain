@@ -69,15 +69,15 @@ const Atlas: FC = () => {
                         using all 5 cases (center) and a tutorial for the Data Explorer functionality (right)
                     </p>
 
-                        <iframe width="500" height="315" src="https://www.youtube.com/embed/uRbUyC-KChk"
+                        <iframe width="500" height="315" src="https://www.youtube-nocookie.com/embed/uRbUyC-KChk"
                                 title="YouTube video player"> AA
                         </iframe>
                         &nbsp;&nbsp;
-                        <iframe width="500" height="315" src="https://www.youtube.com/embed/bgpbX_2Hm74"
+                        <iframe width="500" height="315" src="https://www.youtube-nocookie.com/embed/bgpbX_2Hm74"
                                 title="YouTube video player"> AA
                         </iframe>
                         &nbsp;&nbsp;
-                        <iframe width="500" height="315" src="https://www.youtube.com/embed/pVOfximndPE"
+                        <iframe width="500" height="315" src="https://www.youtube-nocookie.com/embed/pVOfximndPE"
                                 title="YouTube video player"> AA
                         </iframe>
 
@@ -93,11 +93,11 @@ const Atlas: FC = () => {
                     </p>
 
 
-                        <iframe width="500" height="315" src="https://www.youtube.com/embed/bH09BVNjLek"
+                        <iframe width="500" height="315" src="https://www.youtube-nocookie.com/embed/bH09BVNjLek"
                                 title="YouTube video player"> AA
                         </iframe>
                         &nbsp;&nbsp;
-                        <iframe width="500" height="315" src="https://www.youtube.com/embed/SkX0GRm3p4c"
+                        <iframe width="500" height="315" src="https://www.youtube-nocookie.com/embed/SkX0GRm3p4c"
                                 title="YouTube video player"> AA
                         </iframe>
                 </section>
